@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Short Stone Beige — OVERTEXT</title>
+    <!-- Arquitectura ITCSS OVERTEXT -->
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/componentes/navegacion.css">
+    <link rel="stylesheet" href="/css/componentes/botones.css">
+    <link rel="stylesheet" href="/css/componentes/formularios.css">
+    <link rel="stylesheet" href="/css/componentes/tablas.css">
+    <link rel="stylesheet" href="/css/componentes/badges.css">
+    <link rel="stylesheet" href="/css/componentes/footer.css">
+    <link rel="stylesheet" href="/css/componentes/carrito.css">
+    <link rel="stylesheet" href="/css/paginas/producto.css">
+</head>
+
+<body>
+    <header class="barra-navegacion">
+        <div class="contenedor navegacion-interior">
+            <a href="/index.html" class="marca-logo">OVERTEXT</a>
+            <nav class="menu-principal">
+                <ul class="lista-enlaces">
+                    <li><a href="/index.html" class="enlace">INICIO</a></li>
+                    <li><a href="/catalogo.html" class="enlace activo">CATÁLOGO</a></li>
+                    <li><a href="/promotions.html" class="enlace">PROMOCIONES</a></li>
+                    <li><a href="/nosotros.html" class="enlace">NOSOTROS</a></li>
+                    <li><a href="/contacto.html" class="enlace">CONTACTO</a></li>
+                </ul>
+            </nav>
+            <div class="nav-acciones">
+                <a href="/login.html" class="boton-usuario" aria-label="Mi cuenta">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="8" r="4"/>
+                        <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+                    </svg>
+                </a>
+                <button class="boton-carrito" id="abrir-carrito" aria-label="Carrito">
+                    <img src="/assets/icon/carrito-de-compras.png" alt="">
+                    <span class="carrito-contador">2</span>
+                </button>
+                <button class="btn-hamburger" id="btn-hamburger" aria-label="Menú">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- OVERLAY -->
+    <div class="overlay-carrito" id="overlay-carrito"></div>
+
+    <!-- CARRITO LATERAL -->
+    <aside id="carrito-lateral">
+        <div class="carrito-header">
+            <div class="carrito-header-izq">
+                <h2>TU CARRITO</h2>
+                <span class="carrito-conteo">2 PRODUCTOS</span>
+            </div>
+            <button class="btn-cerrar-carrito" id="cerrar-carrito" aria-label="Cerrar carrito">
+                <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                    <line x1="1" y1="1" x2="12" y2="12"/><line x1="12" y1="1" x2="1" y2="12"/>
+                </svg>
+            </button>
+        </div>
+
+        <div class="envio-gratis-info">
+            <p class="envio-gratis-texto">TE FALTAN S/ 60 PARA ENVÍO GRATIS</p>
+            <div class="envio-gratis-barra">
+                <div class="envio-gratis-progreso"></div>
+            </div>
+        </div>
+
+        <div class="carrito-items">
+            <!-- Los productos se renderizan dinámicamente desde js/carrito.js -->
+        </div>
+
+        <div class="carrito-footer">
+            <div class="resumen-linea">
+                <span>SUBTOTAL</span>
+                <span>S/ 120</span>
+            </div>
+            <div class="resumen-linea">
+                <span>ENVÍO</span>
+                <span class="envio-gratis">GRATIS</span>
+            </div>
+            <div class="resumen-total">
+                <span class="total-label">TOTAL</span>
+                <span class="total-monto">S/ 120</span>
+            </div>
+            <a href="/checkout.html" class="btn-finalizar">FINALIZAR COMPRA</a>
+            <button class="btn-seguir" id="seguir-comprando">SEGUIR COMPRANDO</button>
+        </div>
+    </aside>
+
+    <main>
+        <section class="seccion-detalle-producto">
+            <div class="contenedor grid-detalle-producto">
+
+                <!-- GALERÍA -->
+                <div class="galeria-producto">
+                    <div class="foto-principal-wrapper">
+                        <img src="/assets/img/productos/beige/principal.webp" alt="Short Stone Beige">
+                    </div>
+                    <div class="miniaturas-grid">
+                        <img src="/assets/img/productos/beige/1.webp" alt="Vista 1" class="miniatura">
+                        <img src="/assets/img/productos/beige/2.webp" alt="Vista 2" class="miniatura">
+                        <img src="/assets/img/productos/beige/3.webp" alt="Vista 3" class="miniatura">
+                        <img src="/assets/img/productos/beige/4.webp" alt="Vista 4" class="miniatura">
+                    </div>
+                </div>
+
+                <!-- INFO -->
+                <div class="info-detalle-producto">
+
+                    <p class="coleccion-tag">OVERCOMING</p>
+                    <h1 class="nombre-detalle">Short Stone Beige</h1>
+                    <p class="slogan-detalle">Lo que buscabas sin pagar de mas.</p>
+
+                    <div class="bloque-precio">
+                        <p class="precio-principal">S/ 20 <span>unidad</span></p>
+                        <p class="precio-pack">o arma tu pack: 6 x S/ 100</p>
+                    </div>
+
+                    <!-- Talla -->
+                    <div class="selector-campo">
+                        <div class="selector-header">
+                            <span class="selector-label">Talla</span>
+                            <a href="#acordeon-tallas" class="guia-link">Guía de tallas</a>
+                        </div>
+                        <div class="grupo-tallas">
+                            <button class="btn-talla">S</button>
+                            <button class="btn-talla btn-talla--activa">M</button>
+                            <button class="btn-talla">L</button>
+                            <button class="btn-talla">XL</button>
+                        </div>
+                    </div>
+
+                    <!-- Color: indicador de color único (lo rellena js/tienda.js) -->
+                    <div class="selector-campo">
+                        <span class="selector-label">Color</span>
+                        <div class="grupo-colores"></div>
+                    </div>
+
+                    <!-- Cantidad + Carrito -->
+                    <div class="fila-acciones">
+                        <div class="control-cantidad">
+                            <button class="btn-cantidad">−</button>
+                            <span class="valor-cantidad">1</span>
+                            <button class="btn-cantidad">+</button>
+                        </div>
+                        <button class="btn-carrito" data-agregar-carrito data-variante-auto
+                            data-id="short-beige" data-nombre="SHORT STONE BEIGE" data-precio="20"
+                            data-imagen="/assets/img/productos/beige/principal.webp"
+                            data-cantidad-el=".valor-cantidad">Añadir al carrito</button>
+                    </div>
+
+                    <button class="btn-pack">Arma tu pack</button>
+
+                    <!-- Beneficios -->
+                    <div class="beneficios-fila">
+                        <div class="beneficio-item">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 5v4h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
+                            </svg>
+                            <span>Envío rápido</span>
+                        </div>
+                        <div class="beneficio-item">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                            </svg>
+                            <span>Calidad premium</span>
+                        </div>
+                        <div class="beneficio-item">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15"/>
+                            </svg>
+                            <span>Cambios simples</span>
+                        </div>
+                    </div>
+
+                    <!-- Acordeones nativos con <details> — sin JS -->
+                    <div class="acordeones-detalle">
+
+                        <details class="acordeon-item">
+                            <summary class="acordeon-trigger">Detalles del producto</summary>
+                            <div class="acordeon-interior">
+                                <p>Short de algodón stretch con corte relajado y elástico en la cintura. Confeccionado con materiales de alta calidad para mayor comodidad y durabilidad. Ideal para el día a día urbano.</p>
+                            </div>
+                        </details>
+
+                        <details class="acordeon-item" id="acordeon-tallas">
+                            <summary class="acordeon-trigger">Tallas</summary>
+                            <div class="acordeon-interior">
+                                <table class="tabla-tallas-detalle">
+                                    <thead>
+                                        <tr>
+                                            <th>Talla</th>
+                                            <th>Cintura</th>
+                                            <th>Cadera</th>
+                                            <th>Largo</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>S</td><td>70–76 cm</td><td>88–94 cm</td><td>48 cm</td></tr>
+                                        <tr><td>M</td><td>76–82 cm</td><td>94–100 cm</td><td>50 cm</td></tr>
+                                        <tr><td>L</td><td>82–88 cm</td><td>100–106 cm</td><td>52 cm</td></tr>
+                                        <tr><td>XL</td><td>88–94 cm</td><td>106–112 cm</td><td>54 cm</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </details>
+
+                        <details class="acordeon-item">
+                            <summary class="acordeon-trigger">Cuidado de la prenda</summary>
+                            <div class="acordeon-interior">
+                                <ul>
+                                    <li>Lavar a máquina en frío (30°C)</li>
+                                    <li>No usar secadora</li>
+                                    <li>Planchar a temperatura media</li>
+                                    <li>No lavar en seco</li>
+                                    <li>No usar blanqueador</li>
+                                </ul>
+                            </div>
+                        </details>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="pie-pagina">
+        <div class="contenedor grid-pie">
+            <div class="pie-info">
+                <h2 class="pie-logo">OVERTEXT</h2>
+                <p class="pie-lema">LIMA, PERÚ. STREETWEAR PARA LA NUEVA GENERACIÓN.</p>
+            </div>
+            <div class="pie-enlaces">
+                <h3>SITIO</h3>
+                <ul>
+                    <li><a href="/index.html">INICIO</a></li>
+                    <li><a href="/catalogo.html">CATÁLOGO</a></li>
+                    <li><a href="/promotions.html">PROMOCIONES</a></li>
+                </ul>
+            </div>
+            <div class="pie-enlaces">
+                <h3>AYUDA</h3>
+                <ul>
+                    <li><a href="/contacto.html">CONTACTO</a></li>
+                    <li><a href="/nosotros.html">NOSOTROS</a></li>
+                    <li><a href="#">ENVÍOS</a></li>
+                </ul>
+            </div>
+            <div class="pie-boletin">
+                <h3>NEWSLETTER</h3>
+                <div class="formulario-minimal">
+                    <input type="email" placeholder="TU EMAIL">
+                    <button class="btn-flecha">→</button>
+                </div>
+                <div class="redes-sociales">
+                    <a href="https://www.instagram.com/overcoming.pe/">INSTAGRAM</a>
+                    <a href="https://www.tiktok.com/@overcoming.peru">TIKTOK</a>
+                </div>
+            </div>
+        </div>
+        <div class="contenedor">
+            <hr class="divisor">
+            <div class="legal-flex">
+                <p>© 2026 OVERTEXT — TODOS LOS DERECHOS RESERVADOS</p>
+                <p>LIMA, PERÚ</p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/51904501440" class="wsp-flotante" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <img src="/assets/icon/wsp.png" alt="WhatsApp">
+    </a>
+
+    <script src="/js/nav.js"></script>
+    <script src="/js/carrito.js"></script>
+    <script src="/js/tienda.js"></script>
+
+</body>
+</html>

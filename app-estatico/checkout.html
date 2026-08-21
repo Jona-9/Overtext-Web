@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Finalizar compra — OVERTEXT</title>
+  <!-- Arquitectura ITCSS OVERTEXT -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/componentes/navegacion.css">
+  <link rel="stylesheet" href="/css/componentes/botones.css">
+  <link rel="stylesheet" href="/css/componentes/formularios.css">
+  <link rel="stylesheet" href="/css/componentes/tarjetas.css">
+  <link rel="stylesheet" href="/css/componentes/footer.css">
+  <link rel="stylesheet" href="/css/paginas/checkout.css">
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="barra-navegacion">
+    <div class="contenedor navegacion-interior">
+      <a href="/index.html" class="marca-logo">OVERTEXT</a>
+      <nav class="menu-principal">
+        <ul class="lista-enlaces">
+          <li><a href="/index.html" class="enlace">INICIO</a></li>
+          <li><a href="/catalogo.html" class="enlace">CATÁLOGO</a></li>
+          <li><a href="/promotions.html" class="enlace">PROMOCIONES</a></li>
+          <li><a href="/nosotros.html" class="enlace">NOSOTROS</a></li>
+          <li><a href="/contacto.html" class="enlace">CONTACTO</a></li>
+        </ul>
+      </nav>
+      <div class="nav-acciones">
+        <a href="/login.html" class="boton-usuario" aria-label="Mi cuenta">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="8" r="4"/>
+            <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+          </svg>
+        </a>
+        <button class="boton-carrito" aria-label="Carrito">
+          <img src="/assets/icon/carrito-de-compras.png" alt="">
+          <span class="carrito-contador">0</span>
+        </button>
+        <button class="btn-hamburger" id="btn-hamburger" aria-label="Menú">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="checkout contenedor">
+
+    <p class="cupon">¿TIENES UN CUPÓN? Haz clic aquí para introducir tu código</p>
+
+    <h1 class="titulo-checkout">FINALIZAR COMPRA</h1>
+
+    <form id="form-checkout" novalidate>
+    <div class="checkout-contenido">
+
+      <!-- PASOS -->
+      <section class="checkout-formulario">
+
+        <!-- PASO 1 — DATOS DEL CLIENTE -->
+        <div class="paso paso-activo" data-paso="1">
+          <div class="paso-cabecera">
+            <span class="paso-num">1</span>
+            <h3>DATOS DEL CLIENTE</h3>
+            <span class="paso-check">✓</span>
+          </div>
+          <div class="paso-cuerpo">
+
+            <div class="grid-2">
+              <div>
+                <label for="co-nombre">Nombre *</label>
+                <input type="text" id="co-nombre" placeholder="EJ. CARLOS" required autocomplete="given-name">
+                <span class="error-msg">Ingresa tu nombre</span>
+              </div>
+              <div>
+                <label for="co-apellido">Apellido *</label>
+                <input type="text" id="co-apellido" placeholder="EJ. RIVERA" required autocomplete="family-name">
+                <span class="error-msg">Ingresa tu apellido</span>
+              </div>
+            </div>
+
+            <div class="grid-2">
+              <div>
+                <label for="co-telefono">Teléfono *</label>
+                <input type="text" id="co-telefono" placeholder="+51 900 000 000" required autocomplete="tel">
+                <span class="error-msg">Ingresa tu teléfono</span>
+              </div>
+              <div>
+                <label for="co-correo">Correo *</label>
+                <input type="email" id="co-correo" placeholder="USUARIO@MAIL.COM" required autocomplete="email">
+                <span class="error-msg">Ingresa un correo válido</span>
+              </div>
+            </div>
+
+            <div class="grid-2">
+              <div>
+                <label for="co-doc">Tipo de documento</label>
+                <select id="co-doc">
+                  <option value="DNI">DNI</option>
+                  <option value="CE">Carné de extranjería</option>
+                  <option value="Pasaporte">Pasaporte</option>
+                  <option value="RUC">RUC</option>
+                </select>
+              </div>
+              <div>
+                <label for="co-numdoc">Número de documento *</label>
+                <input type="text" id="co-numdoc" placeholder="00000000" required autocomplete="off" inputmode="numeric" maxlength="12">
+                <span class="error-msg">Ingresa un número de documento válido</span>
+              </div>
+            </div>
+
+            <button type="button" class="btn-continuar" data-continuar="1">CONTINUAR</button>
+          </div>
+        </div>
+
+        <!-- PASO 2 — ENVÍO -->
+        <div class="paso paso-bloqueado" data-paso="2">
+          <div class="paso-cabecera">
+            <span class="paso-num">2</span>
+            <h3>ENVÍO</h3>
+            <span class="paso-check">✓</span>
+          </div>
+          <div class="paso-cuerpo">
+
+            <div class="envio-opciones">
+              <label class="envio-card">
+                <input type="radio" name="envio" value="recojo">
+                <span class="envio-card-nombre">RECOJO EN ALMACÉN</span>
+                <span class="envio-card-precio">GRATIS</span>
+              </label>
+              <label class="envio-card">
+                <input type="radio" name="envio" value="delivery">
+                <span class="envio-card-nombre">DELIVERY A LIMA</span>
+                <span class="envio-card-precio">S/ 15.00</span>
+              </label>
+              <label class="envio-card">
+                <input type="radio" name="envio" value="provincia">
+                <span class="envio-card-nombre">ENVÍO A PROVINCIA</span>
+                <span class="envio-card-precio">S/ 25.00</span>
+              </label>
+            </div>
+            <span class="error-msg" id="envio-error">Elige una opción de envío</span>
+
+            <!-- Sub-bloques: solo aparece el que corresponde a la opción elegida -->
+            <div class="envio-campos" data-envio="recojo">
+              <div class="recojo-info">
+                <strong>Almacén OVERTEXT — Lima</strong>
+                Gp7 Huáscar, San Juan de Lurigancho, Lima 15412<br>
+                Lunes a Viernes: 9:00 AM – 6:00 PM<br>
+                Sábados: 9:00 AM – 1:00 PM
+              </div>
+            </div>
+
+            <div class="envio-campos" data-envio="delivery">
+              <label for="co-distrito">Distrito *</label>
+              <select id="co-distrito" required>
+                <option value="">Elige tu distrito</option>
+              </select>
+              <span class="error-msg">Elige tu distrito</span>
+
+              <label for="co-direccion">Dirección *</label>
+              <input type="text" id="co-direccion" placeholder="AV. PRINCIPAL 123" required>
+              <span class="error-msg">Ingresa tu dirección</span>
+
+              <label for="co-referencia">Referencia</label>
+              <input type="text" id="co-referencia" placeholder="FRENTE A PARQUE">
+            </div>
+
+            <div class="envio-campos" data-envio="provincia">
+              <div class="grid-2">
+                <div>
+                  <label for="co-departamento">Departamento *</label>
+                  <select id="co-departamento" required>
+                    <option value="">Elige tu departamento</option>
+                  </select>
+                  <span class="error-msg">Elige tu departamento</span>
+                </div>
+                <div>
+                  <label for="co-provincia">Provincia *</label>
+                  <select id="co-provincia" required disabled>
+                    <option value="">Primero elige departamento</option>
+                  </select>
+                  <span class="error-msg">Elige tu provincia</span>
+                </div>
+              </div>
+              <label for="co-agencia">Agencia de envío *</label>
+              <select id="co-agencia" required>
+                <option value="">Elige el courier</option>
+                <option value="Shalom">Shalom</option>
+                <option value="Olva Courier">Olva Courier</option>
+              </select>
+              <span class="error-msg">Elige la agencia de envío</span>
+            </div>
+
+            <button type="button" class="btn-continuar" data-continuar="2">CONTINUAR</button>
+          </div>
+        </div>
+
+        <!-- PASO 3 — PAGO -->
+        <div class="paso paso-bloqueado" data-paso="3">
+          <div class="paso-cabecera">
+            <span class="paso-num">3</span>
+            <h3>PAGO</h3>
+          </div>
+          <div class="paso-cuerpo">
+
+            <label class="opcion-envio">
+              <input type="radio" name="pago" value="deposito" checked>
+              <span><b>DEPÓSITO — TRANSFERENCIA</b></span>
+            </label>
+            <div class="pago-detalle">
+              <p>BCP: 191-XXXXXXXX-X</p>
+              <p>BBVA: 0011-XXXXXX</p>
+              <p>SCOTIABANK: 000-XXXXXX</p>
+              <p>Enviar comprobante por WhatsApp al finalizar.</p>
+            </div>
+
+            <label class="opcion-envio" style="margin-top:12px;">
+              <input type="radio" name="pago" value="yape">
+              <span><b>YAPE / PLIN</b></span>
+            </label>
+
+            <label for="co-notas" style="margin-top:16px;display:block;">Notas del pedido</label>
+            <textarea id="co-notas" placeholder="INDICACIONES PARA LA ENTREGA..."></textarea>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- RESUMEN -->
+      <aside class="checkout-resumen">
+
+        <h3>TU PEDIDO</h3>
+
+        <div id="resumen-productos" class="resumen-productos"></div>
+
+        <div class="totales-seccion">
+          <div class="total-fila">
+            <span>SUBTOTAL</span>
+            <span id="resumen-subtotal">S/ 0.00</span>
+          </div>
+          <div class="total-fila">
+            <span>ENVÍO</span>
+            <span id="resumen-envio">POR DEFINIR</span>
+          </div>
+          <div class="total-fila total-final">
+            <span class="fila-label">TOTAL</span>
+            <span class="fila-valor" id="resumen-total">S/ 0.00</span>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-pedido">REALIZAR EL PEDIDO</button>
+
+      </aside>
+
+    </div>
+    </form>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="pie-pagina">
+    <div class="contenedor grid-pie">
+      <div class="pie-info">
+        <h2 class="pie-logo">OVERTEXT</h2>
+        <p class="pie-lema">LIMA, PERÚ. STREETWEAR PARA LA NUEVA GENERACIÓN.</p>
+      </div>
+      <div class="pie-enlaces">
+        <h3>SITIO</h3>
+        <ul>
+          <li><a href="/index.html">INICIO</a></li>
+          <li><a href="/catalogo.html">CATÁLOGO</a></li>
+          <li><a href="/promotions.html">PROMOCIONES</a></li>
+        </ul>
+      </div>
+      <div class="pie-enlaces">
+        <h3>AYUDA</h3>
+        <ul>
+          <li><a href="/contacto.html">CONTACTO</a></li>
+          <li><a href="/nosotros.html">NOSOTROS</a></li>
+          <li><a href="#">ENVÍOS</a></li>
+        </ul>
+      </div>
+      <div class="pie-boletin">
+        <h3>NEWSLETTER</h3>
+        <div class="formulario-minimal">
+          <input type="email" placeholder="TU EMAIL">
+          <button class="btn-flecha">→</button>
+        </div>
+        <div class="redes-sociales">
+          <a href="https://www.instagram.com/overcoming.pe/" target="_blank" rel="noopener">INSTAGRAM</a>
+          <a href="https://www.tiktok.com/@overcoming.peru" target="_blank" rel="noopener">TIKTOK</a>
+        </div>
+      </div>
+    </div>
+    <div class="contenedor">
+      <hr class="divisor">
+      <div class="legal-flex">
+        <p>© 2026 OVERTEXT — TODOS LOS DERECHOS RESERVADOS</p>
+        <p>LIMA, PERÚ</p>
+      </div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/51904501440" class="wsp-flotante" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <img src="/assets/icon/wsp.png" alt="WhatsApp">
+  </a>
+
+  <script src="/js/nav.js"></script>
+  <script src="/js/carrito.js"></script>
+  <script src="/js/checkout.js"></script>
+
+</body>
+
+</html>

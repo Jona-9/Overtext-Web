@@ -1,0 +1,236 @@
+/* ============================================================
+   OVERTEXT — layout.css
+   Capa Objects ITCSS: Contenedor + estructura de secciones.
+   ============================================================ */
+
+
+/* ============================================================
+   OBJECTS — Contenedor principal
+   ============================================================ */
+.contenedor {
+    max-width: var(--ancho-maximo);
+    margin: 0 auto;
+    padding: var(--padding-contenedor);
+}
+
+
+/* ============================================================
+   OBJECTS — Secciones y grillas de página
+   ============================================================ */
+
+/* --- Sección portada (inicio, nosotros) --- */
+.seccion-portada {
+    padding: var(--espacio-xl) 0;
+}
+
+.cuadricula-portada {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--espacio-xl);
+    align-items: start;
+}
+
+.imagen-principal {
+    width: 100%;
+    height: auto;
+    min-height: 600px;
+    max-height: 850px;
+    object-fit: cover;
+}
+
+/* --- Textos del hero --- */
+.subtitulo-superior {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    margin-bottom: 1rem;
+    color: var(--color-rojo);
+    text-transform: uppercase;
+}
+
+.titulo-gigante {
+    font-family: var(--fuente-display);
+    font-size: clamp(3rem, 7vw, 5.8rem);
+    line-height: 0.9;
+    font-weight: 900;
+    letter-spacing: -4px;
+    margin: 20px 0 40px;
+}
+
+.bloque-descripcion {
+    max-width: 420px;
+}
+
+.texto-parrafo {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    color: var(--color-negro);
+    line-height: 1.7;
+}
+
+.texto-destacado {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-texto-suave);
+    margin-bottom: 4rem;
+    line-height: 1.6;
+}
+
+.indicador-proceso {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: var(--espacio-lg);
+}
+
+.separador-linea {
+    width: 60px;
+    height: 1.5px;
+    background: var(--color-negro);
+}
+
+.texto-proceso {
+    font-size: 0.85rem;
+    font-weight: 900;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+/* --- Sección proceso (3 columnas) --- */
+.proceso {
+    background-color: var(--color-fondo-alt);
+    padding: var(--espacio-xl) 0;
+    font-family: var(--fuente-principal);
+}
+
+.grid-proceso {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 50px;
+}
+
+.cifra {
+    font-family: var(--fuente-display);
+    font-size: 3.5rem;
+    font-weight: 900;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.titulo-borde {
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-bottom: 2px solid var(--color-rojo);
+    padding-bottom: 4px;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+.texto-columna {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--color-texto-suave);
+}
+
+/* --- Sección detalle de tela (inicio) --- */
+.detalle {
+    padding: var(--espacio-xl) 0;
+}
+
+.grid-detalle {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 40px;
+}
+
+.info-tela h2 {
+    font-family: var(--fuente-display);
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -1.8px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.info-tela p {
+    font-size: 1rem;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--color-texto-suave);
+    max-width: 688px;
+}
+
+.zona-textura img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    margin-bottom: var(--espacio-lg);
+}
+
+.zona-outfit img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 400 / 544;
+    object-fit: cover;
+}
+
+/* --- Hero strip (catálogo, nosotros) --- */
+.hero-strip {
+    padding: var(--espacio-lg) 0;
+    border-bottom: 0.5px solid var(--color-borde);
+}
+
+/* --- Banner de beneficios (inicio) --- */
+.banner-beneficios {
+    background: var(--color-negro);
+    color: var(--color-fondo);
+    padding: var(--espacio-lg) 0;
+}
+
+.banner-beneficios-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--espacio-md);
+}
+
+.banner-beneficios-texto h2 {
+    font-family: var(--fuente-display);
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+    margin-bottom: 8px;
+}
+
+.banner-beneficios-texto p {
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.55);
+}
+
+/* --- Responsive --- */
+@media (max-width: 900px) {
+    .cuadricula-portada {
+        grid-template-columns: 1fr;
+        gap: var(--espacio-lg);
+    }
+
+    .grid-proceso {
+        grid-template-columns: 1fr;
+        gap: var(--espacio-md);
+    }
+
+    .grid-detalle {
+        grid-template-columns: 1fr;
+    }
+
+    .banner-beneficios-inner {
+        flex-direction: column;
+        text-align: center;
+    }
+}

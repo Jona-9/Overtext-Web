@@ -1,0 +1,249 @@
+/* ============================================================
+   OVERTEXT — Navegación
+   Header, logo, menú, ícono de carrito y botón WhatsApp flotante.
+   Compartido por todas las páginas del sitio.
+   ============================================================ */
+
+.barra-navegacion {
+    height: 70px;
+    border-bottom: 1px solid var(--color-borde);
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 100;
+}
+
+.navegacion-interior {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.marca-logo {
+    font-family: var(--fuente-principal);
+    font-weight: 900;
+    font-size: 24px;
+    letter-spacing: -1.2px;
+    color: var(--color-negro);
+    text-decoration: none;
+}
+
+.lista-enlaces {
+    display: flex;
+    gap: 0px;
+}
+
+.enlace {
+    color: var(--color-negro);
+    font-size: 0.75rem;
+    font-weight: 700;
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: inline-block;
+    padding: 15px 15px;
+}
+
+.enlace:hover,
+.enlace.activo {
+    opacity: 1;
+}
+
+.enlace {
+    position: relative;
+}
+/*animacion enlace*/
+.enlace::after {
+    content: '';
+    position: absolute;
+    bottom: 8px;
+    left: 15px;
+    right: 15px;
+    height: 2px;
+    background-color: var(--color-rojo);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.3s ease;
+    
+}
+
+.enlace:hover::after,
+.enlace.activo::after {
+    transform: scaleX(1);
+}
+
+.boton-carrito {
+    display: flex;
+    align-items: center;
+    position: relative;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.boton-carrito img {
+    width: 24px;
+    height: auto;
+}
+
+.carrito-contador {
+    position: absolute;
+    top: -6px;
+    right: -8px;
+    background-color: var(--color-rojo);
+    color: var(--color-fondo);
+    font-size: 10px;
+    font-weight: 700;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Botón WhatsApp flotante */
+.wsp-flotante {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    background: #25d366;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    transition: transform 0.2s;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.wsp-flotante:hover {
+    transform: scale(1.08);
+}
+
+.wsp-flotante img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}
+
+/* Acciones del nav (usuario + carrito) */
+.nav-acciones {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.boton-usuario {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color-negro);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.boton-usuario:hover {
+    opacity: 1;
+}
+
+/* --- Hamburger (móvil) --- */
+.btn-hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    width: 30px;
+}
+
+.btn-hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--color-negro);
+    transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.btn-hamburger.abierto span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.btn-hamburger.abierto span:nth-child(2) {
+    opacity: 0;
+}
+
+.btn-hamburger.abierto span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+@media (max-width: 768px) {
+    .btn-hamburger {
+        display: flex;
+    }
+    
+    .menu-principal {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: var(--color-fondo);
+        border-bottom: none;
+        border-radius: 0 0 14px 14px;
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+        z-index: 99;
+        padding: 8px 0;
+        overflow: hidden;
+    }
+
+    .menu-principal.abierto {
+        display: block;
+    }
+
+    /* Oscurece + desenfoca la página detrás del menú abierto (sin elemento extra en el DOM) */
+    .menu-principal.abierto::before {
+        content: '';
+        position: fixed;
+        top: 70px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: -1;
+        background: rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+    }
+
+    .lista-enlaces {
+        flex-direction: column;
+        gap: 0;
+        padding: 0;
+    }
+
+    .lista-enlaces li + li {
+        border-top: 1px solid var(--color-borde);
+    }
+
+    .lista-enlaces li a {
+        display: block;
+        padding: 16px 25px;
+        opacity: 1;                 /* sin el 0.5 tenue: texto legible sobre blanco */
+    }
+}

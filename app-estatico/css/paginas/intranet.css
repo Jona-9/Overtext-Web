@@ -1,0 +1,115 @@
+/* ============================================================
+   OVERTEXT — Página Intranet (panel administrativo)
+   ============================================================ */
+
+.intranet {
+    padding: var(--espacio-xl) 0;
+}
+
+.intranet-cabecera {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: var(--espacio-md);
+    flex-wrap: wrap;
+    margin-bottom: var(--espacio-lg);
+    padding-bottom: var(--espacio-md);
+    border-bottom: 0.5px solid var(--color-borde);
+}
+
+.intranet-cabecera h1 {
+    font-family: var(--fuente-display);
+    font-size: clamp(2rem, 5vw, 3rem);
+    letter-spacing: -1px;
+    text-transform: uppercase;
+    line-height: 1;
+}
+
+.intranet-cabecera p {
+    font-family: var(--fuente-principal);
+    font-size: 0.85rem;
+    color: var(--color-texto-suave);
+    margin-top: 6px;
+}
+
+.btn-cerrar-sesion {
+    background: var(--color-negro);
+    color: var(--color-fondo);
+    border: none;
+    padding: 14px 28px;
+    font-family: var(--fuente-principal);
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.25s;
+}
+
+.btn-cerrar-sesion:hover {
+    background: var(--color-rojo);
+}
+
+.intranet-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--espacio-md);
+    margin-bottom: var(--espacio-lg);
+}
+
+.intranet-card {
+    border: 1px solid var(--color-borde);
+    padding: var(--espacio-md);
+    background: var(--color-fondo);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.intranet-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.intranet-card .cifra {
+    font-family: var(--fuente-display);
+    font-size: 2.2rem;
+    color: var(--color-rojo);
+    line-height: 1;
+}
+
+.intranet-card h3 {
+    font-family: var(--fuente-principal);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-texto-suave);
+    margin-top: 10px;
+}
+
+.intranet-panel {
+    border: 1px solid var(--color-borde);
+    padding: var(--espacio-lg);
+}
+
+.intranet-panel h2 {
+    font-family: var(--fuente-display);
+    font-size: 1.4rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: var(--espacio-sm);
+}
+
+.intranet-panel p {
+    font-family: var(--fuente-principal);
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--color-texto-suave);
+}
+
+@media (max-width: 900px) {
+    .intranet-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 480px) {
+    .intranet-grid { grid-template-columns: 1fr; }
+}

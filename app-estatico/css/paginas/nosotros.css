@@ -1,0 +1,76 @@
+/* ============================================================
+   OVERTEXT — Página Nosotros
+   Estilos específicos de la página "Sobre nosotros".
+   ============================================================ */
+
+.nosotros-intro {
+    padding: var(--espacio-xl) 0;
+    max-width: 720px;
+}
+
+.nosotros-intro h1 {
+    font-family: var(--fuente-display);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 900;
+    letter-spacing: -2px;
+    text-transform: uppercase;
+    line-height: 0.95;
+    margin-bottom: var(--espacio-md);
+}
+
+.nosotros-intro p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-texto-suave);
+    max-width: 560px;
+}
+
+.nosotros-valores {
+    padding: var(--espacio-xl) 0;
+    border-top: 0.5px solid var(--color-borde);
+}
+
+.nosotros-valores h2 {
+    font-family: var(--fuente-principal);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-texto-suave);
+    margin-bottom: var(--espacio-lg);
+}
+
+.valores-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, auto);
+    gap: 1px;
+    background: var(--color-borde);
+    border: 0.5px solid var(--color-borde);
+}
+
+.valor-item {
+    background: var(--color-fondo);
+    padding: var(--espacio-lg) var(--espacio-md);
+}
+
+.valor-item h3 {
+    font-family: var(--fuente-display);
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.valor-item p {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--color-texto-suave);
+}
+
+@media (max-width: 768px) {
+    .valores-grid {
+        grid-template-columns: 1fr;
+    }
+}

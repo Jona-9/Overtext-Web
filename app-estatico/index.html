@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OVERTEXT — Streetwear Peruano</title>
+    <!-- Arquitectura ITCSS OVERTEXT -->
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/componentes/navegacion.css">
+    <link rel="stylesheet" href="/css/componentes/botones.css">
+    <link rel="stylesheet" href="/css/componentes/formularios.css">
+    <link rel="stylesheet" href="/css/componentes/tarjetas.css">
+    <link rel="stylesheet" href="/css/componentes/badges.css">
+    <link rel="stylesheet" href="/css/componentes/footer.css">
+    <link rel="stylesheet" href="/css/componentes/carrito.css">
+</head>
+
+<body>
+
+    <!-- NAVEGACIÓN -->
+    <header class="barra-navegacion">
+        <div class="contenedor navegacion-interior">
+            <a href="/index.html" class="marca-logo">OVERTEXT</a>
+            <nav class="menu-principal">
+                <ul class="lista-enlaces">
+                    <li><a href="/index.html" class="enlace activo">INICIO</a></li>
+                    <li><a href="/catalogo.html" class="enlace">CATÁLOGO</a></li>
+                    <li><a href="/promotions.html" class="enlace">PROMOCIONES</a></li>
+                    <li><a href="/nosotros.html" class="enlace">NOSOTROS</a></li>
+                    <li><a href="/contacto.html" class="enlace">CONTACTO</a></li>
+                </ul>
+            </nav>
+            <div class="nav-acciones">
+                <a href="/login.html" class="boton-usuario" aria-label="Mi cuenta">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="8" r="4"/>
+                        <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+                    </svg>
+                </a>
+                <button class="boton-carrito" id="abrir-carrito" aria-label="Carrito">
+                    <img src="/assets/icon/carrito-de-compras.png" alt="">
+                    <span class="carrito-contador">2</span>
+                </button>
+                <button class="btn-hamburger" id="btn-hamburger" aria-label="Menú">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- CARRITO LATERAL -->
+    <div class="overlay-carrito" id="overlay-carrito"></div>
+
+    <!-- CARRITO LATERAL -->
+    <aside id="carrito-lateral">
+        <div class="carrito-header">
+            <div class="carrito-header-izq">
+                <h2>TU CARRITO</h2>
+                <span class="carrito-conteo">2 PRODUCTOS</span>
+            </div>
+            <button class="btn-cerrar-carrito" id="cerrar-carrito" aria-label="Cerrar carrito">
+                <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                    <line x1="1" y1="1" x2="12" y2="12"/><line x1="12" y1="1" x2="1" y2="12"/>
+                </svg>
+            </button>
+        </div>
+
+        <div class="envio-gratis-info">
+            <p class="envio-gratis-texto">TE FALTAN S/ 60 PARA ENVÍO GRATIS</p>
+            <div class="envio-gratis-barra">
+                <div class="envio-gratis-progreso"></div>
+            </div>
+        </div>
+
+        <div class="carrito-items">
+            <!-- Los productos se renderizan dinámicamente desde js/carrito.js -->
+        </div>
+
+        <div class="carrito-footer">
+            <div class="resumen-linea">
+                <span>SUBTOTAL</span>
+                <span>S/ 120</span>
+            </div>
+            <div class="resumen-linea">
+                <span>ENVÍO</span>
+                <span class="envio-gratis">GRATIS</span>
+            </div>
+            <div class="resumen-total">
+                <span class="total-label">TOTAL</span>
+                <span class="total-monto">S/ 120</span>
+            </div>
+            <a href="/checkout.html" class="btn-finalizar">FINALIZAR COMPRA</a>
+            <button class="btn-seguir" id="seguir-comprando">SEGUIR COMPRANDO</button>
+        </div>
+    </aside>
+
+    <!-- HERO PRINCIPAL -->
+    <main>
+        <section class="seccion-portada">
+            <div class="contenedor cuadricula-portada">
+
+                <div >
+                    <img src="/assets/img/sitio/modelo.webp" alt="Modelo vistiendo OVERTEXT" class="imagen-principal animar-zoom">
+                </div>
+
+                <div class="portada-contenido">
+                    <span class="subtitulo-superior animar-entrada">OVERCOMING — LIMA, PERÚ</span>
+                    <h1 class="titulo-gigante animar-entrada-2">SHORTS<br>QUE SE<br>SIENTEN<br>BIEN.</h1>
+                    <div class="bloque-descripcion animar-entrada-3">
+                        <p class="texto-parrafo">
+                            Fabricantes directos de streetwear peruano.
+                            Sin intermediarios, sin compromisos en calidad.
+                        </p>
+                        <p class="texto-destacado">
+                            ALGODÓN PERUANO · ENVÍO A TODO EL PAÍS · GARANTÍA DE FÁBRICA
+                        </p>
+                        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+                            <a href="/catalogo.html" class="btn-primario">VER COLECCIÓN</a>
+                            <a href="/promotions.html" class="btn-secundario">ARMA TU PACK</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECCIÓN PROCESO -->
+        <section class="proceso">
+            <div class="contenedor">
+                <div class="indicador-proceso">
+                    <div class="separador-linea"></div>
+                    <span class="texto-proceso">NUESTRO PROCESO</span>
+                </div>
+            </div>
+            <div class="contenedor grid-proceso">
+                <article>
+                    <span class="cifra">01</span>
+                    <h3 class="titulo-borde">ORIGEN TEXTIL</h3>
+                    <p class="texto-columna">Seleccionamos el mejor algodón peruano, reconocido mundialmente por su durabilidad y suavidad superior.</p>
+                </article>
+                <article>
+                    <span class="cifra">02</span>
+                    <h3 class="titulo-borde">MANUFACTURA PROPIA</h3>
+                    <p class="texto-columna">Como fabricantes directos, garantizamos condiciones justas y una supervisión milimétrica en cada prenda.</p>
+                </article>
+                <article>
+                    <span class="cifra">03</span>
+                    <h3 class="titulo-borde">VISIÓN URBANA</h3>
+                    <p class="texto-columna">Diseño pensado para el asfalto, la noche y la identidad propia. Streetwear sin concesiones.</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- SECCIÓN DETALLE TELA -->
+        <section class="detalle">
+            <div class="contenedor grid-detalle">
+                <div class="zona-textura">
+                    <img src="/assets/img/sitio/tela.webp" alt="Textura del algodón OVERTEXT">
+                    <div class="info-tela">
+                        <h2>CALIDAD DE EXPORTACIÓN.</h2>
+                        <p>"Utilizamos las mejores fibras peruanas. Cada prenda pasa por 12 puntos de control antes de llegar a tus manos."</p>
+                        <a href="/nosotros.html" class="btn-secundario" style="margin-top:24px;display:inline-flex;">CONOCE MÁS</a>
+                    </div>
+                </div>
+                <div class="zona-outfit">
+                    <img src="/assets/img/sitio/imagen-principal.webp" alt="Short OVERTEXT">
+                </div>
+            </div>
+        </section>
+
+        <!-- BANNER BENEFICIOS -->
+        <section class="banner-beneficios">
+            <div class="contenedor banner-beneficios-inner">
+                <div class="banner-beneficios-texto">
+                    <h2>ARMA TU PACK DE 6.</h2>
+                    <p>Elige los colores que quieres. Nosotros hacemos el resto.</p>
+                </div>
+                <a href="/promotions.html" class="boton-beneficios">VER PACKS</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="pie-pagina">
+        <div class="contenedor grid-pie">
+            <div class="pie-info">
+                <h2 class="pie-logo">OVERTEXT</h2>
+                <p class="pie-lema">LIMA, PERÚ. STREETWEAR PARA LA NUEVA GENERACIÓN.</p>
+            </div>
+            <div class="pie-enlaces">
+                <h3>SITIO</h3>
+                <ul>
+                    <li><a href="/index.html">INICIO</a></li>
+                    <li><a href="/catalogo.html">CATÁLOGO</a></li>
+                    <li><a href="/promotions.html">PROMOCIONES</a></li>
+                </ul>
+            </div>
+            <div class="pie-enlaces">
+                <h3>AYUDA</h3>
+                <ul>
+                    <li><a href="/contacto.html">CONTACTO</a></li>
+                    <li><a href="/nosotros.html">NOSOTROS</a></li>
+                    <li><a href="#">ENVÍOS</a></li>
+                </ul>
+            </div>
+            <div class="pie-boletin">
+                <h3>NEWSLETTER</h3>
+                <div class="formulario-minimal">
+                    <input type="email" placeholder="TU EMAIL">
+                    <button class="btn-flecha">→</button>
+                </div>
+                <div class="redes-sociales">
+                    <a href="https://www.instagram.com/overcoming.pe/" target="_blank" rel="noopener">INSTAGRAM</a>
+                    <a href="https://www.tiktok.com/@overcoming.peru" target="_blank" rel="noopener">TIKTOK</a>
+                </div>
+            </div>
+        </div>
+        <div class="contenedor">
+            <hr class="divisor">
+            <div class="legal-flex">
+                <p>© 2026 OVERTEXT — TODOS LOS DERECHOS RESERVADOS</p>
+                <p>LIMA, PERÚ</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WSP FLOTANTE -->
+    <a href="https://wa.me/51904501440" class="wsp-flotante" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <img src="/assets/icon/wsp.png" alt="WhatsApp">
+    </a>
+
+    <script src="/js/nav.js"></script>
+    <script src="/js/carrito.js"></script>
+
+</body>
+</html>

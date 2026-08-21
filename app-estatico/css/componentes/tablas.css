@@ -1,0 +1,85 @@
+/* ============================================================
+   OVERTEXT — Tablas
+   Estilos para todas las tablas del sitio.
+   ============================================================ */
+
+/* Contenedor con scroll horizontal en mobile */
+.tabla-envolvente {
+    overflow-x: auto;
+    border: 0.5px solid var(--color-borde);
+    margin-top: var(--espacio-md);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    font-family: var(--fuente-principal);
+}
+
+thead tr {
+    background: var(--color-negro);
+}
+
+th {
+    padding: 0.85rem 1.25rem;
+    text-align: left;
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 500;
+}
+
+tbody tr {
+    border-bottom: 0.5px solid var(--color-borde);
+    transition: background 0.2s;
+}
+
+tbody tr:last-child {
+    border-bottom: none;
+}
+
+tbody tr:hover {
+    background: var(--color-fondo-alt);
+}
+
+td {
+    padding: 0.85rem 1.25rem;
+    color: var(--color-texto-suave);
+    vertical-align: middle;
+}
+
+td strong {
+    color: var(--color-negro);
+    font-weight: 500;
+}
+
+/* Tabla de tallas (detalle producto) */
+.tabla-tallas-detalle {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.78rem;
+}
+
+.tabla-tallas-detalle th,
+.tabla-tallas-detalle td {
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+    border-bottom: 0.5px solid var(--color-borde);
+}
+
+.tabla-tallas-detalle thead tr {
+    background: var(--color-fondo-alt);
+}
+
+.tabla-tallas-detalle th {
+    color: var(--color-texto-suave);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.tabla-tallas-detalle td {
+    color: var(--color-negro);
+}

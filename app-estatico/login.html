@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Iniciar sesión — OverText</title>
+    <!-- Arquitectura ITCSS OVERTEXT -->
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/componentes/navegacion.css">
+    <link rel="stylesheet" href="/css/componentes/botones.css">
+    <link rel="stylesheet" href="/css/componentes/formularios.css">
+    <link rel="stylesheet" href="/css/componentes/tarjetas.css">
+    <link rel="stylesheet" href="/css/componentes/footer.css">
+    <link rel="stylesheet" href="/css/paginas/login.css">
+</head>
+
+<body>
+
+    <header class="barra-navegacion">
+        <div class="contenedor navegacion-interior">
+            <a href="/index.html" class="marca-logo">OVERTEXT</a>
+            <nav class="menu-principal">
+                <ul class="lista-enlaces">
+                    <li><a href="/index.html" class="enlace">INICIO</a></li>
+                    <li><a href="/catalogo.html" class="enlace">CATÁLOGO</a></li>
+                    <li><a href="/promotions.html" class="enlace">PROMOCIONES</a></li>
+                    <li><a href="/nosotros.html" class="enlace">NOSOTROS</a></li>
+                    <li><a href="/contacto.html" class="enlace">CONTACTO</a></li>
+                </ul>
+            </nav>
+            <div class="nav-acciones">
+                <a href="/login.html" class="boton-usuario" aria-label="Mi cuenta">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="8" r="4"/>
+                        <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+                    </svg>
+                </a>
+                <button class="boton-carrito" aria-label="Carrito">
+                    <img src="/assets/icon/carrito-de-compras.png" alt="">
+                    <span class="carrito-contador">2</span>
+                </button>
+                <button class="btn-hamburger" id="btn-hamburger" aria-label="Menú">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Formulario de inicio de sesión -->
+    <main class="contenedor-sesion">
+
+        <div class="tarjeta-sesion">
+
+            <h1 class="titulo-sesion">INICIAR SESIÓN</h1>
+            <p class="subtitulo-sesion">Accede a tu cuenta OverText.</p>
+
+            <form id="formulario-sesion" action="#" method="POST" novalidate>
+
+                <div class="ot-campo">
+                    <label for="usuario">Usuario</label>
+                    <input type="text" id="usuario" name="usuario" placeholder="tu@correo.com" autocomplete="username"
+                        required aria-required="true" />
+                </div>
+
+                <div class="ot-campo">
+                    <div class="ot-campo-fila">
+                        <label for="contrasena">Contraseña</label>
+                        <a class="ot-olvide-contrasena" href="#">¿La olvidaste?</a>
+                    </div>
+                    <input type="password" id="contrasena" name="contrasena" placeholder="••••••••"
+                        autocomplete="current-password" required aria-required="true" />
+                </div>
+
+                <button type="submit" class="ot-boton-ingresar">
+                    ENTRAR
+                </button>
+
+                <p id="mensaje-sesion" class="mensaje-sesion" role="alert"></p>
+
+            </form>
+
+            <div class="ot-separador">
+                <div class="ot-separador-linea"></div>
+                <span>o</span>
+                <div class="ot-separador-linea"></div>
+            </div>
+
+            <a class="ot-boton-whatsapp" href="https://wa.me/51904501440" target="_blank" rel="noopener noreferrer">
+                <img class="ot-icono-whatsapp" src="/assets/icon/wsp.png" alt="WhatsApp" />
+                Escríbenos al toque
+            </a>
+
+            <p class="ot-pie-formulario">
+                ¿Primera vez? <a href="#">Crea tu cuenta</a>
+            </p>
+
+        </div>
+
+    </main>
+
+    <footer class="pie-pagina">
+        <div class="contenedor grid-pie">
+            <div class="pie-info">
+                <h2 class="pie-logo">OVERTEXT</h2>
+                <p class="pie-lema">LIMA, PERÚ. STREETWEAR PARA LA NUEVA GENERACIÓN.</p>
+            </div>
+            <div class="pie-enlaces">
+                <h3>SITIO</h3>
+                <ul>
+                    <li><a href="/index.html">INICIO</a></li>
+                    <li><a href="/catalogo.html">CATÁLOGO</a></li>
+                    <li><a href="/promotions.html">PROMOCIONES</a></li>
+                </ul>
+            </div>
+            <div class="pie-enlaces">
+                <h3>AYUDA</h3>
+                <ul>
+                    <li><a href="/contacto.html">CONTACTO</a></li>
+                    <li><a href="/nosotros.html">NOSOTROS</a></li>
+                    <li><a href="#">ENVÍOS</a></li>
+                </ul>
+            </div>
+            <div class="pie-boletin">
+                <h3>NEWSLETTER</h3>
+                <div class="formulario-minimal">
+                    <input type="email" placeholder="TU EMAIL">
+                    <button class="btn-flecha">→</button>
+                </div>
+                <div class="redes-sociales">
+                    <a href="https://www.instagram.com/overcoming.pe/" target="_blank" rel="noopener">INSTAGRAM</a>
+                    <a href="https://www.tiktok.com/@overcoming.peru" target="_blank" rel="noopener">TIKTOK</a>
+                </div>
+            </div>
+        </div>
+        <div class="contenedor">
+            <hr class="divisor">
+            <div class="legal-flex">
+                <p>© 2026 OVERTEXT — TODOS LOS DERECHOS RESERVADOS</p>
+                <p>LIMA, PERÚ</p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/51904501440" class="wsp-flotante" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <img src="/assets/icon/wsp.png" alt="WhatsApp">
+    </a>
+
+    <script src="/js/nav.js"></script>
+    <script src="/js/carrito.js"></script>
+    <script src="/js/login.js"></script>
+
+</body>
+
+</html>

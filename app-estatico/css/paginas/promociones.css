@@ -1,0 +1,317 @@
+/* ============================================================
+   OVERTEXT — Página Promociones
+   Selector de pack, colores, slots y hero de la promo.
+   ============================================================ */
+
+/* --- Hero de promociones --- */
+.promo-main {
+    width: 100%;
+    padding: var(--espacio-xl) var(--espacio-lg);
+    text-align: center;
+    background-color: var(--color-fondo-alt);
+}
+
+.promo-subtexto {
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.5em;
+    color: var(--color-texto-suave);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.promo-titulo {
+    font-family: var(--fuente-display);
+    font-size: clamp(3.5rem, 8vw, 5.5rem);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: -4px;
+    line-height: 0.85;
+    color: var(--color-negro);
+    margin: 10px 0 20px;
+}
+
+.promo-descripcion {
+    font-size: 1rem;
+    color: var(--color-texto-suave);
+    letter-spacing: -0.3px;
+    margin-bottom: var(--espacio-lg);
+}
+
+/* --- Layout padre (imagen + panel) --- */
+.contenedor-padre {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 30px;
+}
+
+.imagen-pack {
+    width: 45%;
+    aspect-ratio: 1 / 1;
+    min-width: 0;
+    object-fit: cover;
+}
+
+.info-pack {
+    background-color: var(--color-fondo);
+    width: 55%;
+    max-width: 600px;
+}
+
+/* --- Bloque de ofertas --- */
+.ofertas {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 60px;
+    padding: 60px;
+    width: 100%;
+}
+
+.oferta_shorts {
+    font-family: var(--fuente-display);
+    font-weight: 800;
+    font-size: clamp(2.5rem, 5vw, 3.75rem);
+    line-height: 0.8;
+    color: var(--color-negro);
+    text-align: left;
+    max-width: 330px;
+}
+
+.mensaje-promocion {
+    background-color: #FAF6ED;
+    color: #6B624E;
+    font-family: var(--fuente-principal);
+    font-weight: 700;
+    font-size: 0.88rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 15px 25px;
+    line-height: 1.4;
+    text-align: left;
+    display: inline-block;
+    max-width: 280px;
+}
+
+/* --- Selección de colores --- */
+.seleccion-colores {
+    padding: 0 60px 30px;
+    text-align: left;
+}
+
+.etiqueta-colores {
+    font-family: var(--fuente-principal);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--color-texto-suave);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+}
+
+.colores-grid {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.color-opcion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+}
+
+.color-muestra {
+    width: 36px;
+    height: 36px;
+}
+
+.color-opcion span {
+    font-family: var(--fuente-principal);
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: var(--color-texto-suave);
+    text-transform: uppercase;
+}
+
+.color-opcion.activo .color-muestra {
+    outline: 2px solid var(--color-negro);
+    outline-offset: 2px;
+}
+
+/* --- Slots de selección --- */
+.seleccionados {
+    margin: 0 25px 20px;
+    background-color: var(--color-fondo-alt);
+    padding: 18px 20px;
+    text-align: left;
+}
+
+.seleccionados-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+.contador-slots {
+    font-family: var(--fuente-principal);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.icono-info {
+    font-size: 1rem;
+    color: var(--color-texto-suave);
+    cursor: pointer;
+}
+
+.slots {
+    display: flex;
+    gap: 8px;
+}
+
+.slot {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slot.vacio {
+    background-color: var(--color-fondo);
+    border: 1px solid var(--color-borde);
+}
+
+.slot-check {
+    color: var(--color-fondo);
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+/* --- Selección de talla del pack --- */
+.seleccion-tallas {
+    padding: 0 60px 20px;
+    text-align: left;
+}
+
+.tallas-grid {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.pack-talla {
+    min-width: 42px;
+    height: 42px;
+    padding: 0 12px;
+    background: none;
+    border: 1px solid var(--color-borde);
+    font-family: var(--fuente-principal);
+    font-size: 0.78rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s, color 0.2s;
+}
+
+.pack-talla:hover {
+    border-color: var(--color-negro);
+}
+
+.pack-talla.activo {
+    background: var(--color-negro);
+    color: var(--color-fondo);
+    border-color: var(--color-negro);
+}
+
+/* Talla dentro del slot lleno */
+.slot.lleno {
+    cursor: pointer;
+}
+
+.slot-talla {
+    color: var(--color-fondo);
+    font-family: var(--fuente-principal);
+    font-size: 0.72rem;
+    font-weight: 800;
+    mix-blend-mode: difference;
+}
+
+/* Botón deshabilitado hasta completar los 6 */
+.boton-carrito-pack:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* --- Banner beneficios (variante promo) --- */
+.banner-interior {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--espacio-md);
+}
+
+.banner-titulo {
+    font-family: var(--fuente-display);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    letter-spacing: -0.5px;
+    margin-bottom: 4px;
+}
+
+.banner-subtitulo {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.6);
+    max-width: 480px;
+}
+
+/* --- Texto de garantía bajo el botón --- */
+.garantia {
+    font-family: var(--fuente-principal);
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-texto-suave);
+    text-align: center;
+    padding: 0 25px 25px;
+}
+
+/* --- Responsive --- */
+@media (max-width: 900px) {
+    .contenedor-padre {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .imagen-pack,
+    .info-pack {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .ofertas {
+        flex-direction: column;
+        gap: var(--espacio-md);
+        padding: var(--espacio-md);
+    }
+
+    .seleccion-colores,
+    .seleccion-tallas {
+        padding: 0 var(--espacio-md) var(--espacio-md);
+    }
+
+    .banner-interior {
+        flex-direction: column;
+        text-align: center;
+    }
+}

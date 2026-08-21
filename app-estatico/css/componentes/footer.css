@@ -1,0 +1,120 @@
+/* ============================================================
+   OVERTEXT — Footer
+   Pie de página completo. Compartido por todas las páginas.
+   ============================================================ */
+
+.pie-pagina {
+    background-color: var(--color-negro);
+    font-family: var(--fuente-principal);
+    padding-top: 60px;
+    color: var(--color-fondo);
+}
+
+.grid-pie {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 2fr;
+    gap: 40px;
+    padding-bottom: 60px;
+}
+
+.pie-logo {
+    font-weight: 900;
+    font-size: 1.35rem;
+    letter-spacing: -0.5px;
+    margin-bottom: 20px;
+}
+
+.pie-lema {
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.38);
+    text-transform: uppercase;
+}
+
+.pie-enlaces h3,
+.pie-boletin h3 {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.32);
+    margin-bottom: 22px;
+}
+
+.pie-enlaces ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+}
+
+.pie-enlaces ul li a {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.65);
+    transition: color 0.3s ease, background-color 0.3s ease;
+    display: inline-block;
+    padding: 8px 12px; 
+    margin-left: -12px; 
+    border-radius: 4px; 
+}
+
+.pie-enlaces ul li a:hover {
+    color: var(--color-fondo);
+    background-color: rgba(255, 255, 255, 0.05); 
+}
+
+.redes-sociales {
+    display: flex;
+    gap: 28px;
+}
+
+.redes-sociales a {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.55);
+    transition: color 0.3s;
+}
+
+.redes-sociales a:hover {
+    color: var(--color-fondo);
+}
+
+.divisor {
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.legal-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 0;
+}
+
+.legal-flex p {
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.25);
+}
+
+@media (max-width: 768px) {
+    .grid-pie {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .grid-pie {
+        grid-template-columns: 1fr;
+    }
+
+    .legal-flex {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+    }
+}

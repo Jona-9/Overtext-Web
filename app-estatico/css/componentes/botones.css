@@ -1,0 +1,297 @@
+/* ============================================================
+   OVERTEXT — Botones
+   Todos los estilos de botones del sitio en un solo lugar.
+   ============================================================ */
+
+/* CTA principal */
+.btn-primario {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-rojo);
+    color: var(--color-fondo);
+    border: none;
+    padding: 16px 32px;
+    font-family: var(--fuente-principal);
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+}
+
+.btn-primario:hover {
+    background-color: #6e1414;
+}
+
+/* Outline */
+.btn-secundario {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    color: var(--color-negro);
+    border: 1px solid var(--color-borde);
+    padding: 14px 28px;
+    font-family: var(--fuente-principal);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+    text-decoration: none;
+}
+
+.btn-secundario:hover {
+    border-color: var(--color-negro);
+}
+
+/* Agregar al carrito (catálogo) */
+.btn-agregar {
+    width: 100%;
+    background-color: var(--color-negro);
+    color: var(--color-fondo);
+    border: none;
+    padding: 14px;
+    font-family: var(--fuente-principal);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-agregar:hover {
+    background-color: var(--color-rojo);
+}
+
+/* Añadir al carrito (tarjeta de catálogo) */
+.btn-agregar-carrito {
+    width: 100%;
+    margin-top: 8px;
+    background-color: var(--color-rojo);
+    color: var(--color-fondo);
+    border: none;
+    padding: 12px;
+    font-family: var(--fuente-principal);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-agregar-carrito:hover {
+    background-color: #6e1414;
+}
+
+/* Añadir al carrito (detalle producto) */
+.btn-carrito {
+    flex: 1;
+    background-color: var(--color-rojo);
+    color: var(--color-fondo);
+    border: none;
+    padding: 16px;
+    font-family: var(--fuente-principal);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-carrito:hover {
+    background-color: #6e1414;
+}
+
+/* Armar pack (detalle producto) */
+.btn-pack {
+    width: 100%;
+    background: none;
+    color: var(--color-negro);
+    border: 1.5px solid var(--color-negro);
+    padding: 14px;
+    font-family: var(--fuente-principal);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.btn-pack:hover {
+    background-color: var(--color-negro);
+    color: var(--color-fondo);
+}
+
+/* Agregar pack al carrito (promociones) */
+.boton-carrito-pack {
+    display: block;
+    width: calc(100% - 50px);
+    margin: 0 25px 16px;
+    background-color: var(--color-rojo);
+    color: var(--color-fondo);
+    border: none;
+    padding: 20px;
+    font-family: var(--fuente-principal);
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.boton-carrito-pack:hover {
+    background-color: #6e1414;
+}
+
+/* Realizar pedido (checkout) */
+.btn-pedido {
+    width: 100%;
+    background-color: var(--color-rojo);
+    color: var(--color-fondo);
+    border: none;
+    padding: 18px;
+    font-family: var(--fuente-principal);
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+.btn-pedido:hover {
+    background-color: #6e1414;
+}
+
+/* Flecha newsletter (footer) */
+.btn-flecha {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color-fondo);
+    font-size: 1.2rem;
+    transition: transform 0.2s;
+    line-height: 1;
+}
+
+.btn-flecha:hover {
+    transform: translateX(3px);
+}
+
+/* Finalizar compra (carrito lateral) */
+.btn-finalizar {
+    width: 100%;
+    background-color: var(--color-rojo);
+    color: var(--color-fondo);
+    border: none;
+    padding: 16px;
+    font-family: var(--fuente-principal);
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 10px;
+}
+
+.btn-finalizar:hover {
+    background-color: #6e1414;
+}
+
+/* Seguir comprando (carrito lateral) */
+.btn-seguir {
+    width: 100%;
+    background: none;
+    color: var(--color-negro);
+    border: 1px solid var(--color-borde);
+    padding: 14px;
+    font-family: var(--fuente-principal);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: border-color 0.2s;
+}
+
+.btn-seguir:hover {
+    border-color: var(--color-negro);
+}
+
+/* Ingresar (login) */
+.ot-boton-ingresar {
+    width: 100%;
+    height: 48px;
+    background-color: var(--color-rojo);
+    color: var(--color-fondo);
+    border: none;
+    border-radius: 3px;
+    font-family: var(--fuente-principal);
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 8px;
+}
+
+/* WhatsApp alternativo (login) */
+.ot-boton-whatsapp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    height: 46px;
+    background: var(--color-fondo);
+    color: var(--color-negro);
+    border: 1px solid var(--color-borde);
+    border-radius: 3px;
+    font-family: var(--fuente-principal);
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.ot-icono-whatsapp {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+/* Beneficios (banner negro) */
+.boton-beneficios {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: 1px solid var(--color-fondo);
+    color: var(--color-fondo);
+    padding: 14px 28px;
+    font-family: var(--fuente-principal);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.boton-beneficios:hover {
+    background-color: var(--color-fondo);
+    color: var(--color-negro);
+}

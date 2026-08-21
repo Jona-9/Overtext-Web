@@ -1,0 +1,387 @@
+/* ============================================================
+   OVERTEXT — Carrito Lateral
+   Panel deslizante compartido: inicio, catálogo y detalle.
+   ============================================================ */
+
+/* --- Overlay --- */
+.overlay-carrito {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    z-index: 200;
+}
+
+.overlay-carrito.activo {
+    display: block;
+}
+
+/* --- Sidebar --- */
+#carrito-lateral {
+    position: fixed;
+    top: 0;
+    right: -460px;
+    width: 460px;
+    max-width: 100vw;
+    height: 100vh;
+    background: var(--color-fondo);
+    z-index: 300;
+    display: flex;
+    flex-direction: column;
+    transition: right 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: -6px 0 40px rgba(0, 0, 0, 0.1);
+}
+
+#carrito-lateral.abierto {
+    right: 0;
+}
+
+/* --- Cabecera --- */
+.carrito-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 28px;
+    border-bottom: 1px solid var(--color-borde);
+    flex-shrink: 0;
+}
+
+.carrito-header-izq {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.carrito-header h2 {
+    font-family: var(--fuente-display);
+    font-size: 1.4rem;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1;
+}
+
+.carrito-conteo {
+    font-family: var(--fuente-principal);
+    font-size: 0.62rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-texto-suave);
+}
+
+.btn-cerrar-carrito {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: none;
+    border: 1px solid var(--color-borde);
+    cursor: pointer;
+    color: var(--color-negro);
+    transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+    flex-shrink: 0;
+}
+
+.btn-cerrar-carrito:hover {
+    background-color: var(--color-negro);
+    border-color: var(--color-negro);
+    color: var(--color-fondo);
+}
+
+/* --- Barra envío gratis --- */
+.envio-gratis-info {
+    padding: 13px 28px;
+    background: var(--color-fondo-alt);
+    border-bottom: 1px solid var(--color-borde);
+    flex-shrink: 0;
+}
+
+.envio-gratis-texto {
+    font-family: var(--fuente-principal);
+    font-size: 0.63rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-texto-suave);
+    margin-bottom: 8px;
+}
+
+.envio-gratis-barra {
+    width: 100%;
+    height: 2px;
+    background: var(--color-borde);
+}
+
+.envio-gratis-progreso {
+    height: 100%;
+    background: var(--color-negro);
+    width: 66%;
+    transition: width 0.5s ease;
+}
+
+/* --- Lista de items --- */
+.carrito-items {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0 28px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-borde) transparent;
+}
+
+.carrito-items::-webkit-scrollbar {
+    width: 4px;
+}
+
+.carrito-items::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.carrito-items::-webkit-scrollbar-thumb {
+    background: var(--color-borde);
+}
+
+/* --- Estado vacío --- */
+.carrito-vacio {
+    font-family: var(--fuente-principal);
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    color: var(--color-texto-suave);
+    text-align: center;
+    padding: 48px 12px;
+    line-height: 1.6;
+}
+
+/* --- Item individual --- */
+.item-carrito {
+    display: grid;
+    grid-template-columns: 90px 1fr 28px;
+    gap: 16px;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--color-borde);
+    align-items: start;
+}
+
+.item-carrito:last-child {
+    border-bottom: none;
+}
+
+.item-img-wrap {
+    width: 90px;
+    height: 112px;
+    overflow: hidden;
+    background: var(--color-fondo-alt);
+    flex-shrink: 0;
+}
+
+.item-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.item-img-wrap:hover img {
+    transform: scale(1.04);
+}
+
+.item-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.item-info h3 {
+    font-family: var(--fuente-principal);
+    font-size: 0.73rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    line-height: 1.3;
+}
+
+.item-variante {
+    font-family: var(--fuente-principal);
+    font-size: 0.62rem;
+    color: var(--color-texto-suave);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 10px;
+}
+
+.item-controles {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* --- Selector cantidad --- */
+.selector-cantidad {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--color-borde);
+}
+
+.selector-cantidad button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    color: var(--color-negro);
+    transition: background-color 0.15s;
+    line-height: 1;
+}
+
+.selector-cantidad button:hover {
+    background: var(--color-fondo-alt);
+}
+
+.selector-cantidad span {
+    font-family: var(--fuente-principal);
+    font-size: 0.78rem;
+    font-weight: 600;
+    width: 30px;
+    text-align: center;
+    user-select: none;
+}
+
+.item-precio {
+    font-family: var(--fuente-principal);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--color-negro);
+}
+
+/* --- Botón eliminar --- */
+.btn-eliminar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color-placeholder);
+    padding: 4px;
+    transition: color 0.2s;
+    align-self: flex-start;
+    margin-top: 2px;
+}
+
+.btn-eliminar:hover {
+    color: var(--color-rojo);
+}
+
+/* --- Pie del carrito --- */
+.carrito-footer {
+    padding: 20px 28px 28px;
+    border-top: 1px solid var(--color-borde);
+    flex-shrink: 0;
+    background: var(--color-fondo);
+}
+
+.resumen-linea {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--fuente-principal);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-texto-suave);
+    margin-bottom: 8px;
+}
+
+.resumen-linea .envio-gratis {
+    font-weight: 700;
+    color: #2e7d32;
+}
+
+.resumen-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 16px 0 20px;
+    border-top: 1px solid var(--color-borde);
+    margin-top: 8px;
+}
+
+.resumen-total .total-label {
+    font-family: var(--fuente-display);
+    font-size: 1.1rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.resumen-total .total-monto {
+    font-family: var(--fuente-display);
+    font-size: 1.6rem;
+    letter-spacing: 0.02em;
+    color: var(--color-negro);
+    line-height: 1;
+}
+
+/* --- Botones del carrito --- */
+.btn-finalizar {
+    display: block;
+    width: 100%;
+    background-color: var(--color-negro);
+    color: var(--color-fondo);
+    border: none;
+    padding: 17px;
+    font-family: var(--fuente-principal);
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.25s;
+    text-decoration: none;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.btn-finalizar:hover {
+    background-color: var(--color-rojo);
+}
+
+.btn-seguir {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background: none;
+    border: none;
+    padding: 8px;
+    font-family: var(--fuente-principal);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--color-texto-suave);
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 0.2s;
+}
+
+.btn-seguir:hover {
+    color: var(--color-negro);
+}
+
+/* --- Responsive --- */
+@media (max-width: 480px) {
+    #carrito-lateral {
+        width: 100vw;
+        right: -100vw;
+    }
+}

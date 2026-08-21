@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto — OVERTEXT</title>
+  <!-- Arquitectura ITCSS OVERTEXT -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/componentes/navegacion.css">
+  <link rel="stylesheet" href="/css/componentes/botones.css">
+  <link rel="stylesheet" href="/css/componentes/formularios.css">
+  <link rel="stylesheet" href="/css/componentes/footer.css">
+  <link rel="stylesheet" href="/css/componentes/carrito.css">
+  <link rel="stylesheet" href="/css/componentes/modal.css">
+  <link rel="stylesheet" href="/css/paginas/contacto.css">
+</head>
+<body>
+
+  <!-- NAVEGACIÓN -->
+  <header class="barra-navegacion">
+    <div class="contenedor navegacion-interior">
+      <a href="/index.html" class="marca-logo">OVERTEXT</a>
+      <nav class="menu-principal">
+        <ul class="lista-enlaces">
+          <li><a href="/index.html" class="enlace">INICIO</a></li>
+          <li><a href="/catalogo.html" class="enlace">CATÁLOGO</a></li>
+          <li><a href="/promotions.html" class="enlace">PROMOCIONES</a></li>
+          <li><a href="/nosotros.html" class="enlace">NOSOTROS</a></li>
+          <li><a href="/contacto.html" class="enlace activo">CONTACTO</a></li>
+        </ul>
+      </nav>
+      <div class="nav-acciones">
+        <a href="/login.html" class="boton-usuario" aria-label="Mi cuenta">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="8" r="4"/>
+            <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+          </svg>
+        </a>
+        <button class="boton-carrito" id="abrir-carrito" aria-label="Carrito">
+          <img src="/assets/icon/carrito-de-compras.png" alt="">
+          <span class="carrito-contador">2</span>
+        </button>
+        <button class="btn-hamburger" id="btn-hamburger" aria-label="Menú">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- CARRITO LATERAL -->
+  <div class="overlay-carrito" id="overlay-carrito"></div>
+
+  <aside id="carrito-lateral">
+    <div class="carrito-header">
+      <div class="carrito-header-izq">
+        <h2>TU CARRITO</h2>
+        <span class="carrito-conteo">2 PRODUCTOS</span>
+      </div>
+      <button class="btn-cerrar-carrito" id="cerrar-carrito" aria-label="Cerrar carrito">
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="1" y1="1" x2="12" y2="12"/><line x1="12" y1="1" x2="1" y2="12"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="envio-gratis-info">
+      <p class="envio-gratis-texto">TE FALTAN S/ 60 PARA ENVÍO GRATIS</p>
+      <div class="envio-gratis-barra">
+        <div class="envio-gratis-progreso"></div>
+      </div>
+    </div>
+
+    <div class="carrito-items">
+      <!-- Los productos se renderizan dinámicamente desde js/carrito.js -->
+    </div>
+
+    <div class="carrito-footer">
+      <div class="resumen-linea">
+        <span>SUBTOTAL</span>
+        <span>S/ 120</span>
+      </div>
+      <div class="resumen-linea">
+        <span>ENVÍO</span>
+        <span class="envio-gratis">GRATIS</span>
+      </div>
+      <div class="resumen-total">
+        <span class="total-label">TOTAL</span>
+        <span class="total-monto">S/ 120</span>
+      </div>
+      <a href="/checkout.html" class="btn-finalizar">FINALIZAR COMPRA</a>
+      <button class="btn-seguir" id="seguir-comprando">SEGUIR COMPRANDO</button>
+    </div>
+  </aside>
+
+  <main>
+
+    <!-- HERO -->
+    <div class="hero-contacto">
+      <div class="contenedor">
+        <span class="subtitulo-superior">HABLEMOS</span>
+        <h1>ESCRÍBENOS<br>AL TOQUE</h1>
+        <p>¿Dudas con tu talla, tu pedido o el envío? Te respondemos rápido. Fabricantes peruanos, envíos a todo el país.</p>
+      </div>
+    </div>
+
+    <!-- FORMULARIO + PANEL DE INFO -->
+    <section class="contacto-seccion">
+      <div class="contenedor contacto-grid">
+
+        <!-- Columna: formulario -->
+        <div class="contacto-col-form">
+          <p class="contacto-eyebrow">Cuéntanos</p>
+          <h2 class="contacto-titulo">Déjanos tu mensaje</h2>
+          <p class="contacto-intro">Llena esto y te contestamos por correo o WhatsApp. Sin vueltas.</p>
+          <form id="form-contacto" class="contacto-form" novalidate>
+            <div class="grid-2">
+              <div>
+                <label for="contacto-nombre">Nombre *</label>
+                <input type="text" id="contacto-nombre" placeholder="TU NOMBRE" required>
+              </div>
+              <div>
+                <label for="contacto-correo">Correo *</label>
+                <input type="email" id="contacto-correo" placeholder="TU@CORREO.COM" required>
+              </div>
+            </div>
+            <label for="contacto-asunto">Asunto *</label>
+            <input type="text" id="contacto-asunto" placeholder="¿SOBRE QUÉ NOS ESCRIBES?" required>
+            <label for="contacto-mensaje">Mensaje *</label>
+            <textarea id="contacto-mensaje" placeholder="ESCRIBE TU MENSAJE..." required></textarea>
+            <button type="submit" class="btn-agregar contacto-enviar">ENVIAR MENSAJE</button>
+          </form>
+        </div>
+
+        <!-- Columna: info de contacto -->
+        <aside class="contacto-col-info">
+          <div class="info-panel">
+            <h3 class="info-panel-titulo">Contáctanos directo</h3>
+
+            <a class="info-item" href="https://wa.me/51904501440" target="_blank" rel="noopener">
+              <img src="/assets/icon/wsp.png" alt="">
+              <span class="info-item-txt">
+                <b>WhatsApp</b>
+                +51 904 501 440
+                <em>Atención 24 h</em>
+              </span>
+            </a>
+
+            <a class="info-item" href="https://www.instagram.com/overcoming.pe/" target="_blank" rel="noopener">
+              <img src="/assets/icon/instagram.png" alt="">
+              <span class="info-item-txt">
+                <b>Instagram</b>
+                @overcoming.pe
+                <em>Escríbenos por DM</em>
+              </span>
+            </a>
+
+            <a class="info-item" href="mailto:hola@overtext.com">
+              <img src="/assets/icon/carta.png" alt="">
+              <span class="info-item-txt">
+                <b>Email</b>
+                hola@overtext.com
+                <em>Respuesta rápida</em>
+              </span>
+            </a>
+
+            <div class="info-item info-item--estatico">
+              <img src="/assets/icon/ubicacion.png" alt="">
+              <span class="info-item-txt">
+                <b>Almacén</b>
+                Gp7 Huáscar, San Juan de Lurigancho, Lima
+                <em>Recojo con cita</em>
+              </span>
+            </div>
+
+            <div class="info-envio">
+              <strong>Envíos a todo el Perú</strong>
+              <p>Somos fabricantes peruanos. Te llega a Lima o provincia por Shalom u Olva.</p>
+            </div>
+          </div>
+        </aside>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="pie-pagina">
+    <div class="contenedor grid-pie">
+      <div class="pie-info">
+        <h2 class="pie-logo">OVERTEXT</h2>
+        <p class="pie-lema">LIMA, PERÚ. STREETWEAR PARA LA NUEVA GENERACIÓN.</p>
+      </div>
+      <div class="pie-enlaces">
+        <h3>SITIO</h3>
+        <ul>
+          <li><a href="/index.html">INICIO</a></li>
+          <li><a href="/catalogo.html">CATÁLOGO</a></li>
+          <li><a href="/promotions.html">PROMOCIONES</a></li>
+        </ul>
+      </div>
+      <div class="pie-enlaces">
+        <h3>AYUDA</h3>
+        <ul>
+          <li><a href="/contacto.html">CONTACTO</a></li>
+          <li><a href="/nosotros.html">NOSOTROS</a></li>
+          <li><a href="#">ENVÍOS</a></li>
+        </ul>
+      </div>
+      <div class="pie-boletin">
+        <h3>NEWSLETTER</h3>
+        <div class="formulario-minimal">
+          <input type="email" placeholder="TU EMAIL">
+          <button class="btn-flecha">→</button>
+        </div>
+        <div class="redes-sociales">
+          <a href="https://www.instagram.com/overcoming.pe/" target="_blank" rel="noopener">INSTAGRAM</a>
+          <a href="https://www.tiktok.com/@overcoming.peru" target="_blank" rel="noopener">TIKTOK</a>
+        </div>
+      </div>
+    </div>
+    <div class="contenedor">
+      <hr class="divisor">
+      <div class="legal-flex">
+        <p>© 2026 OVERTEXT — TODOS LOS DERECHOS RESERVADOS</p>
+        <p>LIMA, PERÚ</p>
+      </div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/51904501440" class="wsp-flotante" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <img src="/assets/icon/wsp.png" alt="WhatsApp">
+  </a>
+
+  <!-- VENTANA FLOTANTE (MODAL) -->
+  <div class="modal-overlay" id="modal-contacto" role="dialog" aria-modal="true" aria-labelledby="modal-titulo">
+    <div class="modal-caja">
+      <button class="modal-cerrar" aria-label="Cerrar">×</button>
+      <h2 id="modal-titulo">Mensaje enviado</h2>
+      <p class="modal-lema">Estos son los datos que nos enviaste:</p>
+      <div class="modal-datos" id="modal-datos"></div>
+    </div>
+  </div>
+
+  <script src="/js/nav.js"></script>
+  <script src="/js/carrito.js"></script>
+  <script src="/js/contacto.js"></script>
+
+</body>
+</html>

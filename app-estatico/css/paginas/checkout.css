@@ -1,0 +1,455 @@
+/* ============================================================
+   OVERTEXT — Página Checkout (Finalizar Compra)
+   Layout de dos columnas: formulario + resumen de pedido.
+   ============================================================ */
+
+/* --- Cabecera de página --- */
+.cupon {
+    font-family: var(--fuente-principal);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-texto-suave);
+    text-align: right;
+    padding: 12px 0;
+    border-bottom: 0.5px solid var(--color-borde);
+    cursor: pointer;
+}
+
+.cupon:hover {
+    color: var(--color-negro);
+}
+
+.titulo-checkout {
+    font-family: var(--fuente-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900;
+    letter-spacing: -1px;
+    text-transform: uppercase;
+    margin: var(--espacio-lg) 0 var(--espacio-md);
+}
+
+/* --- Layout dos columnas --- */
+.checkout-contenido {
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: var(--espacio-lg);
+    align-items: start;
+    padding-bottom: var(--espacio-xl);
+}
+
+/* --- Formulario --- */
+.checkout-formulario {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espacio-sm);
+}
+
+.checkout-formulario h3 {
+    font-family: var(--fuente-principal);
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-negro);
+    margin-top: var(--espacio-md);
+    padding-bottom: var(--espacio-xs);
+    border-bottom: 0.5px solid var(--color-borde);
+}
+
+/* --- Resumen lateral --- */
+.checkout-resumen {
+    border: 1px solid var(--color-borde);
+    padding: 25px;
+    background: var(--color-fondo);
+    position: sticky;
+    top: 90px;
+}
+
+.checkout-resumen h3 {
+    font-family: var(--fuente-principal);
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: var(--espacio-md);
+}
+
+.checkout-resumen h4 {
+    font-family: var(--fuente-principal);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-texto-suave);
+    margin: var(--espacio-md) 0 var(--espacio-xs);
+}
+
+/* --- Resumen vacío --- */
+.resumen-vacio {
+    font-family: var(--fuente-principal);
+    font-size: 0.8rem;
+    color: var(--color-texto-suave);
+    padding: 16px 0;
+}
+
+.resumen-vacio a {
+    color: var(--color-rojo);
+    text-decoration: underline;
+}
+
+/* --- Producto en resumen --- */
+.producto-resumen {
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    gap: 14px;
+    align-items: start;
+    margin-bottom: var(--espacio-md);
+    padding-bottom: var(--espacio-md);
+    border-bottom: 0.5px solid var(--color-borde);
+}
+
+.producto-resumen img {
+    width: 70px;
+    height: 90px;
+    object-fit: cover;
+}
+
+.info-producto .nombre {
+    font-family: var(--fuente-principal);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+.info-producto .detalle {
+    font-size: 0.65rem;
+    color: var(--color-texto-suave);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 6px;
+}
+
+.info-producto .precio {
+    font-size: 0.9rem;
+    font-weight: 800;
+    color: var(--color-negro);
+}
+
+/* --- Opciones de envío --- */
+.opcion-envio {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 0;
+    border-bottom: 0.5px solid var(--color-borde);
+    font-family: var(--fuente-principal);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.opcion-envio span:last-child {
+    margin-left: auto;
+    color: var(--color-texto-suave);
+}
+
+/* --- Totales --- */
+.checkout-resumen > p {
+    font-family: var(--fuente-principal);
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--color-texto-suave);
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.checkout-resumen > p b {
+    font-size: 0.9rem;
+    font-weight: 800;
+    color: var(--color-negro);
+}
+
+/* --- Botón finalizar pedido --- */
+.btn-pedido {
+    width: 100%;
+    padding: 16px;
+    background: var(--color-negro);
+    color: var(--color-fondo);
+    border: none;
+    font-family: var(--fuente-display);
+    font-size: 1rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: var(--espacio-md);
+    transition: background 0.2s;
+}
+
+.btn-pedido:hover {
+    background: var(--color-rojo);
+}
+
+/* --- Datos de recojo en almacén --- */
+.recojo-info {
+    background: var(--color-fondo-alt);
+    padding: var(--espacio-md);
+    font-size: 0.85rem;
+    line-height: 1.8;
+    color: var(--color-texto-suave);
+    margin-bottom: var(--espacio-sm);
+}
+
+.recojo-info strong {
+    display: block;
+    color: var(--color-negro);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+/* --- Validación de campos --- */
+.campo-invalido {
+    border-color: var(--color-rojo) !important;
+    background: #fff5f5;
+}
+
+.error-msg {
+    display: none;
+    font-family: var(--fuente-principal);
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--color-rojo);
+    margin-top: 4px;
+    text-transform: uppercase;
+}
+
+/* --- Totales mejorados --- */
+.totales-seccion {
+    margin-top: var(--espacio-sm);
+    border-top: 1px solid var(--color-borde);
+    padding-top: var(--espacio-sm);
+}
+
+.total-fila {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--fuente-principal);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-texto-suave);
+    padding: 7px 0;
+}
+
+.total-fila.total-final {
+    border-top: 1px solid var(--color-negro);
+    margin-top: 8px;
+    padding-top: 14px;
+    color: var(--color-negro);
+}
+
+.total-fila.total-final .fila-label {
+    font-family: var(--fuente-display);
+    font-size: 1.1rem;
+    letter-spacing: 0.06em;
+}
+
+.total-fila.total-final .fila-valor {
+    font-family: var(--fuente-display);
+    font-size: 1.5rem;
+    letter-spacing: 0.02em;
+}
+
+.envio-gratis-tag {
+    font-weight: 700;
+    color: #2e7d32;
+}
+
+/* --- Info de pago en resumen --- */
+.pago-detalle {
+    background: var(--color-fondo-alt);
+    padding: var(--espacio-sm);
+    margin-top: var(--espacio-xs);
+}
+
+.pago-detalle p {
+    font-family: var(--fuente-principal) !important;
+    font-size: 0.68rem !important;
+    color: var(--color-texto-suave) !important;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 4px;
+    font-weight: 500 !important;
+}
+
+.pago-detalle p:last-child { margin-bottom: 0; }
+
+/* ============================================================
+   Pasos progresivos del checkout (1 · 2 · 3)
+   ============================================================ */
+.paso {
+    border: 1px solid var(--color-borde);
+    margin-bottom: var(--espacio-md);
+    transition: opacity 0.25s ease, border-color 0.25s ease;
+}
+
+.paso-activo {
+    border-color: var(--color-negro);
+}
+
+/* Un paso bloqueado se atenúa y no se puede interactuar */
+.paso-bloqueado {
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+.paso-cabecera {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: var(--espacio-sm) var(--espacio-md);
+    cursor: pointer;
+}
+
+.paso-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--color-fondo-alt);
+    color: var(--color-texto-suave);
+    font-family: var(--fuente-display);
+    font-size: 0.9rem;
+    flex-shrink: 0;
+    transition: background 0.25s ease, color 0.25s ease;
+}
+
+.paso-activo .paso-num,
+.paso-completado .paso-num {
+    background: var(--color-negro);
+    color: var(--color-fondo);
+}
+
+.paso-cabecera h3 {
+    margin: 0;
+    border: none;
+    padding: 0;
+}
+
+.paso-check {
+    margin-left: auto;
+    color: #2e7d32;
+    font-weight: 800;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+.paso-completado .paso-check {
+    opacity: 1;
+}
+
+/* El cuerpo se oculta cuando el paso queda completado (resumen compacto) */
+.paso-cuerpo {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espacio-sm);
+    padding: 0 var(--espacio-md) var(--espacio-md);
+}
+
+.paso-completado .paso-cuerpo {
+    display: none;
+}
+
+.btn-continuar {
+    align-self: flex-start;
+    margin-top: var(--espacio-sm);
+    padding: 12px 32px;
+    background: var(--color-negro);
+    color: var(--color-fondo);
+    border: none;
+    font-family: var(--fuente-display);
+    font-size: 0.9rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-continuar:hover {
+    background: var(--color-rojo);
+}
+
+/* --- Opciones de envío tipo tarjeta --- */
+.envio-opciones {
+    display: grid;
+    gap: 10px;
+}
+
+.envio-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 16px;
+    border: 1px solid var(--color-borde);
+    cursor: pointer;
+    font-family: var(--fuente-principal);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.envio-card:hover {
+    border-color: var(--color-negro);
+}
+
+.envio-card:has(input:checked) {
+    border-color: var(--color-negro);
+    background: var(--color-fondo-alt);
+}
+
+.envio-card-precio {
+    margin-left: auto;
+    color: var(--color-texto-suave);
+}
+
+/* --- Sub-bloque de campos: aparición dinámica --- */
+.envio-campos {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espacio-sm);
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, opacity 0.35s ease, margin 0.35s ease;
+}
+
+.envio-campos.visible {
+    max-height: 400px;
+    opacity: 1;
+    margin-top: var(--espacio-sm);
+}
+
+/* --- Responsive --- */
+@media (max-width: 900px) {
+    .checkout-contenido {
+        grid-template-columns: 1fr;
+    }
+}

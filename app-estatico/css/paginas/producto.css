@@ -1,0 +1,324 @@
+/* ============================================================
+   OVERTEXT — Página Detalle de Producto
+   Galería, selectores de talla/color, acordeones.
+   ============================================================ */
+
+/* --- Layout principal --- */
+.seccion-detalle-producto {
+    padding: var(--espacio-lg) 0 var(--espacio-xl);
+}
+
+.seccion-detalle-producto > .contenedor {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+}
+
+/* --- Galería --- */
+.galeria-producto {
+    position: sticky;
+    top: 80px;
+}
+
+.foto-principal-wrapper {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.foto-principal-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.miniaturas-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+}
+
+.miniatura {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+    border: 1.5px solid transparent;
+}
+
+.miniatura:hover,
+.miniatura.activa {
+    opacity: 1;
+    border-color: var(--color-negro);
+}
+
+/* --- Info del producto --- */
+.nombre-detalle {
+    font-family: var(--fuente-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900;
+    letter-spacing: -1px;
+    text-transform: uppercase;
+    line-height: 1;
+    margin-bottom: 6px;
+}
+
+.slogan-detalle {
+    font-size: 0.85rem;
+    color: var(--color-texto-suave);
+    margin-bottom: var(--espacio-md);
+}
+
+/* --- Precios --- */
+.bloque-precio {
+    margin-bottom: var(--espacio-md);
+}
+
+.precio-principal {
+    font-family: var(--fuente-principal);
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--color-negro);
+    margin-bottom: 4px;
+}
+
+.precio-principal span {
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--color-texto-suave);
+}
+
+.precio-pack {
+    font-size: 0.78rem;
+    color: var(--color-texto-suave);
+    font-weight: 500;
+}
+
+/* --- Selectores de talla y color --- */
+.selector-campo {
+    margin-bottom: var(--espacio-md);
+}
+
+.selector-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.selector-label {
+    font-family: var(--fuente-principal);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-texto-suave);
+}
+
+.guia-link {
+    font-size: 0.65rem;
+    font-weight: 500;
+    color: var(--color-texto-suave);
+    text-decoration: underline;
+}
+
+.guia-link:hover {
+    color: var(--color-negro);
+}
+
+.grupo-tallas {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.btn-talla {
+    min-width: 44px;
+    height: 44px;
+    padding: 0 12px;
+    background: none;
+    border: 1px solid var(--color-borde);
+    font-family: var(--fuente-principal);
+    font-size: 0.78rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.btn-talla:hover {
+    border-color: var(--color-negro);
+}
+
+.btn-talla--activa {
+    background: var(--color-negro);
+    color: var(--color-fondo);
+    border-color: var(--color-negro);
+}
+
+.grupo-colores {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* Nombre del color junto al swatch (indicador de color único) */
+.selector-valor {
+    font-family: var(--fuente-principal);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-negro);
+    text-transform: capitalize;
+}
+
+.swatch {
+    width: 28px;
+    height: 28px;
+    flex: 0 0 auto;
+    border-radius: 50%;
+    border: 1.5px solid transparent;
+    cursor: pointer;
+    transition: transform 0.15s;
+}
+
+.swatch:hover {
+    transform: scale(1.1);
+}
+
+/* El anillo se dibuja dentro de la caja (borde + hueco inset). Con outline
+   sobresalía del flujo y descuadraba el swatch respecto a la columna. */
+.swatch--activa {
+    border-color: var(--color-negro);
+    box-shadow: inset 0 0 0 3px var(--color-fondo);
+}
+
+.swatch--blanco {
+    border-color: var(--color-borde);
+}
+
+/* --- Control de cantidad y acciones --- */
+.fila-acciones {
+    display: flex;
+    gap: 12px;
+    margin-bottom: var(--espacio-md);
+    align-items: center;
+}
+
+.control-cantidad {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--color-borde);
+    height: 52px;
+}
+
+.btn-cantidad {
+    width: 44px;
+    height: 100%;
+    background: none;
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+    color: var(--color-negro);
+    transition: background 0.15s;
+}
+
+.btn-cantidad:hover {
+    background: var(--color-fondo-alt);
+}
+
+.valor-cantidad {
+    font-family: var(--fuente-principal);
+    font-size: 0.9rem;
+    font-weight: 700;
+    min-width: 32px;
+    text-align: center;
+}
+
+/* --- Beneficios --- */
+.beneficios-fila {
+    display: flex;
+    gap: var(--espacio-md);
+    padding: var(--espacio-md) 0;
+    border-top: 0.5px solid var(--color-borde);
+    border-bottom: 0.5px solid var(--color-borde);
+    margin-bottom: var(--espacio-md);
+}
+
+.beneficio-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-family: var(--fuente-principal);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-texto-suave);
+}
+
+.beneficio-item img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+/* --- Acordeones (details/summary) --- */
+.acordeones-detalle {
+    border-top: 0.5px solid var(--color-borde);
+}
+
+.acordeon-item {
+    border-bottom: 0.5px solid var(--color-borde);
+}
+
+.acordeon-trigger {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+    font-family: var(--fuente-principal);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    list-style: none;
+}
+
+.acordeon-trigger::-webkit-details-marker {
+    display: none;
+}
+
+.acordeon-trigger::after {
+    content: '+';
+    font-size: 1.1rem;
+    font-weight: 300;
+    transition: transform 0.2s;
+}
+
+.acordeon-item[open] .acordeon-trigger::after {
+    transform: rotate(45deg);
+}
+
+.acordeon-interior {
+    padding-bottom: 16px;
+    font-size: 0.85rem;
+    color: var(--color-texto-suave);
+    line-height: 1.6;
+}
+
+/* --- Responsive --- */
+@media (max-width: 900px) {
+    .seccion-detalle-producto > .contenedor {
+        grid-template-columns: 1fr;
+        gap: var(--espacio-lg);
+    }
+
+    .galeria-producto {
+        position: static;
+    }
+}

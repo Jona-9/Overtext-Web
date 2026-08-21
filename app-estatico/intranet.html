@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intranet — OVERTEXT</title>
+    <!-- Arquitectura ITCSS OVERTEXT -->
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/componentes/navegacion.css">
+    <link rel="stylesheet" href="/css/componentes/botones.css">
+    <link rel="stylesheet" href="/css/componentes/footer.css">
+    <link rel="stylesheet" href="/css/paginas/intranet.css">
+</head>
+
+<body>
+
+    <header class="barra-navegacion">
+        <div class="contenedor navegacion-interior">
+            <a href="/index.html" class="marca-logo">OVERTEXT</a>
+            <nav class="menu-principal">
+                <ul class="lista-enlaces">
+                    <li><a href="/index.html" class="enlace">INICIO</a></li>
+                    <li><a href="/catalogo.html" class="enlace">CATÁLOGO</a></li>
+                    <li><a href="/promotions.html" class="enlace">PROMOCIONES</a></li>
+                    <li><a href="/nosotros.html" class="enlace">NOSOTROS</a></li>
+                    <li><a href="/contacto.html" class="enlace">CONTACTO</a></li>
+                </ul>
+            </nav>
+            <div class="nav-acciones">
+                <a href="/login.html" class="boton-usuario" aria-label="Mi cuenta">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="8" r="4"/>
+                        <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+                    </svg>
+                </a>
+                <button class="boton-carrito" aria-label="Carrito">
+                    <img src="/assets/icon/carrito-de-compras.png" alt="">
+                    <span class="carrito-contador">0</span>
+                </button>
+                <button class="btn-hamburger" id="btn-hamburger" aria-label="Menú">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="contenedor">
+        <section class="intranet">
+
+            <div class="intranet-cabecera">
+                <div>
+                    <h1>Intranet OVERTEXT</h1>
+                    <p>Panel de administración — bienvenido de nuevo, Admin.</p>
+                </div>
+                <button type="button" class="btn-cerrar-sesion" id="btn-cerrar-sesion">CERRAR SESIÓN</button>
+            </div>
+
+            <div class="intranet-grid">
+                <div class="intranet-card">
+                    <p class="cifra">128</p>
+                    <h3>Pedidos del mes</h3>
+                </div>
+                <div class="intranet-card">
+                    <p class="cifra">42</p>
+                    <h3>Pendientes de envío</h3>
+                </div>
+                <div class="intranet-card">
+                    <p class="cifra">6</p>
+                    <h3>Productos activos</h3>
+                </div>
+                <div class="intranet-card">
+                    <p class="cifra">S/ 8.4k</p>
+                    <h3>Ventas del mes</h3>
+                </div>
+            </div>
+
+            <div class="intranet-panel">
+                <h2>Bienvenido al panel</h2>
+                <p>Desde aquí administras el catálogo, revisas los pedidos y gestionas los envíos de OVERTEXT. Cuando termines, usa el botón <strong>Cerrar sesión</strong> para salir de forma segura y volver al inicio de sesión.</p>
+            </div>
+
+        </section>
+    </main>
+
+    <footer class="pie-pagina">
+        <div class="contenedor grid-pie">
+            <div class="pie-info">
+                <h2 class="pie-logo">OVERTEXT</h2>
+                <p class="pie-lema">LIMA, PERÚ. STREETWEAR PARA LA NUEVA GENERACIÓN.</p>
+            </div>
+            <div class="pie-enlaces">
+                <h3>SITIO</h3>
+                <ul>
+                    <li><a href="/index.html">INICIO</a></li>
+                    <li><a href="/catalogo.html">CATÁLOGO</a></li>
+                    <li><a href="/promotions.html">PROMOCIONES</a></li>
+                </ul>
+            </div>
+            <div class="pie-enlaces">
+                <h3>AYUDA</h3>
+                <ul>
+                    <li><a href="/contacto.html">CONTACTO</a></li>
+                    <li><a href="/nosotros.html">NOSOTROS</a></li>
+                    <li><a href="#">ENVÍOS</a></li>
+                </ul>
+            </div>
+            <div class="pie-boletin">
+                <h3>NEWSLETTER</h3>
+                <div class="formulario-minimal">
+                    <input type="email" placeholder="TU EMAIL">
+                    <button class="btn-flecha">→</button>
+                </div>
+                <div class="redes-sociales">
+                    <a href="https://www.instagram.com/overcoming.pe/" target="_blank" rel="noopener">INSTAGRAM</a>
+                    <a href="https://www.tiktok.com/@overcoming.peru" target="_blank" rel="noopener">TIKTOK</a>
+                </div>
+            </div>
+        </div>
+        <div class="contenedor">
+            <hr class="divisor">
+            <div class="legal-flex">
+                <p>© 2026 OVERTEXT — TODOS LOS DERECHOS RESERVADOS</p>
+                <p>LIMA, PERÚ</p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/51904501440" class="wsp-flotante" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <img src="/assets/icon/wsp.png" alt="WhatsApp">
+    </a>
+
+    <script src="/js/nav.js"></script>
+    <script src="/js/carrito.js"></script>
+    <script src="/js/intranet.js"></script>
+
+</body>
+</html>

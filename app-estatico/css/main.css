@@ -1,0 +1,159 @@
+/* ============================================================
+   OVERTEXT — main.css
+   Capa base ITCSS: Settings → Generic → Base
+   Importar como PRIMER archivo CSS en cada página.
+   ============================================================ */
+
+/* --- Fuentes (debe ir antes de cualquier regla) --- */
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+
+/* ============================================================
+   SETTINGS — Variables de diseño
+   ============================================================ */
+:root {
+    /* --- Colores --- */
+    --color-fondo:        #FFFFFF;
+    --color-fondo-alt:    #F5F5F5;
+    --color-negro:        #111111;
+    --color-rojo:         #8B1A1A;
+    --color-beige:        #C8B89A;
+    --color-borde:        #E5E5E5;
+    --color-texto-suave:  #777777;
+    --color-placeholder:  #BDBDBD;
+
+    /* --- Tipografías --- */
+--fuente-display: 'Oswald', sans-serif;
+--fuente-principal: 'Inter', sans-serif;
+
+    /* --- Espaciados --- */
+    --espacio-xs:   8px;
+    --espacio-sm:   16px;
+    --espacio-md:   24px;
+    --espacio-lg:   40px;
+    --espacio-xl:   80px;
+    --espacio-xxl:  128px;
+
+    /* --- Layout --- */
+    --ancho-maximo:       1300px;
+    --padding-contenedor: 0 25px;
+}
+
+
+/* ============================================================
+   GENERIC — Reset
+   ============================================================ */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    cursor: pointer;
+    background: none;
+    border: none;
+    font: inherit;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+
+/* ============================================================
+   BASE — Elementos globales del documento
+   ============================================================ */
+body {
+    font-family: var(--fuente-principal);
+    background-color: var(--color-fondo);
+    color: var(--color-negro);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+}
+
+::-webkit-scrollbar {
+    width: 8px; 
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-fondo-alt); 
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-negro); 
+    border-radius: 10px; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-rojo); 
+}
+
+/* ============================================================
+   ANIMATIONS — Keyframes globales reutilizables
+   ============================================================ */
+@keyframes entrada-hero {
+    from {
+        opacity: 0;
+        transform: translateY(32px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes zoom-suave {
+    from { transform: scale(1.05); }
+    to   { transform: scale(1); }
+}
+
+@keyframes pulso-urgencia {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.6; }
+}
+
+.animar-entrada {
+    animation-name: entrada-hero;
+    animation-duration: 0.75s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: both;
+}
+
+.animar-entrada-2 {
+    animation-name: entrada-hero;
+    animation-duration: 0.75s;
+    animation-delay: 0.15s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: both;
+}
+
+.animar-entrada-3 {
+    animation-name: entrada-hero;
+    animation-duration: 0.75s;
+    animation-delay: 0.3s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: both;
+}
+
+.animar-zoom {
+    animation-name: zoom-suave;
+    animation-duration: 1.4s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: both;
+}

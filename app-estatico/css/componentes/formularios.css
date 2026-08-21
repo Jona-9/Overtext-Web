@@ -1,0 +1,173 @@
+/* ============================================================
+   OVERTEXT — Formularios
+   Inputs, labels, textarea, selects. Aplica a todos los formularios.
+   ============================================================ */
+
+.ot-campo {
+    margin-bottom: 20px;
+}
+
+label,
+.etiqueta-campo {
+    display: block;
+    font-family: var(--fuente-principal);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--color-texto-suave);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.ot-campo-fila {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.ot-campo-fila label {
+    margin-bottom: 0;
+}
+
+/* Inputs de línea inferior (checkout, detalle) */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+.input-campo {
+    width: 100%;
+    height: 46px;
+    border: none;
+    border-bottom: 1px solid var(--color-borde);
+    padding: 10px 0;
+    font-family: var(--fuente-principal);
+    font-size: 0.9rem;
+    color: var(--color-negro);
+    background: transparent;
+    outline: none;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+.input-campo:focus {
+    border-bottom-color: var(--color-negro);
+}
+
+/* Inputs con borde completo (login) */
+.ot-campo input[type="text"],
+.ot-campo input[type="password"] {
+    width: 100%;
+    height: 46px;
+    border: 1px solid var(--color-borde);
+    border-radius: 3px;
+    padding: 0 14px;
+    font-size: 14px;
+    font-family: var(--fuente-principal);
+    color: var(--color-negro);
+    background: var(--color-fondo);
+    outline: none;
+}
+
+.ot-campo input[type="text"]:focus,
+.ot-campo input[type="password"]:focus {
+    border-color: var(--color-negro);
+}
+
+/* Textarea */
+textarea,
+.textarea-campo {
+    width: 100%;
+    border: 1px solid var(--color-borde);
+    padding: 12px;
+    font-family: var(--fuente-principal);
+    font-size: 0.9rem;
+    color: var(--color-negro);
+    background: transparent;
+    resize: none;
+    height: 100px;
+    outline: none;
+}
+
+textarea:focus,
+.textarea-campo:focus {
+    border-color: var(--color-negro);
+}
+
+/* Select */
+select,
+.select-campo {
+    width: 100%;
+    height: 46px;
+    border: none;
+    border-bottom: 1px solid var(--color-borde);
+    padding: 10px 0;
+    font-family: var(--fuente-principal);
+    font-size: 0.9rem;
+    color: var(--color-negro);
+    background: transparent;
+    outline: none;
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23111111' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 4px center;
+    padding-right: 24px;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+    accent-color: var(--color-negro);
+    cursor: pointer;
+}
+
+::placeholder {
+    color: var(--color-placeholder);
+    font-size: 0.85rem;
+}
+
+.ot-olvide-contrasena {
+    font-size: 12px;
+    font-weight: 500;
+    font-family: var(--fuente-principal);
+    color: var(--color-texto-suave);
+    text-decoration: none;
+}
+
+/* Formulario minimal del footer */
+.formulario-minimal {
+    display: flex;
+    align-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    padding: 0 12px;
+    height: 44px;
+    margin-bottom: 24px;
+}
+
+.formulario-minimal input[type="email"] {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--color-fondo);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.formulario-minimal input[type="email"]::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+/* Grilla de dos campos */
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+@media (max-width: 640px) {
+    .grid-2 {
+        grid-template-columns: 1fr;
+    }
+}

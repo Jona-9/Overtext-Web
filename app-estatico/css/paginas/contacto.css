@@ -1,0 +1,178 @@
+/* ============================================================
+   OVERTEXT — Página Contacto
+   Hero, barra social y estilos específicos de contacto.
+   ============================================================ */
+
+/* --- Hero de contacto --- */
+.hero-contacto {
+    padding: var(--espacio-xl) 0 var(--espacio-lg);
+    border-bottom: 0.5px solid var(--color-borde);
+}
+
+.hero-contacto h1 {
+    font-family: var(--fuente-display);
+    font-size: clamp(3rem, 7vw, 5rem);
+    font-weight: 900;
+    letter-spacing: -2px;
+    text-transform: uppercase;
+    line-height: 0.9;
+    margin-bottom: var(--espacio-md);
+}
+
+.hero-contacto p {
+    font-size: 1rem;
+    color: var(--color-texto-suave);
+    line-height: 1.6;
+    max-width: 480px;
+}
+
+/* --- Sección contacto: formulario + panel de info --- */
+.contacto-seccion {
+    padding: var(--espacio-xl) 0;
+}
+
+.contacto-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: var(--espacio-xl);
+    align-items: start;
+}
+
+.contacto-intro {
+    font-size: 0.9rem;
+    color: var(--color-texto-suave);
+    line-height: 1.6;
+    margin-bottom: var(--espacio-md);
+    max-width: 420px;
+}
+
+.contacto-eyebrow {
+    font-family: var(--fuente-principal);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-texto-suave);
+    margin-bottom: 8px;
+}
+
+.contacto-titulo {
+    font-family: var(--fuente-display);
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    letter-spacing: -0.5px;
+    text-transform: uppercase;
+    margin-bottom: var(--espacio-lg);
+}
+
+.contacto-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espacio-sm);
+}
+
+.contacto-enviar {
+    width: auto;
+    align-self: flex-start;
+    padding: 14px 40px;
+    margin-top: var(--espacio-sm);
+}
+
+/* --- Panel de información de contacto --- */
+.info-panel {
+    background: var(--color-fondo-alt);
+    padding: var(--espacio-lg);
+}
+
+.info-panel-titulo {
+    font-family: var(--fuente-display);
+    font-size: 1.4rem;
+    letter-spacing: -0.5px;
+    text-transform: uppercase;
+    margin-bottom: var(--espacio-md);
+}
+
+.info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 0;
+    border-top: 0.5px solid var(--color-borde);
+    text-decoration: none;
+    color: var(--color-negro);
+    transition: opacity 0.2s;
+}
+
+.info-item:hover {
+    opacity: 0.65;
+}
+
+.info-item--estatico {
+    cursor: default;
+}
+
+.info-item--estatico:hover {
+    opacity: 1;
+}
+
+.info-item img {
+    width: 26px;
+    height: 26px;
+    object-fit: contain;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.info-item-txt {
+    display: flex;
+    flex-direction: column;
+    font-family: var(--fuente-principal);
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.info-item-txt b {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-texto-suave);
+    margin-bottom: 2px;
+}
+
+.info-item-txt em {
+    font-size: 0.72rem;
+    font-style: normal;
+    color: var(--color-texto-suave);
+    margin-top: 2px;
+}
+
+.info-envio {
+    margin-top: var(--espacio-md);
+    padding: var(--espacio-md);
+    background: var(--color-negro);
+    color: var(--color-fondo);
+}
+
+.info-envio strong {
+    display: block;
+    font-family: var(--fuente-principal);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+
+.info-envio p {
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* --- Responsive --- */
+@media (max-width: 860px) {
+    .contacto-grid {
+        grid-template-columns: 1fr;
+        gap: var(--espacio-lg);
+    }
+}

@@ -1,0 +1,103 @@
+[
+  {
+    "id": "short-beige",
+    "nombre": "SHORT STONE BEIGE",
+    "precio": 20,
+    "precioPack": "6 x S/ 100",
+    "badge": "ÚLTIMAS UNIDADES",
+    "slogan": "Lo que buscabas sin pagar de más.",
+    "descripcion": "Tela ligera y fresca, ideal para un estilo versátil que combina con todo.",
+    "imagen": "/assets/img/productos/beige/principal.webp",
+    "galeria": [
+      "/assets/img/productos/beige/1.webp",
+      "/assets/img/productos/beige/2.webp",
+      "/assets/img/productos/beige/3.webp",
+      "/assets/img/productos/beige/4.webp"
+    ],
+    "color": { "nombre": "Stone Beige", "hex": "#C4A882" },
+    "tallas": ["S", "M", "L", "XL"]
+  },
+  {
+    "id": "short-negro",
+    "nombre": "SHORT NEGRO CLÁSICO",
+    "precio": 20,
+    "precioPack": "6 x S/ 100",
+    "badge": "ÚLTIMAS UNIDADES",
+    "slogan": "El básico que nunca falla.",
+    "descripcion": "Diseño atemporal con acabado limpio y máxima comodidad para cualquier ocasión.",
+    "imagen": "/assets/img/productos/negro/principal.webp",
+    "galeria": [
+      "/assets/img/productos/negro/1.webp",
+      "/assets/img/productos/negro/2.webp",
+      "/assets/img/productos/negro/3.webp",
+      "/assets/img/productos/negro/4.webp"
+    ],
+    "color": { "nombre": "Negro", "hex": "#111111" },
+    "tallas": ["S", "M", "L", "XL"]
+  },
+  {
+    "id": "short-guinda",
+    "nombre": "SHORT GUINDA",
+    "precio": 20,
+    "precioPack": "6 x S/ 100",
+    "badge": "ÚLTIMAS UNIDADES",
+    "slogan": "Color que se hace notar.",
+    "descripcion": "Color único y moderno, confeccionado en tela suave y resistente para el uso diario.",
+    "imagen": "/assets/img/productos/guinda/principal.webp",
+    "galeria": [],
+    "color": { "nombre": "Guinda", "hex": "#8B1A2C" },
+    "tallas": ["S", "M", "L", "XL"]
+  },
+  {
+    "id": "short-gris",
+    "nombre": "SHORT GRIS",
+    "precio": 20,
+    "precioPack": "6 x S/ 100",
+    "badge": "ÚLTIMAS UNIDADES",
+    "slogan": "Minimalista, cómodo, tuyo.",
+    "descripcion": "Minimalista y cómodo, con tejido ligero que brinda libertad de movimiento.",
+    "imagen": "/assets/img/productos/gris/principal.webp",
+    "galeria": [],
+    "color": { "nombre": "Gris", "hex": "#9E9E9E" },
+    "tallas": ["S", "M", "L", "XL"]
+  },
+  {
+    "id": "short-oliva",
+    "nombre": "SHORT OLIVA MILITAR",
+    "precio": 20,
+    "precioPack": "6 x S/ 100",
+    "badge": "ÚLTIMAS UNIDADES",
+    "slogan": "Estilo urbano con carácter.",
+    "descripcion": "Inspirado en tonos naturales, combina resistencia, frescura y estilo urbano.",
+    "imagen": "/assets/img/productos/oliva/principal.webp",
+    "galeria": [],
+    "color": { "nombre": "Oliva Militar", "hex": "#5C6B3A" },
+    "tallas": ["S", "M", "L", "XL"]
+  },
+  {
+    "id": "short-azul",
+    "nombre": "SHORT AZUL",
+    "precio": 20,
+    "precioPack": "6 x S/ 100",
+    "badge": "ÚLTIMAS UNIDADES",
+    "slogan": "Fresco y fácil de combinar.",
+    "descripcion": "Fresco, cómodo y fácil de combinar, perfecto para un look casual y moderno.",
+    "imagen": "/assets/img/productos/azul/principal.webp",
+    "galeria": [],
+    "color": { "nombre": "Azul Marino", "hex": "#1A3A7A" },
+    "tallas": ["S", "M", "L", "XL"]
+  },
+  {
+    "id": "short-marron",
+    "nombre": "SHORT MARRÓN",
+    "precio": 20,
+    "precioPack": "6 x S/ 100",
+    "badge": "ÚLTIMAS UNIDADES",
+    "slogan": "Tierra firme, paso seguro.",
+    "descripcion": "Tono cálido y sobrio, en la misma tela ligera que combina con cualquier prenda básica.",
+    "imagen": "/assets/img/productos/marron/principal.webp",
+    "galeria": [],
+    "color": { "nombre": "Marrón", "hex": "#6B4A2E" },
+    "tallas": ["S", "M", "L", "XL"]
+  }
+]

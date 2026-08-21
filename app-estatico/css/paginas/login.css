@@ -1,0 +1,171 @@
+/* ============================================================
+   OVERTEXT — Página Login / Sesión
+   Centrado del formulario de acceso.
+   ============================================================ */
+
+.contenedor-sesion {
+    min-height: calc(100vh - 70px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--espacio-xl) var(--espacio-sm);
+    background: var(--color-fondo);
+}
+
+/* Mensaje de validación de credenciales */
+.mensaje-sesion {
+    font-family: var(--fuente-principal);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-align: center;
+    margin-top: 14px;
+    min-height: 1em;
+    transition: color 0.2s;
+}
+
+.mensaje-sesion.mensaje-error {
+    color: var(--color-rojo);
+}
+
+.mensaje-sesion.mensaje-ok {
+    color: #2e7d32;
+}
+
+.tarjeta-sesion {
+    width: 100%;
+    max-width: 420px;
+    background: var(--color-fondo);
+    border: 1px solid var(--color-borde);
+    padding: var(--espacio-lg) var(--espacio-md);
+}
+
+.titulo-sesion {
+    font-family: var(--fuente-display);
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    letter-spacing: -0.5px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+.subtitulo-sesion {
+    font-size: 0.85rem;
+    color: var(--color-texto-suave);
+    margin-bottom: var(--espacio-md);
+}
+
+/* --- Campos del formulario (específicos del login) --- */
+.ot-campo {
+    margin-bottom: var(--espacio-sm);
+}
+
+.ot-campo label {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+
+.ot-campo-fila {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 6px;
+}
+
+.ot-olvide-contrasena {
+    font-size: 0.7rem;
+    color: var(--color-rojo);
+    text-decoration: none;
+}
+
+.ot-olvide-contrasena:hover {
+    text-decoration: underline;
+}
+
+/* --- Botón principal --- */
+.ot-boton-ingresar {
+    width: 100%;
+    padding: 14px;
+    background: var(--color-negro);
+    color: var(--color-fondo);
+    border: none;
+    font-family: var(--fuente-display);
+    font-size: 1rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: var(--espacio-sm);
+    transition: background 0.2s;
+}
+
+.ot-boton-ingresar:hover {
+    background: var(--color-rojo);
+}
+
+/* --- Separador "o" --- */
+.ot-separador {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: var(--espacio-md) 0;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-texto-suave);
+}
+
+.ot-separador-linea {
+    flex: 1;
+    height: 0.5px;
+    background: var(--color-borde);
+}
+
+/* --- Botón WhatsApp --- */
+.ot-boton-whatsapp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 13px;
+    background: #25D366;
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: opacity 0.2s;
+}
+
+.ot-boton-whatsapp:hover {
+    opacity: 0.85;
+}
+
+.ot-icono-whatsapp {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+/* --- Pie del formulario --- */
+.ot-pie-formulario {
+    margin-top: var(--espacio-sm);
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--color-texto-suave);
+}
+
+.ot-pie-formulario a {
+    color: var(--color-negro);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.ot-pie-formulario a:hover {
+    color: var(--color-rojo);
+}
