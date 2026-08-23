@@ -1,0 +1,23 @@
+/* ============================================================
+   OVERTEXT — Carrusel Portada 
+   ============================================================ */
+
+#carruselPortada .carousel-item {
+    min-height: 520px;
+}
+
+
+#carruselPortada img {
+    height: 420px;
+    width: 100%;
+    object-fit: cover;
+}
+
+@media (max-width: 768px) {
+    #carruselPortada .carousel-item {
+        min-height: auto;
+    }
+    #carruselPortada img {
+        height: 280px;
+    }
+}

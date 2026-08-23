@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="/css/componentes/badges.css">
     <link rel="stylesheet" href="/css/componentes/footer.css">
     <link rel="stylesheet" href="/css/componentes/carrito.css">
+    <link rel="stylesheet" href="/css/componentes/carrucel.css">
 </head>
 
 <body>
@@ -36,9 +37,10 @@
             </nav>
             <div class="nav-acciones">
                 <a href="/login.html" class="boton-usuario" aria-label="Mi cuenta">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="8" r="4"/>
-                        <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="8" r="4" />
+                        <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
                     </svg>
                 </a>
                 <button class="boton-carrito" id="abrir-carrito" aria-label="Carrito">
@@ -65,8 +67,10 @@
                 <span class="carrito-conteo">2 PRODUCTOS</span>
             </div>
             <button class="btn-cerrar-carrito" id="cerrar-carrito" aria-label="Cerrar carrito">
-                <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-                    <line x1="1" y1="1" x2="12" y2="12"/><line x1="12" y1="1" x2="1" y2="12"/>
+                <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round">
+                    <line x1="1" y1="1" x2="12" y2="12" />
+                    <line x1="12" y1="1" x2="1" y2="12" />
                 </svg>
             </button>
         </div>
@@ -102,31 +106,100 @@
 
     <!-- HERO PRINCIPAL -->
     <main>
-        <section class="seccion-portada">
-            <div class="container cuadricula-portada">
+        <section class="seccion-carrusel">
+            <div id="carruselPortada" class="carousel slide" data-bs-ride="carousel" data-bs-pause="hover"
+                data-bs-interval="4000">
 
-                <div >
-                    <img src="/assets/img/sitio/modelo.webp" alt="Modelo vistiendo OVERTEXT" class="imagen-principal animar-zoom">
+                <!-- Indicadores -->
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carruselPortada" data-bs-slide-to="0" class="active" aria-current="true"><button>
+                    <button type="button" data-bs-target="#carruselPortada" data-bs-slide-to="1"></button>
+                    <button type="button" data-bs-target="#carruselPortada" data-bs-slide-to="2"></button>
                 </div>
 
-                <div class="portada-contenido">
-                    <span class="subtitulo-superior animar-entrada">OVERCOMING — LIMA, PERÚ</span>
-                    <h1 class="titulo-gigante animar-entrada-2">SHORTS<br>QUE SE<br>SIENTEN<br>BIEN.</h1>
-                    <div class="bloque-descripcion animar-entrada-3">
-                        <p class="texto-parrafo">
-                            Fabricantes directos de streetwear peruano.
-                            Sin intermediarios, sin compromisos en calidad.
-                        </p>
-                        <p class="texto-destacado">
-                            ALGODÓN PERUANO · ENVÍO A TODO EL PAÍS · GARANTÍA DE FÁBRICA
-                        </p>
-                        <div style="display:flex;gap:12px;flex-wrap:wrap;">
-                            <a href="/catalogo.html" class="btn-primario">VER COLECCIÓN</a>
-                            <a href="/promotions.html" class="btn-secundario">ARMA TU PACK</a>
+                <!-- Diapositivas -->
+                <div class="carousel-inner">
+
+                    <!-- Deslizamiento 1: Colección Actual -->
+                    <div class="carousel-item active">
+                        <div class="container py-5">
+                            <div class="row align-items-center g-4">
+                                <div class="col-12 col-md-6 text-center">
+                                    <img src="/assets/img/sitio/modelo.webp" alt="Modelo vistiendo OVERTEXT"
+                                        class="img-fluid rounded" style="max-height: 480px; object-fit: cover;">
+                                </div>
+                                <div class="col-12 col-md-6 text-start">
+                                    <span class="subtitulo-superior d-block mb-2">OVERCOMING — LIMA, PERÚ</span>
+                                    <h1 class="titulo-gigante mb-3">SHORTS QUE SE SIENTEN BIEN.</h1>
+                                    <p class="texto-parrafo mb-3">Fabricantes directos de streetwear peruano. Sin
+                                        intermediarios, sin compromisos en calidad.</p>
+                                    <p class="texto-destacado mb-4">ALGODÓN PERUANO · ENVÍO A TODO EL PAÍS · GARANTÍA DE
+                                        FÁBRICA</p>
+                                    <div class="d-flex gap-2 flex-wrap">
+                                        <a href="/catalogo.html" class="btn-primario">VER COLECCIÓN</a>
+                                        <a href="/promotions.html" class="btn-secundario">ARMA TU PACK</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Deslizamiento 2: Promoción Pack -->
+                    <div class="carousel-item">
+                        <div class="container py-5">
+                            <div class="row align-items-center g-4">
+                                <div class="col-12 col-md-6 text-center">
+                                    <img src="/assets/img/sitio/pack_Short.webp" alt="Pack de 6 Shorts OVERTEXT"
+                                        class="img-fluid rounded" style="max-height: 480px; object-fit: cover;">
+                                </div>
+                                <div class="col-12 col-md-6 text-start">
+                                    <span class="subtitulo-superior d-block mb-2">OFERTA ESPECIAL</span>
+                                    <h1 class="titulo-gigante mb-3">ARMA TU PACK DE 6 POR S/ 100</h1>
+                                    <p class="texto-parrafo mb-3">Elige y combina libremente los colores y tallas que
+                                        prefieras. Envío incluido desde 2 packs.</p>
+                                    <p class="texto-destacado mb-4">6 COLORES DISPONIBLES · TALLAS S, M, L, XL</p>
+                                    <div class="d-flex gap-2 flex-wrap">
+                                        <a href="/promotions.html" class="btn-primario">CONFIGURAR PACK</a>
+                                        <a href="/catalogo.html" class="btn-secundario">VER MÁS DETALLES</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Deslizamiento 3: Calidad Textil -->
+                    <div class="carousel-item">
+                        <div class="container py-5">
+                            <div class="row align-items-center g-4">
+                                <div class="col-12 col-md-6 text-center">
+                                    <img src="/assets/img/sitio/tela.webp" alt="Calidad Algodón Peruano"
+                                        class="img-fluid rounded" style="max-height: 480px; object-fit: cover;">
+                                </div>
+                                <div class="col-12 col-md-6 text-start">
+                                    <span class="subtitulo-superior d-block mb-2">100% ALGODÓN PREMIUM</span>
+                                    <h1 class="titulo-gigante mb-3">CALIDAD DE EXPORTACIÓN.</h1>
+                                    <p class="texto-parrafo mb-3">Utilizamos las mejores fibras peruanas. Cada prenda
+                                        pasa por 12 puntos de control antes de llegar a tus manos.</p>
+                                    <p class="texto-destacado mb-4">DURABILIDAD SUPERIOR · MÁXIMO CONFORT</p>
+                                    <div class="d-flex gap-2 flex-wrap">
+                                        <a href="/nosotros.html" class="btn-primario">CONOCE MÁS</a>
+                                        <a href="/contacto.html" class="btn-secundario">CONTÁCTANOS</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-
+                <!-- Controles Anterior / Siguiente -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#carruselPortada"
+                    data-bs-slide="prev" aria-label="Anterior">
+                    <span class="carousel-control-prev-icon" aria-hidden="true" style="filter: invert(1);"></span>
+                    <span class="visually-hidden">Anterior</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carruselPortada"
+                    data-bs-slide="next" aria-label="Siguiente">
+                    <span class="carousel-control-next-icon" aria-hidden="true" style="filter: invert(1);"></span>
+                    <span class="visually-hidden">Siguiente</span>
+                </button>
             </div>
         </section>
 
@@ -142,17 +215,20 @@
                 <article>
                     <span class="cifra">01</span>
                     <h3 class="titulo-borde">ORIGEN TEXTIL</h3>
-                    <p class="texto-columna">Seleccionamos el mejor algodón peruano, reconocido mundialmente por su durabilidad y suavidad superior.</p>
+                    <p class="texto-columna">Seleccionamos el mejor algodón peruano, reconocido mundialmente por su
+                        durabilidad y suavidad superior.</p>
                 </article>
                 <article>
                     <span class="cifra">02</span>
                     <h3 class="titulo-borde">MANUFACTURA PROPIA</h3>
-                    <p class="texto-columna">Como fabricantes directos, garantizamos condiciones justas y una supervisión milimétrica en cada prenda.</p>
+                    <p class="texto-columna">Como fabricantes directos, garantizamos condiciones justas y una
+                        supervisión milimétrica en cada prenda.</p>
                 </article>
                 <article>
                     <span class="cifra">03</span>
                     <h3 class="titulo-borde">VISIÓN URBANA</h3>
-                    <p class="texto-columna">Diseño pensado para el asfalto, la noche y la identidad propia. Streetwear sin concesiones.</p>
+                    <p class="texto-columna">Diseño pensado para el asfalto, la noche y la identidad propia. Streetwear
+                        sin concesiones.</p>
                 </article>
             </div>
         </section>
@@ -164,8 +240,10 @@
                     <img src="/assets/img/sitio/tela.webp" alt="Textura del algodón OVERTEXT">
                     <div class="info-tela">
                         <h2>CALIDAD DE EXPORTACIÓN.</h2>
-                        <p>"Utilizamos las mejores fibras peruanas. Cada prenda pasa por 12 puntos de control antes de llegar a tus manos."</p>
-                        <a href="/nosotros.html" class="btn-secundario" style="margin-top:24px;display:inline-flex;">CONOCE MÁS</a>
+                        <p>"Utilizamos las mejores fibras peruanas. Cada prenda pasa por 12 puntos de control antes de
+                            llegar a tus manos."</p>
+                        <a href="/nosotros.html" class="btn-secundario"
+                            style="margin-top:24px;display:inline-flex;">CONOCE MÁS</a>
                     </div>
                 </div>
                 <div class="zona-outfit">
@@ -235,8 +313,12 @@
         <img src="/assets/icon/wsp.png" alt="WhatsApp">
     </a>
 
+    <!-- Scrip carrusel-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
     <script src="/js/nav.js"></script>
     <script src="/js/carrito.js"></script>
 
 </body>
+
 </html>
