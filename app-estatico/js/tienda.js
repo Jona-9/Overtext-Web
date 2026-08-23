@@ -65,19 +65,55 @@
         if (precioPrincipal) precioPrincipal.innerHTML = 'S/ ' + p.precio + ' <span>unidad</span>';
         set('.precio-pack', 'o arma tu pack: ' + p.precioPack);
 
-        var fotoPrincipal = document.querySelector('.foto-principal-wrapper img');
-        if (fotoPrincipal) {
-            fotoPrincipal.onerror = function () { fotoPrincipal.onerror = null; fotoPrincipal.src = p.imagen; };
-            fotoPrincipal.src = p.galeria[0] || p.imagen;
-            fotoPrincipal.alt = p.nombre;
-        }
+        // Galería / Carrusel dinámico de Bootstrap 
+        var galeriaContenedor = document.querySelector('.galeria-producto');
+        if (galeriaContenedor) {
+            var todasLasFotos = [p.imagen];
+            if (p.galeria && p.galeria.length > 0) {
+                p.galeria.forEach(function (g) {
+                    if (todasLasFotos.indexOf(g) === -1) todasLasFotos.push(g);
+                });
+            }
 
-        var miniaturas = document.querySelector('.miniaturas-grid');
-        if (miniaturas) {
-            miniaturas.innerHTML = p.galeria.map(function (src, i) {
-                return '<img src="' + esc(src) + '" alt="Vista ' + (i + 1) + '"' + onerr +
-                    ' class="miniatura' + (i === 0 ? ' activa' : '') + '">';
-            }).join('');
+            var tieneVariasFotos = todasLasFotos.length > 1;
+
+            var indicadoresHtml = '';
+            if (tieneVariasFotos) {
+                indicadoresHtml = '<div class="carousel-indicators">' +
+                    todasLasFotos.map(function (_, i) {
+                        return '<button type="button" data-bs-target="#carruselProducto" data-bs-slide-to="' + i + '"' +
+                            (i === 0 ? ' class="active"' : '') + '></button>';
+                    }).join('') +
+                '</div>';
+            }
+
+            var itemsHtml = '<div class="carousel-inner rounded overflow-hidden">' +
+                todasLasFotos.map(function (src, i) {
+                    return '<div class="carousel-item' + (i === 0 ? ' active' : '') + '">' +
+                        '<img src="' + esc(src) + '" class="d-block w-100 carrusel-producto-img" alt="' + esc(p.nombre) + '"' + onerr + '>' +
+                    '</div>';
+                }).join('') +
+            '</div>';
+
+            var controlesHtml = '';
+            if (tieneVariasFotos) {
+                controlesHtml = '' +
+                    '<button class="carousel-control-prev" type="button" data-bs-target="#carruselProducto" data-bs-slide="prev">' +
+                        '<span class="carousel-control-prev-icon" aria-hidden="true" style="filter: invert(1);"></span>' +
+                        '<span class="visually-hidden">Anterior</span>' +
+                    '</button>' +
+                    '<button class="carousel-control-next" type="button" data-bs-target="#carruselProducto" data-bs-slide="next">' +
+                        '<span class="carousel-control-next-icon" aria-hidden="true" style="filter: invert(1);"></span>' +
+                        '<span class="visually-hidden">Siguiente</span>' +
+                    '</button>';
+            }
+
+            galeriaContenedor.innerHTML =
+                '<div id="carruselProducto" class="carousel slide" data-bs-ride="false">' +
+                    indicadoresHtml +
+                    itemsHtml +
+                    controlesHtml +
+                '</div>';
         }
 
         // Color: indicador de color único (no un selector). varianteAuto() de
