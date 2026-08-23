@@ -39,7 +39,7 @@
 }
 
 /* --- Layout padre (imagen + panel) --- */
-.contenedor-padre {
+.container-padre {
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -288,7 +288,7 @@
 
 /* --- Responsive --- */
 @media (max-width: 900px) {
-    .contenedor-padre {
+    .container-padre {
         flex-direction: column;
         align-items: center;
     }

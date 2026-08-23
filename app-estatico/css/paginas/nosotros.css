@@ -69,7 +69,7 @@
     color: var(--color-texto-suave);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 991px) {
     .valores-grid {
         grid-template-columns: 1fr;
     }

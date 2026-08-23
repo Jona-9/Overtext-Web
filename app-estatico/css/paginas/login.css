@@ -3,7 +3,7 @@
    Centrado del formulario de acceso.
    ============================================================ */
 
-.contenedor-sesion {
+.container-sesion {
     min-height: calc(100vh - 70px);
     display: flex;
     align-items: center;
