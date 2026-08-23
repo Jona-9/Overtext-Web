@@ -39,24 +39,20 @@
 }
 
 /* --- Layout padre (imagen + panel) --- */
-.container-padre {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 30px;
-}
-
 .imagen-pack {
-    width: 45%;
+    width: 100%;
+    max-width: 500px;
     aspect-ratio: 1 / 1;
     min-width: 0;
     object-fit: cover;
+    margin: 0 auto;
+    display: block;
 }
 
 .info-pack {
     background-color: var(--color-fondo);
-    width: 55%;
-    max-width: 600px;
+    width: 100%;
+    max-width: 100%;
 }
 
 /* --- Bloque de ofertas --- */

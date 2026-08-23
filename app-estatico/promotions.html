@@ -109,75 +109,83 @@
             </div>
         </section>
 
-        <!-- CONFIGURADOR DE PACK -->
-        <div class="container" style="padding: var(--espacio-xl) 25px;">
-            <div class="container-padre">
-                <img class="imagen-pack" src="/assets/img/sitio/pack_Short.webp" alt="Short Overtext">
-
-                <div class="info-pack">
-                    <div class="ofertas">
-                        <p class="oferta_shorts">6 shorts x S/100</p>
-                        <div class="mensaje-promocion">ENVÍO INCLUIDO DESDE 2 PACKS</div>
-                    </div>
-
-                    <div class="seleccion-colores">
-                        <p class="etiqueta-colores">SELECCIONA COLORES</p>
-                        <div class="colores-grid">
-                            <div class="color-opcion activo">
-                                <div class="color-muestra" style="background-color: #1A1A1A;"></div>
-                                <span>NEGRO</span>
-                            </div>
-                            <div class="color-opcion">
-                                <div class="color-muestra" style="background-color: #FFFFFF; border: 1px solid #ddd;">
-                                </div>
-                                <span>BLANCO</span>
-                            </div>
-                            <div class="color-opcion">
-                                <div class="color-muestra" style="background-color: #C8B89A;"></div>
-                                <span>STONE</span>
-                            </div>
-                            <div class="color-opcion">
-                                <div class="color-muestra" style="background-color: #8B1A2C;"></div>
-                                <span>BORGOÑA</span>
-                            </div>
-                            <div class="color-opcion">
-                                <div class="color-muestra" style="background-color: #9E9E9E;"></div>
-                                <span>GRIS</span>
-                            </div>
-                            <div class="color-opcion">
-                                <div class="color-muestra" style="background-color: #5C6B3A;"></div>
-                                <span>OLIVO</span>
-                            </div>
-                            <div class="color-opcion">
-                                <div class="color-muestra" style="background-color: #1A3A7A;"></div>
-                                <span>MARINO</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="seleccion-tallas">
-                        <p class="etiqueta-colores">ELIGE LA TALLA Y LUEGO EL COLOR</p>
-                        <div class="tallas-grid">
-                            <button type="button" class="pack-talla" data-talla="S">S</button>
-                            <button type="button" class="pack-talla activo" data-talla="M">M</button>
-                            <button type="button" class="pack-talla" data-talla="L">L</button>
-                            <button type="button" class="pack-talla" data-talla="XL">XL</button>
-                        </div>
-                    </div>
-
-                    <div class="seleccionados">
-                        <div class="seleccionados-header">
-                            <p class="contador-slots">0 DE 6 SELECCIONADOS</p>
-                            <span class="icono-info" title="Toca un slot lleno para quitarlo">&#9432;</span>
-                        </div>
-                        <div class="slots">
-                            <!-- Los slots se renderizan dinámicamente -->
-                        </div>
-                    </div>
-
-                    <button class="boton-carrito-pack">AGREGAR PACK AL CARRITO &rarr;</button>
-                    <p class="garantia">GARANTÍA DE CALIDAD OVERTEXT &#11044; DEVOLUCIONES FÁCILES</p>
+        <!-- CONFIGURADOR DE PACK: Imagen izquierda, Características derecha -->
+        <div class="container py-5">
+            <div class="container-padre row g-4 align-items-start justify-content-between">
+                
+                <!-- Columna Izquierda: Imagen del pack -->
+                <div class="col-12 col-lg-5 text-center">
+                    <img class="imagen-pack img-fluid rounded shadow-sm" src="/assets/img/sitio/pack_Short.webp" alt="Pack de 6 Shorts Overtext">
                 </div>
+
+                <!-- Columna Derecha: Características y configurador -->
+                <div class="col-12 col-lg-7">
+                    <div class="info-pack p-0">
+                        <div class="ofertas">
+                            <p class="oferta_shorts">6 shorts x S/100</p>
+                            <div class="mensaje-promocion">ENVÍO INCLUIDO DESDE 2 PACKS</div>
+                        </div>
+
+                        <div class="seleccion-colores">
+                            <p class="etiqueta-colores">SELECCIONA COLORES</p>
+                            <div class="colores-grid">
+                                <div class="color-opcion activo">
+                                    <div class="color-muestra" style="background-color: #1A1A1A;"></div>
+                                    <span>NEGRO</span>
+                                </div>
+                                <div class="color-opcion">
+                                    <div class="color-muestra" style="background-color: #FFFFFF; border: 1px solid #ddd;">
+                                    </div>
+                                    <span>BLANCO</span>
+                                </div>
+                                <div class="color-opcion">
+                                    <div class="color-muestra" style="background-color: #C8B89A;"></div>
+                                    <span>STONE</span>
+                                </div>
+                                <div class="color-opcion">
+                                    <div class="color-muestra" style="background-color: #8B1A2C;"></div>
+                                    <span>BORGOÑA</span>
+                                </div>
+                                <div class="color-opcion">
+                                    <div class="color-muestra" style="background-color: #9E9E9E;"></div>
+                                    <span>GRIS</span>
+                                </div>
+                                <div class="color-opcion">
+                                    <div class="color-muestra" style="background-color: #5C6B3A;"></div>
+                                    <span>OLIVO</span>
+                                </div>
+                                <div class="color-opcion">
+                                    <div class="color-muestra" style="background-color: #1A3A7A;"></div>
+                                    <span>MARINO</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="seleccion-tallas">
+                            <p class="etiqueta-colores">ELIGE LA TALLA Y LUEGO EL COLOR</p>
+                            <div class="tallas-grid">
+                                <button type="button" class="pack-talla" data-talla="S">S</button>
+                                <button type="button" class="pack-talla activo" data-talla="M">M</button>
+                                <button type="button" class="pack-talla" data-talla="L">L</button>
+                                <button type="button" class="pack-talla" data-talla="XL">XL</button>
+                            </div>
+                        </div>
+
+                        <div class="seleccionados">
+                            <div class="seleccionados-header">
+                                <p class="contador-slots">0 DE 6 SELECCIONADOS</p>
+                                <span class="icono-info" title="Toca un slot lleno para quitarlo">&#9432;</span>
+                            </div>
+                            <div class="slots">
+                                <!-- Los slots se renderizan dinámicamente -->
+                            </div>
+                        </div>
+
+                        <button class="boton-carrito-pack">AGREGAR PACK AL CARRITO &rarr;</button>
+                        <p class="garantia">GARANTÍA DE CALIDAD OVERTEXT &#11044; DEVOLUCIONES FÁCILES</p>
+                    </div>
+                </div>
+
             </div>
         </div>
 
