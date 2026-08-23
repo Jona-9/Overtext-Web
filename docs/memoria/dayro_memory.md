@@ -181,21 +181,21 @@ Demuestro en vivo: entrar a `/admin` sin sesión, iniciar sesión, y mostrar el 
 ## Bitácora — Sprint 1
 
 ### 2026-08-20
-Hice: 
--Implemente contenedores de Bootstrap usando .container junto con .container-fluid para el diseño responsivo en todas las paginas eliminando el .contenedor que se usaba en algunas etiquetas. 
--Se realizo el carrusel en index.html con 3 diapositivas junto con controles e indicadores 
+- Hice: 
+Implemente contenedores de Bootstrap usando .container junto con .container-fluid para el diseño responsivo en todas las paginas eliminando el .contenedor que se usaba en algunas etiquetas. 
+Se realizo el carrusel en index.html con 3 diapositivas junto con controles e indicadores 
 -Implementacion de carrusel de galeria en detalle-producto.html tolerante a productos sin galeria o con imagenes reducidas.
 -
-Decidí / aprendí: 
--A usar contenedores de Bootstrap para diseños responsivos junto con carruseles para mejorar el diseño visual de la pagina web
--A manejar distintos archivos html, css, y js sin romper estilos o funcionanmiento del sistema.
+- Decidí / aprendí: 
+A usar contenedores de Bootstrap para diseños responsivos junto con carruseles para mejorar el diseño visual de la pagina web
+A manejar distintos archivos html, css, y js sin romper estilos o funcionanmiento del sistema.
 - Bloqueo: —
-Archivos tocados: 
--layout.css
--navegacion.css
--layout.css
--todos los .html para implementar el contenedor
--tienda.js
+- Archivos tocados: 
+layout.css
+navegacion.css
+layout.css
+todos los .html para implementar el contenedor
+tienda.js
 
 
 ---
