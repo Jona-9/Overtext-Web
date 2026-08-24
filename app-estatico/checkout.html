@@ -77,34 +77,34 @@
 
             <div class="grid-2">
               <div>
-                <label for="co-nombre">Nombre *</label>
-                <input type="text" id="co-nombre" placeholder="EJ. CARLOS" required autocomplete="given-name">
+                <label for="co-nombre" class="form-label">Nombre *</label>
+                <input type="text" class="form-control" id="co-nombre" placeholder="EJ. CARLOS" required autocomplete="given-name">
                 <span class="error-msg">Ingresa tu nombre</span>
               </div>
               <div>
-                <label for="co-apellido">Apellido *</label>
-                <input type="text" id="co-apellido" placeholder="EJ. RIVERA" required autocomplete="family-name">
+                <label for="co-apellido" class="form-label">Apellido *</label>
+                <input type="text" class="form-control" id="co-apellido" placeholder="EJ. RIVERA" required autocomplete="family-name">
                 <span class="error-msg">Ingresa tu apellido</span>
               </div>
             </div>
 
             <div class="grid-2">
               <div>
-                <label for="co-telefono">Teléfono *</label>
-                <input type="text" id="co-telefono" placeholder="+51 900 000 000" required autocomplete="tel">
+                <label for="co-telefono" class="form-label">Teléfono *</label>
+                <input type="text" class="form-control" id="co-telefono" placeholder="+51 900 000 000" required autocomplete="tel">
                 <span class="error-msg">Ingresa tu teléfono</span>
               </div>
               <div>
-                <label for="co-correo">Correo *</label>
-                <input type="email" id="co-correo" placeholder="USUARIO@MAIL.COM" required autocomplete="email">
+                <label for="co-correo" class="form-label">Correo *</label>
+                <input type="email" class="form-control" id="co-correo" placeholder="USUARIO@MAIL.COM" required autocomplete="email">
                 <span class="error-msg">Ingresa un correo válido</span>
               </div>
             </div>
 
             <div class="grid-2">
               <div>
-                <label for="co-doc">Tipo de documento</label>
-                <select id="co-doc">
+                <label for="co-doc" class="form-label">Tipo de documento</label>
+                <select class="form-select" id="co-doc">
                   <option value="DNI">DNI</option>
                   <option value="CE">Carné de extranjería</option>
                   <option value="Pasaporte">Pasaporte</option>
@@ -112,8 +112,8 @@
                 </select>
               </div>
               <div>
-                <label for="co-numdoc">Número de documento *</label>
-                <input type="text" id="co-numdoc" placeholder="00000000" required autocomplete="off" inputmode="numeric" maxlength="12">
+                <label for="co-numdoc" class="form-label">Número de documento *</label>
+                <input type="text" class="form-control" id="co-numdoc" placeholder="00000000" required autocomplete="off" inputmode="numeric" maxlength="12">
                 <span class="error-msg">Ingresa un número de documento válido</span>
               </div>
             </div>
@@ -133,17 +133,17 @@
 
             <div class="envio-opciones">
               <label class="envio-card">
-                <input type="radio" name="envio" value="recojo">
+                <input class="form-check-input" type="radio" name="envio" value="recojo">
                 <span class="envio-card-nombre">RECOJO EN ALMACÉN</span>
                 <span class="envio-card-precio">GRATIS</span>
               </label>
               <label class="envio-card">
-                <input type="radio" name="envio" value="delivery">
+                <input class="form-check-input" type="radio" name="envio" value="delivery">
                 <span class="envio-card-nombre">DELIVERY A LIMA</span>
                 <span class="envio-card-precio">S/ 15.00</span>
               </label>
               <label class="envio-card">
-                <input type="radio" name="envio" value="provincia">
+                <input class="form-check-input" type="radio" name="envio" value="provincia">
                 <span class="envio-card-nombre">ENVÍO A PROVINCIA</span>
                 <span class="envio-card-precio">S/ 25.00</span>
               </label>
@@ -161,39 +161,39 @@
             </div>
 
             <div class="envio-campos" data-envio="delivery">
-              <label for="co-distrito">Distrito *</label>
-              <select id="co-distrito" required>
+              <label for="co-distrito" class="form-label">Distrito *</label>
+              <select class="form-select" id="co-distrito" required>
                 <option value="">Elige tu distrito</option>
               </select>
               <span class="error-msg">Elige tu distrito</span>
 
-              <label for="co-direccion">Dirección *</label>
-              <input type="text" id="co-direccion" placeholder="AV. PRINCIPAL 123" required>
+              <label for="co-direccion" class="form-label">Dirección *</label>
+              <input type="text" class="form-control" id="co-direccion" placeholder="AV. PRINCIPAL 123" required>
               <span class="error-msg">Ingresa tu dirección</span>
 
-              <label for="co-referencia">Referencia</label>
-              <input type="text" id="co-referencia" placeholder="FRENTE A PARQUE">
+              <label for="co-referencia" class="form-label">Referencia</label>
+              <input type="text" class="form-control" id="co-referencia" placeholder="FRENTE A PARQUE">
             </div>
 
             <div class="envio-campos" data-envio="provincia">
               <div class="grid-2">
                 <div>
-                  <label for="co-departamento">Departamento *</label>
-                  <select id="co-departamento" required>
+                  <label for="co-departamento" class="form-label">Departamento *</label>
+                  <select class="form-select" id="co-departamento" required>
                     <option value="">Elige tu departamento</option>
                   </select>
                   <span class="error-msg">Elige tu departamento</span>
                 </div>
                 <div>
-                  <label for="co-provincia">Provincia *</label>
-                  <select id="co-provincia" required disabled>
+                  <label for="co-provincia" class="form-label">Provincia *</label>
+                  <select class="form-select" id="co-provincia" required disabled>
                     <option value="">Primero elige departamento</option>
                   </select>
                   <span class="error-msg">Elige tu provincia</span>
                 </div>
               </div>
-              <label for="co-agencia">Agencia de envío *</label>
-              <select id="co-agencia" required>
+              <label for="co-agencia" class="form-label">Agencia de envío *</label>
+              <select class="form-select" id="co-agencia" required>
                 <option value="">Elige el courier</option>
                 <option value="Shalom">Shalom</option>
                 <option value="Olva Courier">Olva Courier</option>
@@ -214,7 +214,7 @@
           <div class="paso-cuerpo">
 
             <label class="opcion-envio">
-              <input type="radio" name="pago" value="deposito" checked>
+              <input class="form-check-input" type="radio" name="pago" value="deposito" checked>
               <span><b>DEPÓSITO — TRANSFERENCIA</b></span>
             </label>
             <div class="pago-detalle">
@@ -225,12 +225,12 @@
             </div>
 
             <label class="opcion-envio" style="margin-top:12px;">
-              <input type="radio" name="pago" value="yape">
+              <input class="form-check-input" type="radio" name="pago" value="yape">
               <span><b>YAPE / PLIN</b></span>
             </label>
 
-            <label for="co-notas" style="margin-top:16px;display:block;">Notas del pedido</label>
-            <textarea id="co-notas" placeholder="INDICACIONES PARA LA ENTREGA..."></textarea>
+            <label for="co-notas" class="form-label d-block mt-3">Notas del pedido</label>
+            <textarea class="form-control" id="co-notas" placeholder="INDICACIONES PARA LA ENTREGA..."></textarea>
           </div>
         </div>
 

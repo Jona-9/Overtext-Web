@@ -116,6 +116,7 @@
             else ok = /^[A-Za-z0-9]{6,12}$/.test(val); // Carné de extranjería / Pasaporte
         }
         input.classList.toggle('campo-invalido', !ok);
+        input.classList.toggle('is-invalid', !ok);   // estado de validación de Bootstrap (E1-07)
         var msg = input.nextElementSibling;
         if (msg && msg.classList.contains('error-msg')) msg.style.display = ok ? 'none' : 'block';
         return ok;
