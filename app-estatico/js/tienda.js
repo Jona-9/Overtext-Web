@@ -81,7 +81,7 @@
             if (tieneVariasFotos) {
                 indicadoresHtml = '<div class="carousel-indicators">' +
                     todasLasFotos.map(function (_, i) {
-                        return '<button type="button" data-bs-target="#carruselProducto" data-bs-slide-to="' + i + '"' +
+                        return '<button type="button" data-bs-target="#carrusel-producto" data-bs-slide-to="' + i + '"' +
                             (i === 0 ? ' class="active"' : '') + '></button>';
                     }).join('') +
                 '</div>';
@@ -98,18 +98,18 @@
             var controlesHtml = '';
             if (tieneVariasFotos) {
                 controlesHtml = '' +
-                    '<button class="carousel-control-prev" type="button" data-bs-target="#carruselProducto" data-bs-slide="prev">' +
+                    '<button class="carousel-control-prev" type="button" data-bs-target="#carrusel-producto" data-bs-slide="prev">' +
                         '<span class="carousel-control-prev-icon" aria-hidden="true" style="filter: invert(1);"></span>' +
                         '<span class="visually-hidden">Anterior</span>' +
                     '</button>' +
-                    '<button class="carousel-control-next" type="button" data-bs-target="#carruselProducto" data-bs-slide="next">' +
+                    '<button class="carousel-control-next" type="button" data-bs-target="#carrusel-producto" data-bs-slide="next">' +
                         '<span class="carousel-control-next-icon" aria-hidden="true" style="filter: invert(1);"></span>' +
                         '<span class="visually-hidden">Siguiente</span>' +
                     '</button>';
             }
 
             galeriaContenedor.innerHTML =
-                '<div id="carruselProducto" class="carousel slide" data-bs-ride="false">' +
+                '<div id="carrusel-producto" class="carousel slide" data-bs-ride="false">' +
                     indicadoresHtml +
                     itemsHtml +
                     controlesHtml +
