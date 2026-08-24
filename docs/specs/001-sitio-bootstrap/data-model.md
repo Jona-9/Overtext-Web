@@ -288,3 +288,21 @@ Roles iniciales: `ADMIN`, `CLIENTE`.
 | M3 | El ATF3 implementa solo `categoria` + `producto` | La rúbrica pide 2 tablas con FK y CRUD completo en una |
 | M4 | El badge de stock se calcula, no se almacena | Artículo 7: un solo origen de verdad |
 | M5 | `variante_producto` se pospone al TF | El ATF3 no necesita esa granularidad |
+
+---
+
+## 6. Estado de E1-22 y supuestos en espera de ratificación
+
+**Historia E1-22** — *Diagrama físico de la base de datos* · criterio **ATF1-3** · responsable: Jonathan.
+
+El diagrama físico de la sección 1 y el diccionario de la sección 2 están **completos y listos para el informe**: cubren las 9 tablas con tipos, claves primarias, claves foráneas y restricciones.
+
+La historia **no se cierra todavía** porque depende del checkpoint del Product Owner (Joaquín) sobre las tres `[NECESITA ACLARACIÓN]` del `spec.md`. Ninguna de las tres cambia la **estructura** de tablas, solo el contenido, así que el diagrama se puede usar ya bajo estos supuestos declarados:
+
+| # | Pregunta abierta | Supuesto de trabajo | Qué cambiaría si el PO decide distinto |
+|---|---|---|---|
+| I1 | ¿Qué colores son válidos? | Los 7 de `productos.json` (beige, negro, guinda, gris, oliva, azul, marrón). El BLANCO del configurador de packs no existe como producto. | Solo las filas semilla de la tabla `color`. La estructura no se toca. |
+| I2 | ¿Umbral de envío gratis: S/ 180 o S/ 200? | No entra al modelo de datos: es configuración de la aplicación, no un campo. | Nada en el diagrama. Afecta a `js/carrito.js` y al copy (deuda D4). |
+| I3 | ¿El badge de stock se calcula o se asigna? | Se **calcula** desde `producto.stock`, según la decisión M4 y el artículo 7. | Si se asignara a mano haría falta una columna `badge` en `producto`, que hoy no existe. |
+
+**Para cerrar la historia hace falta:** que el PO ratifique o corrija estos tres supuestos, y que el duo del documento inserte el diagrama renderizado en la sección 2.3 del informe (historia E1-21).
