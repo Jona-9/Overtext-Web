@@ -1,0 +1,42 @@
+/* ============================================================
+   OVERTEXT — Carrusel Portada 
+   ============================================================ */
+
+#carruselPortada .carousel-item {
+    min-height: 520px;
+}
+
+
+#carruselPortada img {
+    height: 420px;
+    width: 100%;
+    object-fit: cover;
+}
+
+@media (max-width: 768px) {
+    #carruselPortada .carousel-item {
+        min-height: auto;
+    }
+
+    #carruselPortada img {
+        height: 280px;
+    }
+}
+
+/* ============================================================
+   OVERTEXT — Carrusel Producto
+   ============================================================ */
+
+
+.carrusel-producto-img {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+}
+
+
+#carruselProducto .carousel-inner:has(.carousel-item:only-child)~.carousel-control-prev,
+#carruselProducto .carousel-inner:has(.carousel-item:only-child)~.carousel-control-next,
+#carruselProducto .carousel-inner:has(.carousel-item:only-child)~.carousel-indicators {
+    display: none !important;
+}

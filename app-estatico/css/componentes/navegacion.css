@@ -36,6 +36,7 @@
 .lista-enlaces {
     display: flex;
     gap: 0px;
+    margin: 0;
 }
 
 .enlace {
@@ -193,7 +194,7 @@
     transform: translateY(-7px) rotate(-45deg);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 991px) {
     .btn-hamburger {
         display: flex;
     }

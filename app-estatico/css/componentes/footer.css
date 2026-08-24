@@ -40,12 +40,14 @@
     text-transform: uppercase;
     color: rgba(255, 255, 255, 0.32);
     margin-bottom: 22px;
+    
 }
 
 .pie-enlaces ul {
     display: flex;
     flex-direction: column;
     gap: 0px;
+    padding: 0;
 }
 
 .pie-enlaces ul li a {

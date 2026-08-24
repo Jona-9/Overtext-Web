@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Promociones — OVERTEXT</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <!-- Arquitectura ITCSS OVERTEXT -->
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/layout.css">
@@ -15,11 +18,12 @@
     <link rel="stylesheet" href="/css/paginas/promociones.css">
     <link rel="stylesheet" href="/css/componentes/formularios.css">
 </head>
+
 <body>
 
     <!-- NAVEGACIÓN -->
-    <header class="barra-navegacion">
-        <div class="contenedor navegacion-interior">
+    <header class="barra-navegacion container-fluid">
+        <div class="container navegacion-interior">
             <a href="/index.html" class="marca-logo">OVERTEXT</a>
             <nav class="menu-principal">
                 <ul class="lista-enlaces">
@@ -32,9 +36,10 @@
             </nav>
             <div class="nav-acciones">
                 <a href="/login.html" class="boton-usuario" aria-label="Mi cuenta">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="8" r="4"/>
-                        <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="8" r="4" />
+                        <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
                     </svg>
                 </a>
                 <button class="boton-carrito" id="abrir-carrito" aria-label="Carrito">
@@ -59,8 +64,10 @@
                 <span class="carrito-conteo">0 PRODUCTOS</span>
             </div>
             <button class="btn-cerrar-carrito" id="cerrar-carrito" aria-label="Cerrar carrito">
-                <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-                    <line x1="1" y1="1" x2="12" y2="12"/><line x1="12" y1="1" x2="1" y2="12"/>
+                <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round">
+                    <line x1="1" y1="1" x2="12" y2="12" />
+                    <line x1="12" y1="1" x2="1" y2="12" />
                 </svg>
             </button>
         </div>
@@ -91,91 +98,100 @@
         </div>
     </aside>
 
-    <main>
+    <main class="container-fluid px-0">
 
         <!-- HERO PROMOCIONES -->
         <section class="promo-main">
-            <div class="contenedor">
+            <div class="container">
                 <p class="promo-subtexto animar-entrada">PERSONALIZA TU ESTILO</p>
                 <h1 class="promo-titulo animar-entrada-2">ARMA<br>TU PACK</h1>
                 <p class="promo-descripcion">Elige los colores que quieres. Nosotros hacemos el resto.</p>
             </div>
         </section>
 
-        <!-- CONFIGURADOR DE PACK -->
-        <div class="contenedor" style="padding: var(--espacio-xl) 25px;">
-            <div class="contenedor-padre">
-                <img class="imagen-pack" src="/assets/img/sitio/pack_Short.webp" alt="Short Overtext">
-
-                <div class="info-pack">
-                    <div class="ofertas">
-                        <p class="oferta_shorts">6 shorts x S/100</p>
-                        <div class="mensaje-promocion">ENVÍO INCLUIDO DESDE 2 PACKS</div>
-                    </div>
-
-                    <div class="seleccion-colores">
-                        <p class="etiqueta-colores">SELECCIONA COLORES</p>
-                        <div class="colores-grid">
-                            <div class="color-opcion activo">
-                                <div class="color-muestra" style="background-color: #1A1A1A;"></div>
-                                <span>NEGRO</span>
-                            </div>
-                            <div class="color-opcion">
-                                <div class="color-muestra" style="background-color: #FFFFFF; border: 1px solid #ddd;"></div>
-                                <span>BLANCO</span>
-                            </div>
-                            <div class="color-opcion">
-                                <div class="color-muestra" style="background-color: #C8B89A;"></div>
-                                <span>STONE</span>
-                            </div>
-                            <div class="color-opcion">
-                                <div class="color-muestra" style="background-color: #8B1A2C;"></div>
-                                <span>BORGOÑA</span>
-                            </div>
-                            <div class="color-opcion">
-                                <div class="color-muestra" style="background-color: #9E9E9E;"></div>
-                                <span>GRIS</span>
-                            </div>
-                            <div class="color-opcion">
-                                <div class="color-muestra" style="background-color: #5C6B3A;"></div>
-                                <span>OLIVO</span>
-                            </div>
-                            <div class="color-opcion">
-                                <div class="color-muestra" style="background-color: #1A3A7A;"></div>
-                                <span>MARINO</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="seleccion-tallas">
-                        <p class="etiqueta-colores">ELIGE LA TALLA Y LUEGO EL COLOR</p>
-                        <div class="tallas-grid">
-                            <button type="button" class="pack-talla" data-talla="S">S</button>
-                            <button type="button" class="pack-talla activo" data-talla="M">M</button>
-                            <button type="button" class="pack-talla" data-talla="L">L</button>
-                            <button type="button" class="pack-talla" data-talla="XL">XL</button>
-                        </div>
-                    </div>
-
-                    <div class="seleccionados">
-                        <div class="seleccionados-header">
-                            <p class="contador-slots">0 DE 6 SELECCIONADOS</p>
-                            <span class="icono-info" title="Toca un slot lleno para quitarlo">&#9432;</span>
-                        </div>
-                        <div class="slots">
-                            <!-- Los slots se renderizan dinámicamente -->
-                        </div>
-                    </div>
-
-                    <button class="boton-carrito-pack">AGREGAR PACK AL CARRITO &rarr;</button>
-                    <p class="garantia">GARANTÍA DE CALIDAD OVERTEXT &#11044; DEVOLUCIONES FÁCILES</p>
+        <!-- CONFIGURADOR DE PACK: Imagen izquierda, Características derecha -->
+        <div class="container py-5">
+            <div class="container-padre row g-4 align-items-start justify-content-between">
+                
+                <!-- Columna Izquierda: Imagen del pack -->
+                <div class="col-12 col-lg-5 text-center">
+                    <img class="imagen-pack img-fluid rounded shadow-sm" src="/assets/img/sitio/pack_Short.webp" alt="Pack de 6 Shorts Overtext">
                 </div>
+
+                <!-- Columna Derecha: Características y configurador -->
+                <div class="col-12 col-lg-7">
+                    <div class="info-pack p-0">
+                        <div class="ofertas">
+                            <p class="oferta_shorts">6 shorts x S/100</p>
+                            <div class="mensaje-promocion">ENVÍO INCLUIDO DESDE 2 PACKS</div>
+                        </div>
+
+                        <div class="seleccion-colores">
+                            <p class="etiqueta-colores">SELECCIONA COLORES</p>
+                            <div class="colores-grid">
+                                <div class="color-opcion activo">
+                                    <div class="color-muestra" style="background-color: #1A1A1A;"></div>
+                                    <span>NEGRO</span>
+                                </div>
+                                <div class="color-opcion">
+                                    <div class="color-muestra" style="background-color: #FFFFFF; border: 1px solid #ddd;">
+                                    </div>
+                                    <span>BLANCO</span>
+                                </div>
+                                <div class="color-opcion">
+                                    <div class="color-muestra" style="background-color: #C8B89A;"></div>
+                                    <span>STONE</span>
+                                </div>
+                                <div class="color-opcion">
+                                    <div class="color-muestra" style="background-color: #8B1A2C;"></div>
+                                    <span>BORGOÑA</span>
+                                </div>
+                                <div class="color-opcion">
+                                    <div class="color-muestra" style="background-color: #9E9E9E;"></div>
+                                    <span>GRIS</span>
+                                </div>
+                                <div class="color-opcion">
+                                    <div class="color-muestra" style="background-color: #5C6B3A;"></div>
+                                    <span>OLIVO</span>
+                                </div>
+                                <div class="color-opcion">
+                                    <div class="color-muestra" style="background-color: #1A3A7A;"></div>
+                                    <span>MARINO</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="seleccion-tallas">
+                            <p class="etiqueta-colores">ELIGE LA TALLA Y LUEGO EL COLOR</p>
+                            <div class="tallas-grid">
+                                <button type="button" class="pack-talla" data-talla="S">S</button>
+                                <button type="button" class="pack-talla activo" data-talla="M">M</button>
+                                <button type="button" class="pack-talla" data-talla="L">L</button>
+                                <button type="button" class="pack-talla" data-talla="XL">XL</button>
+                            </div>
+                        </div>
+
+                        <div class="seleccionados">
+                            <div class="seleccionados-header">
+                                <p class="contador-slots">0 DE 6 SELECCIONADOS</p>
+                                <span class="icono-info" title="Toca un slot lleno para quitarlo">&#9432;</span>
+                            </div>
+                            <div class="slots">
+                                <!-- Los slots se renderizan dinámicamente -->
+                            </div>
+                        </div>
+
+                        <button class="boton-carrito-pack">AGREGAR PACK AL CARRITO &rarr;</button>
+                        <p class="garantia">GARANTÍA DE CALIDAD OVERTEXT &#11044; DEVOLUCIONES FÁCILES</p>
+                    </div>
+                </div>
+
             </div>
         </div>
 
         <!-- BANNER PACK -->
         <section class="banner-beneficios">
-            <div class="contenedor banner-beneficios-inner">
+            <div class="container banner-beneficios-inner">
                 <div class="banner-beneficios-texto">
                     <h2>¿QUIERES MÁS?</h2>
                     <p>Lleva 2 packs y obtén envío express gratis a todo el Perú.</p>
@@ -187,8 +203,8 @@
     </main>
 
     <!-- FOOTER -->
-    <footer class="pie-pagina">
-        <div class="contenedor grid-pie">
+    <footer class="pie-pagina container-fluid">
+        <div class="container grid-pie">
             <div class="pie-info">
                 <h2 class="pie-logo">OVERTEXT</h2>
                 <p class="pie-lema">LIMA, PERÚ. STREETWEAR PARA LA NUEVA GENERACIÓN.</p>
@@ -221,7 +237,7 @@
                 </div>
             </div>
         </div>
-        <div class="contenedor">
+        <div class="container">
             <hr class="divisor">
             <div class="legal-flex">
                 <p>© 2026 OVERTEXT — TODOS LOS DERECHOS RESERVADOS</p>
@@ -310,4 +326,5 @@
     </script>
 
 </body>
+
 </html>

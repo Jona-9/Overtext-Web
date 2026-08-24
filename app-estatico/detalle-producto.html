@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Short Stone Beige — OVERTEXT</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <!-- Arquitectura ITCSS OVERTEXT -->
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/layout.css">
@@ -15,12 +17,15 @@
     <link rel="stylesheet" href="/css/componentes/badges.css">
     <link rel="stylesheet" href="/css/componentes/footer.css">
     <link rel="stylesheet" href="/css/componentes/carrito.css">
+    <link rel="stylesheet" href="/css/componentes/carrusel.css">
     <link rel="stylesheet" href="/css/paginas/producto.css">
+
+
 </head>
 
 <body>
-    <header class="barra-navegacion">
-        <div class="contenedor navegacion-interior">
+    <header class="barra-navegacion container-fluid">
+        <div class="container navegacion-interior">
             <a href="/index.html" class="marca-logo">OVERTEXT</a>
             <nav class="menu-principal">
                 <ul class="lista-enlaces">
@@ -33,9 +38,10 @@
             </nav>
             <div class="nav-acciones">
                 <a href="/login.html" class="boton-usuario" aria-label="Mi cuenta">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="8" r="4"/>
-                        <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="8" r="4" />
+                        <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
                     </svg>
                 </a>
                 <button class="boton-carrito" id="abrir-carrito" aria-label="Carrito">
@@ -62,8 +68,10 @@
                 <span class="carrito-conteo">2 PRODUCTOS</span>
             </div>
             <button class="btn-cerrar-carrito" id="cerrar-carrito" aria-label="Cerrar carrito">
-                <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-                    <line x1="1" y1="1" x2="12" y2="12"/><line x1="12" y1="1" x2="1" y2="12"/>
+                <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round">
+                    <line x1="1" y1="1" x2="12" y2="12" />
+                    <line x1="12" y1="1" x2="1" y2="12" />
                 </svg>
             </button>
         </div>
@@ -97,22 +105,63 @@
         </div>
     </aside>
 
-    <main>
+    <main class="container-fluid">
         <section class="seccion-detalle-producto">
-            <div class="contenedor grid-detalle-producto">
+            <div class="container grid-detalle-producto">
 
                 <!-- GALERÍA -->
                 <div class="galeria-producto">
-                    <div class="foto-principal-wrapper">
-                        <img src="/assets/img/productos/beige/principal.webp" alt="Short Stone Beige">
-                    </div>
-                    <div class="miniaturas-grid">
-                        <img src="/assets/img/productos/beige/1.webp" alt="Vista 1" class="miniatura">
-                        <img src="/assets/img/productos/beige/2.webp" alt="Vista 2" class="miniatura">
-                        <img src="/assets/img/productos/beige/3.webp" alt="Vista 3" class="miniatura">
-                        <img src="/assets/img/productos/beige/4.webp" alt="Vista 4" class="miniatura">
+                    <div id="carruselProducto" class="carousel slide" data-bs-ride="false">
+
+                        <!-- Indicadores inferiores -->
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#carruselProducto" data-bs-slide-to="0"
+                                class="active"></button>
+                            <button type="button" data-bs-target="#carruselProducto" data-bs-slide-to="1"></button>
+                            <button type="button" data-bs-target="#carruselProducto" data-bs-slide-to="2"></button>
+                            <button type="button" data-bs-target="#carruselProducto" data-bs-slide-to="3"></button>
+                            <button type="button" data-bs-target="#carruselProducto" data-bs-slide-to="4"></button>
+                        </div>
+                        <!-- Diapositivas de la galería -->
+                        <div class="carousel-inner rounded overflow-hidden">
+                            <div class="carousel-item active">
+                                <img src="/assets/img/productos/beige/principal.webp"
+                                    class="d-block w-100 carrusel-producto-img"
+                                    alt="Short Stone Beige - Foto Principal">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="/assets/img/productos/beige/1.webp"
+                                    class="d-block w-100 carrusel-producto-img" alt="Short Stone Beige - Vista 1">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="/assets/img/productos/beige/2.webp"
+                                    class="d-block w-100 carrusel-producto-img" alt="Short Stone Beige - Vista 2">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="/assets/img/productos/beige/3.webp"
+                                    class="d-block w-100 carrusel-producto-img" alt="Short Stone Beige - Vista 3">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="/assets/img/productos/beige/4.webp"
+                                    class="d-block w-100 carrusel-producto-img" alt="Short Stone Beige - Vista 4">
+                            </div>
+                        </div>
+                        <!-- Controles Anterior y Siguiente -->
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carruselProducto"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"
+                                style="filter: invert(1);"></span>
+                            <span class="visually-hidden">Anterior</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carruselProducto"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"
+                                style="filter: invert(1);"></span>
+                            <span class="visually-hidden">Siguiente</span>
+                        </button>
                     </div>
                 </div>
+
 
                 <!-- INFO -->
                 <div class="info-detalle-producto">
@@ -153,8 +202,8 @@
                             <span class="valor-cantidad">1</span>
                             <button class="btn-cantidad">+</button>
                         </div>
-                        <button class="btn-carrito" data-agregar-carrito data-variante-auto
-                            data-id="short-beige" data-nombre="SHORT STONE BEIGE" data-precio="20"
+                        <button class="btn-carrito" data-agregar-carrito data-variante-auto data-id="short-beige"
+                            data-nombre="SHORT STONE BEIGE" data-precio="20"
                             data-imagen="/assets/img/productos/beige/principal.webp"
                             data-cantidad-el=".valor-cantidad">Añadir al carrito</button>
                     </div>
@@ -164,20 +213,28 @@
                     <!-- Beneficios -->
                     <div class="beneficios-fila">
                         <div class="beneficio-item">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 5v4h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="1" y="3" width="15" height="13" rx="1" />
+                                <path d="M16 8h4l3 5v4h-7V8z" />
+                                <circle cx="5.5" cy="18.5" r="2.5" />
+                                <circle cx="18.5" cy="18.5" r="2.5" />
                             </svg>
                             <span>Envío rápido</span>
                         </div>
                         <div class="beneficio-item">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                             </svg>
                             <span>Calidad premium</span>
                         </div>
                         <div class="beneficio-item">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15"/>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M1 4v6h6M23 20v-6h-6" />
+                                <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15" />
                             </svg>
                             <span>Cambios simples</span>
                         </div>
@@ -189,7 +246,9 @@
                         <details class="acordeon-item">
                             <summary class="acordeon-trigger">Detalles del producto</summary>
                             <div class="acordeon-interior">
-                                <p>Short de algodón stretch con corte relajado y elástico en la cintura. Confeccionado con materiales de alta calidad para mayor comodidad y durabilidad. Ideal para el día a día urbano.</p>
+                                <p>Short de algodón stretch con corte relajado y elástico en la cintura. Confeccionado
+                                    con materiales de alta calidad para mayor comodidad y durabilidad. Ideal para el día
+                                    a día urbano.</p>
                             </div>
                         </details>
 
@@ -206,10 +265,30 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr><td>S</td><td>70–76 cm</td><td>88–94 cm</td><td>48 cm</td></tr>
-                                        <tr><td>M</td><td>76–82 cm</td><td>94–100 cm</td><td>50 cm</td></tr>
-                                        <tr><td>L</td><td>82–88 cm</td><td>100–106 cm</td><td>52 cm</td></tr>
-                                        <tr><td>XL</td><td>88–94 cm</td><td>106–112 cm</td><td>54 cm</td></tr>
+                                        <tr>
+                                            <td>S</td>
+                                            <td>70–76 cm</td>
+                                            <td>88–94 cm</td>
+                                            <td>48 cm</td>
+                                        </tr>
+                                        <tr>
+                                            <td>M</td>
+                                            <td>76–82 cm</td>
+                                            <td>94–100 cm</td>
+                                            <td>50 cm</td>
+                                        </tr>
+                                        <tr>
+                                            <td>L</td>
+                                            <td>82–88 cm</td>
+                                            <td>100–106 cm</td>
+                                            <td>52 cm</td>
+                                        </tr>
+                                        <tr>
+                                            <td>XL</td>
+                                            <td>88–94 cm</td>
+                                            <td>106–112 cm</td>
+                                            <td>54 cm</td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -235,8 +314,8 @@
         </section>
     </main>
 
-    <footer class="pie-pagina">
-        <div class="contenedor grid-pie">
+    <footer class="pie-pagina container-fluid">
+        <div class="container grid-pie">
             <div class="pie-info">
                 <h2 class="pie-logo">OVERTEXT</h2>
                 <p class="pie-lema">LIMA, PERÚ. STREETWEAR PARA LA NUEVA GENERACIÓN.</p>
@@ -269,7 +348,7 @@
                 </div>
             </div>
         </div>
-        <div class="contenedor">
+        <div class="container">
             <hr class="divisor">
             <div class="legal-flex">
                 <p>© 2026 OVERTEXT — TODOS LOS DERECHOS RESERVADOS</p>
@@ -282,9 +361,13 @@
         <img src="/assets/icon/wsp.png" alt="WhatsApp">
     </a>
 
+    <!-- Scrip carrusel -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
     <script src="/js/nav.js"></script>
     <script src="/js/carrito.js"></script>
     <script src="/js/tienda.js"></script>
 
 </body>
+
 </html>
