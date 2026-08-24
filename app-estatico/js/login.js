@@ -29,7 +29,8 @@
             }
             window.location.href = '/intranet.html';
         } else {
-            console.error('Credenciales no válidas');
+            // El aviso va en la interfaz, no en la consola: la página se entrega
+            // sin errores de consola (constitución art. 3 · criterio ATF1-2d).
             if (mensaje) {
                 mensaje.textContent = 'Credenciales no válidas. Verifica tu usuario y contraseña.';
                 mensaje.className = 'mensaje-sesion mensaje-error';

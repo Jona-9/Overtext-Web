@@ -2,23 +2,23 @@
    OVERTEXT — Carrusel Portada 
    ============================================================ */
 
-#carruselPortada .carousel-item {
+#carrusel-portada .carousel-item {
     min-height: 520px;
 }
 
 
-#carruselPortada img {
+#carrusel-portada img {
     height: 420px;
     width: 100%;
     object-fit: cover;
 }
 
 @media (max-width: 768px) {
-    #carruselPortada .carousel-item {
+    #carrusel-portada .carousel-item {
         min-height: auto;
     }
 
-    #carruselPortada img {
+    #carrusel-portada img {
         height: 280px;
     }
 }
@@ -35,8 +35,8 @@
 }
 
 
-#carruselProducto .carousel-inner:has(.carousel-item:only-child)~.carousel-control-prev,
-#carruselProducto .carousel-inner:has(.carousel-item:only-child)~.carousel-control-next,
-#carruselProducto .carousel-inner:has(.carousel-item:only-child)~.carousel-indicators {
+#carrusel-producto .carousel-inner:has(.carousel-item:only-child)~.carousel-control-prev,
+#carrusel-producto .carousel-inner:has(.carousel-item:only-child)~.carousel-control-next,
+#carrusel-producto .carousel-inner:has(.carousel-item:only-child)~.carousel-indicators {
     display: none !important;
 }

@@ -206,11 +206,32 @@ Marco a cada quien cuando cierre **todas** sus tareas según la DoD.
 - Bloqueo: falta mover ese `.git` a un respaldo. Pendiente a mano: `mv ~/.git ~/.git-ROTO-backup-20260820`.
 - Archivos tocados: `.gitignore`, `CLAUDE.md`, `memory.md`, `README.md`, `docs/constitution.md`, `docs/memoria/*`, `docs/scrum/*`, `docs/specs/001-sitio-bootstrap/*`, `informes/informe.md`.
 
+### 2026-08-24
+- Hice: **E1-07** — migré los tres formularios (contacto, inicio de sesión y proceso de compra) a `form-control` / `form-select` / `form-check` con validación `was-validated`. Script propio `js/validacion-formularios.js` para los formularios marcados con `.needs-validation`, y re-tematización de los controles de Bootstrap en `formularios.css` usando solo variables de `main.css`.
+- Hice: **E1-22** — el diagrama físico y el diccionario de datos ya estaban completos en `data-model.md`; añadí la sección 6 con los tres supuestos de trabajo declarados, para que el diagrama se pueda usar en el informe mientras Joaquín ratifica el checkpoint.
+- Hice: **4 correcciones de integración sobre el trabajo de Dayro** (avisado; no toqué su memoria):
+  1. `index.html` enlazaba `carrucel.css` en vez de `carrusel.css` → 404 en consola y el CSS del carrusel de portada no se aplicaba.
+  2. `index.html` tenía un `<button>` sin cerrar en el primer indicador del carrusel.
+  3. IDs `carruselPortada` y `carruselProducto` en camelCase → renombrados a `carrusel-portada` y `carrusel-producto` en HTML, CSS y JS (criterio 2c).
+  4. `nosotros.html:137` tenía `<div">` en lugar de `<div class="container">`, del commit `0bdcab4`. Apareció al verificar el balance de etiquetas, no a simple vista.
+- Decidí / aprendí:
+  - El proceso de compra **no** lleva `was-validated` global: es un formulario de 3 pasos con campos ocultos condicionales, y Bootstrap marcaría en rojo campos invisibles. Se enganchó `is-invalid` a la validación por pasos que ya existía en `checkout.js` (art. 8: no se profundiza el checkout).
+  - Quité el `console.error` de `js/login.js` en el intento fallido: el aviso ya está en la interfaz y la consola debe quedar limpia (art. 3, criterio 2d).
+  - Las tareas que tocan zona compartida (encabezado, pie, hoja base) necesitan turno; las locales van en paralelo. **E1-02 (navbar, Joaquín), E1-10 (carrito a offcanvas, Carlos) y E1-11 (íconos, Carlos) tocan las tres la misma zona de las 10 páginas.** Hay que secuenciarlas o se pisan.
+- Bloqueo: E1-22 no se puede cerrar hasta el checkpoint del PO. `tema-overtext.css` (E1-01) sigue sin existir y `bootstrap.bundle.min.js` solo está en `index.html` y `detalle-producto.html`: faltando en las otras 8, los modales de E1-08/E1-09 y el offcanvas de E1-10 no van a funcionar.
+- Archivos tocados: `app-estatico/contacto.html`, `login.html`, `checkout.html`, `index.html`, `nosotros.html`, `detalle-producto.html`, `js/validacion-formularios.js` (nuevo), `js/login.js`, `js/checkout.js`, `js/tienda.js`, `css/componentes/formularios.css`, `css/componentes/carrusel.css`, `docs/specs/001-sitio-bootstrap/data-model.md`.
+- Verificado: las 10 páginas servidas por HTTP responden 200 y **ningún recurso referenciado devuelve 404**; las 10 páginas tienen las etiquetas balanceadas; los 9 archivos JS pasan `node --check`.
+
 ---
 
 ## Para consolidar en memory.md
 
 - [ ] (ya volcado en la versión inicial: decisiones 1-11, deudas D1-D6, trampas T1-T3)
+- [ ] **Nueva trampa T4:** tres historias del Sprint 1 tocan la misma zona (encabezado de las 10 páginas): E1-02, E1-10 y E1-11, de dos personas distintas. Necesitan turno, no paralelo.
+- [ ] **Decisión 12:** las historias que tocan zona compartida se secuencian; las locales van en paralelo. El orden se escribe en el archivo del sprint, no se acuerda de palabra.
+- [ ] **Deuda D7:** `bootstrap.bundle.min.js` solo está en 2 de las 10 páginas. Bloquea modales y offcanvas.
+- [ ] **Deuda D8:** E1-06 quedó incompleta: el grid del catálogo sigue siendo CSS propio y el pie solo se migró en `catalogo.html`.
+- [ ] El proceso de compra usa `is-invalid` sobre su validación por pasos, no `was-validated` global. Quien lo toque después, que no lo "corrija".
 
 ---
 

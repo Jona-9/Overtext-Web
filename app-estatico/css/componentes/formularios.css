@@ -171,3 +171,142 @@ input[type="checkbox"] {
         grid-template-columns: 1fr;
     }
 }
+
+/* ============================================================
+   Tema OVERTEXT sobre los controles de Bootstrap
+   Historia E1-07 · criterio ATF1-1c
+
+   Bootstrap aporta el componente; aquí solo se re-tematiza
+   (constitución art. 4). El CDN se carga antes que este archivo,
+   así que estas reglas ganan sin necesidad de !important.
+   Todos los valores salen de las variables de main.css, para que
+   el tema de E1-01 encaje sin deshacer nada.
+   ============================================================ */
+
+.form-label {
+    display: block;
+    font-family: var(--fuente-principal);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--color-texto-suave);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+/* Controles de línea inferior: contacto y proceso de compra */
+.form-control,
+.form-select {
+    height: 46px;
+    border: none;
+    border-bottom: 1px solid var(--color-borde);
+    border-radius: 0;
+    padding: 10px 0;
+    font-family: var(--fuente-principal);
+    font-size: 0.9rem;
+    color: var(--color-negro);
+    background-color: transparent;
+    box-shadow: none;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-bottom-color: var(--color-negro);
+    background-color: transparent;
+    box-shadow: none;
+}
+
+textarea.form-control {
+    height: 100px;
+    border: 1px solid var(--color-borde);
+    padding: 12px;
+    resize: none;
+}
+
+textarea.form-control:focus {
+    border-color: var(--color-negro);
+}
+
+/* Controles con borde completo: inicio de sesión */
+.ot-campo .form-control {
+    height: 46px;
+    border: 1px solid var(--color-borde);
+    border-radius: 3px;
+    padding: 0 14px;
+    font-size: 14px;
+    background-color: var(--color-fondo);
+}
+
+.ot-campo .form-control:focus {
+    border-color: var(--color-negro);
+}
+
+/* Estados de validación, con la paleta de marca.
+   Se quitan los iconos de fondo de Bootstrap: chocan con los
+   campos de línea inferior y con la flecha propia del select. */
+.was-validated .form-control:invalid,
+.was-validated .form-select:invalid,
+.form-control.is-invalid,
+.form-select.is-invalid {
+    border-color: var(--color-rojo);
+    background-image: none;
+    padding-right: 0;
+}
+
+.was-validated .form-control:valid,
+.was-validated .form-select:valid,
+.form-control.is-valid,
+.form-select.is-valid {
+    border-color: var(--color-negro);
+    background-image: none;
+    padding-right: 0;
+}
+
+.was-validated textarea.form-control:invalid,
+.was-validated textarea.form-control:valid,
+textarea.form-control.is-invalid {
+    padding-right: 12px;
+}
+
+.invalid-feedback {
+    font-family: var(--fuente-principal);
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--color-rojo);
+    text-transform: uppercase;
+    margin-top: 4px;
+}
+
+/* Casillas y opciones */
+.form-check-input {
+    border-color: var(--color-borde);
+}
+
+.form-check-input:checked {
+    background-color: var(--color-negro);
+    border-color: var(--color-negro);
+}
+
+.form-check-input:focus {
+    border-color: var(--color-negro);
+    box-shadow: none;
+}
+
+.form-check-label {
+    font-family: var(--fuente-principal);
+    font-size: 0.78rem;
+    font-weight: 400;
+    letter-spacing: 0;
+    color: var(--color-texto-suave);
+    text-transform: none;
+    margin-bottom: 0;
+}
+
+/* Las tarjetas de envío y de pago del proceso de compra tienen
+   maqueta propia: el radio de Bootstrap se integra sin romperlas. */
+.envio-card .form-check-input,
+.opcion-envio .form-check-input {
+    margin-top: 0;
+    flex-shrink: 0;
+}
