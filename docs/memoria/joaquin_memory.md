@@ -37,11 +37,11 @@
 
 El `spec.md` tiene tres `[NECESITA ACLARACIÓN]` que bloquean el modelo de datos y el contenido. **Nadie escribe `plan.md` ni `tasks.md` hasta que los resuelva:**
 
-- [ ] **I1** — ¿La lista válida de colores es la del catálogo (beige, negro, guinda, gris, oliva, azul, marrón) o la del configurador de packs (que incluye un BLANCO que no existe como producto)?
-- [ ] **I2** — ¿El umbral de envío gratis es S/ 180 (lo que dice el JS) o S/ 200 (lo que dice el copy)?
-- [ ] **I3** — ¿El badge "últimas unidades" se calcula desde un umbral de stock o se asigna a mano por producto?
-- [ ] Aprobar `spec.md` → habilita `plan.md`
-- [ ] Aprobar `plan.md` → habilita `tasks.md`
+- [x] **I1** — Resuelto: la lista válida es la del **catálogo** (`productos.json`: beige, negro, guinda, gris, oliva, azul, marrón). **El BLANCO no existe**, se retira del configurador (ajuste = deuda D3, otro duo).
+- [x] **I2** — Resuelto: umbral de envío gratis = **S/ 200** (el copy manda; `contexto.md` es fuente de verdad del contenido). Corregir `carrito.js` = deuda D4, otro duo.
+- [x] **I3** — Resuelto: el badge se **calcula** desde `producto.stock`, umbral **< 10** → "últimas unidades" (art. 7).
+- [x] Aprobar `spec.md` → habilita `plan.md` *(2026-08-25)*
+- [ ] Aprobar `plan.md` → habilita `tasks.md` *(pendiente: plan.md aún no escrito)*
 
 ### Mis tareas
 
@@ -199,6 +199,17 @@ Luego los objetivos general y específicos, y paso a Jonathan con la arquitectur
 
 ## Bitácora — Sprint 1
 
+### 2026-08-25
+- **Hice (como PO):** resolví las tres aclaraciones que bloqueaban el sprint (I1/I2/I3) y **aprobé el `spec.md`** (checkpoint del PO). Reconcilié `data-model.md` (RN3 → S/ 200, RN5 y nota §2.2 → `stock < 10`).
+- **Hice (Duo UI):**
+  - **E1-01** — Añadí **Bootstrap 5.3 por CDN** y creé `css/tema-overtext.css`, que re-tematiza Bootstrap con la paleta de marca (`--bs-primary: #8B1A1A`, fondo `#FFFFFF`, texto `#111111`, alt `#F5F5F5`, borde `#E5E5E5`, beige `#C8B89A`) y las tipografías Oswald/Inter (reutilizando el `@import` que ya vive en `main.css`, sin duplicar).
+  - **E1-02** — Migré el header de las **10 páginas** a `navbar navbar-expand-lg` de Bootstrap: marca, `navbar-toggler` con colapso nativo, enlace activo por página, y las acciones (cuenta + carrito) conservando `id="abrir-carrito"` y `.carrito-contador` para no romper `carrito.js`. **Eliminé `js/nav.js`** y retiré su `<script>` de las 10 páginas.
+  - **E1-25** — Estilos de párrafo `[SÍLABO]` en el tema: `.texto-guia`, `.parrafo-marca`, `.texto-apoyo`, `.antetitulo`, `.enfasis-marca`.
+- **Decidí / aprendí:** las acciones van fuera del `.collapse` con `order-lg-last` para que el carrito quede visible también en móvil. La duplicación del navbar en 10 HTML es aceptable ahora; ATF2 la deduplica con fragments de Thymeleaf (art. 7 es sobre datos, no sobre boilerplate de plantilla).
+- **Verifiqué:** las 10 páginas + `tema-overtext.css` sirven **200** por HTTP; `js/nav.js` da 404 (correctamente eliminado). Sin restos del header antiguo (`marca-logo`, `btn-hamburger`, `class="enlace"`).
+- **Bloqueo:** ninguno. Falta verificación visual en navegador a 375/1440 px y consola sin errores (criterio 2d) — pendiente de la review.
+- **Archivos tocados:** `docs/specs/001-sitio-bootstrap/spec.md`, `.../data-model.md`, `app-estatico/css/tema-overtext.css` (nuevo), las 10 páginas `app-estatico/*.html`, y eliminado `app-estatico/js/nav.js`.
+
 ### 2026-08-20
 - Hice: —
 - Decidí / aprendí: —
@@ -209,7 +220,10 @@ Luego los objetivos general y específicos, y paso a Jonathan con la arquitectur
 
 ## Para consolidar en memory.md
 
-- [ ]
+- **Decisiones de PO tomadas (2026-08-25):** I1 = 7 colores del catálogo, sin BLANCO · I2 = envío gratis **S/ 200** · I3 = badge calculado con `stock < 10`. `spec.md` **aprobado**; queda habilitado escribir `plan.md`/`tasks.md`.
+- **Base desbloqueante lista:** Bootstrap 5.3 (CDN) + `tema-overtext.css` cargados en las 10 páginas, y navbar de Bootstrap migrada en todas. **El equipo ya puede maquetar encima** (E1-01/E1-02 cerradas). `js/nav.js` eliminado.
+- **Deudas heredadas que siguen abiertas para su duo:** **D3** — alinear el configurador de packs al catálogo (quitar BLANCO, agregar marrón) en `promotions.html`. **D4** — corregir `UMBRAL_ENVIO_GRATIS` a **200** en `js/carrito.js` y el texto de la barra del carrito ("TE FALTAN S/ …").
+- **Nota para Doc/QA:** `nosotros.html` tenía un `<link>` relativo `href="css/componentes/formularios.css"` (sin `/`); no lo toqué (lane de limpieza E1-12/E1-14).
 
 ---
 
