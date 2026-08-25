@@ -180,6 +180,26 @@ Demuestro en vivo: entrar a `/admin` sin sesión, iniciar sesión, y mostrar el 
 
 ## Bitácora — Sprint 1
 
+### 2026-08-25 — ⚠️ entrada escrita por Joaquín (PO y duo UI), no por Dayro
+> Se avanzaron tus tareas del Sprint 1 sobre la base ya integrada (E1-01/E1-02). Revísalo y ajusta lo que veas; esta entrada queda para que sepas qué se tocó. (Excepción puntual a "un archivo, un escritor" — art. 9 — hecha a pedido explícito.)
+
+**Hecho:**
+- **E1-04** ✅ — Carrusel de Bootstrap en la portada (`index.html`): 3 diapositivas (modelo, urbano, detalle), indicadores, controles y autoplay `data-bs-ride` (pausa al hover). Estilos en el nuevo `css/componentes/carrusel.css`.
+- **E1-05** ✅ — Galería de la ficha (`detalle-producto.html`) convertida a `carousel carousel-dark`. `js/tienda.js` ahora rellena `.carousel-inner` e indicadores desde `p.galeria`; **si el producto no tiene galería (5 de 7) muestra solo la principal y oculta controles+indicadores con `.d-none`** (sin flechas rotas). Se eliminó el manejador de miniaturas viejo.
+- **E1-06** ✅ (parcial) — Grillas `row`/`col-*`:
+  - **Catálogo**: `.productos-grid` es ahora `row g-4`; `js/tienda.js` envuelve cada tarjeta en `col-12 col-sm-6 col-lg-4 col-xl-3` (1/2/3/4 columnas). Se limpió el `display:grid` y sus media queries en `css/paginas/catalogo.css`.
+  - **Nosotros**: sección "proceso" → `row g-4` con `col-12 col-md-4`; "valores" → `row g-4` con `col-12 col-sm-6 col-lg-3`.
+
+**Pendiente / decisiones:**
+- **E1-06 · promociones**: sus únicas grillas están dentro del **configurador de packs**, que es **alcance congelado** (art. 8) y arrastra la deuda D3 (color BLANCO). **No se tocó.** El criterio 1f ya queda cubierto por catálogo y nosotros.
+- **E1-06 · pie**: el footer se dejó con su grid propio (ya es responsivo). Conversión a `row`/`col-*` es opcional.
+- **E1-03 · contenedores**: se usa `.container` de Bootstrap en el navbar y en las secciones nuevas (catálogo, nosotros). **La migración total del `.contenedor` propio → `.container`/`.container-fluid` en las 10 páginas quedó pendiente** (se evitó hacerla a ciegas por riesgo visual; `.seccion-detalle-producto > .contenedor` en `producto.css` depende del nombre actual).
+- **QA visual pendiente** (Definición de Hecho): probar a 375 px y 1440 px, consola sin errores (criterio 2d), y confirmar que en un producto sin galería (p. ej. guinda) el carrusel no muestra controles.
+
+**Verificado hasta ahora:** `node --check js/tienda.js` OK; las páginas y `carrusel.css` sirven 200 por HTTP.
+
+**Archivos tocados:** `index.html`, `detalle-producto.html`, `catalogo.html`, `nosotros.html`, `js/tienda.js`, `css/paginas/catalogo.css`, y nuevo `css/componentes/carrusel.css`.
+
 ### 2026-08-20
 - Hice: —
 - Decidí / aprendí: —
@@ -190,7 +210,10 @@ Demuestro en vivo: entrar a `/admin` sin sesión, iniciar sesión, y mostrar el 
 
 ## Para consolidar en memory.md
 
-- [ ]
+- **Criterio 1e (carrusel) cubierto:** carrusel de Bootstrap en portada (E1-04) y en la galería de la ficha (E1-05, tolerante a productos sin galería). Componente nuevo `css/componentes/carrusel.css`.
+- **Criterio 1f (grillas) cubierto** con `row`/`col-*` en catálogo (JS) y nosotros. Promociones no aplica (grillas dentro del configurador congelado).
+- **Pendiente del sprint:** E1-03 (migración total a `.container`), footer con grid propio, y **QA visual a 375/1440 px + consola** antes de cerrar la Definición de Hecho.
+- *(Nota: E1-04/05/06 fueron avanzadas por Joaquín el 25-ago; ver bitácora.)*
 
 ---
 

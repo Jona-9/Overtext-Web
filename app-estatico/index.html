@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="/css/componentes/badges.css">
     <link rel="stylesheet" href="/css/componentes/footer.css">
     <link rel="stylesheet" href="/css/componentes/carrito.css">
+    <link rel="stylesheet" href="/css/componentes/carrusel.css">
 </head>
 
 <body>
@@ -104,8 +105,33 @@
         <section class="seccion-portada">
             <div class="contenedor cuadricula-portada">
 
-                <div >
-                    <img src="/assets/img/sitio/modelo.webp" alt="Modelo vistiendo OVERTEXT" class="imagen-principal animar-zoom">
+                <div>
+                    <div id="carrusel-portada" class="carousel slide carrusel-portada" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#carrusel-portada" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Diapositiva 1"></button>
+                            <button type="button" data-bs-target="#carrusel-portada" data-bs-slide-to="1" aria-label="Diapositiva 2"></button>
+                            <button type="button" data-bs-target="#carrusel-portada" data-bs-slide-to="2" aria-label="Diapositiva 3"></button>
+                        </div>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="/assets/img/sitio/modelo.webp" class="d-block w-100" alt="Modelo vistiendo OVERTEXT">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="/assets/img/sitio/modelo-urbano.webp" class="d-block w-100" alt="Estilo urbano OVERTEXT">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="/assets/img/sitio/imagen-principal.webp" class="d-block w-100" alt="Short OVERTEXT en detalle">
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carrusel-portada" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Anterior</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carrusel-portada" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Siguiente</span>
+                        </button>
+                    </div>
                 </div>
 
                 <div class="portada-contenido">
