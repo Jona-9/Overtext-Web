@@ -68,13 +68,17 @@ El diagrama lo exigen **las cuatro rúbricas**, no solo esta. Se dibuja una vez 
 
 ### No son mías — son de Carlos (mismo duo)
 
-Las anoto para no perderlas de vista: si no se cierran, se cae el criterio **1d** del ATF1, que es del grupo y no de él.
+Las seguía como SM porque el criterio **1d** es del grupo, no suyo.
+**Cerradas las 5 el 26-ago** (ver `carlos_memory.md`):
 
-- [ ] **E1-08** — Modal de confirmación de contacto *(criterio 1d)*
-- [ ] **E1-09** — Modal de guía de tallas en la ficha *(criterio 1d)*
-- [ ] **E1-10** — Panel del carrito a `offcanvas` *(criterio 1b)*
-- [ ] **E1-11** — Bootstrap Icons en lugar de los PNG de 4-5 MB *(criterio 1a)*
-- [ ] **E1-26** — `[SÍLABO]` Tabla de tallas con `table table-striped`
+- [x] **E1-08** — Modal de confirmación de contacto *(criterio 1d)*
+- [x] **E1-09** — Modal de guía de tallas en la ficha *(criterio 1d)*
+- [x] **E1-10** — Panel del carrito a `offcanvas` *(criterio 1b)*
+- [x] **E1-11** — Bootstrap Icons en lugar de los PNG de 4-5 MB *(criterio 1a)*
+- [x] **E1-26** — `[SÍLABO]` Tabla de tallas con `table table-striped`
+
+**El duo Datos queda cerrado.** Con esto el criterio 1 del ATF1 tiene sus 6
+componentes en el sitio.
 
 ---
 
@@ -217,9 +221,9 @@ Muestro la estructura de paquetes *(criterio 1)* y paso a José y Carlos con el 
 
 Marco a cada quien cuando cierre **todas** sus tareas según la DoD.
 
-**Sprint 1:** ⬜ Joaquín · ⬜ José · ✅ Jonathan *(26-ago)* · ⬜ Dayro · ⬜ Carlos · ⬜ Jhade
+**Sprint 1:** ⬜ Joaquín · ⬜ José · ✅ Jonathan *(26-ago)* · ⬜ Dayro · ✅ Carlos *(26-ago: E1-08, E1-09, E1-10, E1-11, E1-26)* · ⬜ Jhade
 
-Faltan 5. **`memory.md` no se toca** hasta que estén los 6 (CLAUDE.md §2).
+Faltan 4. **`memory.md` no se toca** hasta que estén los 6 (CLAUDE.md §2).
 
 ---
 
@@ -399,8 +403,9 @@ Faltan 5. **`memory.md` no se toca** hasta que estén los 6 (CLAUDE.md §2).
 - **Las 6 bitácoras estaban en `Hice: —` del 20-ago** cuando empecé, con trabajo ya
   hecho y sin registrar (E1-01 a E1-06 estaban en el código, no en las memorias). Sin
   bitácora no puedo verificar la puerta de consolidación. A pedir en la daily.
-- **Puerta de consolidación: 1 de 6.** `memory.md` sigue sin tocarse, y así se queda
-  hasta que cierren Joaquín, José, Dayro, Carlos y Jhade (CLAUDE.md §2).
+- **Puerta de consolidación: 2 de 6** *(actualizado el 26-ago: Carlos cerró sus 5)*.
+  `memory.md` sigue sin tocarse hasta que cierren Joaquín, José, Dayro y Jhade
+  (CLAUDE.md §2).
 - Pendiente de facilitar: Review y Retro del vie 04-sep.
 
 ---

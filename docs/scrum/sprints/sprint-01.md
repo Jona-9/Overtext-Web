@@ -136,7 +136,7 @@ Día 10    Verificación con el checklist y empaquetado
 | Review | vie 04-sep |
 | Retro + consolidación | vie 04-sep, tras la review |
 
-**Puerta de consolidación:** ⬜ Joaquín · ⬜ José · ✅ Jonathan *(26-ago: E1-07, E1-22)* · ⬜ Dayro · ⬜ Carlos · ⬜ Jhade
+**Puerta de consolidación:** ⬜ Joaquín · ⬜ José · ✅ Jonathan *(26-ago: E1-07, E1-22)* · ⬜ Dayro · ✅ Carlos *(26-ago: E1-08, E1-09, E1-10, E1-11, E1-26)* · ⬜ Jhade
 `memory.md` se actualiza **solo con los 6 marcados**.
 
 ---

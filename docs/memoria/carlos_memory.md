@@ -33,13 +33,23 @@
 
 ### Mis tareas
 
-| # | Tarea | Criterio | Sesión |
-|---|---|:-:|:-:|
-| E1-08 | **Modal de confirmación de contacto** — migra el modal propio de 102 líneas al `modal` de Bootstrap | **1d** | 5-6 |
-| E1-09 | **Modal de guía de tallas** en la ficha de producto | **1d** | 5-6 |
-| E1-10 | Panel del carrito convertido en **`offcanvas`** de Bootstrap | 1b | 7 |
-| E1-11 | **Bootstrap Icons** en lugar de los PNG de 4-5 MB | 1a | 3-4 |
-| E1-26 | `[SÍLABO]` Tabla de tallas con `table table-striped` | — | 3-4 |
+- [x] **E1-08** *(criterio 1d, sesiones 5-6)* — **Modal de confirmación de contacto**: el modal propio de 102 líneas pasa al `modal` de Bootstrap. *(2026-08-26)*
+- [x] **E1-09** *(criterio 1d, sesiones 5-6)* — **Modal de guía de tallas** en la ficha de producto. *(2026-08-26)*
+- [x] **E1-10** *(criterio 1b, sesión 7)* — Panel del carrito convertido en **`offcanvas`** de Bootstrap en las 6 páginas. *(2026-08-26)*
+- [x] **E1-11** *(criterio 1a, sesiones 3-4)* — **Bootstrap Icons** en lugar de los PNG de 4-5 MB. *(2026-08-26)*
+- [x] **E1-26** *(`[SÍLABO]`, sesiones 3-4)* — Tabla de tallas con `table table-striped`. *(2026-08-26)*
+
+### Definición de Hecho — mis 5 historias
+
+- [x] La página abre **sin errores en consola** *(criterio 2d)* — las 10 verificadas en Chrome
+- [x] Probado a **375 px** y **1440 px** — el offcanvas ocupa el ancho completo en móvil
+- [x] Nombres en **kebab-case** *(criterio 2c)*
+- [x] Capturas archivadas en `informes/capturas/sprint-01/`
+- [x] Criterios de rúbrica marcados en `docs/scrum/checklist-entrega.md`
+- [x] Bloque "Para consolidar" escrito en esta memoria
+- [ ] **Código subido vía PR revisado por otro duo** — pendiente. Va junto con lo de Jonathan, en el PR del duo Datos.
+
+> Como en la memoria de Jonathan: la DoD dice *"código en `develop` vía PR"* y **`develop` no existe**. El equipo mergea contra `testing`. Que lo decida el SM.
 
 ### Por qué mis tareas rinden doble
 
@@ -210,11 +220,192 @@ Demuestro en vivo: crear un producto, editarlo, enviar el formulario vacío para
 - Bloqueo: —
 - Archivos tocados: —
 
+### 2026-08-26 — E1-11 · Bootstrap Icons *(criterio 1a)*
+
+Lo hice **primero**, aunque en el sprint figure junto a los modales: los tres PNG
+estaban en las páginas que iba a tocar después, y no quería editarlas dos veces.
+
+- **Hice:** los 5 PNG de `assets/icon/` salen del proyecto y entran Bootstrap Icons
+  por CDN, en las **10 páginas**.
+  - `carta.png` → `bi-envelope` · `instagram.png` → `bi-instagram` ·
+    `ubicacion.png` → `bi-geo-alt` · `wsp.png` → `bi-whatsapp` ·
+    `carrito-de-compras.png` → `bi-cart3`.
+  - CDN añadido justo detrás del CSS de Bootstrap, respetando la sangría de cada página.
+  - CSS re-tematizado: los iconos ya no se dimensionan con `width`/`height` de imagen
+    sino con `font-size` (`navegacion.css`, `contacto.css`, `botones.css`, `login.css`).
+
+- **Lo que rinde de verdad:** `carta.png` pesaba 4,2 MB, `instagram.png` 4,2 MB y
+  `ubicacion.png` 5,0 MB — **13,4 MB para dibujar tres iconos de 26 px**.
+  `assets/` baja de **39 MB a 26 MB** con solo borrar esos tres. Es la mitad del
+  camino de la deuda **D1** (objetivo < 15 MB) sin tocar una sola foto de producto.
+
+- **Decidí / aprendí:**
+  - Un icono de Bootstrap es un glifo de fuente, no una imagen: se le da tamaño con
+    `font-size` y color con `color`. Dejar el `width: 26px` del `<img>` antiguo no
+    da error, simplemente **no hace nada**, y el icono sale del tamaño del texto.
+  - `.ot-icono-whatsapp` estaba **definido dos veces**, en `botones.css` y en
+    `login.css`. Ajusté las dos: si solo cambias una, el icono se descoloca según
+    qué hoja gane. Lo dejo anotado como duplicación a resolver (va con E1-12/E1-14).
+  - `login.html` usaba el mismo PNG con **otra clase** (`ot-icono-whatsapp` en vez de
+    la del resto), así que mi primera pasada lo dejó fuera. Lo cacé con un
+    `grep "assets/icon/"` final, no a ojo. **Esa comprobación es obligatoria** al
+    sustituir recursos en 10 páginas.
+
+- **Bloqueo:** ninguno.
+
+- **Archivos tocados:** las 10 `app-estatico/*.html`,
+  `css/componentes/navegacion.css`, `css/componentes/botones.css`,
+  `css/paginas/contacto.css`, `css/paginas/login.css`, y **eliminados**
+  `assets/icon/carta.png`, `instagram.png`, `ubicacion.png`, `wsp.png`,
+  `carrito-de-compras.png`.
+
+### 2026-08-26 — E1-08 y E1-09 · Las dos ventanas modales *(criterio 1d)*
+
+- **Hice:**
+  - **E1-08** — el modal propio de `contacto.html` (overlay, caja, botón de cerrar y
+    102 líneas de CSS) pasa al `modal` de Bootstrap: `modal-dialog-centered`,
+    `modal-header` / `modal-body` / `modal-footer` y `btn-close`.
+    `js/contacto.js` ya no maneja clases ni `body.style.overflow`: usa
+    `bootstrap.Modal.getOrCreateInstance(...).show()`. **Se fueron 3 escuchadores**
+    (X, clic fuera y Esc), que ahora los pone el framework.
+  - **E1-09** — la ficha de producto estrena modal de guía de tallas. El enlace
+    "Guía de tallas" era un `<a href="#acordeon-tallas">` que hacía saltar la página;
+    ahora es un `<button data-bs-toggle="modal">`.
+  - `css/componentes/modal.css` deja de reimplementar el componente y pasa a ser
+    **capa de tema** sobre el modal de Bootstrap (constitución art. 4).
+
+- **Decidí / aprendí:**
+  - **La tabla de tallas estaba a punto de quedar duplicada.** El plan decía "modal de
+    guía de tallas", pero la tabla ya existía dentro de un `<details>` del acordeón.
+    Si añadía el modal sin más, quedaban **dos copias de las mismas medidas** y a la
+    primera corrección se despegan. Retiré el `<details>` y dejé la tabla **solo en el
+    modal**: artículo 7, un único origen de verdad.
+  - Conservé `aria-labelledby` y el rol de diálogo, como decía mi nota de contexto.
+    Bootstrap pone `role="dialog"` y `aria-modal` por su cuenta al abrir, así que
+    escribirlos a mano en el HTML sobra.
+  - Al convertir el enlace en `<button>` hay que devolverle `padding: 0` y la
+    tipografía: el reset de `main.css` deja el botón desnudo pero no le quita el
+    relleno propio del navegador.
+
+- **Bloqueo:** ninguno.
+
+- **Archivos tocados:** `app-estatico/contacto.html`,
+  `app-estatico/detalle-producto.html`, `app-estatico/js/contacto.js`,
+  `app-estatico/css/componentes/modal.css`, `app-estatico/css/paginas/producto.css`.
+
+### 2026-08-26 — E1-26 · Tabla de tallas con `table table-striped` *(sílabo)*
+
+- **Hice:** la tabla del modal usa `table table-striped table-hover align-middle` de
+  Bootstrap. La talla es `<th scope="row">` y las cabeceras `<th scope="col">`, con un
+  `<caption class="visually-hidden">` para lectores de pantalla. Envuelta en
+  `.table-responsive` para que no rompa el modal en móvil.
+- **Decidí / aprendí:** `.tabla-tallas-detalle` (35 líneas en `tablas.css`) quedó
+  muerta al mudar la tabla, así que la retiré en el mismo cambio. Una hoja que
+  describe algo que ya no existe es exactamente la deuda **D5** que arrastramos.
+- **Archivos tocados:** `app-estatico/detalle-producto.html`,
+  `app-estatico/css/componentes/tablas.css`, `app-estatico/css/componentes/modal.css`.
+
+### 2026-08-26 — E1-10 · Carrito como `offcanvas` *(criterio 1b)*
+
+La tarea de mayor retorno de las mías, y la más delicada.
+
+- **Hice:** el `<aside id="carrito-lateral">` de **6 páginas** es ahora un
+  `offcanvas offcanvas-end` de Bootstrap.
+  - Fuera el `.overlay-carrito` propio de las 6: el offcanvas trae su backdrop.
+  - Cabecera → `.offcanvas-header` con `btn-close`; cuerpo → `.offcanvas-body`;
+    "seguir comprando" cierra con `data-bs-dismiss="offcanvas"`.
+  - `js/carrito.js`: `abrirPanel`/`cerrarPanel` se conservan **porque son API
+    pública** — "añadir al carrito" llama a `abrirPanel()` — pero por dentro usan
+    `bootstrap.Offcanvas.getOrCreateInstance`. Se fueron 3 escuchadores de cierre.
+  - `carrito.css`: fuera `position`, `right: -460px`, `transition` y `z-index`.
+    El ancho de marca se conserva con `--bs-offcanvas-width: 460px`, y a 480 px
+    con `100vw`.
+
+- **Decidí / aprendí:**
+  - **Casi rompo la API sin darme cuenta.** Mi primer impulso fue borrar
+    `abrirPanel`/`cerrarPanel` y dejarlo todo declarativo con `data-bs-toggle`.
+    Pero `abrirPanel()` se llama **desde el propio JS** al agregar un producto: el
+    panel se abre solo, y eso no se puede hacer por atributos. Las conservé con la
+    implementación cambiada por dentro. Comprobado: al añadir al carrito el panel
+    sigue abriéndose solo.
+  - **No puse `data-bs-toggle` en el icono del header**, aunque sea lo más idiomático.
+    Ese icono existe en páginas donde el offcanvas **no** está, y un `data-bs-target`
+    apuntando a un id inexistente falla al pulsar. Con la apertura por JS, si no hay
+    panel simplemente no pasa nada. *(Verificado: las 6 páginas que tienen el icono
+    son exactamente las 6 que tienen el panel, pero prefiero que no dependa de eso.)*
+  - **La primera migración me dejó el HTML sangrado a mano y hecho un desastre.** Como
+    los 6 paneles eran idénticos, los regeneré desde una plantilla única respetando la
+    sangría de cada página. El criterio 2a es "código estructurado": un `<div>` mal
+    indentado se ve en la revisión.
+
+- **Bloqueo:** ninguno.
+
+- **Archivos tocados:** `app-estatico/index.html`, `catalogo.html`, `contacto.html`,
+  `detalle-producto.html`, `nosotros.html`, `promotions.html`,
+  `app-estatico/js/carrito.js`, `app-estatico/css/componentes/carrito.css`.
+
+### 2026-08-26 — Verificación
+
+Recorrido de clics en Chrome real, no solo carga de páginas:
+
+- **E1-08** — vacío no abre el modal; con datos válidos abre el `modal` de Bootstrap
+  con su backdrop y los 4 datos pintados. Cero restos de `.modal-overlay`,
+  `.modal-caja` y `.modal-cerrar` en el DOM.
+- **E1-09 / E1-26** — el disparador es un `<button>`, el modal abre, la tabla lleva
+  `table table-striped table-hover align-middle` con sus 4 filas, y
+  **`#acordeon-tallas` ya no existe**: no hay tabla duplicada.
+- **E1-10** — abre desde el icono, ancho 460 px, backdrop de Bootstrap, el overlay
+  propio eliminado. Cierra con la **X**, con **Esc** y con "seguir comprando".
+  Al añadir un producto se abre solo y pinta los ítems, el conteo y el badge.
+  A **375 px ocupa el ancho completo** de la pantalla.
+- **E1-11** — cero `<img>` de `assets/icon` en el DOM, 6 iconos `.bi` renderizando
+  glifo en contacto, y el tamaño aplicado por `font-size`.
+- **Las 10 páginas sin errores ni advertencias en consola** *(criterio 2d)* y
+  `node --check` limpio en los 7 archivos de `js/`.
+- **Capturas:** `carrito-offcanvas-1440.png`, `carrito-offcanvas-375.png`,
+  `modal-contacto-1440.png` y `modal-guia-tallas-1440.png` en
+  `informes/capturas/sprint-01/`.
+
+**Un aviso sobre las capturas a 375 px:** mi primer intento con Chrome headless salió
+**cortado por la derecha** y parecía que la página desbordaba en móvil. **No desborda.**
+Lo medí metiendo cada página en un `iframe` de 375 px y comparando `scrollWidth` con
+`clientWidth`: las 6 dan cero desbordamiento. Era el `--window-size` de headless, que
+recorta en vez de re-maquetar. Si alguien ve una captura móvil "rota", que mida antes
+de arreglar nada.
+
 ---
 
 ## Para consolidar en memory.md
 
-- [ ]
+**Sprint 1 — lo que el resto del equipo necesita saber:**
+
+- [ ] **Cobertura de rúbrica ATF1:** marcar **1d Ventanas modales** ✅ (modal de contacto
+      y modal de guía de tallas), **1b** ✅ también por el `offcanvas` del carrito, y
+      **1a** ✅ en su parte de iconos.
+- [ ] **Deuda D1 a la mitad: `assets/` pasa de 39 MB a 26 MB.** Solo con borrar
+      `carta.png`, `instagram.png` y `ubicacion.png` (13,4 MB entre los tres, para
+      dibujar iconos de 26 px). El objetivo sigue siendo < 15 MB: **lo que queda son
+      fotos de producto**, y eso es E1-16, no mío.
+- [ ] **`abrirPanel`/`cerrarPanel` de `carrito.js` son API pública**, no código interno:
+      "añadir al carrito" abre el panel por JS. Siguen existiendo tras pasar a
+      `offcanvas`, pero por dentro llaman a Bootstrap. **Quien las borre por "ya no
+      hacen falta" rompe el flujo de añadir al carrito.**
+- [ ] **Nueva trampa — un icono de fuente no se dimensiona con `width`.** Al pasar de
+      `<img>` a Bootstrap Icons hay que cambiar el CSS a `font-size`. Dejar el `width`
+      antiguo **no da ningún error**: el icono simplemente sale del tamaño del texto.
+- [ ] **Nueva trampa — las capturas móviles de Chrome headless engañan.**
+      `--window-size=375` **recorta** en lugar de re-maquetar, y la página parece rota.
+      Para comprobar el responsive de verdad: `iframe` de 375 px y comparar
+      `scrollWidth` con `clientWidth`. Medido así, las 6 páginas están limpias.
+- [ ] **Duplicación pendiente:** `.ot-icono-whatsapp` está definida **dos veces**, en
+      `css/componentes/botones.css` y en `css/paginas/login.css`. Ajusté ambas, pero
+      hay que dejar una sola (va con E1-12/E1-14).
+- [ ] **CSS muerto que encontré y no me toca:** `.btn-hamburger.abierto` y
+      `.menu-principal.abierto` siguen en `navegacion.css` desde que Joaquín eliminó
+      `js/nav.js` en E1-02. Nadie las usa. Para el duo de limpieza.
+- [ ] **La barra del carrito sigue diciendo "TE FALTAN S/ … PARA ENVÍO GRATIS" sobre
+      S/ 180**, cuando el PO fijó **S/ 200** el 25-ago. Es la deuda **D4** y sigue
+      abierta: se ve en mis capturas del offcanvas.
 
 ---
 
@@ -222,7 +413,9 @@ Demuestro en vivo: crear un producto, editarlo, enviar el formulario vacío para
 
 - Servir el sitio: **no funciona con `file://`**. Live Server o `python3 -m http.server` en `app-estatico/`.
 - Fuentes de datos para el modelo: `app-estatico/js/productos.json` (7 productos), `app-estatico/js/checkout.js` (costos de envío), `app-estatico/detalle-producto.html` (tabla de tallas).
-- El modal de contacto actual está en `contacto.html` con `role="dialog"` y `aria-modal`: conservar esos atributos al migrar a Bootstrap.
+- ~~El modal de contacto actual está en `contacto.html` con `role="dialog"` y `aria-modal`~~
+  **Resuelto (E1-08).** Ya es un `modal` de Bootstrap: el framework pone `role` y
+  `aria-modal` al abrir, así que en el HTML basta con `aria-labelledby`.
 
 ---
 

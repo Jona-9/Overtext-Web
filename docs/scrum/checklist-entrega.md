@@ -29,7 +29,7 @@ Grupo **01**. Reemplaza `n` por el número de avance.
 - [ ] Contenedores → \_\_\_\_\_\_
 - [ ] Menú responsivo → \_\_\_\_\_\_
 - [x] Formularios → `contacto.html` · `login.html` · `checkout.html` *(E1-07, Jonathan)*
-- [ ] Ventanas modales → \_\_\_\_\_\_
+- [x] Ventanas modales → `contacto.html` (confirmación) · `detalle-producto.html` (guía de tallas) *(E1-08, E1-09, Carlos)*
 - [ ] Carrusel de imágenes → \_\_\_\_\_\_
 - [ ] Sistema de grillas → \_\_\_\_\_\_
 

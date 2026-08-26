@@ -1,7 +1,7 @@
 /* ============================================================
    OVERTEXT — Formulario de contacto
    Valida con Bootstrap (was-validated) y, si los datos son válidos,
-   muestra lo ingresado en una ventana flotante.
+   muestra lo ingresado en un `modal` de Bootstrap.
    ============================================================ */
 (function () {
     'use strict';
@@ -11,22 +11,15 @@
     if (!formulario || !modal) return;
 
     var cuerpo = document.getElementById('modal-datos');
-    var btnCerrar = modal.querySelector('.modal-cerrar');
+
+    // E1-08 · El modal es de Bootstrap: la apertura, el cierre con Esc, el
+    // clic fuera y el bloqueo del scroll los gestiona el framework.
+    var ventana = bootstrap.Modal.getOrCreateInstance(modal);
 
     function escapar(txt) {
         return String(txt == null ? '' : txt).replace(/[&<>"]/g, function (c) {
             return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
         });
-    }
-
-    function abrirModal() {
-        modal.classList.add('abierto');
-        document.body.style.overflow = 'hidden';
-    }
-
-    function cerrarModal() {
-        modal.classList.remove('abierto');
-        document.body.style.overflow = '';
     }
 
     function fila(etiqueta, valor) {
@@ -56,16 +49,9 @@
             fila('Asunto', datos.asunto) +
             fila('Mensaje', datos.mensaje);
 
-        abrirModal();
+        ventana.show();
         formulario.reset();
         formulario.classList.remove('was-validated');
     });
 
-    btnCerrar.addEventListener('click', cerrarModal);
-    modal.addEventListener('click', function (e) {
-        if (e.target === modal) cerrarModal();
-    });
-    document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') cerrarModal();
-    });
 }());

@@ -1,72 +1,31 @@
 /* ============================================================
-   OVERTEXT — Ventana flotante (modal)
-   Usada para mostrar los datos enviados en el formulario de contacto.
+   OVERTEXT — Ventanas modales
+   Capa de TEMA sobre el componente `modal` de Bootstrap 5.3.
+   E1-08 (confirmación de contacto) y E1-09 (guía de tallas).
+
+   Aquí NO se reimplementa el modal (constitución art. 4): el overlay, el
+   cierre con Esc, el clic fuera, el foco y el bloqueo del scroll son de
+   Bootstrap. Esto solo le pone la identidad de marca.
    ============================================================ */
 
-.modal-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.55);
-    backdrop-filter: blur(3px);
-    -webkit-backdrop-filter: blur(3px);
-    z-index: 400;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-}
-
-.modal-overlay.abierto {
-    display: flex;
-    animation: modal-fade 0.25s ease;
-}
-
-@keyframes modal-fade {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-}
-
-.modal-caja {
-    background: var(--color-fondo);
-    max-width: 460px;
-    width: 100%;
-    padding: 32px;
-    position: relative;
+/* --- Caja --- */
+.modal-content {
+    border: none;
+    border-radius: 0;                       /* la marca es de esquinas rectas */
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
-    animation: modal-subir 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-@keyframes modal-subir {
-    from { transform: translateY(20px); opacity: 0; }
-    to   { transform: translateY(0); opacity: 1; }
+.modal-header,
+.modal-footer {
+    border-color: var(--color-borde);
 }
 
-.modal-cerrar {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    width: 32px;
-    height: 32px;
-    background: none;
-    border: 1px solid var(--color-borde);
-    cursor: pointer;
-    font-size: 1.1rem;
-    line-height: 1;
-    color: var(--color-negro);
-    transition: background-color 0.2s, color 0.2s;
-}
-
-.modal-cerrar:hover {
-    background: var(--color-negro);
-    color: var(--color-fondo);
-}
-
-.modal-caja h2 {
+.modal-title {
     font-family: var(--fuente-display);
-    font-size: 1.5rem;
+    font-size: 1.35rem;
     letter-spacing: 0.04em;
     text-transform: uppercase;
-    margin-bottom: 6px;
+    color: var(--color-negro);
 }
 
 .modal-lema {
@@ -76,6 +35,7 @@
     margin-bottom: 20px;
 }
 
+/* --- Datos del formulario de contacto (E1-08) --- */
 .modal-datos {
     display: flex;
     flex-direction: column;
@@ -99,4 +59,34 @@
     line-height: 1.5;
     color: var(--color-negro);
     word-break: break-word;
+}
+
+/* --- Guía de tallas (E1-09 + E1-26) --- */
+.modal-tallas-nota {
+    font-family: var(--fuente-principal);
+    font-size: 0.75rem;
+    color: var(--color-texto-suave);
+    margin-top: 16px;
+}
+
+.tabla-tallas th {
+    font-family: var(--fuente-principal);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-texto-suave);
+}
+
+.tabla-tallas td {
+    font-family: var(--fuente-principal);
+    font-size: 0.85rem;
+    color: var(--color-negro);
+}
+
+.tabla-tallas tbody th {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--color-negro);
+    letter-spacing: 0.04em;
 }

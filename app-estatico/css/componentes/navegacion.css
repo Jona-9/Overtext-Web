@@ -109,6 +109,13 @@
     justify-content: center;
 }
 
+/* E1-11: el carrito del header es un Bootstrap Icon; se iguala a los 22 px
+   del SVG de "mi cuenta" que tiene al lado. */
+.accion-navegacion .bi {
+    font-size: 22px;
+    line-height: 1;
+}
+
 /* Botón WhatsApp flotante */
 .wsp-flotante {
     position: fixed;
@@ -130,10 +137,11 @@
     transform: scale(1.08);
 }
 
-.wsp-flotante img {
-    width: 30px;
-    height: 30px;
-    object-fit: contain;
+/* E1-11: el PNG paso a Bootstrap Icons, asi que se dimensiona por tipografia */
+.wsp-flotante .bi {
+    font-size: 30px;
+    line-height: 1;
+    color: #ffffff;
 }
 
 /* Acciones del nav (usuario + carrito) */
