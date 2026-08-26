@@ -190,15 +190,19 @@ Demuestro en vivo: entrar a `/admin` sin sesión, iniciar sesión, y mostrar el 
   - **Catálogo**: `.productos-grid` es ahora `row g-4`; `js/tienda.js` envuelve cada tarjeta en `col-12 col-sm-6 col-lg-4 col-xl-3` (1/2/3/4 columnas). Se limpió el `display:grid` y sus media queries en `css/paginas/catalogo.css`.
   - **Nosotros**: sección "proceso" → `row g-4` con `col-12 col-md-4`; "valores" → `row g-4` con `col-12 col-sm-6 col-lg-3`.
 
-**Pendiente / decisiones:**
-- **E1-06 · promociones**: sus únicas grillas están dentro del **configurador de packs**, que es **alcance congelado** (art. 8) y arrastra la deuda D3 (color BLANCO). **No se tocó.** El criterio 1f ya queda cubierto por catálogo y nosotros.
-- **E1-06 · pie**: el footer se dejó con su grid propio (ya es responsivo). Conversión a `row`/`col-*` es opcional.
-- **E1-03 · contenedores**: se usa `.container` de Bootstrap en el navbar y en las secciones nuevas (catálogo, nosotros). **La migración total del `.contenedor` propio → `.container`/`.container-fluid` en las 10 páginas quedó pendiente** (se evitó hacerla a ciegas por riesgo visual; `.seccion-detalle-producto > .contenedor` en `producto.css` depende del nombre actual).
-- **QA visual pendiente** (Definición de Hecho): probar a 375 px y 1440 px, consola sin errores (criterio 2d), y confirmar que en un producto sin galería (p. ej. guinda) el carrusel no muestra controles.
+**Verificado (primer avance):** `node --check js/tienda.js` OK; páginas y `carrusel.css` sirven 200.
 
-**Verificado hasta ahora:** `node --check js/tienda.js` OK; las páginas y `carrusel.css` sirven 200 por HTTP.
+### 2026-08-25 (cont.) — completado lo pendiente (Joaquín)
+- **E1-03 ✅ — contenedores.** Migradas las **10 páginas** de `.contenedor` propio a **`.container` de Bootstrap** (criterio 1a). Se retiró el bloque `.contenedor` de `layout.css` y se actualizó `.seccion-detalle-producto > .container` en `producto.css`. *(Ojo: durante la migración se coló un bug de fusión `containergrid-pie`; se corrigió token por token y se verificó con grep = 0 fusiones.)*
+- **E1-06 · pie ✅ — footer.** El `grid-pie` de las 10 páginas es ahora `container row g-4 pb-5` con columnas `col-12/col-md-6/col-lg-4` (info y boletín) y `col-6/col-md-3/col-lg-2` (enlaces).
+- **E1-06 · promociones — decisión de alcance (no conversión).** Las únicas grillas de la página están **dentro del configurador de packs**, que es **alcance congelado** (art. 8 + decisión #6 de `memory.md`: "funciona y no da puntos") y arrastra la deuda D3 (BLANCO). `.colores-grid` ya es un flex-wrap responsivo. **No se convierte** para no romper una función que ya sirve; **el criterio 1f ya está cubierto** por catálogo, nosotros y el pie.
+- **Pendiente real (Definición de Hecho):** **QA visual** a 375/1440 px y **consola sin errores** (2d) — no verificable sin navegador aquí. Confirmar además que un producto sin galería (p. ej. guinda) muestra el carrusel sin controles.
 
-**Archivos tocados:** `index.html`, `detalle-producto.html`, `catalogo.html`, `nosotros.html`, `js/tienda.js`, `css/paginas/catalogo.css`, y nuevo `css/componentes/carrusel.css`.
+**Verificado (este avance):** las 10 páginas sirven **200** por HTTP; `grep` confirma 0 `.contenedor` sueltos, 10 footers `row` y 40 columnas de pie.
+
+**Archivos tocados (total del sprint):** las 10 `*.html`, `js/tienda.js`, `css/layout.css`, `css/paginas/catalogo.css`, `css/paginas/producto.css`, y nuevo `css/componentes/carrusel.css`.
+
+**Estado de las tareas de Dayro:** E1-03 ✅ · E1-04 ✅ · E1-05 ✅ · E1-06 ✅ (catálogo/nosotros/pie; promociones = decisión de alcance). Falta solo la QA visual para cerrar la Definición de Hecho.
 
 ### 2026-08-20
 - Hice: —
@@ -211,9 +215,10 @@ Demuestro en vivo: entrar a `/admin` sin sesión, iniciar sesión, y mostrar el 
 ## Para consolidar en memory.md
 
 - **Criterio 1e (carrusel) cubierto:** carrusel de Bootstrap en portada (E1-04) y en la galería de la ficha (E1-05, tolerante a productos sin galería). Componente nuevo `css/componentes/carrusel.css`.
-- **Criterio 1f (grillas) cubierto** con `row`/`col-*` en catálogo (JS) y nosotros. Promociones no aplica (grillas dentro del configurador congelado).
-- **Pendiente del sprint:** E1-03 (migración total a `.container`), footer con grid propio, y **QA visual a 375/1440 px + consola** antes de cerrar la Definición de Hecho.
-- *(Nota: E1-04/05/06 fueron avanzadas por Joaquín el 25-ago; ver bitácora.)*
+- **Criterio 1f (grillas) cubierto** con `row`/`col-*` en catálogo (JS), nosotros y el pie de las 10 páginas. Promociones no aplica (grillas dentro del configurador congelado, art. 8).
+- **Criterio 1a (contenedores) cubierto:** las 10 páginas usan `.container` de Bootstrap (E1-03); se retiró el `.contenedor` propio de `layout.css`.
+- **Único pendiente del sprint:** **QA visual a 375/1440 px + consola sin errores (2d)** antes de cerrar la Definición de Hecho. Todas las tareas de código (E1-03/04/05/06) están hechas.
+- *(Nota: E1-03/04/05/06 fueron avanzadas por Joaquín los días 25-ago; ver bitácora.)*
 
 ---
 

@@ -8,7 +8,7 @@
     padding: var(--espacio-lg) 0 var(--espacio-xl);
 }
 
-.seccion-detalle-producto > .contenedor {
+.seccion-detalle-producto > .container {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 60px;
@@ -313,7 +313,7 @@
 
 /* --- Responsive --- */
 @media (max-width: 900px) {
-    .seccion-detalle-producto > .contenedor {
+    .seccion-detalle-producto > .container {
         grid-template-columns: 1fr;
         gap: var(--espacio-lg);
     }
