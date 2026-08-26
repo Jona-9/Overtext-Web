@@ -231,8 +231,14 @@ Carlos sigue con la demostración del CRUD.
 - **Decidí / aprendí:**
   - **Gotcha `getComputedStyle`:** al pasar el color de los swatches de `style=` a una clase CSS, el configurador leía `.style.backgroundColor` (inline) y devolvía `""` → los slots quedaban sin color. En `promociones.js` lo cambié a `getComputedStyle(...).backgroundColor`. El `style="background-color:…"` que el JS **genera** por slot es dinámico y se queda.
   - Verifiqué con `node --check` los dos JS, `grep` de inline styles / refs a `promotions`, y que **todas** las refs locales `/css /js /assets` resuelven (sin 404).
-- **Bloqueo:** ninguno de código. Falta la QA en navegador (consola limpia página por página) en el Sprint Review — servir por HTTP, no `file://`.
-- **Archivos tocados:** borré `css/style.css`; creé `js/promociones.js` y `css/paginas/inicio.css`; renombré `promotions.html`→`promociones.html` y `pack_Short.webp`→`pack-short.webp`; edité las 10 páginas HTML, `navegacion.css`, `paginas/catalogo.css`, `paginas/promociones.css` y los 2 docs.
+- **Bloqueo:** ninguno.
+- **Archivos tocados:** borré `css/style.css`; creé `js/promociones.js`, `css/paginas/inicio.css` y `assets/favicon.svg`; renombré `promotions.html`→`promociones.html` y `pack_Short.webp`→`pack-short.webp`; edité las 10 páginas HTML, `navegacion.css`, `paginas/catalogo.css`, `paginas/promociones.css` y los 2 docs.
+
+### 2026-08-26 (cierre del sprint)
+- **E1-16 completado:** comprimí las imágenes; `assets/` 26 MB → **3,8 MB**, **0 imágenes > 300 KB**.
+- **Favicon** `assets/favicon.svg` en las 10 páginas → se va el `404 /favicon.ico`.
+- **QA estática OK:** servido con `python -m http.server`, todas las páginas y recursos responden **200**. Verifiqué además: 0 inline styles, 0 refs a `promotions`, `node --check` en los JS, 0 refs locales rotas, kebab-case sin hallazgos nuevos.
+- **Pendiente humano del Sprint Review:** abrir DevTools (F12 → Console) página por página para firmar el criterio 2d (cero errores/warnings). El código no tiene causas estructurales de error.
 
 ---
 
@@ -242,7 +248,8 @@ Carlos sigue con la demostración del CRUD.
 - [x] **`css/style.css` eliminado** (deuda D2 cerrada).
 - [x] **Docs `01-arquitectura-css.md` y `02-sistema-diseno.md` corregidos** (deuda D5 cerrada): la estructura real es `main.css`/`tema-overtext.css`/`layout.css` + `componentes/` + `paginas/`; fuentes Oswald + Inter (no Bebas Neue).
 - [x] **Estilos en línea eliminados** y **placeholders del carrito vaciados** (incumplían art. 7): nuevas clases `.color-muestra--<color>`, `.seccion-configurador`, `.hero-acciones`, `.detalle-cta`, `.catalogo-titulo`, `.catalogo-intro`; regla `.carrito-contador:empty` en `navegacion.css`.
-- [ ] **E1-16 (assets < 15 MB) lo hace José manualmente** — sigue **pendiente**: `assets/` pesa 26 MB; los `productos/*/principal.webp` ~1,9 MB y `negro/2.webp` 3,0 MB deben bajar a < 300 KB (deuda D1 abierta). No se instaló tooling en esta sesión.
+- [x] **E1-16 (assets < 15 MB) — HECHO:** comprimí las imágenes manualmente. `assets/` bajó de 26 MB → **3,8 MB** y **ninguna imagen supera 300 KB** (cumple RNF-0005 y el `LEEME`). Deuda D1 cerrada.
+- [x] **Favicon de marca** (`assets/favicon.svg`) enlazado en las 10 páginas: elimina el único `404 /favicon.ico` del servidor. No es de mis 7 tareas, pero cierra el criterio de "cero errores/404".
 - [ ] **Siguen abiertas para otros duos:** D3 (quitar el color BLANCO inexistente del configurador — el swatch se conserva, solo se des-inlineó) y D4 (`UMBRAL_ENVIO_GRATIS = 180` → 200 en `carrito.js`, no lo toqué por art. 9).
 
 ---
