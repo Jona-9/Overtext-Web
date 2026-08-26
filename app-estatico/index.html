@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="/css/componentes/badges.css">
     <link rel="stylesheet" href="/css/componentes/footer.css">
     <link rel="stylesheet" href="/css/componentes/carrito.css">
+    <link rel="stylesheet" href="/css/componentes/carrusel.css">
 </head>
 
 <body>
@@ -102,10 +103,35 @@
     <!-- HERO PRINCIPAL -->
     <main>
         <section class="seccion-portada">
-            <div class="contenedor cuadricula-portada">
+            <div class="container cuadricula-portada">
 
-                <div >
-                    <img src="/assets/img/sitio/modelo.webp" alt="Modelo vistiendo OVERTEXT" class="imagen-principal animar-zoom">
+                <div>
+                    <div id="carrusel-portada" class="carousel slide carrusel-portada" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#carrusel-portada" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Diapositiva 1"></button>
+                            <button type="button" data-bs-target="#carrusel-portada" data-bs-slide-to="1" aria-label="Diapositiva 2"></button>
+                            <button type="button" data-bs-target="#carrusel-portada" data-bs-slide-to="2" aria-label="Diapositiva 3"></button>
+                        </div>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="/assets/img/sitio/modelo.webp" class="d-block w-100" alt="Modelo vistiendo OVERTEXT">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="/assets/img/sitio/modelo-urbano.webp" class="d-block w-100" alt="Estilo urbano OVERTEXT">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="/assets/img/sitio/imagen-principal.webp" class="d-block w-100" alt="Short OVERTEXT en detalle">
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carrusel-portada" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Anterior</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carrusel-portada" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Siguiente</span>
+                        </button>
+                    </div>
                 </div>
 
                 <div class="portada-contenido">
@@ -131,13 +157,13 @@
 
         <!-- SECCIÓN PROCESO -->
         <section class="proceso">
-            <div class="contenedor">
+            <div class="container">
                 <div class="indicador-proceso">
                     <div class="separador-linea"></div>
                     <span class="texto-proceso">NUESTRO PROCESO</span>
                 </div>
             </div>
-            <div class="contenedor grid-proceso">
+            <div class="container grid-proceso">
                 <article>
                     <span class="cifra">01</span>
                     <h3 class="titulo-borde">ORIGEN TEXTIL</h3>
@@ -158,7 +184,7 @@
 
         <!-- SECCIÓN DETALLE TELA -->
         <section class="detalle">
-            <div class="contenedor grid-detalle">
+            <div class="container grid-detalle">
                 <div class="zona-textura">
                     <img src="/assets/img/sitio/tela.webp" alt="Textura del algodón OVERTEXT">
                     <div class="info-tela">
@@ -175,7 +201,7 @@
 
         <!-- BANNER BENEFICIOS -->
         <section class="banner-beneficios">
-            <div class="contenedor banner-beneficios-inner">
+            <div class="container banner-beneficios-inner">
                 <div class="banner-beneficios-texto">
                     <h2>ARMA TU PACK DE 6.</h2>
                     <p>Elige los colores que quieres. Nosotros hacemos el resto.</p>
@@ -187,12 +213,12 @@
 
     <!-- FOOTER -->
     <footer class="pie-pagina">
-        <div class="contenedor grid-pie">
-            <div class="pie-info">
+        <div class="container row g-4 pb-5">
+            <div class="col-12 col-md-6 col-lg-4 pie-info">
                 <h2 class="pie-logo">OVERTEXT</h2>
                 <p class="pie-lema">LIMA, PERÚ. STREETWEAR PARA LA NUEVA GENERACIÓN.</p>
             </div>
-            <div class="pie-enlaces">
+            <div class="col-6 col-md-3 col-lg-2 pie-enlaces">
                 <h3>SITIO</h3>
                 <ul>
                     <li><a href="/index.html">INICIO</a></li>
@@ -200,7 +226,7 @@
                     <li><a href="/promotions.html">PROMOCIONES</a></li>
                 </ul>
             </div>
-            <div class="pie-enlaces">
+            <div class="col-6 col-md-3 col-lg-2 pie-enlaces">
                 <h3>AYUDA</h3>
                 <ul>
                     <li><a href="/contacto.html">CONTACTO</a></li>
@@ -208,7 +234,7 @@
                     <li><a href="#">ENVÍOS</a></li>
                 </ul>
             </div>
-            <div class="pie-boletin">
+            <div class="col-12 col-md-6 col-lg-4 pie-boletin">
                 <h3>NEWSLETTER</h3>
                 <div class="formulario-minimal">
                     <input type="email" placeholder="TU EMAIL">
@@ -220,7 +246,7 @@
                 </div>
             </div>
         </div>
-        <div class="contenedor">
+        <div class="container">
             <hr class="divisor">
             <div class="legal-flex">
                 <p>© 2026 OVERTEXT — TODOS LOS DERECHOS RESERVADOS</p>

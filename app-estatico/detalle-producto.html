@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="/css/componentes/footer.css">
     <link rel="stylesheet" href="/css/componentes/carrito.css">
     <link rel="stylesheet" href="/css/paginas/producto.css">
+    <link rel="stylesheet" href="/css/componentes/carrusel.css">
 </head>
 
 <body>
@@ -100,18 +101,25 @@
 
     <main>
         <section class="seccion-detalle-producto">
-            <div class="contenedor grid-detalle-producto">
+            <div class="container grid-detalle-producto">
 
-                <!-- GALERÍA -->
+                <!-- GALERÍA (carrusel de Bootstrap; lo rellena js/tienda.js) -->
                 <div class="galeria-producto">
-                    <div class="foto-principal-wrapper">
-                        <img src="/assets/img/productos/beige/principal.webp" alt="Short Stone Beige">
-                    </div>
-                    <div class="miniaturas-grid">
-                        <img src="/assets/img/productos/beige/1.webp" alt="Vista 1" class="miniatura">
-                        <img src="/assets/img/productos/beige/2.webp" alt="Vista 2" class="miniatura">
-                        <img src="/assets/img/productos/beige/3.webp" alt="Vista 3" class="miniatura">
-                        <img src="/assets/img/productos/beige/4.webp" alt="Vista 4" class="miniatura">
+                    <div id="carrusel-galeria" class="carousel slide carousel-dark carrusel-galeria" data-bs-ride="carousel">
+                        <div class="carousel-indicators"></div>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="/assets/img/productos/beige/principal.webp" class="d-block w-100" alt="Short Stone Beige">
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carrusel-galeria" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Anterior</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carrusel-galeria" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Siguiente</span>
+                        </button>
                     </div>
                 </div>
 
@@ -237,12 +245,12 @@
     </main>
 
     <footer class="pie-pagina">
-        <div class="contenedor grid-pie">
-            <div class="pie-info">
+        <div class="container row g-4 pb-5">
+            <div class="col-12 col-md-6 col-lg-4 pie-info">
                 <h2 class="pie-logo">OVERTEXT</h2>
                 <p class="pie-lema">LIMA, PERÚ. STREETWEAR PARA LA NUEVA GENERACIÓN.</p>
             </div>
-            <div class="pie-enlaces">
+            <div class="col-6 col-md-3 col-lg-2 pie-enlaces">
                 <h3>SITIO</h3>
                 <ul>
                     <li><a href="/index.html">INICIO</a></li>
@@ -250,7 +258,7 @@
                     <li><a href="/promotions.html">PROMOCIONES</a></li>
                 </ul>
             </div>
-            <div class="pie-enlaces">
+            <div class="col-6 col-md-3 col-lg-2 pie-enlaces">
                 <h3>AYUDA</h3>
                 <ul>
                     <li><a href="/contacto.html">CONTACTO</a></li>
@@ -258,7 +266,7 @@
                     <li><a href="#">ENVÍOS</a></li>
                 </ul>
             </div>
-            <div class="pie-boletin">
+            <div class="col-12 col-md-6 col-lg-4 pie-boletin">
                 <h3>NEWSLETTER</h3>
                 <div class="formulario-minimal">
                     <input type="email" placeholder="TU EMAIL">
@@ -270,7 +278,7 @@
                 </div>
             </div>
         </div>
-        <div class="contenedor">
+        <div class="container">
             <hr class="divisor">
             <div class="legal-flex">
                 <p>© 2026 OVERTEXT — TODOS LOS DERECHOS RESERVADOS</p>
