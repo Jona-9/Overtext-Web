@@ -44,14 +44,37 @@
 
 ### Mis tareas
 
-| # | Tarea | Criterio | Sesión |
-|---|---|:-:|:-:|
-| E1-07 | Formularios de contacto, inicio de sesión y compra a `form-control` / `form-select` / `form-check` + validación `was-validated` | 1c | 5-6 |
-| E1-22 | **Diagrama físico de la base de datos** desde `data-model.md` | **3** | — |
+- [x] **E1-07** *(criterio 1c, sesiones 5-6)* — Formularios de contacto, inicio de sesión y compra a `form-control` / `form-select` / `form-check` con validación `was-validated`. *(2026-08-26)*
+- [x] **E1-22** *(criterio 3)* — **Diagrama físico de la base de datos** desde `data-model.md`: `esquema-fisico.sql`, el SVG/PNG del informe y `diagrama-fisico-bd.md`. *(2026-08-26)*
 
-**E1-22 depende del checkpoint de Joaquín:** las tres `[NECESITA ACLARACIÓN]` (colores válidos, umbral de envío gratis, cálculo del badge) condicionan el modelo. Hasta que las resuelva, queda a la espera.
+### Definición de Hecho — E1-07 y E1-22
+
+- [x] La página abre **sin errores en consola** *(criterio 2d)* — las 10 páginas verificadas en Chrome, no solo las mías
+- [x] Probado a **375 px** y **1440 px** — 7 capturas en `informes/capturas/sprint-01/`
+- [x] Nombres en **kebab-case** *(criterio 2c)*
+- [x] Captura archivada en `informes/capturas/sprint-01/`
+- [x] Criterio de rúbrica marcado en `docs/scrum/checklist-entrega.md`
+- [x] Bloque "Para consolidar" escrito en esta memoria
+- [ ] **Código subido vía PR revisado por otro duo** — *lo único que me falta.* Ver la nota de abajo: la rama `develop` que pide la DoD no existe.
+
+> **Incoherencia que me toca resolver como SM:** la DoD del sprint dice *"código en `develop` vía PR"*, pero **`develop` no existe** en el repositorio. Las ramas son `main`, `testing` y una por persona, y los merges anteriores (José, Joaquín) fueron a `testing`. Hay que corregir la DoD o crear `develop`; mientras tanto esa casilla no se puede marcar con honestidad.
+
+~~**E1-22 depende del checkpoint de Joaquín**~~ — **desbloqueado.** Joaquín aprobó el
+`spec.md` el 2026-08-25 y resolvió las tres `[NECESITA ACLARACIÓN]`: colores = los del
+catálogo (sin BLANCO), envío gratis = **S/ 200**, badge **calculado** con `stock < 10`.
+Las tres están dentro del modelo físico.
 
 El diagrama lo exigen **las cuatro rúbricas**, no solo esta. Se dibuja una vez y se actualiza.
+
+### No son mías — son de Carlos (mismo duo)
+
+Las anoto para no perderlas de vista: si no se cierran, se cae el criterio **1d** del ATF1, que es del grupo y no de él.
+
+- [ ] **E1-08** — Modal de confirmación de contacto *(criterio 1d)*
+- [ ] **E1-09** — Modal de guía de tallas en la ficha *(criterio 1d)*
+- [ ] **E1-10** — Panel del carrito a `offcanvas` *(criterio 1b)*
+- [ ] **E1-11** — Bootstrap Icons en lugar de los PNG de 4-5 MB *(criterio 1a)*
+- [ ] **E1-26** — `[SÍLABO]` Tabla de tallas con `table table-striped`
 
 ---
 
@@ -194,7 +217,9 @@ Muestro la estructura de paquetes *(criterio 1)* y paso a José y Carlos con el 
 
 Marco a cada quien cuando cierre **todas** sus tareas según la DoD.
 
-**Sprint 1:** ⬜ Joaquín · ⬜ José · ⬜ Jonathan · ⬜ Dayro · ⬜ Carlos · ⬜ Jhade
+**Sprint 1:** ⬜ Joaquín · ⬜ José · ✅ Jonathan *(26-ago)* · ⬜ Dayro · ⬜ Carlos · ⬜ Jhade
+
+Faltan 5. **`memory.md` no se toca** hasta que estén los 6 (CLAUDE.md §2).
 
 ---
 
@@ -206,11 +231,230 @@ Marco a cada quien cuando cierre **todas** sus tareas según la DoD.
 - Bloqueo: falta mover ese `.git` a un respaldo. Pendiente a mano: `mv ~/.git ~/.git-ROTO-backup-20260820`.
 - Archivos tocados: `.gitignore`, `CLAUDE.md`, `memory.md`, `README.md`, `docs/constitution.md`, `docs/memoria/*`, `docs/scrum/*`, `docs/specs/001-sitio-bootstrap/*`, `informes/informe.md`.
 
+### 2026-08-26 — E1-07 · Formularios con Bootstrap *(criterio 1c)*
+
+- **Hice:** migré los tres formularios a componentes de Bootstrap 5.3 y dejé la
+  validación funcionando sin errores en consola.
+  - `contacto.html` — `needs-validation` + `novalidate`, campos en `.row`/`.col-md-6`
+    con `.form-control`, cada uno con su `.invalid-feedback`.
+  - `login.html` — `.form-control` en usuario y contraseña (`type="email"` en usuario,
+    que era `text` y no validaba el formato) y un `.form-check` para "mantener la sesión".
+  - `checkout.html` — `.form-control`, `.form-select` y `.form-check-input` en los tres
+    pasos; las antiguas `.grid-2` pasaron a `.row g-3` / `.col-md-6`.
+  - `js/contacto.js` y `js/login.js` — patrón `was-validated`: se marca el formulario,
+    y si `checkValidity()` falla no se abre el modal ni se comprueban credenciales.
+  - `js/checkout.js` — estado de validación con `.is-invalid` / `.is-valid` de Bootstrap.
+  - `css/componentes/formularios.css` — capa de tema para `.form-control`, `.form-select`,
+    `.form-check` y los estados de validación, en la paleta de marca.
+  - `css/paginas/checkout.css` — fuera `.campo-invalido` y `.error-msg`, ya sustituidas.
+
+- **Decidí / aprendí — tres cosas que costaron:**
+
+  1. **El CSS heredado le ganaba a Bootstrap por especificidad.** `input[type="text"]`
+     pesa (0,1,1) y `.form-control` solo (0,1,0): el `border: none` del tema antiguo
+     ganaba y los campos se veían igual que antes, con Bootstrap cargado y todo.
+     Lo resolví acotando los selectores viejos con `:not(.form-control)` /
+     `:not(.form-select)`, en vez de subir la especificidad con `!important`.
+     **Aviso al equipo: cualquier componente de Bootstrap que se maquete encima de
+     `css/componentes/*.css` puede sufrir lo mismo.** Se ve marcado en consola: no.
+     Hay que mirarlo en el navegador.
+
+  2. **`label { display: block }` del CSS global rompe el `.form-check`**: la etiqueta
+     se iba a la línea de abajo y el cuadrito quedaba suelto. Añadí una regla
+     `.form-check-label { display: inline }`.
+
+  3. **`checkout.html` no usa `was-validated`, y es a propósito.** El proceso de compra
+     tiene 3 pasos con bloqueo: `was-validated` valida el formulario entero de golpe y
+     marcaría en rojo los campos de pasos aún ocultos. Ahí uso las mismas clases de
+     Bootstrap (`.is-invalid` + `.invalid-feedback`) aplicadas paso a paso, que es el
+     otro patrón que documenta Bootstrap. El criterio 1c queda igual de demostrado.
+     **Contacto e inicio de sesión sí usan `was-validated`**, que es lo que pide E1-07.
+
+- **Trampa que casi se me cuela:** para quitar el tilde verde de Bootstrap puse
+  `background-image: none` en `.is-valid`. En un `<input>` está bien, pero en un
+  `.form-select` **eso borra también la flecha del desplegable**, porque Bootstrap
+  dibuja las dos cosas con la misma propiedad. En cuanto un select del checkout se
+  validaba, se quedaba sin flecha. Arreglado devolviendo `var(--bs-form-select-bg-img)`
+  en `.form-select.is-valid`, y comprobado con `getComputedStyle` en los tres estados.
+
+- **Trampa que dejé cerrada:** el aviso "elige una opción de envío" estaba como
+  `class="invalid-feedback d-block" hidden`. No funcionaba: `.d-block` lleva
+  `!important` y gana al atributo `hidden`, así que el mensaje salía siempre.
+  Ahora el JS añade y quita `.d-block`.
+
+- **Verificado en navegador (Chrome headless), no solo a ojo:**
+  - **12 comprobaciones funcionales, las 12 en verde.** Contacto: vacío marca
+    `was-validated`, no abre el modal y muestra el `.invalid-feedback`; correo mal
+    formado tampoco abre el modal; con datos válidos sí abre y se limpia la validación.
+    Inicio de sesión: vacío no redirige y marca `was-validated`; credencial equivocada
+    muestra el aviso. Compra: el paso 1 vacío marca `.is-invalid` y **no** desbloquea el
+    paso 2; con datos válidos sí avanza.
+  - **Las 10 páginas sin errores ni advertencias en consola** *(criterio 2d)*, con la
+    única excepción del `favicon.ico` — ver el aviso de abajo.
+  - `node --check` limpio en los 7 archivos de `js/`, y todos los recursos en 200
+    servidos por `python3 -m http.server`.
+
+- **Recorrido de clics en un Chrome real (26-ago), además del repaso manual.**
+  Lo headless no pulsa botones; esto sí, y es donde aparecen los fallos de verdad:
+  - Paso 1 vacío → CONTINUAR marca los 5 campos y **no** desbloquea el paso 2;
+    con datos correctos → los 5 en verde y el paso 2 se activa.
+  - Paso 2 sin elegir envío → sale "Elige una opción de envío"; al elegir una,
+    desaparece. *(mi arreglo del `.d-block`)*
+  - "Envío a provincia" → cargan 26 departamentos; al elegir uno se habilita provincia
+    con sus 8; y **los selects conservan la flecha**. *(mi arreglo del tilde verde)*
+  - Contacto vacío → marca y **no** abre el modal; con datos válidos → el modal muestra
+    los datos, el formulario se resetea y deja de estar en rojo.
+  - Login: vacío y correo mal formado ni llegan a comprobar credenciales; contraseña
+    equivocada → aviso en pantalla y **consola limpia**; credencial correcta →
+    redirige a `intranet.html`.
+  - "Mantener la sesión iniciada" queda `display: inline`. *(mi arreglo de
+    `label { display: block }`)*
+
+- **⚠️ Aviso pendiente — el favicon (criterio 2d).** **No existe `favicon.ico` ni ningún
+  `<link rel="icon">` en las 10 páginas.** Un Chrome normal pide `/favicon.ico` igual y
+  recibe un **404 que sale como error rojo en la consola**. En headless no aparece
+  porque no lo pide, así que la verificación automática **no lo detecta**.
+  Es un punto del criterio 2d ("cero errores en consola") que se pierde por un archivo
+  que no está. Arreglo: añadir el `.ico` y una línea `<link rel="icon">` por página.
+  **No lo hice yo:** toca las 10 páginas y eso es del duo UI y del de limpieza (E1-14),
+  no mío. Va a la lista de consolidación para que alguien lo tome.
+
+- **Capturas archivadas** en `informes/capturas/sprint-01/`, a **1440 px y 375 px**
+  *(DoD)*: `formulario-contacto-1440.png` / `-375.png`,
+  `formulario-inicio-sesion-1440.png` / `-375.png`,
+  `formulario-compra-1440.png` / `-375.png`, y
+  `validacion-contacto-1440.png` con los mensajes de error a la vista, que es la
+  evidencia del criterio 1c.
+
+- **Bloqueo:** ninguno.
+
+- **Archivos tocados:** `app-estatico/contacto.html`, `app-estatico/login.html`,
+  `app-estatico/checkout.html`, `app-estatico/js/contacto.js`,
+  `app-estatico/js/login.js`, `app-estatico/js/checkout.js`,
+  `app-estatico/css/componentes/formularios.css`,
+  `app-estatico/css/paginas/checkout.css`.
+
+### 2026-08-26 — E1-22 · Diagrama físico de la base de datos *(criterio 3)*
+
+- **Hice:** el modelo físico completo de las 10 tablas, en tres piezas:
+  - `docs/specs/001-sitio-bootstrap/esquema-fisico.sql` — el DDL de MySQL 8 (InnoDB,
+    `utf8mb4_unicode_ci`): tipos, PK, FK con su `ON DELETE`, UK, `CHECK`, índices y
+    datos semilla. **Es la definición autoritativa del modelo.**
+  - `informes/capturas/sprint-01/diagrama-fisico-bd.svg` (y `.png`) — la figura para
+    insertar en el informe §2.3.
+  - `docs/specs/001-sitio-bootstrap/diagrama-fisico-bd.md` — cómo leerlo, la tabla de
+    relaciones con su regla de borrado, los índices y por qué está así.
+  - Puntero añadido en `data-model.md` §1 para que nadie confunda la vista lógica con
+    el entregable físico.
+
+- **Decidí / aprendí:**
+  - **El diagrama se generó por script desde la misma definición del esquema**, no a
+    mano en una herramienta de dibujo. Motivo: cuando cambie una tabla, el dibujo no se
+    queda atrás. Es la trampa clásica de este entregable, y lo piden **cuatro** rúbricas.
+  - **Escribí el DDL de las 10 tablas ahora, aunque solo 3 se implementen en el ATF3.**
+    Un diagrama a medias no demuestra el criterio 3, y el resto ya estaba diseñado.
+  - **Reglas de borrado, una por una** (esto no estaba en `data-model.md`):
+    `CASCADE` donde el hijo no existe sin el padre (`variante_producto`,
+    `imagen_producto`, `detalle_pedido`); `RESTRICT` sobre catálogos maestros
+    (`categoria`, `color`, `rol`, y `producto` desde `detalle_pedido`, para no poder
+    borrar un producto que figura en un pedido histórico); y **`SET NULL`** en
+    `pedido.usuario_id`, que es el único FK nulo: si se da de baja al usuario, el
+    pedido sobrevive porque es un registro contable.
+  - **El dinero va en `DECIMAL(10,2)`, nunca `FLOAT`**: la coma flotante pierde céntimos.
+  - Las tres decisiones del PO del 25-ago entraron en el esquema: sin color BLANCO en la
+    semilla, y el badge **no es columna** — se calcula con `stock < 10` (art. 7).
+
+- **Bloqueo:** ninguno. El checkpoint que me bloqueaba lo cerró Joaquín el 25-ago.
+
+- **Archivos tocados:** `docs/specs/001-sitio-bootstrap/esquema-fisico.sql` (nuevo),
+  `docs/specs/001-sitio-bootstrap/diagrama-fisico-bd.md` (nuevo),
+  `informes/capturas/sprint-01/diagrama-fisico-bd.svg` y `.png` (nuevos),
+  `docs/specs/001-sitio-bootstrap/data-model.md`,
+  `docs/scrum/checklist-entrega.md` (marcado el componente "Formularios").
+
+### 2026-08-26 — E1-19 · Consola limpia *(criterio 2d, tarea de todo el equipo)*
+
+- **Hice:** pasé las **10 páginas** por Chrome en modo headless, servidas por HTTP, y
+  filtré la salida buscando mensajes de consola, `Uncaught` y recursos fallidos.
+  **Las 10 salen limpias.** Es la primera medición real del criterio 2d, no una
+  suposición: hasta ahora solo se había comprobado que los recursos devolvían 200.
+- **Ojo:** esto vale para el estado de hoy. E1-19 es de todo el equipo y hay que
+  **repetirlo en la Review del 04-sep**, cuando estén dentro el carrusel, el offcanvas
+  y los modales, que es donde suele aparecer el error de consola.
+
+### 2026-08-26 — Como Scrum Master
+
+- Mis dos tareas del Sprint 1 están cerradas según la DoD, capturas incluidas.
+
+- **Dos huecos de proceso que me toca destrabar a mí, no a mi duo:**
+  1. **No existen `plan.md` ni `tasks.md`.** El `spec.md` quedó aprobado el 25-ago y su
+     §7 dice que eso habilita escribir `plan.md`, pero se pasó directo a implementar
+     (CLAUDE.md §4 pide Specify → Plan → Tasks → Implement). Además `plan.md` es la
+     fuente de §2.1.2 del informe, que sigue vacía.
+  2. **La DoD apunta a una rama que no existe.** `sprint-01.md` §7 exige "código en
+     `develop` vía PR", pero en el remoto solo hay `main`, `testing` y una rama por
+     persona — y los PR #3 y #6 de José entraron a `testing`. Hay que decidirlo antes de
+     que entren más ramas: o se crea `develop`, o se corrige la DoD.
+
+- **Las 6 bitácoras estaban en `Hice: —` del 20-ago** cuando empecé, con trabajo ya
+  hecho y sin registrar (E1-01 a E1-06 estaban en el código, no en las memorias). Sin
+  bitácora no puedo verificar la puerta de consolidación. A pedir en la daily.
+- **Puerta de consolidación: 1 de 6.** `memory.md` sigue sin tocarse, y así se queda
+  hasta que cierren Joaquín, José, Dayro, Carlos y Jhade (CLAUDE.md §2).
+- Pendiente de facilitar: Review y Retro del vie 04-sep.
+
 ---
 
 ## Para consolidar en memory.md
 
 - [ ] (ya volcado en la versión inicial: decisiones 1-11, deudas D1-D6, trampas T1-T3)
+
+**Sprint 1 — lo que el resto del equipo necesita saber:**
+
+- [ ] **Cobertura de rúbrica ATF1:** marcar **1c Formularios** ✅ — evidencia
+      `contacto.html`, `login.html`, `checkout.html`. Y **3 Informe** 🟨 — el diagrama
+      físico ya existe (`informes/capturas/sprint-01/diagrama-fisico-bd.svg`); falta que
+      el duo del documento lo inserte en §2.3 (E1-21).
+- [ ] **Nueva trampa T4 — el CSS heredado le gana a Bootstrap por especificidad.**
+      `input[type="text"]` (0,1,1) pesa más que `.form-control` (0,1,0), así que el tema
+      antiguo anulaba al framework **sin dar ningún error en consola**. En
+      `css/componentes/formularios.css` ya está acotado con `:not(.form-control)`.
+      Quien maquete un componente de Bootstrap encima del CSS viejo tiene que
+      **mirarlo en el navegador**, no fiarse de la consola.
+- [ ] **⚠️ Falta el favicon y cuesta puntos del criterio 2d.** No hay `favicon.ico` ni
+      `<link rel="icon">` en ninguna de las 10 páginas: Chrome lo pide igual y el 404
+      sale como **error rojo en consola**. Ojo, que **la verificación headless no lo
+      detecta** (no pide el favicon), así que no basta con "me salió limpio".
+      Hay que añadir el archivo y una línea por página antes de la entrega.
+- [ ] **Nueva trampa T5 — `.d-block` de Bootstrap lleva `!important`** y gana al
+      atributo `hidden`. Para mostrar u ocultar un `.invalid-feedback` desde JS hay que
+      añadir y quitar `.d-block`, no usar `hidden`.
+- [ ] **Nueva decisión — `esquema-fisico.sql` es la fuente autoritativa del modelo de
+      datos.** `data-model.md` es la vista lógica y el diccionario; si discrepan, gana
+      el `.sql`. El diagrama del informe se **genera** desde ahí, no se dibuja a mano.
+- [ ] **Nueva decisión — se escribió el DDL de las 10 tablas en el Sprint 1**, aunque
+      el ATF3 solo implemente `categoria`, `producto` y `color`. Las cuatro rúbricas
+      piden el diagrama físico y a medias no demuestra nada.
+- [ ] **Aviso para Carlos (E1-11) y para el duo de QA (E1-19): falta el favicon.**
+      Las 10 páginas piden `/favicon.ico` y el servidor devuelve **404**, así que sale un
+      error en consola en cada página y saldrá en cada captura del informe. No lo arreglo
+      yo porque toca el `<head>` de las 10 páginas, que es la pasada de Carlos: basta un
+      `<link rel="icon">` en ese mismo commit. Es el **único** aviso que queda en las 10
+      páginas; el resto de la consola está limpia.
+- [ ] **Aviso para el Sprint 6 (E4-08):** `js/login.js` tiene las credenciales en el
+      cliente (`admin@mail.com` / `123456`). Se borra con Spring Security. Le quité el
+      `console.error` de credencial equivocada: ensuciaba la consola y el criterio 2d
+      la quiere limpia.
+- [ ] **`.grid-2` está retirada de `css/componentes/formularios.css`**, sustituida por
+      `.row`/`.col-*` (art. 4). Comprobado: ninguna página ni componente vivo la usaba
+      ya. La única definición que queda está en `css/style.css`, que es el código muerto
+      que elimina E1-12 — **si alguien la "rescata" de ahí, se rompe**.
+- [ ] **Para el duo del documento (E1-21):** la figura de §2.3 es
+      `informes/capturas/sprint-01/diagrama-fisico-bd.svg`, con el pie
+      *«Figura N. Diagrama físico de la base de datos. Fuente: elaboración propia.»*
+      El `.png` está al lado por si el exportador a `.docx` no traga SVG.
+      En §2.3 **ya está insertada la figura con su pie**; lo que falta ahí es el texto
+      que la acompaña, que es de E1-21. No toqué ninguna otra sección del informe.
 
 ---
 

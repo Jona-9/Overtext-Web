@@ -218,22 +218,9 @@
     margin-bottom: 8px;
 }
 
-/* --- Validación de campos --- */
-.campo-invalido {
-    border-color: var(--color-rojo) !important;
-    background: #fff5f5;
-}
-
-.error-msg {
-    display: none;
-    font-family: var(--fuente-principal);
-    font-size: 0.62rem;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    color: var(--color-rojo);
-    margin-top: 4px;
-    text-transform: uppercase;
-}
+/* --- Validación de campos ---
+   E1-07: la sustituyen .is-invalid y .invalid-feedback de Bootstrap,
+   re-tematizadas en css/componentes/formularios.css. --- */
 
 /* --- Totales mejorados --- */
 .totales-seccion {

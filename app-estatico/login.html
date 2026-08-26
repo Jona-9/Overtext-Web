@@ -59,24 +59,31 @@
             <h1 class="titulo-sesion">INICIAR SESIÓN</h1>
             <p class="subtitulo-sesion">Accede a tu cuenta OverText.</p>
 
-            <form id="formulario-sesion" action="#" method="POST" novalidate>
+            <form id="formulario-sesion" class="needs-validation" action="#" method="POST" novalidate>
 
                 <div class="ot-campo">
-                    <label for="usuario">Usuario</label>
-                    <input type="text" id="usuario" name="usuario" placeholder="tu@correo.com" autocomplete="username"
-                        required aria-required="true" />
+                    <label for="usuario" class="form-label">Usuario</label>
+                    <input type="email" class="form-control" id="usuario" name="usuario"
+                        placeholder="tu@correo.com" autocomplete="username" required aria-required="true" />
+                    <div class="invalid-feedback">Escribe tu correo, por ejemplo nombre@correo.com.</div>
                 </div>
 
                 <div class="ot-campo">
                     <div class="ot-campo-fila">
-                        <label for="contrasena">Contraseña</label>
+                        <label for="contrasena" class="form-label">Contraseña</label>
                         <a class="ot-olvide-contrasena" href="#">¿La olvidaste?</a>
                     </div>
-                    <input type="password" id="contrasena" name="contrasena" placeholder="••••••••"
-                        autocomplete="current-password" required aria-required="true" />
+                    <input type="password" class="form-control" id="contrasena" name="contrasena"
+                        placeholder="••••••••" autocomplete="current-password" required aria-required="true" />
+                    <div class="invalid-feedback">Escribe tu contraseña.</div>
                 </div>
 
-                <button type="submit" class="ot-boton-ingresar">
+                <div class="form-check ot-recordarme">
+                    <input class="form-check-input" type="checkbox" value="1" id="recordarme" name="recordarme">
+                    <label class="form-check-label" for="recordarme">Mantener la sesión iniciada</label>
+                </div>
+
+                <button type="submit" class="btn btn-dark ot-boton-ingresar">
                     ENTRAR
                 </button>
 

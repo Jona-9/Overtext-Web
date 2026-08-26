@@ -18,6 +18,12 @@
 
     formulario.addEventListener('submit', function (e) {
         e.preventDefault();
+        e.stopPropagation();
+
+        // E1-07 · Validación de Bootstrap: sin campos válidos no se comprueban
+        // las credenciales.
+        formulario.classList.add('was-validated');
+        if (!formulario.checkValidity()) return;
 
         var usuario = document.getElementById('usuario').value.trim();
         var contrasena = document.getElementById('contrasena').value;
@@ -29,7 +35,8 @@
             }
             window.location.href = '/intranet.html';
         } else {
-            console.error('Credenciales no válidas');
+            // Sin console.error: una credencial equivocada es un caso previsto,
+            // no un fallo de la página (criterio 2d, consola limpia).
             if (mensaje) {
                 mensaje.textContent = 'Credenciales no válidas. Verifica tu usuario y contraseña.';
                 mensaje.className = 'mensaje-sesion mensaje-error';

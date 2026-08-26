@@ -11,6 +11,15 @@
 
 ## 1. Diagrama físico
 
+> **E1-22 (Sprint 1, Jonathan):** el diagrama físico entregable y su DDL viven en
+> `esquema-fisico.sql` (definición autoritativa: tipos, PK/FK/UK, `ON DELETE`,
+> `CHECK` e índices) y `diagrama-fisico-bd.md` (cómo leerlo).
+> La figura para el informe §2.3 es
+> `informes/capturas/sprint-01/diagrama-fisico-bd.svg`.
+> El diagrama de abajo es la **vista lógica de referencia**; si discrepa del `.sql`,
+> gana el `.sql`.
+
+
 ```mermaid
 erDiagram
     CATEGORIA   ||--o{ PRODUCTO          : agrupa

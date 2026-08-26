@@ -116,22 +116,34 @@
           <p class="contacto-eyebrow">Cuéntanos</p>
           <h2 class="contacto-titulo">Déjanos tu mensaje</h2>
           <p class="contacto-intro">Llena esto y te contestamos por correo o WhatsApp. Sin vueltas.</p>
-          <form id="form-contacto" class="contacto-form" novalidate>
-            <div class="grid-2">
-              <div>
-                <label for="contacto-nombre">Nombre *</label>
-                <input type="text" id="contacto-nombre" placeholder="TU NOMBRE" required>
+          <form id="form-contacto" class="contacto-form needs-validation" novalidate>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="contacto-nombre" class="form-label">Nombre *</label>
+                <input type="text" class="form-control" id="contacto-nombre" name="contacto-nombre"
+                       placeholder="TU NOMBRE" required autocomplete="name">
+                <div class="invalid-feedback">Escribe tu nombre.</div>
               </div>
-              <div>
-                <label for="contacto-correo">Correo *</label>
-                <input type="email" id="contacto-correo" placeholder="TU@CORREO.COM" required>
+              <div class="col-md-6">
+                <label for="contacto-correo" class="form-label">Correo *</label>
+                <input type="email" class="form-control" id="contacto-correo" name="contacto-correo"
+                       placeholder="TU@CORREO.COM" required autocomplete="email">
+                <div class="invalid-feedback">Escribe un correo válido, por ejemplo nombre@correo.com.</div>
               </div>
             </div>
-            <label for="contacto-asunto">Asunto *</label>
-            <input type="text" id="contacto-asunto" placeholder="¿SOBRE QUÉ NOS ESCRIBES?" required>
-            <label for="contacto-mensaje">Mensaje *</label>
-            <textarea id="contacto-mensaje" placeholder="ESCRIBE TU MENSAJE..." required></textarea>
-            <button type="submit" class="btn-agregar contacto-enviar">ENVIAR MENSAJE</button>
+            <div class="campo-contacto">
+              <label for="contacto-asunto" class="form-label">Asunto *</label>
+              <input type="text" class="form-control" id="contacto-asunto" name="contacto-asunto"
+                     placeholder="¿SOBRE QUÉ NOS ESCRIBES?" required>
+              <div class="invalid-feedback">Cuéntanos sobre qué nos escribes.</div>
+            </div>
+            <div class="campo-contacto">
+              <label for="contacto-mensaje" class="form-label">Mensaje *</label>
+              <textarea class="form-control" id="contacto-mensaje" name="contacto-mensaje" rows="5"
+                        placeholder="ESCRIBE TU MENSAJE..." required></textarea>
+              <div class="invalid-feedback">Escribe tu mensaje antes de enviar.</div>
+            </div>
+            <button type="submit" class="btn btn-dark contacto-enviar">ENVIAR MENSAJE</button>
           </form>
         </div>
 

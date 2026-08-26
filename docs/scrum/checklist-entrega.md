@@ -10,7 +10,7 @@ Grupo **01**. Reemplaza `n` por el número de avance.
 
 - [ ] **(desde ATF2)** `mvn clean package` termina sin errores.
 - [ ] **(desde ATF2)** `java -jar target/overtext.jar` levanta y responde en `http://localhost:8080`.
-- [ ] Las 10 páginas abren **sin errores ni advertencias en la consola** del navegador. *(ATF1-2d)*
+- [ ] Las 10 páginas abren **sin errores ni advertencias en la consola** del navegador. *(ATF1-2d)* — 26-ago: verificadas las 10 en Chrome headless, limpias salvo el **404 de `/favicon.ico`**, que falta en el `<head>` (va en E1-11).
 - [ ] Todas las páginas tienen encabezado, cuerpo y pie.
 - [ ] El menú navega correctamente a todas las secciones, sin enlaces muertos.
 - [ ] Probado a **375 px** y **1440 px**.
@@ -28,7 +28,7 @@ Grupo **01**. Reemplaza `n` por el número de avance.
 
 - [ ] Contenedores → \_\_\_\_\_\_
 - [ ] Menú responsivo → \_\_\_\_\_\_
-- [ ] Formularios → \_\_\_\_\_\_
+- [x] Formularios → `contacto.html` · `login.html` · `checkout.html` *(E1-07, Jonathan)*
 - [ ] Ventanas modales → \_\_\_\_\_\_
 - [ ] Carrusel de imágenes → \_\_\_\_\_\_
 - [ ] Sistema de grillas → \_\_\_\_\_\_
