@@ -38,6 +38,11 @@
     margin-bottom: var(--espacio-lg);
 }
 
+/* --- Sección del configurador (envoltura del selector de pack) --- */
+.seccion-configurador {
+    padding: var(--espacio-xl) 25px;
+}
+
 /* --- Layout padre (imagen + panel) --- */
 .contenedor-padre {
     display: flex;
@@ -69,7 +74,7 @@
     width: 100%;
 }
 
-.oferta_shorts {
+.oferta-shorts {
     font-family: var(--fuente-display);
     font-weight: 800;
     font-size: clamp(2.5rem, 5vw, 3.75rem);
@@ -142,6 +147,16 @@
     outline: 2px solid var(--color-negro);
     outline-offset: 2px;
 }
+
+/* Color de cada muestra: la fuente de verdad de estos hex es el catálogo
+   (productos.json). El configurador se alineará al catálogo como deuda D3. */
+.color-muestra--negro   { background-color: #1A1A1A; }
+.color-muestra--blanco  { background-color: #FFFFFF; border: 1px solid #ddd; }
+.color-muestra--stone   { background-color: #C8B89A; }
+.color-muestra--borgona { background-color: #8B1A2C; }
+.color-muestra--gris    { background-color: #9E9E9E; }
+.color-muestra--olivo   { background-color: #5C6B3A; }
+.color-muestra--marino  { background-color: #1A3A7A; }
 
 /* --- Slots de selección --- */
 .seleccionados {

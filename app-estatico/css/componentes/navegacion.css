@@ -109,6 +109,12 @@
     justify-content: center;
 }
 
+/* E1-15: sin cifra en el HTML el badge queda vacío hasta que js/carrito.js
+   lo llena; se oculta mientras tanto para que no parpadee un círculo vacío. */
+.carrito-contador:empty {
+    display: none;
+}
+
 /* E1-11: el carrito del header es un Bootstrap Icon; se iguala a los 22 px
    del SVG de "mi cuenta" que tiene al lado. */
 .accion-navegacion .bi {
