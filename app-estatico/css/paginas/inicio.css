@@ -1,0 +1,17 @@
+/* ============================================================
+   OVERTEXT — Página Inicio
+   Estilos específicos de la portada (index.html).
+   ============================================================ */
+
+/* Grupo de botones del hero */
+.hero-acciones {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+/* Enlace "Conoce más" de la sección detalle de tela */
+.detalle-cta {
+    margin-top: 24px;
+    display: inline-flex;
+}
