@@ -7,6 +7,7 @@
     <title>Short Stone Beige — OVERTEXT</title>
     <!-- Framework: Bootstrap 5.3 por CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- Arquitectura ITCSS OVERTEXT -->
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/tema-overtext.css">
@@ -18,6 +19,7 @@
     <link rel="stylesheet" href="/css/componentes/badges.css">
     <link rel="stylesheet" href="/css/componentes/footer.css">
     <link rel="stylesheet" href="/css/componentes/carrito.css">
+    <link rel="stylesheet" href="/css/componentes/modal.css">
     <link rel="stylesheet" href="/css/paginas/producto.css">
     <link rel="stylesheet" href="/css/componentes/carrusel.css">
 </head>
@@ -34,7 +36,7 @@
                     </svg>
                 </a>
                 <button class="accion-navegacion" id="abrir-carrito" type="button" aria-label="Carrito">
-                    <img src="/assets/icon/carrito-de-compras.png" alt="" width="22" height="22">
+                    <i class="bi bi-cart3" aria-hidden="true"></i>
                     <span class="carrito-contador">2</span>
                 </button>
                 <button class="navbar-toggler ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#menu-principal" aria-controls="menu-principal" aria-expanded="false" aria-label="Menú">
@@ -54,31 +56,33 @@
     </nav>
 
     <!-- OVERLAY -->
-    <div class="overlay-carrito" id="overlay-carrito"></div>
 
-    <!-- CARRITO LATERAL -->
-    <aside id="carrito-lateral">
-        <div class="carrito-header">
+    <!-- CARRITO — offcanvas de Bootstrap (E1-10 · criterio 1b)
+         El backdrop, el cierre con Esc, el foco y el bloqueo del scroll son del
+         framework. Se conserva el id y las clases que consulta js/carrito.js. -->
+    <aside class="offcanvas offcanvas-end" tabindex="-1" id="carrito-lateral"
+           aria-labelledby="carrito-titulo">
+
+        <div class="offcanvas-header carrito-header">
             <div class="carrito-header-izq">
-                <h2>TU CARRITO</h2>
+                <h2 class="offcanvas-title" id="carrito-titulo">TU CARRITO</h2>
                 <span class="carrito-conteo">2 PRODUCTOS</span>
             </div>
-            <button class="btn-cerrar-carrito" id="cerrar-carrito" aria-label="Cerrar carrito">
-                <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-                    <line x1="1" y1="1" x2="12" y2="12"/><line x1="12" y1="1" x2="1" y2="12"/>
-                </svg>
-            </button>
+            <button type="button" class="btn-close" id="cerrar-carrito"
+                    data-bs-dismiss="offcanvas" aria-label="Cerrar carrito"></button>
         </div>
 
-        <div class="envio-gratis-info">
-            <p class="envio-gratis-texto">TE FALTAN S/ 60 PARA ENVÍO GRATIS</p>
-            <div class="envio-gratis-barra">
-                <div class="envio-gratis-progreso"></div>
+        <div class="offcanvas-body carrito-cuerpo">
+            <div class="envio-gratis-info">
+                <p class="envio-gratis-texto">TE FALTAN S/ 60 PARA ENVÍO GRATIS</p>
+                <div class="envio-gratis-barra">
+                    <div class="envio-gratis-progreso"></div>
+                </div>
             </div>
-        </div>
 
-        <div class="carrito-items">
-            <!-- Los productos se renderizan dinámicamente desde js/carrito.js -->
+            <div class="carrito-items">
+                <!-- Los productos se renderizan dinámicamente desde js/carrito.js -->
+            </div>
         </div>
 
         <div class="carrito-footer">
@@ -95,8 +99,9 @@
                 <span class="total-monto">S/ 120</span>
             </div>
             <a href="/checkout.html" class="btn-finalizar">FINALIZAR COMPRA</a>
-            <button class="btn-seguir" id="seguir-comprando">SEGUIR COMPRANDO</button>
+            <button class="btn-seguir" id="seguir-comprando" data-bs-dismiss="offcanvas">SEGUIR COMPRANDO</button>
         </div>
+
     </aside>
 
     <main>
@@ -139,7 +144,7 @@
                     <div class="selector-campo">
                         <div class="selector-header">
                             <span class="selector-label">Talla</span>
-                            <a href="#acordeon-tallas" class="guia-link">Guía de tallas</a>
+                            <button type="button" class="guia-link" data-bs-toggle="modal" data-bs-target="#modal-tallas">Guía de tallas</button>
                         </div>
                         <div class="grupo-tallas">
                             <button class="btn-talla">S</button>
@@ -199,28 +204,6 @@
                             <summary class="acordeon-trigger">Detalles del producto</summary>
                             <div class="acordeon-interior">
                                 <p>Short de algodón stretch con corte relajado y elástico en la cintura. Confeccionado con materiales de alta calidad para mayor comodidad y durabilidad. Ideal para el día a día urbano.</p>
-                            </div>
-                        </details>
-
-                        <details class="acordeon-item" id="acordeon-tallas">
-                            <summary class="acordeon-trigger">Tallas</summary>
-                            <div class="acordeon-interior">
-                                <table class="tabla-tallas-detalle">
-                                    <thead>
-                                        <tr>
-                                            <th>Talla</th>
-                                            <th>Cintura</th>
-                                            <th>Cadera</th>
-                                            <th>Largo</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr><td>S</td><td>70–76 cm</td><td>88–94 cm</td><td>48 cm</td></tr>
-                                        <tr><td>M</td><td>76–82 cm</td><td>94–100 cm</td><td>50 cm</td></tr>
-                                        <tr><td>L</td><td>82–88 cm</td><td>100–106 cm</td><td>52 cm</td></tr>
-                                        <tr><td>XL</td><td>88–94 cm</td><td>106–112 cm</td><td>54 cm</td></tr>
-                                    </tbody>
-                                </table>
                             </div>
                         </details>
 
@@ -288,8 +271,52 @@
     </footer>
 
     <a href="https://wa.me/51904501440" class="wsp-flotante" target="_blank" rel="noopener" aria-label="WhatsApp">
-        <img src="/assets/icon/wsp.png" alt="WhatsApp">
+        <i class="bi bi-whatsapp" aria-hidden="true"></i>
     </a>
+
+    <!-- MODAL GUÍA DE TALLAS (E1-09 · criterio 1d)
+         La tabla vive SOLO aquí: antes estaba duplicada en el acordeón
+         (constitución art. 7, un solo origen de verdad).
+         E1-26 [SÍLABO]: `table table-striped` de Bootstrap. -->
+    <div class="modal fade" id="modal-tallas" tabindex="-1"
+         aria-labelledby="modal-tallas-titulo" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title h5" id="modal-tallas-titulo">Guía de tallas</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
+          <div class="modal-body">
+            <p class="modal-lema">Medidas de la prenda en centímetros.</p>
+            <div class="table-responsive">
+              <table class="table table-striped table-hover align-middle tabla-tallas">
+                <caption class="visually-hidden">Medidas por talla: cintura, cadera y largo</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Talla</th>
+                    <th scope="col">Cintura</th>
+                    <th scope="col">Cadera</th>
+                    <th scope="col">Largo</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><th scope="row">S</th><td>70–76 cm</td><td>88–94 cm</td><td>48 cm</td></tr>
+                  <tr><th scope="row">M</th><td>76–82 cm</td><td>94–100 cm</td><td>50 cm</td></tr>
+                  <tr><th scope="row">L</th><td>82–88 cm</td><td>100–106 cm</td><td>52 cm</td></tr>
+                  <tr><th scope="row">XL</th><td>88–94 cm</td><td>106–112 cm</td><td>54 cm</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="modal-tallas-nota">
+              ¿Entre dos tallas? Elige la mayor: el short es de corte recto.
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Entendido</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/js/carrito.js"></script>
