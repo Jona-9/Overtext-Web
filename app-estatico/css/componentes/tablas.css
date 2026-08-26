@@ -55,31 +55,6 @@ td strong {
     font-weight: 500;
 }
 
-/* Tabla de tallas (detalle producto) */
-.tabla-tallas-detalle {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.78rem;
-}
-
-.tabla-tallas-detalle th,
-.tabla-tallas-detalle td {
-    padding: 0.5rem 0.75rem;
-    text-align: left;
-    border-bottom: 0.5px solid var(--color-borde);
-}
-
-.tabla-tallas-detalle thead tr {
-    background: var(--color-fondo-alt);
-}
-
-.tabla-tallas-detalle th {
-    color: var(--color-texto-suave);
-    font-size: 0.65rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-}
-
-.tabla-tallas-detalle td {
-    color: var(--color-negro);
-}
+/* La tabla de tallas se retiró de aquí en E1-26: ahora vive en el modal
+   con `table table-striped` de Bootstrap, re-tematizada en
+   css/componentes/modal.css (constitución art. 4). */

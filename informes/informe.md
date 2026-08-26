@@ -119,7 +119,15 @@ OverText — Plataforma de comercio electrónico para streetwear peruano
 
 ### 2.3 Diseño de la base de datos
 
-`[ATF1]` ⬜ — **Fuente:** `docs/specs/001-sitio-bootstrap/data-model.md`. Insertar aquí el **diagrama físico** (lo exigen las cuatro rúbricas).
+`[ATF1]` ⬜ — **Fuente:** `docs/specs/001-sitio-bootstrap/data-model.md`. Falta el texto que acompaña a la figura (E1-21).
+
+**Figura 1.** Diagrama físico de la base de datos de OverText — 10 tablas, MySQL 8 / InnoDB.
+
+![Diagrama físico de la base de datos de OverText](capturas/sprint-01/diagrama-fisico-bd.png)
+
+*Fuente: elaboración propia.*
+
+> E1-22 ✅ — El diagrama se **genera por script** desde `docs/specs/001-sitio-bootstrap/esquema-fisico.sql`, que es la definición autoritativa del modelo. Si una tabla cambia, se vuelve a exportar; no se redibuja a mano. Para el `.docx` usar el `.png`; el `.svg` es el original vectorial y no pixela al imprimir.
 
 #### 2.3.1 Diccionario de datos
 

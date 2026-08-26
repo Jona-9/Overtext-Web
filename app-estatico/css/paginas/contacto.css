@@ -114,12 +114,13 @@
     opacity: 1;
 }
 
-.info-item img {
-    width: 26px;
-    height: 26px;
-    object-fit: contain;
+/* E1-11: iconos de Bootstrap en lugar de los PNG de 4-5 MB */
+.info-item .bi {
+    font-size: 26px;
+    line-height: 1;
     flex-shrink: 0;
     margin-top: 2px;
+    color: var(--color-negro);
 }
 
 .info-item-txt {

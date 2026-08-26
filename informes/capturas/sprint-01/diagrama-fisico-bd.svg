@@ -1,0 +1,295 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1320" height="845" viewBox="0 0 1320 845" font-family="Helvetica, Arial, sans-serif">
+<rect width="1320" height="845" fill="#FFFFFF"/>
+<text x="40" y="44" font-size="21" font-weight="700" fill="#111111" letter-spacing="1.5">OVERTEXT — DIAGRAMA FÍSICO DE LA BASE DE DATOS</text>
+<text x="40" y="66" font-size="11.5" fill="#777777">MySQL 8 · InnoDB · utf8mb4_unicode_ci   |   PK clave primaria · FK clave foránea · UK clave única · AI autoincremental</text>
+<line x1="40" y1="76" x2="1280" y2="76" stroke="#D9D9D9" stroke-width="1"/>
+<path d="M 265 136.5 H 312.5 V 326.5 H 360" fill="none" stroke="#C8B89A" stroke-width="1.6"/>
+<text x="272" y="131.5" font-size="9.5" fill="#777777">1</text>
+<path d="M 360 326.5 l -9 -5 M 360 326.5 l -9 0 M 360 326.5 l -9 5" fill="none" stroke="#8B1A1A" stroke-width="1.6"/>
+<text x="338" y="320.5" font-size="9.5" fill="#777777" text-anchor="end">N</text>
+<text x="317.5" y="231.5" font-size="9.5" fill="#777777" font-style="italic">agrupa</text>
+<path d="M 265 447.5 H 312.5 V 510.5 H 360" fill="none" stroke="#C8B89A" stroke-width="1.6"/>
+<text x="272" y="442.5" font-size="9.5" fill="#777777">1</text>
+<path d="M 360 510.5 l -9 -5 M 360 510.5 l -9 0 M 360 510.5 l -9 5" fill="none" stroke="#8B1A1A" stroke-width="1.6"/>
+<text x="338" y="504.5" font-size="9.5" fill="#777777" text-anchor="end">N</text>
+<text x="317.5" y="479.0" font-size="9.5" fill="#777777" font-style="italic">clasifica</text>
+<path d="M 615 136.5 H 644.75 V 212.5 H 700" fill="none" stroke="#C8B89A" stroke-width="1.6"/>
+<text x="622" y="131.5" font-size="9.5" fill="#777777">1</text>
+<path d="M 700 212.5 l -9 -5 M 700 212.5 l -9 0 M 700 212.5 l -9 5" fill="none" stroke="#8B1A1A" stroke-width="1.6"/>
+<text x="678" y="206.5" font-size="9.5" fill="#777777" text-anchor="end">N</text>
+<text x="649.75" y="174.5" font-size="9.5" fill="#777777" font-style="italic">tiene</text>
+<path d="M 265 301.5 H 290 V 358 H 656.5 V 231.5 H 700" fill="none" stroke="#C8B89A" stroke-width="1.6"/>
+<text x="272" y="296.5" font-size="9.5" fill="#777777">1</text>
+<path d="M 700 231.5 l -9 -5 M 700 231.5 l -9 0 M 700 231.5 l -9 5" fill="none" stroke="#8B1A1A" stroke-width="1.6"/>
+<text x="678" y="225.5" font-size="9.5" fill="#777777" text-anchor="end">N</text>
+<text x="661.5" y="352" font-size="9.5" fill="#777777" font-style="italic">define</text>
+<path d="M 615 136.5 H 667.7 V 377.5 H 700" fill="none" stroke="#C8B89A" stroke-width="1.6"/>
+<text x="622" y="131.5" font-size="9.5" fill="#777777">1</text>
+<path d="M 700 377.5 l -9 -5 M 700 377.5 l -9 0 M 700 377.5 l -9 5" fill="none" stroke="#8B1A1A" stroke-width="1.6"/>
+<text x="678" y="371.5" font-size="9.5" fill="#777777" text-anchor="end">N</text>
+<text x="672.7" y="257.0" font-size="9.5" fill="#777777" font-style="italic">muestra</text>
+<path d="M 615 415.5 H 657.5 V 770.5 H 700" fill="none" stroke="#C8B89A" stroke-width="1.6"/>
+<text x="622" y="410.5" font-size="9.5" fill="#777777">1</text>
+<path d="M 700 770.5 l -9 -5 M 700 770.5 l -9 0 M 700 770.5 l -9 5" fill="none" stroke="#8B1A1A" stroke-width="1.6"/>
+<text x="678" y="764.5" font-size="9.5" fill="#777777" text-anchor="end">N</text>
+<text x="662.5" y="593.0" font-size="9.5" fill="#777777" font-style="italic">realiza</text>
+<path d="M 945 466.5 H 983.25 V 231.5 H 1030" fill="none" stroke="#C8B89A" stroke-width="1.6"/>
+<text x="952" y="461.5" font-size="9.5" fill="#777777">1</text>
+<path d="M 1030 231.5 l -9 -5 M 1030 231.5 l -9 0 M 1030 231.5 l -9 5" fill="none" stroke="#8B1A1A" stroke-width="1.6"/>
+<text x="1008" y="225.5" font-size="9.5" fill="#777777" text-anchor="end">N</text>
+<text x="988.25" y="349.0" font-size="9.5" fill="#777777" font-style="italic">contiene</text>
+<path d="M 615 136.5 H 947.0 V 250.5 H 1030" fill="none" stroke="#C8B89A" stroke-width="1.6"/>
+<text x="622" y="131.5" font-size="9.5" fill="#777777">1</text>
+<path d="M 1030 250.5 l -9 -5 M 1030 250.5 l -9 0 M 1030 250.5 l -9 5" fill="none" stroke="#8B1A1A" stroke-width="1.6"/>
+<text x="1008" y="244.5" font-size="9.5" fill="#777777" text-anchor="end">N</text>
+<text x="952.0" y="193.5" font-size="9.5" fill="#777777" font-style="italic">figura en</text>
+<rect x="40" y="96" width="225" height="131" rx="3" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1"/>
+<rect x="40" y="96" width="225" height="30" rx="3" fill="#111111"/>
+<rect x="40" y="122" width="225" height="4" fill="#111111"/>
+<text x="50" y="116" font-size="12" font-weight="700" fill="#FFFFFF" letter-spacing="0.8">categoria</text>
+<text x="255" y="116" font-size="9" fill="#C8B89A" text-anchor="end" letter-spacing="0.8">ATF3</text>
+<text x="50" y="139" font-size="8.5" font-weight="700" fill="#8B1A1A">PK</text>
+<text x="74" y="139" font-size="10" font-weight="700" fill="#111111">id</text>
+<text x="255" y="139" font-size="9" fill="#777777" text-anchor="end">BIGINT AI</text>
+<rect x="41" y="145" width="223" height="19" fill="#F7F6F4"/>
+<text x="74" y="158" font-size="10" font-weight="400" fill="#111111">nombre</text>
+<text x="255" y="158" font-size="9" fill="#777777" text-anchor="end">VARCHAR(60)</text>
+<text x="50" y="177" font-size="8.5" font-weight="700" fill="#777777">UK</text>
+<text x="74" y="177" font-size="10" font-weight="400" fill="#111111">slug</text>
+<text x="255" y="177" font-size="9" fill="#777777" text-anchor="end">VARCHAR(60)</text>
+<rect x="41" y="183" width="223" height="19" fill="#F7F6F4"/>
+<text x="74" y="196" font-size="10" font-weight="400" fill="#111111">descripcion</text>
+<text x="255" y="196" font-size="9" fill="#777777" text-anchor="end">VARCHAR(255)</text>
+<text x="74" y="215" font-size="10" font-weight="400" fill="#111111">activo</text>
+<text x="255" y="215" font-size="9" fill="#777777" text-anchor="end">BOOLEAN</text>
+<rect x="40" y="261" width="225" height="112" rx="3" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1"/>
+<rect x="40" y="261" width="225" height="30" rx="3" fill="#111111"/>
+<rect x="40" y="287" width="225" height="4" fill="#111111"/>
+<text x="50" y="281" font-size="12" font-weight="700" fill="#FFFFFF" letter-spacing="0.8">color</text>
+<text x="255" y="281" font-size="9" fill="#C8B89A" text-anchor="end" letter-spacing="0.8">ATF3</text>
+<text x="50" y="304" font-size="8.5" font-weight="700" fill="#8B1A1A">PK</text>
+<text x="74" y="304" font-size="10" font-weight="700" fill="#111111">id</text>
+<text x="255" y="304" font-size="9" fill="#777777" text-anchor="end">BIGINT AI</text>
+<rect x="41" y="310" width="223" height="19" fill="#F7F6F4"/>
+<text x="74" y="323" font-size="10" font-weight="400" fill="#111111">nombre</text>
+<text x="255" y="323" font-size="9" fill="#777777" text-anchor="end">VARCHAR(40)</text>
+<text x="74" y="342" font-size="10" font-weight="400" fill="#111111">hex</text>
+<text x="255" y="342" font-size="9" fill="#777777" text-anchor="end">CHAR(7)</text>
+<rect x="41" y="348" width="223" height="19" fill="#F7F6F4"/>
+<text x="50" y="361" font-size="8.5" font-weight="700" fill="#777777">UK</text>
+<text x="74" y="361" font-size="10" font-weight="400" fill="#111111">slug</text>
+<text x="255" y="361" font-size="9" fill="#777777" text-anchor="end">VARCHAR(40)</text>
+<rect x="40" y="407" width="225" height="93" rx="3" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1"/>
+<rect x="40" y="407" width="225" height="30" rx="3" fill="#111111"/>
+<rect x="40" y="433" width="225" height="4" fill="#111111"/>
+<text x="50" y="427" font-size="12" font-weight="700" fill="#FFFFFF" letter-spacing="0.8">rol</text>
+<text x="255" y="427" font-size="9" fill="#C8B89A" text-anchor="end" letter-spacing="0.8">TF</text>
+<text x="50" y="450" font-size="8.5" font-weight="700" fill="#8B1A1A">PK</text>
+<text x="74" y="450" font-size="10" font-weight="700" fill="#111111">id</text>
+<text x="255" y="450" font-size="9" fill="#777777" text-anchor="end">BIGINT AI</text>
+<rect x="41" y="456" width="223" height="19" fill="#F7F6F4"/>
+<text x="50" y="469" font-size="8.5" font-weight="700" fill="#777777">UK</text>
+<text x="74" y="469" font-size="10" font-weight="400" fill="#111111">nombre</text>
+<text x="255" y="469" font-size="9" fill="#777777" text-anchor="end">VARCHAR(20)</text>
+<text x="74" y="488" font-size="10" font-weight="400" fill="#111111">descripcion</text>
+<text x="255" y="488" font-size="9" fill="#777777" text-anchor="end">VARCHAR(100)</text>
+<rect x="40" y="534" width="225" height="169" rx="3" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1"/>
+<rect x="40" y="534" width="225" height="30" rx="3" fill="#111111"/>
+<rect x="40" y="560" width="225" height="4" fill="#111111"/>
+<text x="50" y="554" font-size="12" font-weight="700" fill="#FFFFFF" letter-spacing="0.8">mensaje_contacto</text>
+<text x="255" y="554" font-size="9" fill="#C8B89A" text-anchor="end" letter-spacing="0.8">TF</text>
+<text x="50" y="577" font-size="8.5" font-weight="700" fill="#8B1A1A">PK</text>
+<text x="74" y="577" font-size="10" font-weight="700" fill="#111111">id</text>
+<text x="255" y="577" font-size="9" fill="#777777" text-anchor="end">BIGINT AI</text>
+<rect x="41" y="583" width="223" height="19" fill="#F7F6F4"/>
+<text x="74" y="596" font-size="10" font-weight="400" fill="#111111">nombre</text>
+<text x="255" y="596" font-size="9" fill="#777777" text-anchor="end">VARCHAR(60)</text>
+<text x="74" y="615" font-size="10" font-weight="400" fill="#111111">correo</text>
+<text x="255" y="615" font-size="9" fill="#777777" text-anchor="end">VARCHAR(120)</text>
+<rect x="41" y="621" width="223" height="19" fill="#F7F6F4"/>
+<text x="74" y="634" font-size="10" font-weight="400" fill="#111111">asunto</text>
+<text x="255" y="634" font-size="9" fill="#777777" text-anchor="end">VARCHAR(120)</text>
+<text x="74" y="653" font-size="10" font-weight="400" fill="#111111">mensaje</text>
+<text x="255" y="653" font-size="9" fill="#777777" text-anchor="end">TEXT</text>
+<rect x="41" y="659" width="223" height="19" fill="#F7F6F4"/>
+<text x="74" y="672" font-size="10" font-weight="400" fill="#111111">fecha</text>
+<text x="255" y="672" font-size="9" fill="#777777" text-anchor="end">DATETIME</text>
+<text x="74" y="691" font-size="10" font-weight="400" fill="#111111">atendido</text>
+<text x="255" y="691" font-size="9" fill="#777777" text-anchor="end">BOOLEAN</text>
+<rect x="360" y="96" width="255" height="245" rx="3" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1"/>
+<rect x="360" y="96" width="255" height="30" rx="3" fill="#111111"/>
+<rect x="360" y="122" width="255" height="4" fill="#111111"/>
+<text x="370" y="116" font-size="12" font-weight="700" fill="#FFFFFF" letter-spacing="0.8">producto</text>
+<text x="605" y="116" font-size="9" fill="#C8B89A" text-anchor="end" letter-spacing="0.8">ATF3</text>
+<text x="370" y="139" font-size="8.5" font-weight="700" fill="#8B1A1A">PK</text>
+<text x="394" y="139" font-size="10" font-weight="700" fill="#111111">id</text>
+<text x="605" y="139" font-size="9" fill="#777777" text-anchor="end">BIGINT AI</text>
+<rect x="361" y="145" width="253" height="19" fill="#F7F6F4"/>
+<text x="370" y="158" font-size="8.5" font-weight="700" fill="#777777">UK</text>
+<text x="394" y="158" font-size="10" font-weight="400" fill="#111111">codigo</text>
+<text x="605" y="158" font-size="9" fill="#777777" text-anchor="end">VARCHAR(40)</text>
+<text x="394" y="177" font-size="10" font-weight="400" fill="#111111">nombre</text>
+<text x="605" y="177" font-size="9" fill="#777777" text-anchor="end">VARCHAR(100)</text>
+<rect x="361" y="183" width="253" height="19" fill="#F7F6F4"/>
+<text x="394" y="196" font-size="10" font-weight="400" fill="#111111">slogan</text>
+<text x="605" y="196" font-size="9" fill="#777777" text-anchor="end">VARCHAR(150)</text>
+<text x="394" y="215" font-size="10" font-weight="400" fill="#111111">descripcion</text>
+<text x="605" y="215" font-size="9" fill="#777777" text-anchor="end">TEXT</text>
+<rect x="361" y="221" width="253" height="19" fill="#F7F6F4"/>
+<text x="394" y="234" font-size="10" font-weight="400" fill="#111111">precio</text>
+<text x="605" y="234" font-size="9" fill="#777777" text-anchor="end">DECIMAL(10,2)</text>
+<text x="394" y="253" font-size="10" font-weight="400" fill="#111111">precio_pack</text>
+<text x="605" y="253" font-size="9" fill="#777777" text-anchor="end">DECIMAL(10,2)</text>
+<rect x="361" y="259" width="253" height="19" fill="#F7F6F4"/>
+<text x="394" y="272" font-size="10" font-weight="400" fill="#111111">stock</text>
+<text x="605" y="272" font-size="9" fill="#777777" text-anchor="end">INT</text>
+<text x="394" y="291" font-size="10" font-weight="400" fill="#111111">imagen_principal</text>
+<text x="605" y="291" font-size="9" fill="#777777" text-anchor="end">VARCHAR(255)</text>
+<rect x="361" y="297" width="253" height="19" fill="#F7F6F4"/>
+<text x="394" y="310" font-size="10" font-weight="400" fill="#111111">activo</text>
+<text x="605" y="310" font-size="9" fill="#777777" text-anchor="end">BOOLEAN</text>
+<text x="370" y="329" font-size="8.5" font-weight="700" fill="#8B1A1A">FK</text>
+<text x="394" y="329" font-size="10" font-weight="400" fill="#111111">categoria_id</text>
+<text x="605" y="329" font-size="9" fill="#777777" text-anchor="end">BIGINT</text>
+<rect x="360" y="375" width="255" height="150" rx="3" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1"/>
+<rect x="360" y="375" width="255" height="30" rx="3" fill="#111111"/>
+<rect x="360" y="401" width="255" height="4" fill="#111111"/>
+<text x="370" y="395" font-size="12" font-weight="700" fill="#FFFFFF" letter-spacing="0.8">usuario</text>
+<text x="605" y="395" font-size="9" fill="#C8B89A" text-anchor="end" letter-spacing="0.8">TF</text>
+<text x="370" y="418" font-size="8.5" font-weight="700" fill="#8B1A1A">PK</text>
+<text x="394" y="418" font-size="10" font-weight="700" fill="#111111">id</text>
+<text x="605" y="418" font-size="9" fill="#777777" text-anchor="end">BIGINT AI</text>
+<rect x="361" y="424" width="253" height="19" fill="#F7F6F4"/>
+<text x="370" y="437" font-size="8.5" font-weight="700" fill="#777777">UK</text>
+<text x="394" y="437" font-size="10" font-weight="400" fill="#111111">email</text>
+<text x="605" y="437" font-size="9" fill="#777777" text-anchor="end">VARCHAR(120)</text>
+<text x="394" y="456" font-size="10" font-weight="400" fill="#111111">password</text>
+<text x="605" y="456" font-size="9" fill="#777777" text-anchor="end">VARCHAR(72)</text>
+<rect x="361" y="462" width="253" height="19" fill="#F7F6F4"/>
+<text x="394" y="475" font-size="10" font-weight="400" fill="#111111">nombre</text>
+<text x="605" y="475" font-size="9" fill="#777777" text-anchor="end">VARCHAR(80)</text>
+<text x="394" y="494" font-size="10" font-weight="400" fill="#111111">activo</text>
+<text x="605" y="494" font-size="9" fill="#777777" text-anchor="end">BOOLEAN</text>
+<rect x="361" y="500" width="253" height="19" fill="#F7F6F4"/>
+<text x="370" y="513" font-size="8.5" font-weight="700" fill="#8B1A1A">FK</text>
+<text x="394" y="513" font-size="10" font-weight="400" fill="#111111">rol_id</text>
+<text x="605" y="513" font-size="9" fill="#777777" text-anchor="end">BIGINT</text>
+<rect x="700" y="96" width="245" height="150" rx="3" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1"/>
+<rect x="700" y="96" width="245" height="30" rx="3" fill="#111111"/>
+<rect x="700" y="122" width="245" height="4" fill="#111111"/>
+<text x="710" y="116" font-size="12" font-weight="700" fill="#FFFFFF" letter-spacing="0.8">variante_producto</text>
+<text x="935" y="116" font-size="9" fill="#C8B89A" text-anchor="end" letter-spacing="0.8">TF</text>
+<text x="710" y="139" font-size="8.5" font-weight="700" fill="#8B1A1A">PK</text>
+<text x="734" y="139" font-size="10" font-weight="700" fill="#111111">id</text>
+<text x="935" y="139" font-size="9" fill="#777777" text-anchor="end">BIGINT AI</text>
+<rect x="701" y="145" width="243" height="19" fill="#F7F6F4"/>
+<text x="734" y="158" font-size="10" font-weight="400" fill="#111111">talla</text>
+<text x="935" y="158" font-size="9" fill="#777777" text-anchor="end">VARCHAR(4)</text>
+<text x="734" y="177" font-size="10" font-weight="400" fill="#111111">stock</text>
+<text x="935" y="177" font-size="9" fill="#777777" text-anchor="end">INT</text>
+<rect x="701" y="183" width="243" height="19" fill="#F7F6F4"/>
+<text x="710" y="196" font-size="8.5" font-weight="700" fill="#777777">UK</text>
+<text x="734" y="196" font-size="10" font-weight="400" fill="#111111">sku</text>
+<text x="935" y="196" font-size="9" fill="#777777" text-anchor="end">VARCHAR(40)</text>
+<text x="710" y="215" font-size="8.5" font-weight="700" fill="#8B1A1A">FK</text>
+<text x="734" y="215" font-size="10" font-weight="400" fill="#111111">producto_id</text>
+<text x="935" y="215" font-size="9" fill="#777777" text-anchor="end">BIGINT</text>
+<rect x="701" y="221" width="243" height="19" fill="#F7F6F4"/>
+<text x="710" y="234" font-size="8.5" font-weight="700" fill="#8B1A1A">FK</text>
+<text x="734" y="234" font-size="10" font-weight="400" fill="#111111">color_id</text>
+<text x="935" y="234" font-size="9" fill="#777777" text-anchor="end">BIGINT</text>
+<rect x="700" y="280" width="245" height="112" rx="3" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1"/>
+<rect x="700" y="280" width="245" height="30" rx="3" fill="#111111"/>
+<rect x="700" y="306" width="245" height="4" fill="#111111"/>
+<text x="710" y="300" font-size="12" font-weight="700" fill="#FFFFFF" letter-spacing="0.8">imagen_producto</text>
+<text x="935" y="300" font-size="9" fill="#C8B89A" text-anchor="end" letter-spacing="0.8">TF</text>
+<text x="710" y="323" font-size="8.5" font-weight="700" fill="#8B1A1A">PK</text>
+<text x="734" y="323" font-size="10" font-weight="700" fill="#111111">id</text>
+<text x="935" y="323" font-size="9" fill="#777777" text-anchor="end">BIGINT AI</text>
+<rect x="701" y="329" width="243" height="19" fill="#F7F6F4"/>
+<text x="734" y="342" font-size="10" font-weight="400" fill="#111111">url</text>
+<text x="935" y="342" font-size="9" fill="#777777" text-anchor="end">VARCHAR(255)</text>
+<text x="734" y="361" font-size="10" font-weight="400" fill="#111111">orden</text>
+<text x="935" y="361" font-size="9" fill="#777777" text-anchor="end">INT</text>
+<rect x="701" y="367" width="243" height="19" fill="#F7F6F4"/>
+<text x="710" y="380" font-size="8.5" font-weight="700" fill="#8B1A1A">FK</text>
+<text x="734" y="380" font-size="10" font-weight="400" fill="#111111">producto_id</text>
+<text x="935" y="380" font-size="9" fill="#777777" text-anchor="end">BIGINT</text>
+<rect x="700" y="426" width="245" height="359" rx="3" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1"/>
+<rect x="700" y="426" width="245" height="30" rx="3" fill="#111111"/>
+<rect x="700" y="452" width="245" height="4" fill="#111111"/>
+<text x="710" y="446" font-size="12" font-weight="700" fill="#FFFFFF" letter-spacing="0.8">pedido</text>
+<text x="935" y="446" font-size="9" fill="#C8B89A" text-anchor="end" letter-spacing="0.8">TF</text>
+<text x="710" y="469" font-size="8.5" font-weight="700" fill="#8B1A1A">PK</text>
+<text x="734" y="469" font-size="10" font-weight="700" fill="#111111">id</text>
+<text x="935" y="469" font-size="9" fill="#777777" text-anchor="end">BIGINT AI</text>
+<rect x="701" y="475" width="243" height="19" fill="#F7F6F4"/>
+<text x="710" y="488" font-size="8.5" font-weight="700" fill="#777777">UK</text>
+<text x="734" y="488" font-size="10" font-weight="400" fill="#111111">numero</text>
+<text x="935" y="488" font-size="9" fill="#777777" text-anchor="end">VARCHAR(20)</text>
+<text x="734" y="507" font-size="10" font-weight="400" fill="#111111">fecha</text>
+<text x="935" y="507" font-size="9" fill="#777777" text-anchor="end">DATETIME</text>
+<rect x="701" y="513" width="243" height="19" fill="#F7F6F4"/>
+<text x="734" y="526" font-size="10" font-weight="400" fill="#111111">cliente_nombre</text>
+<text x="935" y="526" font-size="9" fill="#777777" text-anchor="end">VARCHAR(60)</text>
+<text x="734" y="545" font-size="10" font-weight="400" fill="#111111">cliente_apellido</text>
+<text x="935" y="545" font-size="9" fill="#777777" text-anchor="end">VARCHAR(60)</text>
+<rect x="701" y="551" width="243" height="19" fill="#F7F6F4"/>
+<text x="734" y="564" font-size="10" font-weight="400" fill="#111111">cliente_telefono</text>
+<text x="935" y="564" font-size="9" fill="#777777" text-anchor="end">VARCHAR(15)</text>
+<text x="734" y="583" font-size="10" font-weight="400" fill="#111111">cliente_correo</text>
+<text x="935" y="583" font-size="9" fill="#777777" text-anchor="end">VARCHAR(120)</text>
+<rect x="701" y="589" width="243" height="19" fill="#F7F6F4"/>
+<text x="734" y="602" font-size="10" font-weight="400" fill="#111111">tipo_documento</text>
+<text x="935" y="602" font-size="9" fill="#777777" text-anchor="end">VARCHAR(10)</text>
+<text x="734" y="621" font-size="10" font-weight="400" fill="#111111">numero_documento</text>
+<text x="935" y="621" font-size="9" fill="#777777" text-anchor="end">VARCHAR(15)</text>
+<rect x="701" y="627" width="243" height="19" fill="#F7F6F4"/>
+<text x="734" y="640" font-size="10" font-weight="400" fill="#111111">tipo_envio</text>
+<text x="935" y="640" font-size="9" fill="#777777" text-anchor="end">VARCHAR(15)</text>
+<text x="734" y="659" font-size="10" font-weight="400" fill="#111111">direccion_envio</text>
+<text x="935" y="659" font-size="9" fill="#777777" text-anchor="end">VARCHAR(255)</text>
+<rect x="701" y="665" width="243" height="19" fill="#F7F6F4"/>
+<text x="734" y="678" font-size="10" font-weight="400" fill="#111111">costo_envio</text>
+<text x="935" y="678" font-size="9" fill="#777777" text-anchor="end">DECIMAL(10,2)</text>
+<text x="734" y="697" font-size="10" font-weight="400" fill="#111111">subtotal</text>
+<text x="935" y="697" font-size="9" fill="#777777" text-anchor="end">DECIMAL(10,2)</text>
+<rect x="701" y="703" width="243" height="19" fill="#F7F6F4"/>
+<text x="734" y="716" font-size="10" font-weight="400" fill="#111111">total</text>
+<text x="935" y="716" font-size="9" fill="#777777" text-anchor="end">DECIMAL(10,2)</text>
+<text x="734" y="735" font-size="10" font-weight="400" fill="#111111">metodo_pago</text>
+<text x="935" y="735" font-size="9" fill="#777777" text-anchor="end">VARCHAR(15)</text>
+<rect x="701" y="741" width="243" height="19" fill="#F7F6F4"/>
+<text x="734" y="754" font-size="10" font-weight="400" fill="#111111">estado</text>
+<text x="935" y="754" font-size="9" fill="#777777" text-anchor="end">VARCHAR(15)</text>
+<text x="710" y="773" font-size="8.5" font-weight="700" fill="#8B1A1A">FK</text>
+<text x="734" y="773" font-size="10" font-weight="400" fill="#111111">usuario_id</text>
+<text x="935" y="773" font-size="9" fill="#777777" text-anchor="end">BIGINT NULL</text>
+<rect x="1030" y="96" width="250" height="169" rx="3" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1"/>
+<rect x="1030" y="96" width="250" height="30" rx="3" fill="#111111"/>
+<rect x="1030" y="122" width="250" height="4" fill="#111111"/>
+<text x="1040" y="116" font-size="12" font-weight="700" fill="#FFFFFF" letter-spacing="0.8">detalle_pedido</text>
+<text x="1270" y="116" font-size="9" fill="#C8B89A" text-anchor="end" letter-spacing="0.8">TF</text>
+<text x="1040" y="139" font-size="8.5" font-weight="700" fill="#8B1A1A">PK</text>
+<text x="1064" y="139" font-size="10" font-weight="700" fill="#111111">id</text>
+<text x="1270" y="139" font-size="9" fill="#777777" text-anchor="end">BIGINT AI</text>
+<rect x="1031" y="145" width="248" height="19" fill="#F7F6F4"/>
+<text x="1064" y="158" font-size="10" font-weight="400" fill="#111111">variante_texto</text>
+<text x="1270" y="158" font-size="9" fill="#777777" text-anchor="end">VARCHAR(80)</text>
+<text x="1064" y="177" font-size="10" font-weight="400" fill="#111111">precio_unitario</text>
+<text x="1270" y="177" font-size="9" fill="#777777" text-anchor="end">DECIMAL(10,2)</text>
+<rect x="1031" y="183" width="248" height="19" fill="#F7F6F4"/>
+<text x="1064" y="196" font-size="10" font-weight="400" fill="#111111">cantidad</text>
+<text x="1270" y="196" font-size="9" fill="#777777" text-anchor="end">INT</text>
+<text x="1064" y="215" font-size="10" font-weight="400" fill="#111111">subtotal</text>
+<text x="1270" y="215" font-size="9" fill="#777777" text-anchor="end">DECIMAL(10,2)</text>
+<rect x="1031" y="221" width="248" height="19" fill="#F7F6F4"/>
+<text x="1040" y="234" font-size="8.5" font-weight="700" fill="#8B1A1A">FK</text>
+<text x="1064" y="234" font-size="10" font-weight="400" fill="#111111">pedido_id</text>
+<text x="1270" y="234" font-size="9" fill="#777777" text-anchor="end">BIGINT</text>
+<text x="1040" y="253" font-size="8.5" font-weight="700" fill="#8B1A1A">FK</text>
+<text x="1064" y="253" font-size="10" font-weight="400" fill="#111111">producto_id</text>
+<text x="1270" y="253" font-size="9" fill="#777777" text-anchor="end">BIGINT</text>
+<text x="40" y="819" font-size="10" fill="#777777">ATF3 = tablas implementadas en el tercer avance · TF = tablas implementadas en el trabajo final. mensaje_contacto no tiene claves foráneas: es una bandeja independiente.</text>
+<text x="40" y="833" font-size="10" fill="#777777">El indicador «últimas unidades» no se almacena: se calcula con producto.stock &lt; 10 (constitución art. 7).</text>
+</svg>

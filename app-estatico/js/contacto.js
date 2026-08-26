@@ -1,6 +1,7 @@
 /* ============================================================
    OVERTEXT — Formulario de contacto
-   Al enviar, muestra los datos ingresados en una ventana flotante.
+   Valida con Bootstrap (was-validated) y, si los datos son válidos,
+   muestra lo ingresado en un `modal` de Bootstrap.
    ============================================================ */
 (function () {
     'use strict';
@@ -10,22 +11,15 @@
     if (!formulario || !modal) return;
 
     var cuerpo = document.getElementById('modal-datos');
-    var btnCerrar = modal.querySelector('.modal-cerrar');
+
+    // E1-08 · El modal es de Bootstrap: la apertura, el cierre con Esc, el
+    // clic fuera y el bloqueo del scroll los gestiona el framework.
+    var ventana = bootstrap.Modal.getOrCreateInstance(modal);
 
     function escapar(txt) {
         return String(txt == null ? '' : txt).replace(/[&<>"]/g, function (c) {
             return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
         });
-    }
-
-    function abrirModal() {
-        modal.classList.add('abierto');
-        document.body.style.overflow = 'hidden';
-    }
-
-    function cerrarModal() {
-        modal.classList.remove('abierto');
-        document.body.style.overflow = '';
     }
 
     function fila(etiqueta, valor) {
@@ -35,6 +29,12 @@
 
     formulario.addEventListener('submit', function (e) {
         e.preventDefault();
+        e.stopPropagation();
+
+        // E1-07 · Validación de Bootstrap: si algún campo no cumple, se marca
+        // el formulario y no se envía. El modal solo se abre con datos válidos.
+        formulario.classList.add('was-validated');
+        if (!formulario.checkValidity()) return;
 
         var datos = {
             nombre:  document.getElementById('contacto-nombre').value.trim(),
@@ -49,15 +49,9 @@
             fila('Asunto', datos.asunto) +
             fila('Mensaje', datos.mensaje);
 
-        abrirModal();
+        ventana.show();
         formulario.reset();
+        formulario.classList.remove('was-validated');
     });
 
-    btnCerrar.addEventListener('click', cerrarModal);
-    modal.addEventListener('click', function (e) {
-        if (e.target === modal) cerrarModal();
-    });
-    document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') cerrarModal();
-    });
 }());

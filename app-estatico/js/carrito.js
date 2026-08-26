@@ -173,22 +173,26 @@
         '</article>';
     }
 
-    /* --- Panel abrir / cerrar --- */
-    function abrirPanel() {
+    /* --- Panel abrir / cerrar (E1-10) ---
+       El panel es un `offcanvas` de Bootstrap: el backdrop, el cierre con Esc,
+       la trampa de foco y el bloqueo del scroll los pone el framework
+       (constitución art. 4). Aquí solo se pide mostrarlo u ocultarlo.
+       Se conservan `abrirPanel`/`cerrarPanel` porque son API pública:
+       `agregar al carrito` llama a `abrirPanel()`. */
+    function panelCarrito() {
         var panel = document.getElementById('carrito-lateral');
-        var overlay = document.getElementById('overlay-carrito');
-        if (!panel) return;
-        panel.classList.add('abierto');
-        if (overlay) overlay.classList.add('activo');
-        document.body.style.overflow = 'hidden';
+        if (!panel || !window.bootstrap) return null;
+        return bootstrap.Offcanvas.getOrCreateInstance(panel);
+    }
+
+    function abrirPanel() {
+        var oc = panelCarrito();
+        if (oc) oc.show();
     }
 
     function cerrarPanel() {
-        var panel = document.getElementById('carrito-lateral');
-        var overlay = document.getElementById('overlay-carrito');
-        if (panel) panel.classList.remove('abierto');
-        if (overlay) overlay.classList.remove('activo');
-        document.body.style.overflow = '';
+        var oc = panelCarrito();
+        if (oc) oc.hide();
     }
 
     /* --- Construir variante desde selectores activos (página de detalle) --- */
@@ -205,15 +209,11 @@
     function init() {
         renderizarCarrito();
 
-        // Abrir/cerrar panel
+        // Abrir el panel desde el icono del header. El cierre (X, "seguir
+        // comprando", Esc y clic fuera) lo resuelve Bootstrap por atributos,
+        // así que ya no necesita escuchadores propios.
         var abrir = document.getElementById('abrir-carrito');
-        var cerrar = document.getElementById('cerrar-carrito');
-        var seguir = document.getElementById('seguir-comprando');
-        var overlay = document.getElementById('overlay-carrito');
         if (abrir) abrir.addEventListener('click', abrirPanel);
-        if (cerrar) cerrar.addEventListener('click', cerrarPanel);
-        if (seguir) seguir.addEventListener('click', cerrarPanel);
-        if (overlay) overlay.addEventListener('click', cerrarPanel);
 
         // Delegación +/−/eliminar dentro del panel
         var lista = document.querySelector('.carrito-items');

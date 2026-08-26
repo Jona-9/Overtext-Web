@@ -146,10 +146,10 @@
     opacity: 0.85;
 }
 
+/* E1-11: Bootstrap Icon, ya no es un <img> */
 .ot-icono-whatsapp {
-    width: 20px;
-    height: 20px;
-    object-fit: contain;
+    font-size: 20px;
+    line-height: 1;
 }
 
 /* --- Pie del formulario --- */
