@@ -1,7 +1,8 @@
 # Sistema de Diseño — OverText
 
-Basado en el Manual de Tono y Estilo (contexto.md).
-Todos los tokens viven en `css/variables.css`.
+Basado en el Manual de Tono y Estilo (`contexto.md`).
+Todos los tokens viven en el `:root` de `css/main.css` (colores, tipografías, espaciados y layout).
+`tema-overtext.css` los usa para re-tematizar los componentes de Bootstrap.
 
 ---
 
@@ -24,10 +25,12 @@ Todos los tokens viven en `css/variables.css`.
 
 ## Tipografía
 
+Ambas familias se importan con un único `@import` de Google Fonts al inicio de `main.css`.
+
 | Variable | Familia | Uso |
 |----------|---------|-----|
-| `--fuente-display` | Bebas Neue | Títulos grandes, hero, cifras |
-| `--fuente-principal` | Inter | Cuerpo, etiquetas, botones, navegación |
+| `--fuente-display` | **Oswald** | Títulos grandes, hero, cifras |
+| `--fuente-principal` | **Inter** | Cuerpo, etiquetas, botones, navegación |
 
 ---
 
@@ -42,85 +45,73 @@ Todos los tokens viven en `css/variables.css`.
 | `--espacio-xl` | `80px` | Padding de sección normal |
 | `--espacio-xxl` | `128px` | Padding de sección prominente |
 
+## Layout
+
+| Variable | Valor | Uso |
+|----------|-------|-----|
+| `--ancho-maximo` | `1300px` | Ancho máximo del contenido |
+| `--padding-contenedor` | `0 25px` | Padding lateral del contenedor |
+
 ---
 
 ## Convenciones de Clases
 
-- Variables CSS: `--color-*`, `--fuente-*`, `--espacio-*`, `--ancho-*`
-- Componentes: kebab-case en español: `.barra-navegacion`, `.pie-pagina`, `.tarjeta`
-- Estados: `.activo`, `.lleno`, `.vacio`
-- Modificadores BEM-like: `.btn-talla--activa`, `.swatch--activa`
+- Tokens CSS: `--color-*`, `--fuente-*`, `--espacio-*`, `--ancho-*` (constitución art. 2).
+- Componentes: kebab-case en español: `.barra-navegacion`, `.pie-pagina`, `.tarjeta`.
+- Estados: `.activo`, `.lleno`, `.vacio`.
+- Modificadores tipo BEM: `.btn-talla--activa`, `.swatch--activa`, `.color-muestra--negro`.
+- Las clases de Bootstrap (`navbar`, `carousel`, `offcanvas`, `row`, `col-*`) se usan tal cual.
 
 ---
 
-## Estructura HTML Estandarizada
+## Estructura HTML estandarizada
 
-### Header (todas las páginas):
+### Header (todas las páginas) — `navbar` de Bootstrap + Bootstrap Icons:
 ```html
-<header class="barra-navegacion">
-  <div class="contenedor navegacion-interior">
-    <div class="marca-logo">OVERTEXT</div>
-    <nav class="menu-principal">
-      <ul class="lista-enlaces">
-        <li><a href="..." class="enlace activo">INICIO</a></li>
-      </ul>
-    </nav>
-    <div class="contenedor-carrito">
-      <button class="boton-carrito">
-        <img src="/assets/icon/carrito-de-compras.png" alt="Carrito">
+<nav class="navbar navbar-expand-lg barra-navegacion">
+  <div class="container">
+    <a class="navbar-brand" href="/index.html">OVERTEXT</a>
+    <div class="d-flex align-items-center order-lg-last nav-acciones">
+      <a href="/login.html" class="accion-navegacion" aria-label="Mi cuenta"><!-- ícono --></a>
+      <button class="accion-navegacion" id="abrir-carrito" type="button" aria-label="Carrito">
+        <i class="bi bi-cart3" aria-hidden="true"></i>
+        <span class="carrito-contador"></span> <!-- lo llena js/carrito.js -->
+      </button>
+      <button class="navbar-toggler ms-2" type="button" data-bs-toggle="collapse"
+              data-bs-target="#menu-principal" aria-label="Menú">
+        <span class="navbar-toggler-icon"></span>
       </button>
     </div>
+    <div class="collapse navbar-collapse" id="menu-principal">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item"><a class="nav-link active" aria-current="page" href="/index.html">INICIO</a></li>
+        <!-- … -->
+      </ul>
+    </div>
   </div>
-</header>
+</nav>
 ```
 
-### Footer completo:
+### Carrito — `offcanvas` de Bootstrap:
+```html
+<aside class="offcanvas offcanvas-end" tabindex="-1" id="carrito-lateral">
+  <div class="offcanvas-header carrito-header"> … <span class="carrito-conteo"></span> … </div>
+  <div class="offcanvas-body carrito-cuerpo"> … </div>
+  <div class="carrito-footer"> … <span class="total-monto"></span> … </div>
+</aside>
+```
+
+### Footer (grilla Bootstrap `row`/`col-*`):
 ```html
 <footer class="pie-pagina">
-  <div class="contenedor grid-pie">
-    <div class="pie-info">
-      <h2 class="pie-logo">OVERTEXT</h2>
-      <p class="pie-lema">...</p>
-    </div>
-    <div class="pie-enlaces"><h3>SITIO</h3><ul>...</ul></div>
-    <div class="pie-enlaces"><h3>AYUDA</h3><ul>...</ul></div>
-    <div class="pie-boletin">
-      <h3>NEWSLETTER</h3>
-      <div class="formulario-minimal">
-        <input type="email" placeholder="TU EMAIL">
-        <button class="btn-flecha">→</button>
-      </div>
-    </div>
-  </div>
-  <div class="contenedor pie-legal">
-    <hr class="divisor">
-    <div class="legal-flex"><p>© 2026 OVERTEXT</p></div>
+  <div class="container row g-4 pb-5">
+    <div class="col-12 col-md-6 col-lg-4 pie-info"> … </div>
+    <div class="col-6 col-md-3 col-lg-2 pie-enlaces"><h3>SITIO</h3><ul>…</ul></div>
+    <!-- … -->
   </div>
 </footer>
 ```
 
-### Tabla (contacto, detalle producto):
-```html
-<div class="tabla-envolvente">
-  <table>
-    <thead><tr><th>Canal</th></tr></thead>
-    <tbody><tr><td>Dato</td></tr></tbody>
-  </table>
-</div>
-```
-
-### Tarjeta informativa (contacto):
-```html
-<div class="tarjetas-grid">
-  <div class="tarjeta">
-    <div class="tarjeta-icono"><img src="..." alt=""></div>
-    <h3>WhatsApp</h3>
-    <a href="...">+51 904 501 440</a>
-    <span class="badge-24">Atención 24 h</span>
-  </div>
-</div>
-```
-
 ---
 
-*Documento generado el 2 de mayo de 2026*
+*Documento actualizado el 26 de agosto de 2026 (Sprint 1, José · QA).*

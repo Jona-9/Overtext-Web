@@ -3,6 +3,16 @@
    Grid de productos y swatches de color.
    ============================================================ */
 
+/* --- Hero del catálogo --- */
+.catalogo-titulo {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    letter-spacing: -2px;
+}
+
+.catalogo-intro {
+    max-width: 480px;
+}
+
 /* --- Sección catálogo --- */
 .catalogo-productos {
     padding: var(--espacio-xl) 0;
