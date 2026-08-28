@@ -133,13 +133,25 @@
             }
         }
 
-        // Totales del pie (envío se define al finalizar compra)
+        // Totales del pie (el costo exacto del envio se define al finalizar compra)
         var footer = panel.querySelector('.carrito-footer');
         if (footer) {
             var lineaSub = footer.querySelector('.resumen-linea span:last-child');
             if (lineaSub) lineaSub.textContent = formatoSoles(totales.subtotal);
             var monto = footer.querySelector('.total-monto');
             if (monto) monto.textContent = formatoSoles(totales.subtotal);
+
+            // El HTML traia "GRATIS" quemado y contradecia a la barra de arriba
+            // ("te faltan S/ 140"). Se deriva del mismo umbral, igual que el
+            // checkout, que muestra POR DEFINIR hasta saber el tipo de envio.
+            var envio = footer.querySelector('.envio-gratis');
+            if (envio) {
+                var gratis = totales.subtotal >= UMBRAL_ENVIO_GRATIS;
+                envio.textContent = gratis ? 'GRATIS' : 'POR DEFINIR';
+                // .envio-gratis es el gancho fijo del elemento; el verde lo pone
+                // .es-gratis, igual que .envio-gratis-tag en el checkout.
+                envio.classList.toggle('es-gratis', gratis);
+            }
         }
     }
 
