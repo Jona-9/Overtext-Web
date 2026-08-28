@@ -711,6 +711,44 @@ componente de Bootstrap** (art. 4). Comprobado que el escritorio no se mueve: la
 > **Lección para el QA del Sprint 2:** E1-19 verifica consola, y con eso no basta. Un menú
 > ilegible da 0 errores. Hace falta mirar la pantalla a 375 px, no solo el log.
 
+### Auditoría de código previa al PR — E1-25 estaba ✅ sobre nada
+
+Barrido de código antes de cerrar. Lo estructural salió limpio: 0 estilos en línea, 0
+scripts incrustados, 0 `console.log` olvidados, kebab-case correcto, sin ids duplicados,
+`lang="es"` y favicon en las 10, misma versión de CDN en todas, ningún enlace local roto,
+ninguna `<img>` sin `alt`, ningún `.css` huérfano.
+
+**Pero encontré 23 clases CSS que ninguna página usa (~207 líneas), y cinco de ellas eran
+la evidencia declarada de E1-25.** `memory.md` §5 daba el extra del sílabo "estilos de
+párrafo" por ✅ apoyándose en `.texto-guia`, `.parrafo-marca`, `.texto-apoyo`,
+`.antetitulo` y `.enfasis-marca`. Estaban definidas en `tema-overtext.css` y **no se
+aplicaban a un solo elemento del sitio**.
+
+Intenté aplicarlas a contenido real y ahí apareció el motivo de que nunca se usaran:
+
+- **`.antetitulo` duplica `.subtitulo-superior`** (`layout.css`), que ya está en uso en
+  index, catálogo, nosotros y contacto. Mismo papel, dos nombres.
+- **`.texto-guia`, `.parrafo-marca` y `.texto-apoyo` duplican la tipografía que cada
+  página ya define** (`.hero-contacto p`, `.valor-item p`…). Las puse en el HTML y medí:
+  **las reglas de página ganan por especificidad**, porque el tema es la capa 2 y las
+  páginas la capa 5. La clase quedaba puesta y sin efecto.
+
+O sea que E1-25 creó un sistema de párrafos paralelo al que las páginas ya tenían. Nunca
+se pudo usar.
+
+**Qué hice.** Apliqué `.enfasis-marca` —la única con un papel propio— al banner de packs
+del catálogo, y **verifiqué que gobierna** (700 y rojo de marca). Las otras cuatro las
+retiré del tema, con el porqué escrito en el archivo. **No forcé nada con `!important`**:
+eso es justo lo que prohíbe T4. La evidencia de E1-25 en `memory.md` §5 ahora dice lo que
+hay, no lo que quisimos.
+
+**Lección:** una casilla ✅ debería exigir la clase **aplicada y gobernando**, no definida.
+Definir CSS no es evidencia de nada.
+
+Las otras ~18 clases muertas van a **D15**, junto con la decisión de fondo: en qué capa
+debe vivir la tipografía de párrafo. Sin resolver eso, cualquier clase genérica que
+añadamos al tema se la vuelve a comer la capa de páginas.
+
 ### Hueco de rúbrica que nadie tenía anotado
 
 Revisando el ATF2 contra el estado real: la rúbrica pide **página 404 + rutas por
@@ -850,6 +888,14 @@ tenemos trae fechas de mayo de **2025** y figura como «Vencido» — es del cic
 - [x] **D13 y D14 detectadas y cerradas el 28-ago.** No estaban en ninguna lista: salieron
       de verificar. D13 la delató la propia captura de D11; D14, mirar el menú a 375 px.
       **Ninguna de las dos daba error de consola**, así que E1-19 las había dado por buenas.
+- [ ] **Deuda nueva D15 — ~18 clases CSS muertas y una decisión de fondo.** Misma familia
+      que D8/D10. Va unida a **en qué capa vive la tipografía de párrafo**: mientras las
+      páginas ganen por especificidad, cualquier clase genérica del tema nace muerta.
+      Es lo que dejó a E1-25 sin sitio. **Sale al Planning con dueño.**
+- [ ] **E1-25 corregida en `memory.md` §5.** Estaba ✅ sobre cinco clases que no se
+      aplicaban en ninguna página. Queda `.enfasis-marca`, aplicada y verificada; las
+      otras cuatro se retiraron por duplicar estilos ya existentes. **Una casilla ✅ pide
+      la clase aplicada y gobernando, no solo definida.**
 - [ ] **Regla de QA para el Sprint 2 (T13):** E1-19 verifica la consola y con eso no basta.
       D13 y D14 convivían con 0 errores y 0 avisos. **El criterio 1b se juzga mirando la
       pantalla a 375 px**, no el log. Que E1-19 del Sprint 2 pida las dos verificaciones.

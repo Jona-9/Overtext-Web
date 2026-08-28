@@ -175,3 +175,25 @@ El sitio usa rutas absolutas (`/css/…`) y `fetch` de JSON: **no funciona con
 - [x] El modelo de datos tiene una fuente autoritativa única
 - [x] Lo que queda fuera de alcance está dicho explícitamente
 - [x] **Siguiente fase:** [`tasks.md`](tasks.md)
+
+## 10. Qué sección del informe sale de dónde
+
+Para el duo del documento (art. 10). Este `plan.md` es la fuente de la sección
+2.1.2; el resto se lista para que nadie tenga que buscarlo.
+
+| Sección del informe | Hito | Fuente |
+|---|:-:|---|
+| 1.1 Situación problemática | ATF1 | `spec.md` §1 |
+| 1.2.1 Objetivo general | ATF1 | `spec.md` §2.1 |
+| 1.2.2 Objetivos específicos | ATF1 | `spec.md` §2.2 (los cinco) |
+| 2.1.1 Reseña | ATF1 | `docs/contexto.md` §01 y §10 |
+| **2.1.2 Descripción de la solución planteada** | **ATF1** | **este `plan.md` §1, §3 y §6** |
+| 2.1.2.1 Tecnologías usadas | TF | este `plan.md` §2 y §4 (la parte ya construida) |
+| 2.1.2.2 Descripción técnica del funcionamiento | TF | este `plan.md` §2 y §4 + los ANEXOS |
+| 2.2 Requisitos | ATF1 | `spec.md` §4.1 y §4.2 (las dos tablas) |
+| 2.3 Diseño de la base de datos | ATF1 | `esquema-fisico.sql` → `diagrama-fisico-bd.svg` (Figura 1) |
+| 2.4 Resultados | ATF1 | `informes/capturas/sprint-01/` |
+
+**Ojo:** los marcadores `⬜` de `informes/informe.md` **no son trabajo pendiente**.
+Es el esqueleto limpio (E1-20); Jhade lleva la redacción en su documento propio,
+fuera del repo, para conservar la voz única (decisión 18, art. 10).

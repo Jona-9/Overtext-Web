@@ -5,7 +5,7 @@
 > Es la última foto **estable**: puede estar desactualizada respecto al sprint en curso. Si contradice el código, gana el código.
 
 **Última consolidación:** **Sprint 1 — 28-ago-2026.** Sprint cerrado, entrega **ATF1** hecha.
-**Enmienda del 28-ago (SM):** cierre de deuda previo al Sprint 2 — **D6, D8, D9, D10, D11, D13 y D14 cerradas**; D7 reformulada (falta el visto del PO). D13 y D14 se detectaron y se arreglaron en el mismo barrido. Solo se tocaron la §6 y la tabla de trampas.
+**Enmienda del 28-ago (SM):** cierre de deuda previo al Sprint 2 — **D6, D8, D9, D10, D11, D13 y D14 cerradas**; D7 reformulada (falta el visto del PO); **D15 abierta**. D13 y D14 se detectaron y se arreglaron en el mismo barrido. Se corrigió además la evidencia de E1-25 en la §5. Solo se tocaron la §5, la §6 y la tabla de trampas.
 **Estado de la puerta:** ✅ Joaquín · ✅ José · ✅ Jonathan · ✅ Dayro · ✅ Carlos · ✅ Jhade
 **Sprint en curso:** ninguno. El **Sprint 2** (Spring Boot y Spring Web) arranca el 07-sep.
 
@@ -101,7 +101,7 @@ Leyenda: ⬜ pendiente · 🟨 en curso · ✅ cubierto y con evidencia
 |---|---|---|
 | Tablas | ✅ | Guía de tallas con `table table-striped table-hover` (E1-26) |
 | Íconos | ✅ | Bootstrap Icons en lugar de los PNG de 4-5 MB (E1-11) |
-| Estilos de párrafo | ✅ | `.texto-guia`, `.parrafo-marca`, `.texto-apoyo`, `.antetitulo`, `.enfasis-marca` (E1-25) |
+| Estilos de párrafo | ✅ | `.enfasis-marca`, aplicada en el banner de packs del catálogo (E1-25). **Las otras cuatro se retiraron**: `.antetitulo` duplicaba `.subtitulo-superior`, y `.texto-guia`/`.parrafo-marca`/`.texto-apoyo` duplicaban la tipografía que cada página ya define y que gana por especificidad (art. 7, T4) |
 | REST, JWT | ⬜ | Sprints 6-7 |
 
 ## 6. Deuda y pendientes
@@ -112,6 +112,7 @@ Leyenda: ⬜ pendiente · 🟨 en curso · ✅ cubierto y con evidencia
 |---|---|---|---|
 | **D7** | **`plan.md` y `tasks.md` ya existen** en `docs/specs/001-sitio-bootstrap/` (28-ago), pero la fase Plan **no se cierra con el archivo escrito sino con el checkpoint del PO**. Ambos son retroactivos y lo declaran en su cabecera. `plan.md` §10 traza qué sección del informe sale de dónde | Sprint 1 | **Joaquín — aprobar. Lo primero del Sprint 2** |
 | D12 | `js/login.js` tiene las credenciales en el cliente (`admin@mail.com` / `123456`) | Sprint 1 | Se borra con Spring Security (Sprint 6, E4-08) |
+| D15 | **Quedan ~18 clases CSS que ninguna página usa** (`tarjetas-grid`, `grid-pie`, `miniaturas-grid`, `banner-titulo`, `tag-disponible`, `select-campo`…), ~180 líneas. Misma familia que D8 y D10: restos de la migración. Ninguna rompe nada ni cuesta rúbrica. Va con la decisión de **en qué capa vive la tipografía de párrafo**, que es lo que dejó a E1-25 sin sitio | Sprint 1 (detectada 28-ago) | **Sin dueño — Planning del Sprint 2 (regla 19)** |
 
 ### Cerradas en el Sprint 1
 
