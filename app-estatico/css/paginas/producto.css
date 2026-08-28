@@ -199,10 +199,6 @@
     box-shadow: inset 0 0 0 3px var(--color-fondo);
 }
 
-.swatch--blanco {
-    border-color: var(--color-borde);
-}
-
 /* --- Control de cantidad y acciones --- */
 .fila-acciones {
     display: flex;

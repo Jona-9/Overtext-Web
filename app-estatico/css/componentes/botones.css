@@ -249,32 +249,6 @@
     margin-top: 8px;
 }
 
-/* WhatsApp alternativo (login) */
-.ot-boton-whatsapp {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    width: 100%;
-    height: 46px;
-    background: var(--color-fondo);
-    color: var(--color-negro);
-    border: 1px solid var(--color-borde);
-    border-radius: 3px;
-    font-family: var(--fuente-principal);
-    font-size: 13px;
-    font-weight: 500;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-/* E1-11: Bootstrap Icon, ya no es un <img> */
-.ot-icono-whatsapp {
-    font-size: 20px;
-    line-height: 1;
-    flex-shrink: 0;
-}
-
 /* Beneficios (banner negro) */
 .boton-beneficios {
     display: inline-flex;
