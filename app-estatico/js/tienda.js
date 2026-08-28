@@ -33,6 +33,7 @@
             var punto = '<span class="color" style="background:' + esc(p.color.hex) +
                 '" title="' + esc(p.color.nombre) + '"></span>';
             return '' +
+            '<div class="col-12 col-sm-6 col-lg-4 col-xl-3">' +
             '<article class="producto-card">' +
                 '<span class="producto-badge">' + esc(p.badge) + '</span>' +
                 '<a href="' + url + '"><img src="' + esc(p.imagen) + '" alt="' + esc(p.nombre) + '"></a>' +
@@ -45,7 +46,8 @@
                     'data-id="' + esc(p.id) + '" data-nombre="' + esc(p.nombre) + '" data-precio="' + p.precio + '" ' +
                     'data-variante="' + esc(p.color.nombre.toUpperCase()) + '" ' +
                     'data-imagen="' + esc(p.imagen) + '">AÑADIR AL CARRITO</button>' +
-            '</article>';
+            '</article>' +
+            '</div>';
         }).join('');
     }
 
@@ -65,20 +67,32 @@
         if (precioPrincipal) precioPrincipal.innerHTML = 'S/ ' + p.precio + ' <span>unidad</span>';
         set('.precio-pack', 'o arma tu pack: ' + p.precioPack);
 
-        var fotoPrincipal = document.querySelector('.foto-principal-wrapper img');
-        if (fotoPrincipal) {
-            fotoPrincipal.onerror = function () { fotoPrincipal.onerror = null; fotoPrincipal.src = p.imagen; };
-            fotoPrincipal.src = p.galeria[0] || p.imagen;
-            fotoPrincipal.alt = p.nombre;
-        }
-
-        var miniaturas = document.querySelector('.miniaturas-grid');
-        if (miniaturas) {
-            miniaturas.innerHTML = p.galeria.map(function (src, i) {
-                return '<img src="' + esc(src) + '" alt="Vista ' + (i + 1) + '"' + onerr +
-                    ' class="miniatura' + (i === 0 ? ' activa' : '') + '">';
+        // Galería como carrusel de Bootstrap. Si el producto no tiene galería
+        // (5 de 7 hoy), se muestra solo la foto principal y se ocultan los
+        // controles y los indicadores: sin flechas rotas.
+        var imgs = (p.galeria && p.galeria.length) ? p.galeria : [p.imagen];
+        var inner = document.querySelector('#carrusel-galeria .carousel-inner');
+        if (inner) {
+            inner.innerHTML = imgs.map(function (src, i) {
+                return '<div class="carousel-item' + (i === 0 ? ' active' : '') + '">' +
+                    '<img src="' + esc(src) + '" class="d-block w-100" alt="' +
+                    esc(p.nombre) + ' — vista ' + (i + 1) + '"' + onerr + '>' +
+                '</div>';
             }).join('');
         }
+
+        var indicadores = document.querySelector('#carrusel-galeria .carousel-indicators');
+        if (indicadores) {
+            indicadores.innerHTML = imgs.length > 1 ? imgs.map(function (src, i) {
+                return '<button type="button" data-bs-target="#carrusel-galeria" data-bs-slide-to="' + i + '"' +
+                    (i === 0 ? ' class="active" aria-current="true"' : '') +
+                    ' aria-label="Vista ' + (i + 1) + '"></button>';
+            }).join('') : '';
+        }
+
+        var soloUna = imgs.length <= 1;
+        document.querySelectorAll('#carrusel-galeria .carousel-control-prev, #carrusel-galeria .carousel-control-next')
+            .forEach(function (c) { c.classList.toggle('d-none', soloUna); });
 
         // Color: indicador de color único (no un selector). varianteAuto() de
         // carrito.js lee el .swatch--activa[title] para armar "COLOR · TALLA".
@@ -111,15 +125,5 @@
         if (el) el.textContent = txt;
     }
 
-    // Galería clickeable: la miniatura cambia la foto principal (solo en detalle)
-    if (detalle) {
-        document.addEventListener('click', function (e) {
-            var mini = e.target.closest('.miniatura');
-            if (!mini) return;
-            var main = document.querySelector('.foto-principal-wrapper img');
-            if (main) main.src = mini.src;
-            document.querySelectorAll('.miniatura').forEach(function (m) { m.classList.remove('activa'); });
-            mini.classList.add('activa');
-        });
-    }
+    // La navegación de la galería la maneja el carrusel de Bootstrap (E1-05).
 }());

@@ -4,9 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
     <title>Catálogo — OVERTEXT</title>
+    <!-- Framework: Bootstrap 5.3 por CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- Arquitectura ITCSS OVERTEXT -->
     <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/tema-overtext.css">
     <link rel="stylesheet" href="/css/layout.css">
     <link rel="stylesheet" href="/css/componentes/navegacion.css">
     <link rel="stylesheet" href="/css/componentes/botones.css">
@@ -21,150 +26,152 @@
 <body>
 
     <!-- NAVEGACIÓN -->
-    <header class="barra-navegacion">
-        <div class="contenedor navegacion-interior">
-            <a href="/index.html" class="marca-logo">OVERTEXT</a>
-            <nav class="menu-principal">
-                <ul class="lista-enlaces">
-                    <li><a href="/index.html" class="enlace">INICIO</a></li>
-                    <li><a href="/catalogo.html" class="enlace activo">CATÁLOGO</a></li>
-                    <li><a href="/promotions.html" class="enlace">PROMOCIONES</a></li>
-                    <li><a href="/nosotros.html" class="enlace">NOSOTROS</a></li>
-                    <li><a href="/contacto.html" class="enlace">CONTACTO</a></li>
-                </ul>
-            </nav>
-            <div class="nav-acciones">
-                <a href="/login.html" class="boton-usuario" aria-label="Mi cuenta">
+    <nav class="navbar navbar-expand-lg barra-navegacion">
+        <div class="container">
+            <a class="navbar-brand" href="/index.html">OVERTEXT</a>
+            <div class="d-flex align-items-center order-lg-last nav-acciones">
+                <a href="/login.html" class="accion-navegacion" aria-label="Mi cuenta">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="12" cy="8" r="4"/>
                         <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
                     </svg>
                 </a>
-                <button class="boton-carrito" id="abrir-carrito" aria-label="Carrito">
-                    <img src="/assets/icon/carrito-de-compras.png" alt="">
-                    <span class="carrito-contador">2</span>
+                <button class="accion-navegacion" id="abrir-carrito" type="button" aria-label="Carrito">
+                    <i class="bi bi-cart3" aria-hidden="true"></i>
+                    <span class="carrito-contador"></span>
                 </button>
-                <button class="btn-hamburger" id="btn-hamburger" aria-label="Menú">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                <button class="navbar-toggler ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#menu-principal" aria-controls="menu-principal" aria-expanded="false" aria-label="Menú">
+                    <span class="navbar-toggler-icon"></span>
                 </button>
             </div>
+            <div class="collapse navbar-collapse" id="menu-principal">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="/index.html">INICIO</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="/catalogo.html">CATÁLOGO</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/promociones.html">PROMOCIONES</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/nosotros.html">NOSOTROS</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/contacto.html">CONTACTO</a></li>
+                </ul>
+            </div>
         </div>
-    </header>
+    </nav>
 
-    <div class="overlay-carrito" id="overlay-carrito"></div>
 
-    <!-- CARRITO LATERAL -->
-    <aside id="carrito-lateral">
-        <div class="carrito-header">
+    <!-- CARRITO — offcanvas de Bootstrap (E1-10 · criterio 1b)
+         El backdrop, el cierre con Esc, el foco y el bloqueo del scroll son del
+         framework. Se conserva el id y las clases que consulta js/carrito.js. -->
+    <aside class="offcanvas offcanvas-end" tabindex="-1" id="carrito-lateral"
+           aria-labelledby="carrito-titulo">
+
+        <div class="offcanvas-header carrito-header">
             <div class="carrito-header-izq">
-                <h2>TU CARRITO</h2>
-                <span class="carrito-conteo">2 PRODUCTOS</span>
+                <h2 class="offcanvas-title" id="carrito-titulo">TU CARRITO</h2>
+                <span class="carrito-conteo"></span>
             </div>
-            <button class="btn-cerrar-carrito" id="cerrar-carrito" aria-label="Cerrar carrito">
-                <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-                    <line x1="1" y1="1" x2="12" y2="12"/><line x1="12" y1="1" x2="1" y2="12"/>
-                </svg>
-            </button>
+            <button type="button" class="btn-close" id="cerrar-carrito"
+                    data-bs-dismiss="offcanvas" aria-label="Cerrar carrito"></button>
         </div>
 
-        <div class="envio-gratis-info">
-            <p class="envio-gratis-texto">TE FALTAN S/ 60 PARA ENVÍO GRATIS</p>
-            <div class="envio-gratis-barra">
-                <div class="envio-gratis-progreso"></div>
+        <div class="offcanvas-body carrito-cuerpo">
+            <div class="envio-gratis-info">
+                <p class="envio-gratis-texto"></p>
+                <div class="envio-gratis-barra">
+                    <div class="envio-gratis-progreso"></div>
+                </div>
             </div>
-        </div>
 
-        <div class="carrito-items">
-            <!-- Los productos se renderizan dinámicamente desde js/carrito.js -->
+            <div class="carrito-items">
+                <!-- Los productos se renderizan dinámicamente desde js/carrito.js -->
+            </div>
         </div>
 
         <div class="carrito-footer">
             <div class="resumen-linea">
                 <span>SUBTOTAL</span>
-                <span>S/ 120</span>
+                <span></span>
             </div>
             <div class="resumen-linea">
                 <span>ENVÍO</span>
-                <span class="envio-gratis">GRATIS</span>
+                <span class="envio-gratis"></span>
             </div>
             <div class="resumen-total">
                 <span class="total-label">TOTAL</span>
-                <span class="total-monto">S/ 120</span>
+                <span class="total-monto"></span>
             </div>
             <a href="/checkout.html" class="btn-finalizar">FINALIZAR COMPRA</a>
-            <button class="btn-seguir" id="seguir-comprando">SEGUIR COMPRANDO</button>
+            <button class="btn-seguir" id="seguir-comprando" data-bs-dismiss="offcanvas">SEGUIR COMPRANDO</button>
         </div>
+
     </aside>
 
     <main>
         <!-- HERO DEL CATÁLOGO -->
         <section class="hero-strip">
-            <div class="contenedor">
+            <div class="container">
                 <span class="subtitulo-superior animar-entrada">COLECCIÓN ACTUAL</span>
-                <h1 class="titulo-gigante animar-entrada-2" style="font-size:clamp(2rem,5vw,3.5rem);letter-spacing:-2px;">CATÁLOGO OVERTEXT</h1>
-                <p class="texto-parrafo animar-entrada-3" style="max-width:480px;">Prendas urbanas diseñadas para brindarte comodidad, estilo y libertad en cada movimiento. Calidad premium con fabricación directa y precio justo.</p>
+                <h1 class="titulo-gigante animar-entrada-2 catalogo-titulo">CATÁLOGO OVERTEXT</h1>
+                <p class="texto-parrafo animar-entrada-3 catalogo-intro">Prendas urbanas diseñadas para brindarte comodidad, estilo y libertad en cada movimiento. Calidad premium con fabricación directa y precio justo.</p>
             </div>
         </section>
 
         <!-- GRID DE PRODUCTOS -->
         <section class="catalogo-productos">
-            <div class="contenedor">
-                <div class="productos-grid">
-                    <!-- Las tarjetas se renderizan dinámicamente desde js/tienda.js -->
+            <div class="container">
+                <div class="productos-grid row g-4">
+                    <!-- Las tarjetas se renderizan dinámicamente desde js/tienda.js
+                         (cada una envuelta en una columna Bootstrap) -->
                 </div>
             </div>
         </section>
 
         <!-- BANNER PACK -->
         <section class="banner-beneficios">
-            <div class="contenedor banner-beneficios-inner">
+            <div class="container banner-beneficios-inner">
                 <div class="banner-beneficios-texto">
                     <h2>¿LLEVAS MÁS DE UNO?</h2>
-                    <p>Arma tu pack de 6 shorts y ahorra. Envío incluido desde 2 packs.</p>
+                    <p>Arma tu pack de 6 shorts y ahorra. <span class="enfasis-marca">Envío incluido desde 2 packs.</span></p>
                 </div>
-                <a href="/promotions.html" class="boton-beneficios">VER PACKS</a>
+                <a href="/promociones.html" class="boton-beneficios">VER PACKS</a>
             </div>
         </section>
     </main>
 
     <!-- FOOTER -->
     <footer class="pie-pagina">
-        <div class="contenedor grid-pie">
-            <div class="pie-info">
+        <div class="container row g-4 pb-5">
+            <div class="col-12 col-md-6 col-lg-4 pie-info">
                 <h2 class="pie-logo">OVERTEXT</h2>
                 <p class="pie-lema">LIMA, PERÚ. STREETWEAR PARA LA NUEVA GENERACIÓN.</p>
             </div>
-            <div class="pie-enlaces">
+            <div class="col-6 col-md-3 col-lg-2 pie-enlaces">
                 <h3>SITIO</h3>
                 <ul>
                     <li><a href="/index.html">INICIO</a></li>
                     <li><a href="/catalogo.html">CATÁLOGO</a></li>
-                    <li><a href="/promotions.html">PROMOCIONES</a></li>
+                    <li><a href="/promociones.html">PROMOCIONES</a></li>
                 </ul>
             </div>
-            <div class="pie-enlaces">
+            <div class="col-6 col-md-3 col-lg-2 pie-enlaces">
                 <h3>AYUDA</h3>
                 <ul>
                     <li><a href="/contacto.html">CONTACTO</a></li>
                     <li><a href="/nosotros.html">NOSOTROS</a></li>
-                    <li><a href="#">ENVÍOS</a></li>
+                    <li><a href="/contacto.html">ENVÍOS</a></li>
                 </ul>
             </div>
-            <div class="pie-boletin">
+            <div class="col-12 col-md-6 col-lg-4 pie-boletin">
                 <h3>NEWSLETTER</h3>
-                <div class="formulario-minimal">
-                    <input type="email" placeholder="TU EMAIL">
-                    <button class="btn-flecha">→</button>
-                </div>
+                <a href="/contacto.html" class="formulario-minimal enlace-boletin">
+                    SUSCRÍBETE
+                    <span class="btn-flecha" aria-hidden="true">→</span>
+                </a>
                 <div class="redes-sociales">
                     <a href="https://www.instagram.com/overcoming.pe/" target="_blank" rel="noopener">INSTAGRAM</a>
                     <a href="https://www.tiktok.com/@overcoming.peru" target="_blank" rel="noopener">TIKTOK</a>
                 </div>
             </div>
         </div>
-        <div class="contenedor">
+        <div class="container">
             <hr class="divisor">
             <div class="legal-flex">
                 <p>© 2026 OVERTEXT — TODOS LOS DERECHOS RESERVADOS</p>
@@ -174,10 +181,10 @@
     </footer>
 
     <a href="https://wa.me/51904501440" class="wsp-flotante" target="_blank" rel="noopener" aria-label="WhatsApp">
-        <img src="/assets/icon/wsp.png" alt="WhatsApp">
+        <i class="bi bi-whatsapp" aria-hidden="true"></i>
     </a>
 
-    <script src="/js/nav.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/js/carrito.js"></script>
     <script src="/js/tienda.js"></script>
 

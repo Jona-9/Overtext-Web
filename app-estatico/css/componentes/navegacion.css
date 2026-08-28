@@ -1,7 +1,13 @@
 /* ============================================================
    OVERTEXT — Navegación
-   Header, logo, menú, ícono de carrito y botón WhatsApp flotante.
+   Header, ícono de carrito y botón WhatsApp flotante.
    Compartido por todas las páginas del sitio.
+
+   D10: el menú anterior (.navegacion-interior, .marca-logo, .lista-enlaces,
+   .enlace, .btn-hamburger, .menu-principal, .boton-usuario, .boton-carrito)
+   se retiró: desde E1-07 el navbar es `navbar navbar-expand-lg` + `collapse`
+   de Bootstrap y ninguna de esas clases quedaba en el HTML. Lo que sigue es
+   solo la capa de tema sobre el componente del framework.
    ============================================================ */
 
 .barra-navegacion {
@@ -17,80 +23,24 @@
     z-index: 100;
 }
 
-.navegacion-interior {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+/* D14: bajo 992 px el `collapse` se abría dentro de una barra de altura fija y
+   sin fondo propio, así que los enlaces se salían de la barra y caían encima
+   del carrusel, ilegibles. La barra pasa a crecer con el menú —que es el
+   comportamiento normal del navbar— y el desplegable recibe fondo sólido y una
+   línea que lo separa del encabezado. No se toca el `collapse` de Bootstrap:
+   esto es solo capa de tema (art. 4). */
+@media (max-width: 991.98px) {
+    .barra-navegacion {
+        height: auto;
+        min-height: 70px;
+    }
 
-.marca-logo {
-    font-family: var(--fuente-principal);
-    font-weight: 900;
-    font-size: 24px;
-    letter-spacing: -1.2px;
-    color: var(--color-negro);
-    text-decoration: none;
-}
-
-.lista-enlaces {
-    display: flex;
-    gap: 0px;
-}
-
-.enlace {
-    color: var(--color-negro);
-    font-size: 0.75rem;
-    font-weight: 700;
-    opacity: 0.5;
-    transition: opacity 0.3s ease;
-    text-decoration: none;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    display: inline-block;
-    padding: 15px 15px;
-}
-
-.enlace:hover,
-.enlace.activo {
-    opacity: 1;
-}
-
-.enlace {
-    position: relative;
-}
-/*animacion enlace*/
-.enlace::after {
-    content: '';
-    position: absolute;
-    bottom: 8px;
-    left: 15px;
-    right: 15px;
-    height: 2px;
-    background-color: var(--color-rojo);
-    transform: scaleX(0);
-    transform-origin: center;
-    transition: transform 0.3s ease;
-    
-}
-
-.enlace:hover::after,
-.enlace.activo::after {
-    transform: scaleX(1);
-}
-
-.boton-carrito {
-    display: flex;
-    align-items: center;
-    position: relative;
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-
-.boton-carrito img {
-    width: 24px;
-    height: auto;
+    .barra-navegacion .navbar-collapse {
+        background: var(--color-fondo);
+        border-top: 1px solid var(--color-borde);
+        margin-top: 12px;
+        padding: 8px 0;
+    }
 }
 
 .carrito-contador {
@@ -107,6 +57,19 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+/* E1-15: sin cifra en el HTML el badge queda vacío hasta que js/carrito.js
+   lo llena; se oculta mientras tanto para que no parpadee un círculo vacío. */
+.carrito-contador:empty {
+    display: none;
+}
+
+/* E1-11: el carrito del header es un Bootstrap Icon; se iguala a los 22 px
+   del SVG de "mi cuenta" que tiene al lado. */
+.accion-navegacion .bi {
+    font-size: 22px;
+    line-height: 1;
 }
 
 /* Botón WhatsApp flotante */
@@ -130,10 +93,11 @@
     transform: scale(1.08);
 }
 
-.wsp-flotante img {
-    width: 30px;
-    height: 30px;
-    object-fit: contain;
+/* E1-11: el PNG pasó a Bootstrap Icons, así que se dimensiona por tipografía */
+.wsp-flotante .bi {
+    font-size: 30px;
+    line-height: 1;
+    color: #ffffff;
 }
 
 /* Acciones del nav (usuario + carrito) */
@@ -141,109 +105,4 @@
     display: flex;
     align-items: center;
     gap: 16px;
-}
-
-.boton-usuario {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: var(--color-negro);
-    text-decoration: none;
-    opacity: 0.7;
-    transition: opacity 0.2s;
-}
-
-.boton-usuario:hover {
-    opacity: 1;
-}
-
-/* --- Hamburger (móvil) --- */
-.btn-hamburger {
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    gap: 5px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 4px;
-    width: 30px;
-}
-
-.btn-hamburger span {
-    display: block;
-    width: 22px;
-    height: 2px;
-    background: var(--color-negro);
-    transition: transform 0.25s ease, opacity 0.25s ease;
-}
-
-.btn-hamburger.abierto span:nth-child(1) {
-    transform: translateY(7px) rotate(45deg);
-}
-
-.btn-hamburger.abierto span:nth-child(2) {
-    opacity: 0;
-}
-
-.btn-hamburger.abierto span:nth-child(3) {
-    transform: translateY(-7px) rotate(-45deg);
-}
-
-@media (max-width: 768px) {
-    .btn-hamburger {
-        display: flex;
-    }
-    
-    .menu-principal {
-        display: none;
-        position: absolute;
-        top: 70px;
-        left: 0;
-        right: 0;
-        background: var(--color-fondo);
-        border-bottom: none;
-        border-radius: 0 0 14px 14px;
-        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
-        z-index: 99;
-        padding: 8px 0;
-        overflow: hidden;
-    }
-
-    .menu-principal.abierto {
-        display: block;
-    }
-
-    /* Oscurece + desenfoca la página detrás del menú abierto (sin elemento extra en el DOM) */
-    .menu-principal.abierto::before {
-        content: '';
-        position: fixed;
-        top: 70px;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        z-index: -1;
-        background: rgba(0, 0, 0, 0.4);
-        backdrop-filter: blur(4px);
-        -webkit-backdrop-filter: blur(4px);
-    }
-
-    .lista-enlaces {
-        flex-direction: column;
-        gap: 0;
-        padding: 0;
-    }
-
-    .lista-enlaces li + li {
-        border-top: 1px solid var(--color-borde);
-    }
-
-    .lista-enlaces li a {
-        display: block;
-        padding: 16px 25px;
-        opacity: 1;                 /* sin el 0.5 tenue: texto legible sobre blanco */
-    }
 }

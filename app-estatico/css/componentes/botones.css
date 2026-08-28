@@ -110,9 +110,13 @@
     background-color: #6e1414;
 }
 
-/* Armar pack (detalle producto) */
+/* Armar pack (detalle producto). Es un enlace a /promociones.html, no un
+   <button>: navega, no ejecuta nada en la pagina. */
 .btn-pack {
+    display: block;
     width: 100%;
+    text-align: center;
+    text-decoration: none;
     background: none;
     color: var(--color-negro);
     border: 1.5px solid var(--color-negro);
@@ -174,18 +178,16 @@
     background-color: #6e1414;
 }
 
-/* Flecha newsletter (footer) */
+/* Flecha del boletin (pie). Es un <span> dentro de .enlace-boletin, no un
+   boton: el desplazamiento lo dispara el hover del enlace que la contiene. */
 .btn-flecha {
-    background: none;
-    border: none;
-    cursor: pointer;
     color: var(--color-fondo);
     font-size: 1.2rem;
     transition: transform 0.2s;
     line-height: 1;
 }
 
-.btn-flecha:hover {
+.enlace-boletin:hover .btn-flecha {
     transform: translateX(3px);
 }
 
@@ -245,31 +247,6 @@
     text-transform: uppercase;
     cursor: pointer;
     margin-top: 8px;
-}
-
-/* WhatsApp alternativo (login) */
-.ot-boton-whatsapp {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    width: 100%;
-    height: 46px;
-    background: var(--color-fondo);
-    color: var(--color-negro);
-    border: 1px solid var(--color-borde);
-    border-radius: 3px;
-    font-family: var(--fuente-principal);
-    font-size: 13px;
-    font-weight: 500;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.ot-icono-whatsapp {
-    width: 20px;
-    height: 20px;
-    flex-shrink: 0;
 }
 
 /* Beneficios (banner negro) */

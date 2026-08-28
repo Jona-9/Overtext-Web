@@ -4,14 +4,8 @@
    ============================================================ */
 
 
-/* ============================================================
-   OBJECTS — Contenedor principal
-   ============================================================ */
-.contenedor {
-    max-width: var(--ancho-maximo);
-    margin: 0 auto;
-    padding: var(--padding-contenedor);
-}
+/* El contenedor del sitio ahora es el `.container` de Bootstrap (E1-03).
+   El `.contenedor` propio se retiró: Bootstrap gobierna el ancho y el centrado. */
 
 
 /* ============================================================

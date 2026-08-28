@@ -214,17 +214,85 @@ Carlos sigue con la demostración del CRUD.
 
 ## Bitácora — Sprint 1
 
+### 2026-08-28 — cierre del Sprint 1
+
+- **Mis 7 tareas cerradas** (E1-12 a E1-18). El criterio 2 completo, sus cuatro puntos:
+  **2a** estructurado (script del configurador fuera del HTML, docs al día), **2b** limpio
+  (`style.css` borrado, 0 estilos en línea, 0 placeholders de relleno), **2c** kebab-case
+  auditado archivo por archivo, **2d** JS sin errores.
+- **El pendiente humano de E1-19 quedó firmado.** Lo que dejé abierto era abrir DevTools
+  página por página, cosa que no podía hacer con verificación estática. Lo firmaron
+  Jonathan, Carlos y Dayro sobre las 10 páginas, a 375 y 1440 px: **cero errores y cero
+  avisos**. Con el favicon que añadí ya no queda ni el `404 /favicon.ico`.
+- **Las dos deudas que dejé abiertas por el art. 9 ya están cerradas.** Jonathan aplicó
+  D3 y D4 el 28-ago:
+  - **D3** — el configurador ofrece los **7 colores del catálogo**. El swatch **BLANCO**,
+    que yo solo había des-inlineado (`.color-muestra--blanco`), **desapareció**, y entró
+    **Marrón**, que faltaba. También se renombró `--borgona` → `--guinda` y `--olivo` →
+    `--oliva` para que los nombres coincidan con `productos.json`. **Los hex ahora salen
+    del catálogo**, no de un valor aproximado.
+  - **D4** — `UMBRAL_ENVIO_GRATIS = 200`.
+- **Confirmé que mi cambio de E1-13 aguanta el cambio de D3.** `promociones.js` lee el
+  color con `getComputedStyle` y el nombre desde el DOM (`.nombre-color`), así que
+  **no tiene ninguna lista de colores quemada**: quitar el blanco y añadir el marrón fue
+  editar HTML y CSS, sin tocar el JS. Ese fue el motivo de hacerlo así.
+- **Deuda menor que dejo apuntada (no es mía, no la toqué):** quedan dos reglas CSS
+  muertas que nombran colores inexistentes — `.color-borgona` en
+  `css/paginas/catalogo.css:47` y `.swatch--blanco` en `css/paginas/producto.css:202`.
+  Los swatches reales se generan con el hex en línea desde `productos.json`
+  (`tienda.js`), así que **ninguna de las dos se usa**. Es limpieza, no un fallo.
+- **Bloqueo:** ninguno.
+- **Archivos tocados:** ninguno.
+
 ### 2026-08-20
 - Hice: —
 - Decidí / aprendí: —
 - Bloqueo: —
 - Archivos tocados: —
 
+### 2026-08-26
+- **Hice (6 de mis 7 tareas del Sprint 1):**
+  - **E1-12** — borré `css/style.css` (616 líneas de código muerto, `:root` con `--negro:#000` en conflicto con `main.css`). Ningún HTML lo enlazaba.
+  - **E1-13** — extraje el configurador de packs incrustado en `promociones.html` a `js/promociones.js` nuevo; el HTML ahora lo carga con `<script src>` después de `carrito.js`.
+  - **E1-14** — eliminé **todos** los estilos en línea: 2 en `catalogo.html` (→ `.catalogo-titulo`/`.catalogo-intro` en `paginas/catalogo.css`), 2 en `index.html` (→ `.hero-acciones`/`.detalle-cta` en `paginas/inicio.css` nuevo), 8 en `promociones.html` (7 swatches → clases `.color-muestra--<color>` + el padding del contenedor → `.seccion-configurador`, en `paginas/promociones.css`). `grep style= *.html` = 0.
+  - **E1-15** — vacié los placeholders que parpadeaban (`.carrito-contador`, `.carrito-conteo`, `.envio-gratis-texto`, subtotal y `.total-monto`) en las 10 páginas; los llena `carrito.js`. Añadí `.carrito-contador:empty{display:none}` en `navegacion.css` para que el badge vacío no parpadee.
+  - **E1-17** — reescribí `docs/01-arquitectura-css.md` y `docs/02-sistema-diseno.md` con la estructura REAL (main.css/tema-overtext.css/layout.css + 10 componentes + 10 páginas; fuentes **Oswald+Inter**, no Bebas; nombres reales de archivo; header con `navbar` + Bootstrap Icons).
+  - **E1-18** — renombré `promotions.html` → `promociones.html` y actualicé los enlaces en las 10 páginas. Auditoría kebab-case: además corregí `.oferta_shorts` → `.oferta-shorts` y el asset `pack_Short.webp` → `pack-short.webp` (con sus 2 referencias). `LEEME.txt` se deja en mayúsculas (convención de readme).
+- **Decidí / aprendí:**
+  - **Gotcha `getComputedStyle`:** al pasar el color de los swatches de `style=` a una clase CSS, el configurador leía `.style.backgroundColor` (inline) y devolvía `""` → los slots quedaban sin color. En `promociones.js` lo cambié a `getComputedStyle(...).backgroundColor`. El `style="background-color:…"` que el JS **genera** por slot es dinámico y se queda.
+  - Verifiqué con `node --check` los dos JS, `grep` de inline styles / refs a `promotions`, y que **todas** las refs locales `/css /js /assets` resuelven (sin 404).
+- **Bloqueo:** ninguno.
+- **Archivos tocados:** borré `css/style.css`; creé `js/promociones.js`, `css/paginas/inicio.css` y `assets/favicon.svg`; renombré `promotions.html`→`promociones.html` y `pack_Short.webp`→`pack-short.webp`; edité las 10 páginas HTML, `navegacion.css`, `paginas/catalogo.css`, `paginas/promociones.css` y los 2 docs.
+
+### 2026-08-26 (cierre del sprint)
+- **E1-16 completado:** comprimí las imágenes; `assets/` 26 MB → **3,8 MB**, **0 imágenes > 300 KB**.
+- **Favicon** `assets/favicon.svg` en las 10 páginas → se va el `404 /favicon.ico`.
+- **QA estática OK:** servido con `python -m http.server`, todas las páginas y recursos responden **200**. Verifiqué además: 0 inline styles, 0 refs a `promotions`, `node --check` en los JS, 0 refs locales rotas, kebab-case sin hallazgos nuevos.
+- **Pendiente humano del Sprint Review:** abrir DevTools (F12 → Console) página por página para firmar el criterio 2d (cero errores/warnings). El código no tiene causas estructurales de error.
+
 ---
 
 ## Para consolidar en memory.md
 
-- [ ]
+- [x] **`promotions.html` → `promociones.html`** (renombrado): afecta a todo el equipo, los enlaces internos de las 10 páginas ya apuntan al nuevo nombre. Ojo si alguien tiene ramas en curso que enlacen `/promotions.html`.
+- [x] **`css/style.css` eliminado** (deuda D2 cerrada).
+- [x] **Docs `01-arquitectura-css.md` y `02-sistema-diseno.md` corregidos** (deuda D5 cerrada): la estructura real es `main.css`/`tema-overtext.css`/`layout.css` + `componentes/` + `paginas/`; fuentes Oswald + Inter (no Bebas Neue).
+- [x] **Estilos en línea eliminados** y **placeholders del carrito vaciados** (incumplían art. 7): nuevas clases `.color-muestra--<color>`, `.seccion-configurador`, `.hero-acciones`, `.detalle-cta`, `.catalogo-titulo`, `.catalogo-intro`; regla `.carrito-contador:empty` en `navegacion.css`.
+- [x] **E1-16 (assets < 15 MB) — HECHO:** comprimí las imágenes manualmente. `assets/` bajó de 26 MB → **3,8 MB** y **ninguna imagen supera 300 KB** (cumple RNF-0005 y el `LEEME`). Deuda D1 cerrada.
+- [x] **Favicon de marca** (`assets/favicon.svg`) enlazado en las 10 páginas: elimina el único `404 /favicon.ico` del servidor. No es de mis 7 tareas, pero cierra el criterio de "cero errores/404".
+- [x] ~~Siguen abiertas para otros duos: D3 y D4.~~ **Cerradas el 28-ago por Jonathan.**
+      **D3** — fuera el BLANCO, dentro Marrón, y `--borgona`/`--olivo` renombradas a
+      `--guinda`/`--oliva`; los 7 hex salen ahora de `productos.json`. **D4** —
+      `UMBRAL_ENVIO_GRATIS = 200`.
+- [x] **`promociones.js` no tiene lista de colores quemada, y es a propósito:** lee el
+      nombre del DOM (`.nombre-color`) y el color con `getComputedStyle`. Por eso cambiar
+      la paleta del configurador (D3) fue editar HTML y CSS **sin tocar el JS**.
+      Quien vaya a "mejorarlo" metiendo un array de colores, rompe esa propiedad.
+- [ ] **Limpieza pendiente, menor:** dos reglas CSS muertas que nombran colores que no
+      existen — `.color-borgona` (`css/paginas/catalogo.css:47`) y `.swatch--blanco`
+      (`css/paginas/producto.css:202`). Los swatches reales se pintan con el hex en línea
+      desde `productos.json` vía `tienda.js`, así que ninguna se usa. Va con la limpieza
+      del Sprint 2, no es un fallo del ATF1.
 
 ---
 
@@ -238,4 +306,6 @@ Carlos sigue con la demostración del CRUD.
 
 ## Sprints cerrados
 
-*(vacío)*
+- **Sprint 1 — Bootstrap y sitio estático (20-ago → 04-sep). Cerrado el 28-ago-2026.**
+  E1-12 ✅ · E1-13 ✅ · E1-14 ✅ · E1-15 ✅ · E1-16 ✅ · E1-17 ✅ · E1-18 ✅.
+  **Criterio 2 completo (2a, 2b, 2c, 2d).** Deudas D1, D2 y D5 cerradas.

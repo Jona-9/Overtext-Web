@@ -4,9 +4,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
   <title>Finalizar compra — OVERTEXT</title>
+  <!-- Framework: Bootstrap 5.3 por CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <!-- Arquitectura ITCSS OVERTEXT -->
   <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/tema-overtext.css">
   <link rel="stylesheet" href="/css/layout.css">
   <link rel="stylesheet" href="/css/componentes/navegacion.css">
   <link rel="stylesheet" href="/css/componentes/botones.css">
@@ -19,37 +24,35 @@
 <body>
 
   <!-- HEADER -->
-  <header class="barra-navegacion">
-    <div class="contenedor navegacion-interior">
-      <a href="/index.html" class="marca-logo">OVERTEXT</a>
-      <nav class="menu-principal">
-        <ul class="lista-enlaces">
-          <li><a href="/index.html" class="enlace">INICIO</a></li>
-          <li><a href="/catalogo.html" class="enlace">CATÁLOGO</a></li>
-          <li><a href="/promotions.html" class="enlace">PROMOCIONES</a></li>
-          <li><a href="/nosotros.html" class="enlace">NOSOTROS</a></li>
-          <li><a href="/contacto.html" class="enlace">CONTACTO</a></li>
-        </ul>
-      </nav>
-      <div class="nav-acciones">
-        <a href="/login.html" class="boton-usuario" aria-label="Mi cuenta">
+  <nav class="navbar navbar-expand-lg barra-navegacion">
+    <div class="container">
+      <a class="navbar-brand" href="/index.html">OVERTEXT</a>
+      <div class="d-flex align-items-center order-lg-last nav-acciones">
+        <a href="/login.html" class="accion-navegacion" aria-label="Mi cuenta">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="8" r="4"/>
             <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
           </svg>
         </a>
-        <button class="boton-carrito" aria-label="Carrito">
-          <img src="/assets/icon/carrito-de-compras.png" alt="">
-          <span class="carrito-contador">0</span>
+        <button class="accion-navegacion" type="button" aria-label="Carrito">
+          <i class="bi bi-cart3" aria-hidden="true"></i>
+          <span class="carrito-contador"></span>
         </button>
-        <button class="btn-hamburger" id="btn-hamburger" aria-label="Menú">
-          <span></span>
-          <span></span>
-          <span></span>
+        <button class="navbar-toggler ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#menu-principal" aria-controls="menu-principal" aria-expanded="false" aria-label="Menú">
+          <span class="navbar-toggler-icon"></span>
         </button>
       </div>
+      <div class="collapse navbar-collapse" id="menu-principal">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="/index.html">INICIO</a></li>
+          <li class="nav-item"><a class="nav-link" href="/catalogo.html">CATÁLOGO</a></li>
+          <li class="nav-item"><a class="nav-link" href="/promociones.html">PROMOCIONES</a></li>
+          <li class="nav-item"><a class="nav-link" href="/nosotros.html">NOSOTROS</a></li>
+          <li class="nav-item"><a class="nav-link" href="/contacto.html">CONTACTO</a></li>
+        </ul>
+      </div>
     </div>
-  </header>
+  </nav>
 
   <!-- MAIN -->
   <main class="checkout contenedor">
@@ -73,46 +76,46 @@
           </div>
           <div class="paso-cuerpo">
 
-            <div class="grid-2">
-              <div>
-                <label for="co-nombre">Nombre *</label>
-                <input type="text" id="co-nombre" placeholder="EJ. CARLOS" required autocomplete="given-name">
-                <span class="error-msg">Ingresa tu nombre</span>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="co-nombre" class="form-label">Nombre *</label>
+                <input type="text" class="form-control" id="co-nombre" placeholder="EJ. CARLOS" required autocomplete="given-name">
+                <div class="invalid-feedback">Ingresa tu nombre</div>
               </div>
-              <div>
-                <label for="co-apellido">Apellido *</label>
-                <input type="text" id="co-apellido" placeholder="EJ. RIVERA" required autocomplete="family-name">
-                <span class="error-msg">Ingresa tu apellido</span>
-              </div>
-            </div>
-
-            <div class="grid-2">
-              <div>
-                <label for="co-telefono">Teléfono *</label>
-                <input type="text" id="co-telefono" placeholder="+51 900 000 000" required autocomplete="tel">
-                <span class="error-msg">Ingresa tu teléfono</span>
-              </div>
-              <div>
-                <label for="co-correo">Correo *</label>
-                <input type="email" id="co-correo" placeholder="USUARIO@MAIL.COM" required autocomplete="email">
-                <span class="error-msg">Ingresa un correo válido</span>
+              <div class="col-md-6">
+                <label for="co-apellido" class="form-label">Apellido *</label>
+                <input type="text" class="form-control" id="co-apellido" placeholder="EJ. RIVERA" required autocomplete="family-name">
+                <div class="invalid-feedback">Ingresa tu apellido</div>
               </div>
             </div>
 
-            <div class="grid-2">
-              <div>
-                <label for="co-doc">Tipo de documento</label>
-                <select id="co-doc">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="co-telefono" class="form-label">Teléfono *</label>
+                <input type="text" class="form-control" id="co-telefono" placeholder="+51 900 000 000" required autocomplete="tel">
+                <div class="invalid-feedback">Ingresa tu teléfono</div>
+              </div>
+              <div class="col-md-6">
+                <label for="co-correo" class="form-label">Correo *</label>
+                <input type="email" class="form-control" id="co-correo" placeholder="USUARIO@MAIL.COM" required autocomplete="email">
+                <div class="invalid-feedback">Ingresa un correo válido</div>
+              </div>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="co-doc" class="form-label">Tipo de documento</label>
+                <select class="form-select" id="co-doc">
                   <option value="DNI">DNI</option>
                   <option value="CE">Carné de extranjería</option>
                   <option value="Pasaporte">Pasaporte</option>
                   <option value="RUC">RUC</option>
                 </select>
               </div>
-              <div>
-                <label for="co-numdoc">Número de documento *</label>
-                <input type="text" id="co-numdoc" placeholder="00000000" required autocomplete="off" inputmode="numeric" maxlength="12">
-                <span class="error-msg">Ingresa un número de documento válido</span>
+              <div class="col-md-6">
+                <label for="co-numdoc" class="form-label">Número de documento *</label>
+                <input type="text" class="form-control" id="co-numdoc" placeholder="00000000" required autocomplete="off" inputmode="numeric" maxlength="12">
+                <div class="invalid-feedback">Ingresa un número de documento válido</div>
               </div>
             </div>
 
@@ -131,22 +134,22 @@
 
             <div class="envio-opciones">
               <label class="envio-card">
-                <input type="radio" name="envio" value="recojo">
+                <input class="form-check-input" type="radio" name="envio" value="recojo">
                 <span class="envio-card-nombre">RECOJO EN ALMACÉN</span>
                 <span class="envio-card-precio">GRATIS</span>
               </label>
               <label class="envio-card">
-                <input type="radio" name="envio" value="delivery">
+                <input class="form-check-input" type="radio" name="envio" value="delivery">
                 <span class="envio-card-nombre">DELIVERY A LIMA</span>
                 <span class="envio-card-precio">S/ 15.00</span>
               </label>
               <label class="envio-card">
-                <input type="radio" name="envio" value="provincia">
+                <input class="form-check-input" type="radio" name="envio" value="provincia">
                 <span class="envio-card-nombre">ENVÍO A PROVINCIA</span>
                 <span class="envio-card-precio">S/ 25.00</span>
               </label>
             </div>
-            <span class="error-msg" id="envio-error">Elige una opción de envío</span>
+            <div class="invalid-feedback" id="envio-error">Elige una opción de envío</div>
 
             <!-- Sub-bloques: solo aparece el que corresponde a la opción elegida -->
             <div class="envio-campos" data-envio="recojo">
@@ -159,44 +162,44 @@
             </div>
 
             <div class="envio-campos" data-envio="delivery">
-              <label for="co-distrito">Distrito *</label>
-              <select id="co-distrito" required>
+              <label for="co-distrito" class="form-label">Distrito *</label>
+              <select class="form-select" id="co-distrito" required>
                 <option value="">Elige tu distrito</option>
               </select>
-              <span class="error-msg">Elige tu distrito</span>
+              <div class="invalid-feedback">Elige tu distrito</div>
 
-              <label for="co-direccion">Dirección *</label>
-              <input type="text" id="co-direccion" placeholder="AV. PRINCIPAL 123" required>
-              <span class="error-msg">Ingresa tu dirección</span>
+              <label for="co-direccion" class="form-label">Dirección *</label>
+              <input type="text" class="form-control" id="co-direccion" placeholder="AV. PRINCIPAL 123" required>
+              <div class="invalid-feedback">Ingresa tu dirección</div>
 
-              <label for="co-referencia">Referencia</label>
-              <input type="text" id="co-referencia" placeholder="FRENTE A PARQUE">
+              <label for="co-referencia" class="form-label">Referencia</label>
+              <input type="text" class="form-control" id="co-referencia" placeholder="FRENTE A PARQUE">
             </div>
 
             <div class="envio-campos" data-envio="provincia">
-              <div class="grid-2">
-                <div>
-                  <label for="co-departamento">Departamento *</label>
-                  <select id="co-departamento" required>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label for="co-departamento" class="form-label">Departamento *</label>
+                  <select class="form-select" id="co-departamento" required>
                     <option value="">Elige tu departamento</option>
                   </select>
-                  <span class="error-msg">Elige tu departamento</span>
+                  <div class="invalid-feedback">Elige tu departamento</div>
                 </div>
-                <div>
-                  <label for="co-provincia">Provincia *</label>
-                  <select id="co-provincia" required disabled>
+                <div class="col-md-6">
+                  <label for="co-provincia" class="form-label">Provincia *</label>
+                  <select class="form-select" id="co-provincia" required disabled>
                     <option value="">Primero elige departamento</option>
                   </select>
-                  <span class="error-msg">Elige tu provincia</span>
+                  <div class="invalid-feedback">Elige tu provincia</div>
                 </div>
               </div>
-              <label for="co-agencia">Agencia de envío *</label>
-              <select id="co-agencia" required>
+              <label for="co-agencia" class="form-label">Agencia de envío *</label>
+              <select class="form-select" id="co-agencia" required>
                 <option value="">Elige el courier</option>
                 <option value="Shalom">Shalom</option>
                 <option value="Olva Courier">Olva Courier</option>
               </select>
-              <span class="error-msg">Elige la agencia de envío</span>
+              <div class="invalid-feedback">Elige la agencia de envío</div>
             </div>
 
             <button type="button" class="btn-continuar" data-continuar="2">CONTINUAR</button>
@@ -212,7 +215,7 @@
           <div class="paso-cuerpo">
 
             <label class="opcion-envio">
-              <input type="radio" name="pago" value="deposito" checked>
+              <input class="form-check-input" type="radio" name="pago" value="deposito" checked>
               <span><b>DEPÓSITO — TRANSFERENCIA</b></span>
             </label>
             <div class="pago-detalle">
@@ -222,13 +225,13 @@
               <p>Enviar comprobante por WhatsApp al finalizar.</p>
             </div>
 
-            <label class="opcion-envio" style="margin-top:12px;">
-              <input type="radio" name="pago" value="yape">
+            <label class="opcion-envio mt-3">
+              <input class="form-check-input" type="radio" name="pago" value="yape">
               <span><b>YAPE / PLIN</b></span>
             </label>
 
-            <label for="co-notas" style="margin-top:16px;display:block;">Notas del pedido</label>
-            <textarea id="co-notas" placeholder="INDICACIONES PARA LA ENTREGA..."></textarea>
+            <label for="co-notas" class="form-label d-block mt-4">Notas del pedido</label>
+            <textarea class="form-control" id="co-notas" rows="3" placeholder="INDICACIONES PARA LA ENTREGA..."></textarea>
           </div>
         </div>
 
@@ -267,40 +270,40 @@
 
   <!-- FOOTER -->
   <footer class="pie-pagina">
-    <div class="contenedor grid-pie">
-      <div class="pie-info">
+    <div class="container row g-4 pb-5">
+      <div class="col-12 col-md-6 col-lg-4 pie-info">
         <h2 class="pie-logo">OVERTEXT</h2>
         <p class="pie-lema">LIMA, PERÚ. STREETWEAR PARA LA NUEVA GENERACIÓN.</p>
       </div>
-      <div class="pie-enlaces">
+      <div class="col-6 col-md-3 col-lg-2 pie-enlaces">
         <h3>SITIO</h3>
         <ul>
           <li><a href="/index.html">INICIO</a></li>
           <li><a href="/catalogo.html">CATÁLOGO</a></li>
-          <li><a href="/promotions.html">PROMOCIONES</a></li>
+          <li><a href="/promociones.html">PROMOCIONES</a></li>
         </ul>
       </div>
-      <div class="pie-enlaces">
+      <div class="col-6 col-md-3 col-lg-2 pie-enlaces">
         <h3>AYUDA</h3>
         <ul>
           <li><a href="/contacto.html">CONTACTO</a></li>
           <li><a href="/nosotros.html">NOSOTROS</a></li>
-          <li><a href="#">ENVÍOS</a></li>
+          <li><a href="/contacto.html">ENVÍOS</a></li>
         </ul>
       </div>
-      <div class="pie-boletin">
+      <div class="col-12 col-md-6 col-lg-4 pie-boletin">
         <h3>NEWSLETTER</h3>
-        <div class="formulario-minimal">
-          <input type="email" placeholder="TU EMAIL">
-          <button class="btn-flecha">→</button>
-        </div>
+        <a href="/contacto.html" class="formulario-minimal enlace-boletin">
+            SUSCRÍBETE
+            <span class="btn-flecha" aria-hidden="true">→</span>
+        </a>
         <div class="redes-sociales">
           <a href="https://www.instagram.com/overcoming.pe/" target="_blank" rel="noopener">INSTAGRAM</a>
           <a href="https://www.tiktok.com/@overcoming.peru" target="_blank" rel="noopener">TIKTOK</a>
         </div>
       </div>
     </div>
-    <div class="contenedor">
+    <div class="container">
       <hr class="divisor">
       <div class="legal-flex">
         <p>© 2026 OVERTEXT — TODOS LOS DERECHOS RESERVADOS</p>
@@ -310,10 +313,10 @@
   </footer>
 
   <a href="https://wa.me/51904501440" class="wsp-flotante" target="_blank" rel="noopener" aria-label="WhatsApp">
-    <img src="/assets/icon/wsp.png" alt="WhatsApp">
+    <i class="bi bi-whatsapp" aria-hidden="true"></i>
   </a>
 
-  <script src="/js/nav.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="/js/carrito.js"></script>
   <script src="/js/checkout.js"></script>
 

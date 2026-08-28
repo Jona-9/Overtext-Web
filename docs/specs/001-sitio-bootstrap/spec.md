@@ -3,7 +3,7 @@
 **Fase SDD:** Specify
 **Sprint:** 1 (20-ago → 04-sep-2026)
 **Entrega:** ATF1
-**Estado:** ⬜ borrador — pendiente del checkpoint del Product Owner (Joaquín)
+**Estado:** ✅ aprobado por el Product Owner (Joaquín) — 2026-08-25
 
 ---
 
@@ -147,16 +147,16 @@ Vienen del proyecto anterior y contradicen el artículo 7 de la constitución (u
 
 | # | Incoherencia | Decisión |
 |---|---|---|
-| I1 | Los 7 colores del configurador de packs (NEGRO, BLANCO, STONE, BORGOÑA, GRIS, OLIVO, MARINO) no coinciden con los 7 de `productos.json` (beige, negro, guinda, gris, oliva, azul, marrón). Hay un BLANCO que no existe como producto. | `[NECESITA ACLARACIÓN]` |
-| I2 | Envío gratis: `UMBRAL_ENVIO_GRATIS = 180` en `js/carrito.js` vs "envío incluido desde 2 packs" (S/ 200) en el copy. | `[NECESITA ACLARACIÓN]` |
-| I3 | Los 7 productos llevan el mismo badge "ÚLTIMAS UNIDADES" sin stock real detrás. | `[NECESITA ACLARACIÓN]` |
+| I1 | Los 7 colores del configurador de packs (NEGRO, BLANCO, STONE, BORGOÑA, GRIS, OLIVO, MARINO) no coinciden con los 7 de `productos.json` (beige, negro, guinda, gris, oliva, azul, marrón). Hay un BLANCO que no existe como producto. | **PO 2026-08-25:** la fuente única es `productos.json` (7 colores del catálogo, con marrón). Se **elimina el BLANCO** (no tiene producto ni imágenes) y el configurador se alinea al catálogo. Implementación del ajuste = deuda D3, otro duo. |
+| I2 | Envío gratis: `UMBRAL_ENVIO_GRATIS = 180` en `js/carrito.js` vs "envío incluido desde 2 packs" (S/ 200) en el copy. | **PO 2026-08-25:** **S/ 200**. `contexto.md` es la fuente de verdad del contenido ("desde 2 packs"). Corregir `carrito.js` y la barra del carrito = deuda D4, otro duo. |
+| I3 | Los 7 productos llevan el mismo badge "ÚLTIMAS UNIDADES" sin stock real detrás. | **PO 2026-08-25:** el badge se **calcula** desde `producto.stock` con umbral **< 10** → "últimas unidades" (art. 7; ver data-model M4/RN5). |
 | I4 | El pedido se guarda en `localStorage` bajo `ot_pedido` y **se sobrescribe en cada compra**: no hay historial. | Se resuelve en el TF con la tabla `pedido`. |
 
-**Preguntas para el Product Owner:**
+**Preguntas para el Product Owner — resueltas (Joaquín, 2026-08-25):**
 
-1. ¿La lista de colores válida es la del catálogo (7 con beige/guinda/azul/marrón) o la del configurador? ¿Existe o no el short blanco?
-2. ¿Cuál es el umbral real de envío gratis: S/ 180 o S/ 200?
-3. ¿El badge de stock se calcula desde un umbral (p. ej. stock < 10 → "últimas unidades") o se asigna a mano por producto?
+1. Lista de colores válida = la del **catálogo** (`productos.json`, 7 con beige/guinda/azul/marrón). **El short blanco no existe**: se retira del configurador.
+2. Umbral de envío gratis = **S/ 200** (según el copy de marca).
+3. El badge de stock se **calcula** desde un umbral: **stock < 10 → "últimas unidades"**. No se asigna a mano.
 
 ---
 
@@ -166,4 +166,4 @@ Vienen del proyecto anterior y contradicen el artículo 7 de la constitución (u
 - [x] Los criterios de aceptación son verificables en el navegador
 - [x] Lo que queda fuera de alcance está dicho explícitamente
 - [x] Las ambigüedades están marcadas `[NECESITA ACLARACIÓN]`
-- [ ] **Checkpoint: aprobado por el Product Owner** → habilita escribir `plan.md`
+- [x] **Checkpoint: aprobado por el Product Owner** → habilita escribir `plan.md` *(Joaquín, 2026-08-25)*
