@@ -55,7 +55,7 @@
 - [x] Captura archivada en `informes/capturas/sprint-01/`
 - [x] Criterio de rúbrica marcado en `docs/scrum/checklist-entrega.md`
 - [x] Bloque "Para consolidar" escrito en esta memoria
-- [ ] **Código subido vía PR revisado por otro duo** — *lo único que me falta.* Ver la nota de abajo: la rama `develop` que pide la DoD no existe.
+- [x] **Código subido vía PR revisado por otro duo** — *cerrado (2026-08-28).* Resuelto el equívoco: la rama de integración es **`testing`**, no `develop`; la DoD se corrige para el Sprint 2.
 
 > **Incoherencia que me toca resolver como SM:** la DoD del sprint dice *"código en `develop` vía PR"*, pero **`develop` no existe** en el repositorio. Las ramas son `main`, `testing` y una por persona, y los merges anteriores (José, Joaquín) fueron a `testing`. Hay que corregir la DoD o crear `develop`; mientras tanto esa casilla no se puede marcar con honestidad.
 
@@ -408,10 +408,235 @@ Faltan 4. **`memory.md` no se toca** hasta que estén los 6 (CLAUDE.md §2).
   (CLAUDE.md §2).
 - Pendiente de facilitar: Review y Retro del vie 04-sep.
 
+### 27-ago — Arreglo del bloque `.seleccion-colores` (promociones)
+
+**Hice:** corregí el configurador de packs, que se veía mal en `promociones.html`.
+Tres defectos reales, ninguno era que los swatches no pintaran (los 7 hex resolvían bien):
+
+1. **`activo` congelado.** `js/promociones.js` nunca tocaba la clase: el recuadro negro
+   se quedaba siempre en NEGRO (venía escrito a mano en el HTML) y clicar un color no
+   daba ningún feedback. Ahora `marcarColores()` recalcula el estado desde `seleccion`
+   en cada `render()`, así que `activo` significa **«este color ya está en el pack»** y
+   se apaga solo al quitar un slot. Añadí un contador `×N` bajo cada muestra.
+2. **Tres márgenes izquierdos distintos** dentro de `.info-pack`: colores y tallas a
+   60px, slots y botón a 25px. Unifiqué con una variable `--pad-panel: 25px` declarada
+   en `.info-pack`; todos los bloques internos la usan. Medido: los 6 bloques parten
+   de la misma línea en escritorio y en 390px.
+3. **`mix-blend-mode: difference` en `.slot-talla`** pintaba la talla en turquesa sobre
+   borgoña. Lo cambié por una clase `.slot--claro` que el JS pone según la luminancia
+   del color: texto negro sobre muestras claras, blanco sobre oscuras.
+
+**Archivos:** `app-estatico/promociones.html`, `app-estatico/css/paginas/promociones.css`,
+`app-estatico/js/promociones.js`.
+
+**Efecto colateral que tuve que resolver:** al pasar `.ofertas` de 60px a 25px de
+padding lateral, el titular y el badge ganaron ancho y cambiaron de corte de línea.
+Fijé el titular con `<br>` (`6 shorts / x S/100`, igual que el hero) y el badge con
+`max-width: 230px`. Sin esto la alineación se arregla pero la tipografía se rompe.
+
+**Verificado:** servido en `python3 -m http.server`, consola limpia (0 errores),
+sin scroll horizontal, colores en 2 filas a 390px, y el ciclo agregar → quitar →
+llegar a 6 → clic extra bloqueado funciona.
+
+**Bloqueado / no toqué:** la deuda **D3** sigue viva — los hex de las muestras están
+duplicados a mano en `promociones.css:153-159` y no coinciden con `productos.json`
+(art. 7). Tampoco existe una opción «celeste» aunque la foto del pack muestra un short
+celeste.
+
+### 27-ago (2) — `.btn-pack` muerto y barrido de errores
+
+**Hice:** `detalle-producto.html:177` tenía `<button class="btn-pack">Arma tu pack</button>`
+sin `href`, sin `data-*` y sin ningún JS que enganchara `.btn-pack` (la clase solo existía
+en `botones.css`). Se veía como botón y al pulsarlo no pasaba nada. Lo convertí en
+`<a href="/promociones.html" class="btn-pack">`, que es lo que hace su gemelo de
+`index.html:154`. En `css/componentes/botones.css` añadí `display:block`,
+`text-align:center` y `text-decoration:none` para que el `<a>` se vea igual que el
+`<button>` (el `width:100%` que ya tenía no hace nada sobre un elemento inline).
+No monté un configurador en la ficha: el spec dice que el pack "se re-maqueta pero no
+se profundiza" (`spec.md:48`, art. 8).
+
+**Verificado:** clic real en el navegador → navega a `/promociones.html`; mismo ancho,
+alto y tipografía que antes.
+
+**Barrido del sitio (las 10 páginas, servidas en localhost):**
+
+- 0 errores de consola, 0 imágenes rotas, 0 enlaces internos a archivos inexistentes,
+  0 rutas de `productos.json` que no existan en disco. También comprobado: ningún
+  `onclick=` inline en el HTML.
+- **Queda un botón muerto: `.btn-flecha`** (la flecha del NEWSLETTER en el pie de las
+  **10** páginas). Ningún JS la escucha y el bloque `.formulario-minimal` **no es un
+  `<form>`**, así que ni el clic ni el Enter hacen nada. Es el mismo defecto que acabo
+  de arreglar en `.btn-pack`, multiplicado por 10. No lo toco yo: el pie es la pasada
+  de Carrizo/Carlos y hay que decidir antes qué debe hacer (no hay backend en el ATF1).
+- **Enlaces `href="#"`**: `ENVÍOS` en el pie de las 10 páginas (no existe `envios.html`),
+  y en `login.html` `¿La olvidaste?` (:76) y `Crea tu cuenta` (:108). Son marcadores de
+  posición conscientes, pero conviene que el PO diga si se quedan así en el ATF1.
+- **D4 confirmada y viva:** `js/carrito.js:10` sigue con `UMBRAL_ENVIO_GRATIS = 180`
+  cuando el PO fijó **S/ 200** (`spec.md:151`).
+- **D3, datos concretos** para quien la implemente. Catálogo (`productos.json`, 7):
+  Stone Beige `#C4A882`, Negro `#111111`, Guinda `#8B1A2C`, Gris `#9E9E9E`,
+  Oliva Militar `#5C6B3A`, Azul Marino `#1A3A7A`, Marrón `#6B4A2E`.
+  Configurador (`promociones.css`, 7): NEGRO `#1A1A1A`, BLANCO, STONE `#C8B89A`,
+  BORGOÑA `#8B1A2C`, GRIS `#9E9E9E`, OLIVO `#5C6B3A`, MARINO `#1A3A7A`.
+  O sea: **sobra BLANCO, falta MARRÓN**, y NEGRO y STONE tienen el hex desviado.
+  GRIS, OLIVO y MARINO ya coinciden en hex aunque no en nombre.
+
+### 27-ago (3) — Enlaces muertos del pie y checklist B
+
+**Hice** (decisión: cerrar la línea del checklist A *"sin enlaces muertos"*, que hasta
+hoy era falsa; ver criterio en la conversación del 27-ago):
+
+1. **`ENVÍOS` del pie** (`href="#"` en las 10 páginas) → `/contacto.html`.
+2. **Flecha del boletín** (las 10): el `<div class="formulario-minimal">` con un
+   `<input type="email">` inerte y un `<button class="btn-flecha">` sin handler pasa a
+   ser **un enlace** a `/contacto.html`, que sí tiene formulario real:
+   `<a class="formulario-minimal enlace-boletin">SUSCRÍBETE <span class="btn-flecha">→</span></a>`.
+   Sin backend, un control que navega es honesto; uno que finge enviar, no.
+   `contexto.md` no define copy de boletín, así que no se pisó contenido de marca.
+3. **CSS:** en `formularios.css` se retiran las reglas del `input[type=email]` (ya no
+   existe ese input en ninguna página, era código muerto → criterio 2b) y entra
+   `.enlace-boletin`. En `botones.css`, `.btn-flecha` deja de tener propiedades de
+   `<button>` (`background`/`border`/`cursor`) porque ahora es un `<span>`, y el
+   desplazamiento pasa a `.enlace-boletin:hover .btn-flecha`.
+4. **Defecto preexistente que encontré al verificar:** `intranet.html` y
+   `confirmacion.html` **nunca cargaban `css/componentes/formularios.css`**, así que su
+   caja del pie salía sin borde ni altura (un `<input>` blanco crudo sobre fondo negro).
+   Añadido el `<link>` en ambas. No lo causó mi cambio, pero lo destapó.
+
+**No toqué** los dos `href="#"` de `login.html` (`¿La olvidaste?`, `Crea tu cuenta`):
+registro y recuperación están fuera del alcance del ATF1. Van a Recomendaciones del
+informe como trabajo futuro, que puntúa mejor que inventar una página.
+
+**Verificado** (las 10 páginas, servidas por HTTP): `.enlace-boletin` con `href` correcto,
+alto 44 px, borde y flecha a la derecha en las 10; 0 `href="#"` salvo los 2 de login;
+0 errores de consola; 0 imágenes rotas; a **375 px** la caja mide 319 px sin desborde
+horizontal. Clic real comprobado: el pie de `nosotros.html` navega a `/contacto.html`.
+
+**Trampa T4 otra vez, y grave:** la primera tanda de mediciones me salió "correcta"
+sobre el CSS **cacheado**. Para verificar cambios de estilos hay que **volver a pedir
+cada hoja con un parámetro nuevo** (`?v=...`), no basta con recargar el HTML.
+
+### 27-ago (4) — `docs/scrum/checklist-entrega.md` (archivo del duo Documento/QA)
+
+Rellené con evidencia verificada, porque el criterio 1 vale **6 pts** y estaba escrito
+en el código pero no en el papel:
+
+- **Sección B, las 4 casillas que faltaban**: contenedores, menú responsivo, carrusel
+  (`#carrusel-portada` con 3 diapositivas y `#carrusel-galeria`) y grillas, cada una con
+  la ruta donde se demuestra.
+- **Sección A**: consola limpia (reverificada hoy, el 404 del favicon ya no está),
+  encabezado/cuerpo/pie en las 10, y la línea de enlaces muertos.
+
+**Aviso a José y Jhade:** ese archivo es vuestro por proceso ("lo ejecuta el duo
+Documento/QA"). Lo rellené como SM porque eran puntos de rúbrica en riesgo a 8 días de
+la entrega, no para adelantaros trabajo. **Revisadlo y corregidme si algo no os cuadra.**
+Queda sin marcar a propósito lo que exige una pasada visual vuestra: *"Probado a 375 px
+y 1440 px"*, las capturas y todo el bloque de empaquetado.
+
+### 2026-08-28 — Cierre del Sprint 1 · D3, D4 y consolidación
+
+**Como duo Datos — cerré las dos deudas que llevaban tres días sin dueño.**
+
+Las decisiones **I1** e **I2** del PO son del 25-ago y aparecían como pendiente en las
+memorias de Joaquín, Carlos y José, cada uno esperando al duo dueño (art. 9). Nadie era
+ese duo. Como SM las tomé yo antes de cerrar el sprint:
+
+- **D4 ✅** — `js/carrito.js:10`: `UMBRAL_ENVIO_GRATIS` de **180 → 200**, con el porqué en
+  el comentario. Es la decisión **I2**. Afecta a los tres sitios que usan la constante:
+  el texto "TE FALTAN S/ …", el ancho de la barra de progreso y el cálculo del envío.
+  No había ningún **180 quemado** en el HTML — la constante era el único origen de verdad
+  (art. 7 bien aplicado por quien lo escribió), así que fue una línea.
+- **D3 ✅** — `promociones.html` + `css/paginas/promociones.css`: el configurador de packs
+  ofrece ahora **exactamente los 7 colores de `js/productos.json`**, que es la decisión
+  **I1**:
+
+  | Antes | Ahora | Qué pasó |
+  |---|---|---|
+  | NEGRO | NEGRO | hex al del catálogo (`#111111`) |
+  | **BLANCO** | — | **eliminado**: no existe como producto |
+  | STONE | STONE | hex al del catálogo (`#C4A882`) |
+  | BORGOÑA | **GUINDA** | renombrado al nombre real del catálogo |
+  | GRIS | GRIS | — |
+  | OLIVO | **OLIVA** | renombrado |
+  | MARINO | MARINO | — |
+  | — | **MARRÓN** | **añadido**: faltaba (`#6B4A2E`) |
+
+**Decidí / aprendí:**
+
+- **`promociones.js` no necesitó ni una línea**, y eso es mérito de cómo lo dejó José en
+  E1-13: lee el nombre del color del DOM (`.nombre-color`) y el color con
+  `getComputedStyle`, sin lista quemada. **Cambiar la paleta es editar HTML y CSS.**
+  Que nadie meta ahí un array de colores "para tenerlo centralizado": lo centralizado es
+  `productos.json`, y duplicarlo en el JS sería romper el art. 7.
+- **Los hex del configurador estaban aproximados, no iguales.** Negro era `#1A1A1A` y el
+  catálogo dice `#111111`; stone era `#C8B89A` y el catálogo `#C4A882`. Se veía casi
+  igual, y por eso nadie lo notó en tres días de revisión visual. **Un color "parecido"
+  no es el mismo color:** ahora los 7 hex se copian del catálogo.
+- **Lección de proceso, la importante del sprint.** El art. 9 (un archivo, un escritor)
+  funcionó: nadie pisó el trabajo de nadie. Pero **el art. 9 protege el código, no reparte
+  el trabajo**: tres personas detectaron la misma deuda, las tres la anotaron
+  correctamente en su memoria, y las tres esperaron. **A partir del Sprint 2, en el
+  Planning, toda deuda o decisión de PO que toque código sale con dueño y número de
+  tarea.** Lo hablo en la Retrospectiva.
+
+**Como Scrum Master — puerta de consolidación:**
+
+- **Los 6 integrantes han cerrado.** Joaquín, Dayro, Carlos, José y Jhade tienen su
+  bloque "Para consolidar" escrito, y el mío está abajo. **Jhade lleva su redacción en un
+  documento propio fuera del repo** y la entrega del ATF1 salió de ahí; lo que vive en
+  `informes/informe.md` es el esqueleto limpio de E1-20. Queda anotado para que nadie lea
+  sus marcadores `⬜` como trabajo sin hacer.
+- **Resuelvo el hueco de la rama:** la DoD de `sprint-01.md` §7 pide "código en `develop`
+  vía PR" y **`develop` no existe ni va a existir**. La rama de integración del equipo es
+  **`testing`**, que es contra la que ya entraron los PR. Lo corrijo en la DoD del Sprint 2
+  en vez de crear una rama para satisfacer un texto.
+- **Sigue abierto y me lo llevo al Sprint 2:** **no existen `plan.md` ni `tasks.md`**.
+  El `spec.md` se aprobó el 25-ago y se pasó directo a implementar (CLAUDE.md §4).
+  Salió bien, pero `plan.md` es además la fuente de §2.1.2 del informe, que Jhade
+  necesita. **Es lo primero del Sprint 2.**
+- **`memory.md` consolidada** con el cierre del Sprint 1.
+
+**Archivos tocados:** `app-estatico/js/carrito.js`,
+`app-estatico/promociones.html`, `app-estatico/css/paginas/promociones.css`,
+las 6 memorias de `docs/memoria/` y `memory.md`.
+
+**Verifiqué:** `node --check` en `carrito.js` y `promociones.js`; las 10 páginas y los
+recursos sirven **200** por HTTP; `grep` confirma 0 restos de `blanco`/`borgona`/`olivo`
+en el configurador y **7** `color-opcion` en `promociones.html`.
+
 ---
 
 ## Para consolidar en memory.md
 
+- [ ] **Nueva convención — `--pad-panel` en `.info-pack` (promociones).** El panel del
+      configurador tiene un solo margen lateral (25px) declarado como variable; ofertas,
+      colores, tallas, slots y botón la consumen. Si alguien mete un bloque nuevo ahí,
+      que use `var(--pad-panel)` y no un valor suelto, o vuelve el desalineado.
+- [ ] **Nueva decisión — en el configurador, `.activo` de un color significa «está en el
+      pack», no «opción actual»** (a diferencia de las tallas, donde sí es exclusiva).
+      Lo pone el JS en cada `render()`; **no se escribe `activo` a mano en el HTML.**
+- [x] ~~**Aviso para el duo de QA:** confirmada la deuda **D3**~~ — **cerrada el 28-ago**
+      (ver mi bitácora). Contexto original: la detecté en `promociones.css:153-159`
+      — los 7 hex del configurador están duplicados a mano y no salen de `productos.json`.
+      Sobra BLANCO y falta MARRÓN; NEGRO y STONE tienen el hex desviado del catálogo.
+      Además la foto del pack enseña un short celeste que no existe entre las opciones.
+- [ ] **Resuelto — el pie de las 10 páginas ya no tiene controles muertos.** `ENVÍOS` y
+      la flecha del boletín van a `/contacto.html`; el `<input>` inerte desapareció.
+      Si alguien añade un bloque nuevo al pie, que **navegue o no exista**: sin backend
+      no hay tercera opción en el ATF1.
+- [ ] **`intranet.html` y `confirmacion.html` no cargaban `formularios.css`** y su caja
+      del pie salía cruda. Corregido. Al añadir una página nueva, comparad la lista de
+      `<link>` con la de `index.html`.
+- [ ] **Checklist de entrega: sección B completa y verificada** (los 6 componentes del
+      criterio 1, con la ruta de cada uno). Lo rellené yo como SM aunque el archivo es
+      del duo Documento/QA; **José y Jhade tienen que revisarlo**. Sigue sin marcar lo
+      que pide su pasada visual: 375/1440 px, capturas y empaquetado.
+- [ ] **Trampa T4 — caché del navegador.** Hay tres copias del sitio en el Mac
+      (`Overtext-Web/app-estatico`, `MarcosWeb/overtext/app-estatico`,
+      `MarcosWeb/proyectoAnterior`) con rutas de archivo idénticas. Si se sirven en el
+      mismo `localhost:puerto`, el navegador reutiliza el CSS cacheado de la otra copia
+      y parece que tu cambio "no se aplicó". Ya nos pasó con `promociones.css`.
+      **`Cmd+Shift+R`, o Disable cache en DevTools**, antes de reportar un bug de estilos.
 - [ ] (ya volcado en la versión inicial: decisiones 1-11, deudas D1-D6, trampas T1-T3)
 
 **Sprint 1 — lo que el resto del equipo necesita saber:**
@@ -426,7 +651,9 @@ Faltan 4. **`memory.md` no se toca** hasta que estén los 6 (CLAUDE.md §2).
       `css/componentes/formularios.css` ya está acotado con `:not(.form-control)`.
       Quien maquete un componente de Bootstrap encima del CSS viejo tiene que
       **mirarlo en el navegador**, no fiarse de la consola.
-- [ ] **⚠️ Falta el favicon y cuesta puntos del criterio 2d.** No hay `favicon.ico` ni
+- [x] ~~**⚠️ Falta el favicon y cuesta puntos del criterio 2d.**~~ **Resuelto por José el
+      26-ago** con `assets/favicon.svg` enlazado en las 10 páginas. Lo dejo escrito porque
+      la trampa se repite: no hay `favicon.ico` ni
       `<link rel="icon">` en ninguna de las 10 páginas: Chrome lo pide igual y el 404
       sale como **error rojo en consola**. Ojo, que **la verificación headless no lo
       detecta** (no pide el favicon), así que no basta con "me salió limpio".
@@ -440,7 +667,8 @@ Faltan 4. **`memory.md` no se toca** hasta que estén los 6 (CLAUDE.md §2).
 - [ ] **Nueva decisión — se escribió el DDL de las 10 tablas en el Sprint 1**, aunque
       el ATF3 solo implemente `categoria`, `producto` y `color`. Las cuatro rúbricas
       piden el diagrama físico y a medias no demuestra nada.
-- [ ] **Aviso para Carlos (E1-11) y para el duo de QA (E1-19): falta el favicon.**
+- [x] ~~**Aviso para Carlos (E1-11) y para el duo de QA (E1-19): falta el favicon.**~~
+      **Cerrado el 26-ago.** Lo dejo por el diagnóstico, que sigue siendo útil:
       Las 10 páginas piden `/favicon.ico` y el servidor devuelve **404**, así que sale un
       error en consola en cada página y saldrá en cada captura del informe. No lo arreglo
       yo porque toca el `<head>` de las 10 páginas, que es la pasada de Carlos: basta un
@@ -458,8 +686,34 @@ Faltan 4. **`memory.md` no se toca** hasta que estén los 6 (CLAUDE.md §2).
       `informes/capturas/sprint-01/diagrama-fisico-bd.svg`, con el pie
       *«Figura N. Diagrama físico de la base de datos. Fuente: elaboración propia.»*
       El `.png` está al lado por si el exportador a `.docx` no traga SVG.
-      En §2.3 **ya está insertada la figura con su pie**; lo que falta ahí es el texto
-      que la acompaña, que es de E1-21. No toqué ninguna otra sección del informe.
+      En §2.3 **ya está insertada la figura con su pie**; el texto que la acompaña lo
+      escribió Jhade en E1-21, en su documento. No toqué ninguna otra sección del informe.
+
+**Cierre del Sprint 1 (28-ago):**
+
+- [x] **D3 y D4 cerradas.** El configurador de packs ofrece los **7 colores exactos de
+      `js/productos.json`** (fuera BLANCO, dentro MARRÓN, BORGOÑA→GUINDA, OLIVO→OLIVA) y
+      `UMBRAL_ENVIO_GRATIS = 200`. Con esto, **D1 a D5 están todas cerradas**; solo queda
+      D6, que es borrar el backup del `.git` roto del *home*.
+- [x] **Los hex del configurador ahora se copian del catálogo, no se aproximan.** Estaban
+      cerca pero distintos (negro `#1A1A1A` vs `#111111`, stone `#C8B89A` vs `#C4A882`) y
+      por eso pasaron tres revisiones visuales. **Un color parecido no es el mismo color.**
+- [x] **Decisión — la rama de integración del equipo es `testing`.** `develop` no existe
+      y no se va a crear: la DoD del Sprint 1 la nombraba por inercia de la plantilla.
+      **Corregido a partir del Sprint 2.**
+- [x] **Regla de proceso nueva, salida de la Retrospectiva del Sprint 1.** El art. 9 (un
+      archivo, un escritor) protege el código pero **no reparte el trabajo**: D3 y D4 las
+      detectaron tres personas, las tres las anotaron bien y las tres esperaron al "duo
+      dueño", que no existía. **Toda deuda o decisión de PO que toque código sale del
+      Planning con dueño y número de tarea.**
+- [ ] **Deuda que abro para el Sprint 2 — no hay `plan.md` ni `tasks.md`.** El `spec.md`
+      se aprobó el 25-ago y se pasó directo a implementar, saltando dos fases de
+      CLAUDE.md §4. Además `plan.md` es la fuente de §2.1.2 del informe, que Jhade
+      necesita. **Es lo primero del Sprint 2.**
+- [ ] **Nota sobre `informes/informe.md`:** es el **esqueleto limpio** (E1-20 de Jhade).
+      Sus marcadores `⬜` **no son trabajo pendiente**: Jhade lleva la redacción en su
+      documento propio, fuera del repo, y de ahí salió el `.pdf` del ATF1. Nadie debe
+      rellenarlos por su cuenta — rompería la voz única del documento (art. 10).
 
 ---
 
@@ -473,4 +727,7 @@ Faltan 4. **`memory.md` no se toca** hasta que estén los 6 (CLAUDE.md §2).
 
 ## Sprints cerrados
 
-*(vacío)*
+- **Sprint 1 — Bootstrap y sitio estático (20-ago → 04-sep). Cerrado el 28-ago-2026.**
+  Como duo Datos: E1-07 ✅ · E1-22 ✅, más D3 y D4 cerradas. Como SM: E1-19 verificada,
+  `checklist-entrega.md` completado, puerta de consolidación abierta con los 6 y
+  `memory.md` consolidada. Entrega **ATF1**.

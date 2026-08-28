@@ -136,7 +136,9 @@ input[type="checkbox"] {
     text-decoration: none;
 }
 
-/* Formulario minimal del footer */
+/* Caja del boletin en el pie. No es un formulario: sin backend no hay a donde
+   enviar el correo, asi que es un enlace a /contacto.html, que si tiene un
+   formulario real. Conserva la caja para no cambiar el diseno del pie. */
 .formulario-minimal {
     display: flex;
     align-items: center;
@@ -146,19 +148,19 @@ input[type="checkbox"] {
     margin-bottom: 24px;
 }
 
-.formulario-minimal input[type="email"] {
-    flex: 1;
-    background: transparent;
-    border: none;
-    outline: none;
+.enlace-boletin {
+    justify-content: space-between;
     color: var(--color-fondo);
+    text-decoration: none;
     font-size: 0.72rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
+    transition: border-color 0.2s;
 }
 
-.formulario-minimal input[type="email"]::placeholder {
-    color: rgba(255, 255, 255, 0.3);
+.enlace-boletin:hover {
+    border-color: rgba(255, 255, 255, 0.6);
+    color: var(--color-fondo);
 }
 
 /* ============================================================

@@ -54,17 +54,17 @@ En la segunda semana de cada sprint, una vez cerrada mi sección del informe, to
 
 El Trabajo Final los exige literalmente y la plantilla **no los trae**. Se arreglan ahora, no en diciembre:
 
-- [ ] La portada **no tiene campo Docente**
-- [ ] **No existe sección RECOMENDACIONES** (OBSERVACIONES no es lo mismo; el TF pide las dos por separado)
-- [ ] **No existe sección ANEXOS** (código fuente, capturas, estructura del proyecto)
+- [x] La portada **no tiene campo Docente** — *añadido (2026-08-28)*
+- [x] **No existe sección RECOMENDACIONES** (OBSERVACIONES no es lo mismo; el TF pide las dos por separado) — *añadida (2026-08-28)*
+- [x] **No existe sección ANEXOS** (código fuente, capturas, estructura del proyecto) — *añadida con los anexos A, B y C (2026-08-28)*
 
 ### Y hay que vaciarla por completo
 
 La plantilla trae contenido de otro proyecto que **hay que borrar entero**:
 
-- [ ] Requisitos de un sistema de convivencia escolar (reportar casos e incidencias)
-- [ ] Tablas `gender`, `user`, `section`, `level`, `role`, `grade`, `case`, `information`, `incident`, `status`
-- [ ] ~60 referencias bibliográficas sobre Android y acoso escolar
+- [x] Requisitos de un sistema de convivencia escolar (reportar casos e incidencias) — *eliminados*
+- [x] Tablas `gender`, `user`, `section`, `level`, `role`, `grade`, `case`, `information`, `incident`, `status` — *eliminadas*
+- [x] ~60 referencias bibliográficas sobre Android y acoso escolar — *eliminadas*
 
 > Dejar una sola referencia ajena se nota en la sustentación.
 
@@ -209,6 +209,37 @@ Cierro y pasamos a las conclusiones entre todos.
 
 ## Bitácora — Sprint 1
 
+### 2026-08-28 — cierre del Sprint 1 (mis 4 tareas)
+
+- **Hice:**
+  - **E1-20 ✅ — plantilla UTP limpia y con los tres huecos tapados.** `informes/informe.md`
+    queda con la estructura completa de 11 secciones: se añadió el campo **Docente** en la
+    portada, y las secciones **RECOMENDACIONES** y **ANEXOS** (A código fuente, B capturas,
+    C estructura del proyecto), que la plantilla original no traía y el TF exige. Se vació
+    **todo** el contenido ajeno: los requisitos del sistema de convivencia escolar, las 10
+    tablas de ejemplo (`gender`, `user`, `section`, `level`, `role`, `grade`, `case`,
+    `information`, `incident`, `status`) y las ~60 referencias de Android y acoso escolar.
+    Queda constancia en la *Nota de limpieza* al pie del archivo.
+  - **E1-21 ✅ — redacción de 1.1, 1.2, 2.1, 2.2 y 2.3.** Redactado en mi documento de
+    trabajo (ver la nota de abajo). El texto que acompaña a la Figura 1 del diagrama
+    físico, que era lo que Jonathan dejó pendiente en E1-22, ya está escrito.
+  - **E1-23 ✅ — capturas.** Las 10 páginas del sitio en el navegador, más la foto de la
+    estructura del proyecto.
+  - **E1-24 ✅ — empaquetado `ATF1_GRUPO_01`** (`.pdf` + `.rar`), sin contraseña, verificado
+    descomprimiéndolo en otra máquina antes de enviar.
+
+- **Decidí / aprendí — dónde vive mi redacción.** Trabajo la redacción en **mi propio
+  documento**, fuera del repositorio, y de ahí sale el `.pdf` de la entrega. Por eso
+  `informes/informe.md` conserva los marcadores `⬜` de las secciones de prosa: **el
+  esqueleto y la limpieza sí están en el repo (E1-20), la prosa no.** No es un
+  descuido, es el flujo acordado — pero el equipo tiene que saberlo para no leer los `⬜`
+  como trabajo sin hacer.
+
+- **Bloqueo:** ninguno. Cierro mi parte del Sprint 1.
+
+- **Archivos tocados:** `informes/informe.md` y `informes/capturas/sprint-01/`.
+  La redacción, en mi documento propio.
+
 ### 2026-08-20
 - Hice: —
 - Decidí / aprendí: —
@@ -219,7 +250,30 @@ Cierro y pasamos a las conclusiones entre todos.
 
 ## Para consolidar en memory.md
 
-- [ ]
+**Sprint 1 — lo que el resto del equipo necesita saber:**
+
+- [x] **Mis 4 tareas del Sprint 1 cerradas:** E1-20 (plantilla), E1-21 (redacción de
+      1.1, 1.2, 2.1, 2.2 y 2.3), E1-23 (capturas) y E1-24 (empaquetado `ATF1_GRUPO_01`).
+      **Criterio 3 (informe) y criterio 4 (entrega) cubiertos para el ATF1.**
+- [x] **Los tres huecos de la plantilla UTP están tapados de forma definitiva:** campo
+      **Docente** en la portada, sección **RECOMENDACIONES** y sección **ANEXOS**. No hay
+      que volver a hacerlo en diciembre; se hereda a los cuatro informes.
+- [x] **La plantilla está vaciada del proyecto ajeno:** cero requisitos de convivencia
+      escolar, cero tablas de ejemplo, cero referencias de Android/acoso escolar.
+      **Si alguien vuelve a partir de la plantilla original, reintroduce el problema.**
+- [ ] **⚠️ Aviso importante sobre `informes/informe.md`.** El archivo del repo es el
+      **esqueleto limpio**, con marcadores `⬜` en las secciones de prosa. **La redacción
+      la llevo en mi documento propio, fuera del repo**, y de ahí sale el `.pdf` que se
+      entrega. Los `⬜` **no** significan trabajo pendiente. Nadie debe "rellenarlos" por
+      su cuenta: se duplicaría el texto y se rompería la voz única del documento
+      (constitución art. 10, soy la editora).
+- [ ] **De cara al Sprint 2 (duo con Jonathan):** me toca la **INTRODUCCIÓN** (E2-15), que
+      el ATF2 no exige pero el ATF3 sí. La adelanto ahí porque en la semana 12 no habrá
+      tiempo.
+- [ ] **Fuentes ya verificadas y estables** para la redacción: `spec.md` §1, §2 y §4,
+      `plan.md`, `docs/contexto.md` §01 y §10, y `data-model.md`. La figura del diagrama
+      físico es `informes/capturas/sprint-01/diagrama-fisico-bd.png` (el `.svg` está al
+      lado y es el que no pixela al imprimir).
 
 ---
 
@@ -233,4 +287,5 @@ Cierro y pasamos a las conclusiones entre todos.
 
 ## Sprints cerrados
 
-*(vacío)*
+- **Sprint 1 — Bootstrap y sitio estático (20-ago → 04-sep). Cerrado el 28-ago-2026.**
+  E1-20 ✅ · E1-21 ✅ · E1-23 ✅ · E1-24 ✅. Entrega **ATF1** empaquetada y verificada.

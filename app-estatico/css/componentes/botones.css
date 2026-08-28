@@ -110,9 +110,13 @@
     background-color: #6e1414;
 }
 
-/* Armar pack (detalle producto) */
+/* Armar pack (detalle producto). Es un enlace a /promociones.html, no un
+   <button>: navega, no ejecuta nada en la pagina. */
 .btn-pack {
+    display: block;
     width: 100%;
+    text-align: center;
+    text-decoration: none;
     background: none;
     color: var(--color-negro);
     border: 1.5px solid var(--color-negro);
@@ -174,18 +178,16 @@
     background-color: #6e1414;
 }
 
-/* Flecha newsletter (footer) */
+/* Flecha del boletin (pie). Es un <span> dentro de .enlace-boletin, no un
+   boton: el desplazamiento lo dispara el hover del enlace que la contiene. */
 .btn-flecha {
-    background: none;
-    border: none;
-    cursor: pointer;
     color: var(--color-fondo);
     font-size: 1.2rem;
     transition: transform 0.2s;
     line-height: 1;
 }
 
-.btn-flecha:hover {
+.enlace-boletin:hover .btn-flecha {
     transform: translateX(3px);
 }
 

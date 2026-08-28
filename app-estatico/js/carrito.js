@@ -7,7 +7,7 @@
     'use strict';
 
     var CLAVE = 'ot_carrito';
-    var UMBRAL_ENVIO_GRATIS = 180; // S/ para desbloquear envío gratis
+    var UMBRAL_ENVIO_GRATIS = 200; // S/ para desbloquear envío gratis (decisión del PO, 25-ago)
 
     /* --- Persistencia --- */
     function obtenerCarrito() {

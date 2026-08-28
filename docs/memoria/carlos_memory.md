@@ -47,9 +47,9 @@
 - [x] Capturas archivadas en `informes/capturas/sprint-01/`
 - [x] Criterios de rúbrica marcados en `docs/scrum/checklist-entrega.md`
 - [x] Bloque "Para consolidar" escrito en esta memoria
-- [ ] **Código subido vía PR revisado por otro duo** — pendiente. Va junto con lo de Jonathan, en el PR del duo Datos.
+- [x] **Código subido vía PR revisado por otro duo** — *cerrado (2026-08-28).* El SM resolvió que la rama de integración del equipo es **`testing`**, no `develop`; el trabajo del duo Datos entró por PR revisado y la DoD se lee sobre `testing`.
 
-> Como en la memoria de Jonathan: la DoD dice *"código en `develop` vía PR"* y **`develop` no existe**. El equipo mergea contra `testing`. Que lo decida el SM.
+> La DoD decía *"código en `develop` vía PR"* y **`develop` nunca existió**. El SM lo zanjó el 28-ago: **la rama de integración es `testing`** y la Definición de Hecho queda redactada así para los siguientes sprints.
 
 ### Por qué mis tareas rinden doble
 
@@ -213,6 +213,22 @@ Demuestro en vivo: crear un producto, editarlo, enviar el formulario vacío para
 ---
 
 ## Bitácora — Sprint 1
+
+### 2026-08-28 — cierre del Sprint 1
+
+- **Mis 5 tareas quedan cerradas con la Definición de Hecho completa** (E1-08, E1-09,
+  E1-10, E1-11 y E1-26). El último `[ ]` que me quedaba era el del PR contra `develop`;
+  el SM confirmó que la rama de integración es **`testing`** y con eso se cierra.
+- **Dos cosas mías que ya no aplican y conviene no arrastrar:**
+  - La cifra de **`assets/` en 26 MB** que dejé anotada era la foto del 26-ago, a mitad de
+    la limpieza. José terminó E1-16 ese mismo día y **`assets/` quedó en 3,8 MB**, sin
+    ninguna imagen por encima de 300 KB. **La cifra buena es la suya**; la D1 está cerrada.
+  - La barra del carrito ya **no dice S/ 180**. Jonathan corrigió `UMBRAL_ENVIO_GRATIS` a
+    **200** el 28-ago (deuda D4), que es lo que fijó el PO. Mis capturas del offcanvas son
+    de antes de ese cambio: **si se reusan en el informe del ATF2, hay que volver a
+    tomarlas**, porque muestran el umbral viejo.
+- **Bloqueo:** ninguno.
+- **Archivos tocados:** ninguno.
 
 ### 2026-08-20
 - Hice: —
@@ -382,10 +398,11 @@ de arreglar nada.
 - [ ] **Cobertura de rúbrica ATF1:** marcar **1d Ventanas modales** ✅ (modal de contacto
       y modal de guía de tallas), **1b** ✅ también por el `offcanvas` del carrito, y
       **1a** ✅ en su parte de iconos.
-- [ ] **Deuda D1 a la mitad: `assets/` pasa de 39 MB a 26 MB.** Solo con borrar
-      `carta.png`, `instagram.png` y `ubicacion.png` (13,4 MB entre los tres, para
-      dibujar iconos de 26 px). El objetivo sigue siendo < 15 MB: **lo que queda son
-      fotos de producto**, y eso es E1-16, no mío.
+- [x] **Deuda D1 cerrada.** Mi parte bajó `assets/` de 39 MB a 26 MB borrando
+      `carta.png`, `instagram.png` y `ubicacion.png` (13,4 MB entre los tres, para dibujar
+      iconos de 26 px). José remató con E1-16 el mismo día y **quedó en 3,8 MB, sin
+      ninguna imagen sobre 300 KB**. *La cifra de 26 MB que aparece más arriba en esta
+      memoria es una foto intermedia; la válida es 3,8 MB.*
 - [ ] **`abrirPanel`/`cerrarPanel` de `carrito.js` son API pública**, no código interno:
       "añadir al carrito" abre el panel por JS. Siguen existiendo tras pasar a
       `offcanvas`, pero por dentro llaman a Bootstrap. **Quien las borre por "ya no
@@ -403,9 +420,10 @@ de arreglar nada.
 - [ ] **CSS muerto que encontré y no me toca:** `.btn-hamburger.abierto` y
       `.menu-principal.abierto` siguen en `navegacion.css` desde que Joaquín eliminó
       `js/nav.js` en E1-02. Nadie las usa. Para el duo de limpieza.
-- [ ] **La barra del carrito sigue diciendo "TE FALTAN S/ … PARA ENVÍO GRATIS" sobre
-      S/ 180**, cuando el PO fijó **S/ 200** el 25-ago. Es la deuda **D4** y sigue
-      abierta: se ve en mis capturas del offcanvas.
+- [x] ~~La barra del carrito dice "TE FALTAN S/ … PARA ENVÍO GRATIS" sobre S/ 180~~
+      **Deuda D4 cerrada el 28-ago:** `UMBRAL_ENVIO_GRATIS = 200` en `js/carrito.js`, que
+      es lo que fijó el PO. **Aviso: mis capturas del offcanvas son anteriores y muestran
+      el umbral viejo** — hay que volver a tomarlas si se reusan en el ATF2.
 
 ---
 
@@ -421,4 +439,6 @@ de arreglar nada.
 
 ## Sprints cerrados
 
-*(vacío)*
+- **Sprint 1 — Bootstrap y sitio estático (20-ago → 04-sep). Cerrado el 28-ago-2026.**
+  E1-08 ✅ · E1-09 ✅ · E1-10 ✅ · E1-11 ✅ · E1-26 ✅. Criterios **1d** (modales),
+  **1b** (offcanvas) y **1a** (iconos) cubiertos. Deuda D1 cerrada entre E1-11 y E1-16.

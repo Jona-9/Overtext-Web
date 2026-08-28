@@ -10,9 +10,9 @@ Grupo **01**. Reemplaza `n` por el número de avance.
 
 - [ ] **(desde ATF2)** `mvn clean package` termina sin errores.
 - [ ] **(desde ATF2)** `java -jar target/overtext.jar` levanta y responde en `http://localhost:8080`.
-- [ ] Las 10 páginas abren **sin errores ni advertencias en la consola** del navegador. *(ATF1-2d)* — 26-ago: verificadas las 10 en Chrome headless, limpias salvo el **404 de `/favicon.ico`**, que falta en el `<head>` (va en E1-11).
-- [ ] Todas las páginas tienen encabezado, cuerpo y pie.
-- [ ] El menú navega correctamente a todas las secciones, sin enlaces muertos.
+- [x] Las 10 páginas abren **sin errores ni advertencias en la consola** del navegador. *(ATF1-2d)* — 27-ago: reverificadas las 10 servidas por HTTP; 0 errores, 0 imágenes rotas. El 404 de `/favicon.ico` del 26-ago ya está resuelto.
+- [x] Todas las páginas tienen encabezado, cuerpo y pie. — 27-ago: las 10 tienen `<header>`/`navbar`, `<main>` y `.pie-pagina`.
+- [x] El menú navega correctamente a todas las secciones, sin enlaces muertos. — 27-ago: barrido de las 10 páginas. Corregidos `ENVÍOS` del pie (era `href="#"`) y la flecha del boletín (era un `<button>` sin handler); ambos van ahora a `/contacto.html`. **Excepción consciente:** `login.html` conserva 2 marcadores (`¿La olvidaste?`, `Crea tu cuenta`); registro y recuperación están fuera del alcance del ATF1 y se declaran en Recomendaciones del informe.
 - [ ] Probado a **375 px** y **1440 px**.
 - [ ] **(desde ATF2)** Una URL inexistente muestra el **404 personalizado**. *(ATF2-1c)*
 - [ ] **(desde ATF3)** Crear, editar y borrar un producto desde `/admin/productos` funciona de punta a punta.
@@ -26,12 +26,12 @@ Grupo **01**. Reemplaza `n` por el número de avance.
 
 **ATF1** — marcar dónde se demuestra cada uno:
 
-- [ ] Contenedores → \_\_\_\_\_\_
-- [ ] Menú responsivo → \_\_\_\_\_\_
+- [x] Contenedores → `.container` / `.container-fluid` en las **10** páginas (8 en `index.html`, 6 en `catalogo.html`, 8 en `nosotros.html`) *(E1-03)*
+- [x] Menú responsivo → `navbar navbar-expand-lg` con `navbar-toggler` en las **10** páginas *(E1-02)*
 - [x] Formularios → `contacto.html` · `login.html` · `checkout.html` *(E1-07, Jonathan)*
 - [x] Ventanas modales → `contacto.html` (confirmación) · `detalle-producto.html` (guía de tallas) *(E1-08, E1-09, Carlos)*
-- [ ] Carrusel de imágenes → \_\_\_\_\_\_
-- [ ] Sistema de grillas → \_\_\_\_\_\_
+- [x] Carrusel de imágenes → `index.html` `#carrusel-portada` (3 diapositivas, controles, indicadores, `data-bs-ride`) · `detalle-producto.html` `#carrusel-galeria` *(E1-04, E1-05)*
+- [x] Sistema de grillas → `row` / `col-*` en las **10** páginas; ejemplos: `catalogo.html` `.productos-grid.row.g-4` y el pie `.container.row.g-4` *(E1-06)*
 
 **ATF2**:
 

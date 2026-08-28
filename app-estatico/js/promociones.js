@@ -16,11 +16,20 @@
     var btnPack = document.querySelector('.boton-carrito-pack');
     if (!btnPack || !slotsCont) return;
 
+    // Luminancia aproximada de un 'rgb(r, g, b)' para decidir si la talla
+    // del slot se escribe en blanco o en negro.
+    function esClaro(rgb) {
+        var n = rgb.match(/\d+/g);
+        if (!n) return false;
+        return (n[0] * 0.299 + n[1] * 0.587 + n[2] * 0.114) > 150;
+    }
+
     function render() {
         var html = '';
         for (var i = 0; i < MAX; i++) {
             if (seleccion[i]) {
-                html += '<div class="slot lleno" data-idx="' + i + '" title="Quitar" style="background-color:' +
+                html += '<div class="slot lleno' + (esClaro(seleccion[i].color) ? ' slot--claro' : '') +
+                    '" data-idx="' + i + '" title="Quitar" style="background-color:' +
                     seleccion[i].color + ';"><span class="slot-talla">' + seleccion[i].talla + '</span></div>';
             } else {
                 html += '<div class="slot vacio"></div>';
@@ -29,6 +38,19 @@
         slotsCont.innerHTML = html;
         contador.textContent = seleccion.length + ' DE ' + MAX + ' SELECCIONADOS';
         btnPack.disabled = seleccion.length !== MAX;
+        marcarColores();
+    }
+
+    // El resaltado de una muestra significa "este color ya esta en el pack",
+    // asi que se recalcula desde la seleccion en cada render.
+    function marcarColores() {
+        opciones.forEach(function (op) {
+            var nombre = op.querySelector('.nombre-color').textContent.trim();
+            var cuantos = seleccion.filter(function (s) { return s.nombre === nombre; }).length;
+            op.classList.toggle('activo', cuantos > 0);
+            var contadorColor = op.querySelector('.contador-color');
+            if (contadorColor) contadorColor.textContent = cuantos ? '\u00D7' + cuantos : '';
+        });
     }
 
     tallas.forEach(function (t) {
@@ -42,7 +64,7 @@
     opciones.forEach(function (op) {
         op.addEventListener('click', function () {
             if (seleccion.length >= MAX) return;
-            var nombre = op.querySelector('span').textContent.trim();
+            var nombre = op.querySelector('.nombre-color').textContent.trim();
             // El color de cada muestra ahora vive en una clase CSS, no en un
             // atributo style, así que se lee el valor ya resuelto por el navegador.
             var color = getComputedStyle(op.querySelector('.color-muestra')).backgroundColor;

@@ -59,6 +59,9 @@
 }
 
 .info-pack {
+    /* Margen lateral unico del panel: todos los bloques internos
+       (ofertas, colores, tallas, slots, boton) parten de esta misma linea. */
+    --pad-panel: 25px;
     background-color: var(--color-fondo);
     width: 55%;
     max-width: 600px;
@@ -70,7 +73,7 @@
     align-items: center;
     justify-content: flex-start;
     gap: 60px;
-    padding: 60px;
+    padding: 60px var(--pad-panel);
     width: 100%;
 }
 
@@ -96,12 +99,13 @@
     line-height: 1.4;
     text-align: left;
     display: inline-block;
-    max-width: 280px;
+    /* Corta en dos lineas: "ENVIO INCLUIDO / DESDE 2 PACKS" */
+    max-width: 230px;
 }
 
 /* --- Selección de colores --- */
 .seleccion-colores {
-    padding: 0 60px 30px;
+    padding: 0 var(--pad-panel) 30px;
     text-align: left;
 }
 
@@ -143,24 +147,47 @@
     text-transform: uppercase;
 }
 
+.color-opcion:hover .color-muestra {
+    outline: 1px solid var(--color-borde);
+    outline-offset: 2px;
+}
+
+/* .activo = el color ya esta dentro del pack. Lo marca el JS al
+   agregar o quitar prendas; no se escribe a mano en el HTML. */
 .color-opcion.activo .color-muestra {
     outline: 2px solid var(--color-negro);
     outline-offset: 2px;
 }
 
+.color-opcion.activo span {
+    color: var(--color-negro);
+}
+
+/* Cuantas prendas de ese color hay en el pack */
+.color-opcion .contador-color {
+    font-size: 0.55rem;
+    font-weight: 700;
+    color: var(--color-negro);
+    visibility: hidden;
+}
+
+.color-opcion.activo .contador-color {
+    visibility: visible;
+}
+
 /* Color de cada muestra: la fuente de verdad de estos hex es el catálogo
-   (productos.json). El configurador se alineará al catálogo como deuda D3. */
-.color-muestra--negro   { background-color: #1A1A1A; }
-.color-muestra--blanco  { background-color: #FFFFFF; border: 1px solid #ddd; }
-.color-muestra--stone   { background-color: #C8B89A; }
-.color-muestra--borgona { background-color: #8B1A2C; }
-.color-muestra--gris    { background-color: #9E9E9E; }
-.color-muestra--olivo   { background-color: #5C6B3A; }
-.color-muestra--marino  { background-color: #1A3A7A; }
+   (js/productos.json). Los 7 colores son exactamente los del catálogo. */
+.color-muestra--negro  { background-color: #111111; }
+.color-muestra--stone  { background-color: #C4A882; }
+.color-muestra--guinda { background-color: #8B1A2C; }
+.color-muestra--gris   { background-color: #9E9E9E; }
+.color-muestra--oliva  { background-color: #5C6B3A; }
+.color-muestra--marino { background-color: #1A3A7A; }
+.color-muestra--marron { background-color: #6B4A2E; }
 
 /* --- Slots de selección --- */
 .seleccionados {
-    margin: 0 25px 20px;
+    margin: 0 var(--pad-panel) 20px;
     background-color: var(--color-fondo-alt);
     padding: 18px 20px;
     text-align: left;
@@ -213,7 +240,7 @@
 
 /* --- Selección de talla del pack --- */
 .seleccion-tallas {
-    padding: 0 60px 20px;
+    padding: 0 var(--pad-panel) 20px;
     text-align: left;
 }
 
@@ -256,7 +283,11 @@
     font-family: var(--fuente-principal);
     font-size: 0.72rem;
     font-weight: 800;
-    mix-blend-mode: difference;
+}
+
+/* Sobre muestras claras (stone, gris) el texto va en negro */
+.slot.lleno.slot--claro .slot-talla {
+    color: var(--color-negro);
 }
 
 /* Botón deshabilitado hasta completar los 6 */
@@ -317,12 +348,12 @@
     .ofertas {
         flex-direction: column;
         gap: var(--espacio-md);
-        padding: var(--espacio-md);
+        padding: var(--espacio-md) var(--pad-panel);
     }
 
     .seleccion-colores,
     .seleccion-tallas {
-        padding: 0 var(--espacio-md) var(--espacio-md);
+        padding-bottom: var(--espacio-md);
     }
 
     .banner-interior {
