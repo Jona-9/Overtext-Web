@@ -606,6 +606,98 @@ en el configurador y **7** `color-opcion` en `promociones.html`.
 
 ---
 
+## Cierre de deuda del Sprint 1 · 28-ago-2026
+
+Barrido de D6 a D11 antes de arrancar el Sprint 2. **Cinco cerradas, una a medias.**
+
+### Lo que encontré
+
+Tres deudas (**D8, D9 y D10**) ya estaban arregladas en el *working tree* pero **sin
+commitear**: eran las 5 modificaciones sueltas de `git status`, −225 líneas de CSS. Un
+`git checkout .` las habría revivido. Ya están commiteadas.
+
+**D6 estaba muerta y nadie lo sabía.** Ni `~/.git-ROTO-backup-20260820` ni `~/.git`
+existen. No hacía falta ninguna acción, solo comprobarlo.
+
+### Lo que hice
+
+| # | Cómo se cerró | Commit |
+|:-:|---|---|
+| D6 | Verificado: el backup del `.git` roto ya no existe en el *home* | — |
+| D8 | Fuera `.color-borgona` (`paginas/catalogo.css`) y `.swatch--blanco` (`paginas/producto.css`) | `083d594` |
+| D9 | `.ot-icono-whatsapp` y `.ot-boton-whatsapp` viven **solo** en `paginas/login.css`, no en `componentes/botones.css`. Solo las usa `login.html`, así que van con su página | `083d594` |
+| D10 | Retirado el menú anterior de `componentes/navegacion.css`, −191 líneas | `083d594` |
+| D11 | Capturas del offcanvas retomadas: ahora dicen **S/ 140** (umbral 200), no S/ 120 | `5e6cafc` |
+| **D7** | `plan.md` y `tasks.md` escritos, **pero falta la aprobación de Joaquín** | `e18b4a9` |
+
+### Cómo verifiqué el borrado de CSS
+
+No borré a ojo. Extraje los **33 selectores** eliminados del diff y los crucé contra todo
+el HTML y el JS. Las coincidencias que quedaban eran **falsos positivos por substring**, y
+conviene saberlo porque el siguiente que haga limpieza se va a topar con lo mismo:
+
+- `.enlace` → lo vivo es `.enlace-boletin` y `.pie-enlaces`
+- `.boton-carrito` → lo vivo es `.boton-carrito-pack`
+- `.activo` → vive en `.color-opcion.activo` y `.pack-talla.activo`
+- `.menu-principal` → sobrevive como **id** `#menu-principal`, que Bootstrap **necesita**
+  para el `collapse`. Borrar el id rompe el menú en las 10 páginas.
+
+**Un `grep` de la clase pelada no sirve para decidir un borrado.** Hay que mirar cada
+coincidencia.
+
+### Las capturas de D11
+
+Con Chrome headless y `deviceScaleFactor: 2`, sirviendo `app-estatico/` por HTTP. Los
+anchos se fijan con `setViewport` (1440×900 y 375×812 con `isMobile`), **no** con
+`--window-size` — esa es la trampa T7. Mismo carrito que la captura vieja para que la
+comparación sea directa: 2 × beige + 1 × negro = S/ 60. Comprobado en ambos anchos: cero
+errores de consola y `scrollWidth == clientWidth`.
+
+### Deuda nueva que abro — D13
+
+**El pie del carrito dice «ENVÍO — GRATIS» siempre.** Está quemado en el HTML de las 10
+páginas (`<span class="envio-gratis">GRATIS</span>`) y **ningún JS lo toca**:
+`renderizarCarrito()` actualiza el subtotal, el total y la barra de progreso, pero esa
+línea no. Resultado visible en la captura nueva: la barra dice «te faltan S/ 140 para
+envío gratis» y dos líneas más abajo pone que el envío ya es gratis.
+
+Es el mismo patrón de D4 — un dato de negocio escrito a mano en vez de calculado (art. 7).
+**No lo arreglé**: toca el HTML de las 10 páginas, que es territorio de otro duo, y por la
+regla 19 toda deuda que toque código sale del Planning con dueño y número de tarea. Lo
+llevo al Planning del Sprint 2.
+
+### Por qué D7 no está cerrada
+
+Escribí `plan.md` y `tasks.md`, y **los dos dicen en la cabecera que son retroactivos**.
+No documentan lo que pensábamos hacer, sino el diseño con el que realmente se construyó,
+verificado contra `app-estatico/`. Me pareció más honesto y más útil que fingir una
+planificación previa.
+
+Con eso el duo del documento ya tiene la fuente de §2.1.2, §2.1.2.1 y §2.1.2.2 del informe
+(la tabla de trazabilidad está en `plan.md` §10). Pero **la fase Plan se cierra con el
+checkpoint del PO**, no con el archivo escrito: las dos listas de verificación terminan
+con esa casilla sin marcar. **Falta que Joaquín lo apruebe.**
+
+### Hueco de rúbrica que nadie tenía anotado
+
+Revisando el ATF2 contra el estado real: la rúbrica pide **página 404 + rutas por
+controladores** (criterio 1, 6 pts) y **Thymeleaf con 2 fragmentos, un condicional y una
+iteración** (criterio 2, 6 pts). `overtext/` no existe todavía. Son **12 de 20 puntos** sin
+ninguna deuda ni tarea que los cubra. Cerrar D6-D11 deja el Sprint 1 limpio pero **no
+adelanta nada del ATF2**.
+
+Aparte: **CLAUDE.md §7 apunta mal.** Dice `../rubricas/` y `../silabus_general.md`; están
+en `../MarcosWeb/rubricas/` y `../MarcosWeb/silabus_general.md`. Y la copia del ATF2 que
+tenemos trae fechas de mayo de **2025** y figura como «Vencido» — es del ciclo anterior.
+**Hay que confirmar las fechas reales del 2026-2 antes del Planning del Sprint 2.**
+
+**Archivos que toqué:** `app-estatico/css/componentes/{botones,navegacion}.css`,
+`app-estatico/css/paginas/{catalogo,login,producto}.css`,
+`informes/capturas/sprint-01/carrito-offcanvas-{1440,375}.png`,
+`docs/specs/001-sitio-bootstrap/{plan.md,tasks.md}` y esta memoria.
+
+---
+
 ## Para consolidar en memory.md
 
 - [ ] **Nueva convención — `--pad-panel` en `.info-pack` (promociones).** El panel del
@@ -714,6 +806,27 @@ en el configurador y **7** `color-opcion` en `promociones.html`.
       Sus marcadores `⬜` **no son trabajo pendiente**: Jhade lleva la redacción en su
       documento propio, fuera del repo, y de ahí salió el `.pdf` del ATF1. Nadie debe
       rellenarlos por su cuenta — rompería la voz única del documento (art. 10).
+
+- [ ] **D6, D8, D9, D10 y D11 están cerradas** (28-ago). Al consolidar, muévelas a la
+      tabla de cerradas del Sprint 1. **D6 no requirió trabajo**: el `.git` roto del
+      *home* ya no existía.
+- [ ] **D7 sigue abierta, pero cambió de forma.** `plan.md` y `tasks.md` ya existen en
+      `docs/specs/001-sitio-bootstrap/`; lo que falta es **el checkpoint de Joaquín**.
+      Los dos son retroactivos y lo declaran en la cabecera. El duo del documento ya
+      puede tomar de `plan.md` las secciones §2.1.2, §2.1.2.1 y §2.1.2.2 del informe.
+- [ ] **Deuda nueva D13 — «ENVÍO GRATIS» quemado en el pie del carrito.** Aparece en las
+      10 páginas y ningún JS lo recalcula, así que contradice a la barra de progreso.
+      Mismo patrón que D4. **Sale al Planning del Sprint 2 con dueño**, por la regla 19.
+- [ ] **Aviso para quien limpie CSS:** un `grep` de la clase pelada da falsos positivos
+      por substring (`.enlace` → `.enlace-boletin`, `.boton-carrito` →
+      `.boton-carrito-pack`). Y `#menu-principal` **es un id que Bootstrap necesita**
+      para el `collapse`: no es CSS muerto aunque la regla `.menu-principal` sí lo fuera.
+- [ ] **Aviso para el Planning del Sprint 2 — 12 de los 20 puntos del ATF2 no tienen
+      tarea.** Faltan la página 404 con rutas por controladores (criterio 1) y Thymeleaf
+      con 2 fragmentos + condicional + iteración (criterio 2). `overtext/` aún no existe.
+- [ ] **Corregir CLAUDE.md §7:** las rúbricas están en `../MarcosWeb/rubricas/`, no en
+      `../rubricas/`. Y verificar las fechas del ATF2: la copia que tenemos es del ciclo
+      2025 y figura como vencida.
 
 ---
 

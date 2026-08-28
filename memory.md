@@ -5,6 +5,7 @@
 > Es la última foto **estable**: puede estar desactualizada respecto al sprint en curso. Si contradice el código, gana el código.
 
 **Última consolidación:** **Sprint 1 — 28-ago-2026.** Sprint cerrado, entrega **ATF1** hecha.
+**Enmienda del 28-ago (SM):** cierre de deuda previo al Sprint 2 — D6, D8, D9, D10 y D11 cerradas; D7 reformulada; **D13 abierta**. Solo se tocó la §6 y la tabla de trampas.
 **Estado de la puerta:** ✅ Joaquín · ✅ José · ✅ Jonathan · ✅ Dayro · ✅ Carlos · ✅ Jhade
 **Sprint en curso:** ninguno. El **Sprint 2** (Spring Boot y Spring Web) arranca el 07-sep.
 
@@ -109,13 +110,9 @@ Leyenda: ⬜ pendiente · 🟨 en curso · ✅ cubierto y con evidencia
 
 | # | Pendiente | Origen | Dueño |
 |---|---|---|---|
-| D6 | El `.git` roto del *home* quedó en `~/.git-ROTO-backup-20260820`; borrarlo cuando haya confianza | Sprint 1 | Jonathan |
-| **D7** | **No existen `plan.md` ni `tasks.md`.** El `spec.md` se aprobó el 25-ago y se pasó directo a implementar, saltando dos fases de CLAUDE.md §4. `plan.md` es además la fuente de §2.1.2 del informe | Sprint 1 | **Lo primero del Sprint 2** |
-| D8 | Dos reglas CSS muertas que nombran colores inexistentes: `.color-borgona` (`paginas/catalogo.css:47`) y `.swatch--blanco` (`paginas/producto.css:202`). Los swatches reales se pintan con el hex de `productos.json` | Sprint 1 | Limpieza, Sprint 2 |
-| D9 | `.ot-icono-whatsapp` está definida dos veces: en `componentes/botones.css` y en `paginas/login.css`. Dejar una sola | Sprint 1 | Limpieza, Sprint 2 |
-| D10 | CSS muerto en `componentes/navegacion.css`: `.btn-hamburger.abierto` y `.menu-principal.abierto`, huérfanas desde que se eliminó `js/nav.js` | Sprint 1 | Limpieza, Sprint 2 |
-| D11 | Las capturas del offcanvas del ATF1 muestran el umbral viejo de S/ 180. **Volver a tomarlas si se reusan en el ATF2** | Sprint 1 | Doc/QA |
+| **D7** | **`plan.md` y `tasks.md` ya existen** en `docs/specs/001-sitio-bootstrap/` (28-ago), pero la fase Plan **no se cierra con el archivo escrito sino con el checkpoint del PO**. Ambos son retroactivos y lo declaran en su cabecera. `plan.md` §10 traza qué sección del informe sale de dónde | Sprint 1 | **Joaquín — aprobar. Lo primero del Sprint 2** |
 | D12 | `js/login.js` tiene las credenciales en el cliente (`admin@mail.com` / `123456`) | Sprint 1 | Se borra con Spring Security (Sprint 6, E4-08) |
+| **D13** | **El pie del carrito dice «ENVÍO — GRATIS» siempre**, esté o no alcanzado el umbral. El `<span class="envio-gratis">GRATIS</span>` está quemado en el HTML de las 10 páginas y `renderizarCarrito()` no lo toca: contradice a la barra de progreso en la misma pantalla. Mismo patrón que D4 — dato de negocio escrito a mano en vez de calculado (art. 7) | Sprint 1 (detectada 28-ago) | **Sin dueño — sale del Planning del Sprint 2 (regla 19)** |
 
 ### Cerradas en el Sprint 1
 
@@ -126,6 +123,18 @@ Leyenda: ⬜ pendiente · 🟨 en curso · ✅ cubierto y con evidencia
 | D3 | Colores del configurador ≠ colores del catálogo (BLANCO inexistente) | ✅ Los **7 del catálogo**: fuera BLANCO, dentro MARRÓN, BORGOÑA→GUINDA, OLIVO→OLIVA, y los hex copiados de `productos.json` |
 | D4 | Envío gratis: S/ 180 en el JS vs S/ 200 en el copy | ✅ `UMBRAL_ENVIO_GRATIS = 200` en `js/carrito.js` |
 | D5 | Los docs de CSS describían archivos que no existen | ✅ `01-arquitectura-css.md` y `02-sistema-diseno.md` reescritos con la estructura real (E1-17) |
+| D6 | Borrar `~/.git-ROTO-backup-20260820`, el `.git` roto del *home* | ✅ **No requirió trabajo**: ni el backup ni `~/.git` existen ya. Verificado el 28-ago |
+| D8 | `.color-borgona` (`paginas/catalogo.css`) y `.swatch--blanco` (`paginas/producto.css`) nombran colores inexistentes | ✅ Ambas retiradas (28-ago, `083d594`) |
+| D9 | `.ot-icono-whatsapp` definida dos veces, en `componentes/botones.css` y en `paginas/login.css` | ✅ Una sola definición, en `paginas/login.css`, junto a `.ot-boton-whatsapp`: solo las usa `login.html`, así que viven con su página (28-ago, `083d594`) |
+| D10 | CSS muerto en `componentes/navegacion.css`, huérfano desde que se eliminó `js/nav.js` | ✅ Retirado el menú anterior completo, **−191 líneas** (28-ago, `083d594`) |
+| D11 | Las capturas del offcanvas mostraban el umbral viejo de S/ 180 | ✅ Retomadas a 1440 y 375 px: ahora dicen **S/ 140** (umbral 200). Cero errores de consola y sin desborde horizontal (28-ago, `5e6cafc`) |
+
+> **Cierre de deuda del 28-ago.** D6, D8, D9, D10 y D11 se cerraron después de la
+> consolidación del Sprint 1, en un barrido previo al Sprint 2. **D8, D9 y D10 ya
+> estaban arregladas en el *working tree* pero sin commitear** — un `git checkout .`
+> las habría revivido. Antes de dar por bueno el borrado se cruzaron los **33
+> selectores** eliminados contra todo el HTML y el JS; ver T12.
+
 
 ## 7. Trampas conocidas
 
@@ -142,3 +151,4 @@ Leyenda: ⬜ pendiente · 🟨 en curso · ✅ cubierto y con evidencia
 | T9 | **`abrirPanel` / `cerrarPanel` de `carrito.js` son API pública**, no código interno: "añadir al carrito" abre el panel por JS. Siguen existiendo tras pasar a `offcanvas`, pero por dentro llaman a Bootstrap. **Quien las borre por "ya no hacen falta" rompe el flujo de añadir al carrito.** |
 | T10 | **`promociones.js` no tiene lista de colores quemada, y es a propósito:** lee el nombre del DOM (`.nombre-color`) y el color con `getComputedStyle`. Por eso cambiar la paleta es editar HTML y CSS. Meter ahí un array de colores duplicaría `productos.json` (art. 7). |
 | T11 | **Un color "parecido" no es el mismo color.** Los hex del configurador estaban aproximados (negro `#1A1A1A` vs `#111111`) y pasaron tres revisiones visuales sin que nadie lo notara. Los hex se copian del catálogo, no se estiman a ojo. |
+| T12 | **Un `grep` de la clase pelada no basta para borrar CSS.** Da falsos positivos por substring: `.enlace` aparece en `.enlace-boletin` y `.pie-enlaces`, `.boton-carrito` en `.boton-carrito-pack`, `.activo` en `.color-opcion.activo`. Hay que mirar cada coincidencia. Y ojo con `#menu-principal`: la **regla** `.menu-principal` era CSS muerto, pero el **id** lo necesita el `collapse` de Bootstrap en las 10 páginas. |
