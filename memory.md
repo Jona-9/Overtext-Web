@@ -5,7 +5,7 @@
 > Es la última foto **estable**: puede estar desactualizada respecto al sprint en curso. Si contradice el código, gana el código.
 
 **Última consolidación:** **Sprint 1 — 28-ago-2026.** Sprint cerrado, entrega **ATF1** hecha.
-**Enmienda del 28-ago (SM):** cierre de deuda previo al Sprint 2 — D6, D8, D9, D10 y D11 cerradas; D7 reformulada; **D13 abierta**. Solo se tocó la §6 y la tabla de trampas.
+**Enmienda del 28-ago (SM):** cierre de deuda previo al Sprint 2 — **D6, D8, D9, D10, D11, D13 y D14 cerradas**; D7 reformulada (falta el visto del PO). D13 y D14 se detectaron y se arreglaron en el mismo barrido. Solo se tocaron la §6 y la tabla de trampas.
 **Estado de la puerta:** ✅ Joaquín · ✅ José · ✅ Jonathan · ✅ Dayro · ✅ Carlos · ✅ Jhade
 **Sprint en curso:** ninguno. El **Sprint 2** (Spring Boot y Spring Web) arranca el 07-sep.
 
@@ -112,7 +112,6 @@ Leyenda: ⬜ pendiente · 🟨 en curso · ✅ cubierto y con evidencia
 |---|---|---|---|
 | **D7** | **`plan.md` y `tasks.md` ya existen** en `docs/specs/001-sitio-bootstrap/` (28-ago), pero la fase Plan **no se cierra con el archivo escrito sino con el checkpoint del PO**. Ambos son retroactivos y lo declaran en su cabecera. `plan.md` §10 traza qué sección del informe sale de dónde | Sprint 1 | **Joaquín — aprobar. Lo primero del Sprint 2** |
 | D12 | `js/login.js` tiene las credenciales en el cliente (`admin@mail.com` / `123456`) | Sprint 1 | Se borra con Spring Security (Sprint 6, E4-08) |
-| **D13** | **El pie del carrito dice «ENVÍO — GRATIS» siempre**, esté o no alcanzado el umbral. El `<span class="envio-gratis">GRATIS</span>` está quemado en el HTML de las 10 páginas y `renderizarCarrito()` no lo toca: contradice a la barra de progreso en la misma pantalla. Mismo patrón que D4 — dato de negocio escrito a mano en vez de calculado (art. 7) | Sprint 1 (detectada 28-ago) | **Sin dueño — sale del Planning del Sprint 2 (regla 19)** |
 
 ### Cerradas en el Sprint 1
 
@@ -126,14 +125,21 @@ Leyenda: ⬜ pendiente · 🟨 en curso · ✅ cubierto y con evidencia
 | D6 | Borrar `~/.git-ROTO-backup-20260820`, el `.git` roto del *home* | ✅ **No requirió trabajo**: ni el backup ni `~/.git` existen ya. Verificado el 28-ago |
 | D8 | `.color-borgona` (`paginas/catalogo.css`) y `.swatch--blanco` (`paginas/producto.css`) nombran colores inexistentes | ✅ Ambas retiradas (28-ago, `083d594`) |
 | D9 | `.ot-icono-whatsapp` definida dos veces, en `componentes/botones.css` y en `paginas/login.css` | ✅ Una sola definición, en `paginas/login.css`, junto a `.ot-boton-whatsapp`: solo las usa `login.html`, así que viven con su página (28-ago, `083d594`) |
-| D10 | CSS muerto en `componentes/navegacion.css`, huérfano desde que se eliminó `js/nav.js` | ✅ Retirado el menú anterior completo, **−191 líneas** (28-ago, `083d594`) |
+| D10 | CSS muerto en `componentes/navegacion.css`, huérfano desde que se eliminó `js/nav.js` | ✅ Retirado el menú anterior completo: **183 líneas eliminadas**, 8 de comentario que explica por qué (28-ago, `083d594`) |
 | D11 | Las capturas del offcanvas mostraban el umbral viejo de S/ 180 | ✅ Retomadas a 1440 y 375 px: ahora dicen **S/ 140** (umbral 200). Cero errores de consola y sin desborde horizontal (28-ago, `5e6cafc`) |
+| D13 | El pie del carrito decía «ENVÍO — GRATIS» siempre, contradiciendo a la barra de progreso | ✅ `renderizarCarrito()` lo deriva del mismo umbral: **POR DEFINIR** bajo S/ 200 y **GRATIS** al alcanzarlo. El verde pasa a `.es-gratis`, siguiendo el precedente de `envio-gratis-tag` en el checkout (28-ago) |
+| D14 | El menú móvil desplegado no tenía fondo y caía ilegible sobre el carrusel | ✅ Bajo 992 px la barra crece con el menú (`height: auto` + `min-height: 70px`) y el `collapse` recibe fondo sólido y línea separadora. Escritorio intacto: **70 px** a 1440 y a 992. Solo capa de tema, no se tocó el componente (28-ago) |
 
 > **Cierre de deuda del 28-ago.** D6, D8, D9, D10 y D11 se cerraron después de la
 > consolidación del Sprint 1, en un barrido previo al Sprint 2. **D8, D9 y D10 ya
 > estaban arregladas en el *working tree* pero sin commitear** — un `git checkout .`
 > las habría revivido. Antes de dar por bueno el borrado se cruzaron los **33
 > selectores** eliminados contra todo el HTML y el JS; ver T12.
+>
+> **D13 y D14 no venían en la lista: salieron de verificar.** D13 la delató la propia
+> captura de D11 (la barra decía «te faltan S/ 140» y el pie «GRATIS»). D14 apareció al
+> mirar el menú a 375 px. **Ninguna de las dos da error de consola**, así que E1-19 las
+> dio por buenas; ver T13.
 
 
 ## 7. Trampas conocidas
@@ -152,3 +158,4 @@ Leyenda: ⬜ pendiente · 🟨 en curso · ✅ cubierto y con evidencia
 | T10 | **`promociones.js` no tiene lista de colores quemada, y es a propósito:** lee el nombre del DOM (`.nombre-color`) y el color con `getComputedStyle`. Por eso cambiar la paleta es editar HTML y CSS. Meter ahí un array de colores duplicaría `productos.json` (art. 7). |
 | T11 | **Un color "parecido" no es el mismo color.** Los hex del configurador estaban aproximados (negro `#1A1A1A` vs `#111111`) y pasaron tres revisiones visuales sin que nadie lo notara. Los hex se copian del catálogo, no se estiman a ojo. |
 | T12 | **Un `grep` de la clase pelada no basta para borrar CSS.** Da falsos positivos por substring: `.enlace` aparece en `.enlace-boletin` y `.pie-enlaces`, `.boton-carrito` en `.boton-carrito-pack`, `.activo` en `.color-opcion.activo`. Hay que mirar cada coincidencia. Y ojo con `#menu-principal`: la **regla** `.menu-principal` era CSS muerto, pero el **id** lo necesita el `collapse` de Bootstrap en las 10 páginas. |
+| T13 | **Consola limpia no es sitio correcto.** D13 (un texto de negocio quemado que contradecía al JS) y D14 (el menú móvil ilegible sobre el carrusel) convivían con **0 errores y 0 avisos** en las 10 páginas. E1-19 verifica el log; el criterio 1b se juzga mirando la pantalla a 375 px. Las dos verificaciones son distintas y hacen falta las dos. |

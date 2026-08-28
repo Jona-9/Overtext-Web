@@ -626,7 +626,7 @@ existen. No hacía falta ninguna acción, solo comprobarlo.
 | D6 | Verificado: el backup del `.git` roto ya no existe en el *home* | — |
 | D8 | Fuera `.color-borgona` (`paginas/catalogo.css`) y `.swatch--blanco` (`paginas/producto.css`) | `083d594` |
 | D9 | `.ot-icono-whatsapp` y `.ot-boton-whatsapp` viven **solo** en `paginas/login.css`, no en `componentes/botones.css`. Solo las usa `login.html`, así que van con su página | `083d594` |
-| D10 | Retirado el menú anterior de `componentes/navegacion.css`, −191 líneas | `083d594` |
+| D10 | Retirado el menú anterior de `componentes/navegacion.css`, 183 líneas eliminadas | `083d594` |
 | D11 | Capturas del offcanvas retomadas: ahora dicen **S/ 140** (umbral 200), no S/ 120 | `5e6cafc` |
 | **D7** | `plan.md` y `tasks.md` escritos, **pero falta la aprobación de Joaquín** | `e18b4a9` |
 
@@ -653,7 +653,7 @@ anchos se fijan con `setViewport` (1440×900 y 375×812 con `isMobile`), **no** 
 comparación sea directa: 2 × beige + 1 × negro = S/ 60. Comprobado en ambos anchos: cero
 errores de consola y `scrollWidth == clientWidth`.
 
-### Deuda nueva que abro — D13
+### Deuda nueva D13 — detectada y cerrada el mismo día
 
 **El pie del carrito dice «ENVÍO — GRATIS» siempre.** Está quemado en el HTML de las 10
 páginas (`<span class="envio-gratis">GRATIS</span>`) y **ningún JS lo toca**:
@@ -662,9 +662,13 @@ línea no. Resultado visible en la captura nueva: la barra dice «te faltan S/ 1
 envío gratis» y dos líneas más abajo pone que el envío ya es gratis.
 
 Es el mismo patrón de D4 — un dato de negocio escrito a mano en vez de calculado (art. 7).
-**No lo arreglé**: toca el HTML de las 10 páginas, que es territorio de otro duo, y por la
-regla 19 toda deuda que toque código sale del Planning con dueño y número de tarea. Lo
-llevo al Planning del Sprint 2.
+
+**Cerrada.** `renderizarCarrito()` deriva la línea del mismo umbral que la barra: **POR
+DEFINIR** bajo S/ 200 y **GRATIS** al alcanzarlo. El verde se separó a `.es-gratis`, porque
+`.envio-gratis` es el gancho fijo del elemento y no debe significar «gratis conseguido».
+Sigue el precedente que ya existía en el checkout con `envio-gratis-tag`. **No hizo falta
+tocar el HTML de las 10 páginas**, que era mi reparo inicial: el gancho ya estaba puesto.
+Verificado en los dos estados: S/ 60 → POR DEFINIR en gris; S/ 200 → GRATIS en verde.
 
 ### Por qué D7 no está cerrada
 
@@ -677,6 +681,35 @@ Con eso el duo del documento ya tiene la fuente de §2.1.2, §2.1.2.1 y §2.1.2.
 (la tabla de trazabilidad está en `plan.md` §10). Pero **la fase Plan se cierra con el
 checkpoint del PO**, no con el archivo escrito: las dos listas de verificación terminan
 con esa casilla sin marcar. **Falta que Joaquín lo apruebe.**
+
+### Deuda nueva D14 — detectada y cerrada el mismo día
+
+**El menú móvil desplegado no tiene fondo, y esto sí se ve feo.** Bajo 992 px, al pulsar la
+hamburguesa el `#menu-principal` se abre transparente: `background-color` calculado
+`rgba(0,0,0,0)`, sin `box-shadow`, y `position: static`. Como `.barra-navegacion` tiene
+`height: 70px` fija, los enlaces se salen de la barra y caen **encima del carrusel** —
+PROMOCIONES, NOSOTROS y CONTACTO quedan ilegibles sobre la foto.
+
+**Casi lo anoto como regresión mía y no lo es.** Lo verifiqué reconstruyendo el árbol
+previo a `083d594` con `git archive` y sirviéndolo en otro puerto: el menú se ve **idéntico
+antes y después**, mismos estilos calculados. La razón es que la regla que retiré era
+`.menu-principal` —**selector de clase**— y el HTML solo usa `id="menu-principal"` (las 10
+páginas). Nunca aplicó. Era código muerto tal como decía D10.
+
+O sea que el bug **viene de E1-02**, de la migración al navbar de Bootstrap: nadie le puso
+fondo al `collapse`. Lleva ahí desde entonces y pasó el barrido de E1-19 porque **la
+consola está limpia** — es un fallo visual, no un error de JS.
+
+Toca el **criterio 1b** (menú responsivo), así que no es cosmético.
+
+**Cerrada.** Bajo 992 px la barra pasa a `height: auto` con `min-height: 70px` —o sea,
+crece con el menú, que es lo que hace un navbar normal— y el `collapse` recibe fondo sólido
+y una línea que lo separa del encabezado. Todo en la capa de tema: **no se tocó el
+componente de Bootstrap** (art. 4). Comprobado que el escritorio no se mueve: la barra mide
+**70 px a 1440 y a 992**, y a 375 sigue midiendo 70 cerrada y crece a 294 abierta.
+
+> **Lección para el QA del Sprint 2:** E1-19 verifica consola, y con eso no basta. Un menú
+> ilegible da 0 errores. Hace falta mirar la pantalla a 375 px, no solo el log.
 
 ### Hueco de rúbrica que nadie tenía anotado
 
@@ -814,9 +847,12 @@ tenemos trae fechas de mayo de **2025** y figura como «Vencido» — es del cic
       `docs/specs/001-sitio-bootstrap/`; lo que falta es **el checkpoint de Joaquín**.
       Los dos son retroactivos y lo declaran en la cabecera. El duo del documento ya
       puede tomar de `plan.md` las secciones §2.1.2, §2.1.2.1 y §2.1.2.2 del informe.
-- [ ] **Deuda nueva D13 — «ENVÍO GRATIS» quemado en el pie del carrito.** Aparece en las
-      10 páginas y ningún JS lo recalcula, así que contradice a la barra de progreso.
-      Mismo patrón que D4. **Sale al Planning del Sprint 2 con dueño**, por la regla 19.
+- [x] **D13 y D14 detectadas y cerradas el 28-ago.** No estaban en ninguna lista: salieron
+      de verificar. D13 la delató la propia captura de D11; D14, mirar el menú a 375 px.
+      **Ninguna de las dos daba error de consola**, así que E1-19 las había dado por buenas.
+- [ ] **Regla de QA para el Sprint 2 (T13):** E1-19 verifica la consola y con eso no basta.
+      D13 y D14 convivían con 0 errores y 0 avisos. **El criterio 1b se juzga mirando la
+      pantalla a 375 px**, no el log. Que E1-19 del Sprint 2 pida las dos verificaciones.
 - [ ] **Aviso para quien limpie CSS:** un `grep` de la clase pelada da falsos positivos
       por substring (`.enlace` → `.enlace-boletin`, `.boton-carrito` →
       `.boton-carrito-pack`). Y `#menu-principal` **es un id que Bootstrap necesita**

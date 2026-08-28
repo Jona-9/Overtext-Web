@@ -3,191 +3,175 @@
 **Fase SDD:** Plan
 **Sprint:** 1 (20-ago → 04-sep-2026)
 **Entrega:** ATF1
-**Depende de:** `spec.md`, aprobado por el Product Owner (Joaquín) el 2026-08-25
-**Estado:** redactado el 2026-08-28 · pendiente de checkpoint del PO
+**Spec de origen:** [`spec.md`](spec.md) — aprobado por el Product Owner (Joaquín) el 2026-08-25
+**Estado:** ✅ ejecutado. Escrito **a posteriori** el 28-ago-2026 (deuda D7).
 
-> **Este documento se escribió después de implementar, y hay que decirlo.**
-> El `spec.md` se aprobó el 25-ago y el equipo pasó directo a código, saltando las
-> fases Plan y Tasks de CLAUDE.md §4. Eso quedó registrado como deuda **D7**.
-> Este `plan.md` cierra esa deuda documentando **el diseño técnico con el que
-> efectivamente se construyó** el sitio, verificado contra `app-estatico/`, no una
-> intención previa. Donde el plan y el código discrepaban, se corrigió el plan.
-> A partir del Sprint 2 el orden vuelve a ser Specify → Plan → Tasks → Implement.
+> **Nota de honestidad.** Este documento faltaba: el `spec.md` se aprobó el 25-ago
+> y se pasó directo a implementar, saltando las fases *Plan* y *Tasks* de
+> `CLAUDE.md` §4. Se redacta ahora reconstruyéndolo desde el código entregado y
+> desde `docs/scrum/sprints/sprint-01.md`. **No describe intenciones, describe lo
+> que quedó construido**, verificado archivo por archivo. Sirve de fuente para la
+> sección **2.1.2 del informe** y de línea base para el Sprint 2.
 
 ---
 
-## 1. Qué se construye
+## 1. Qué se construyó
 
-El objetivo específico 1 del `spec.md`: llevar el sitio estático heredado a un
-**framework CSS responsivo**, conservando la identidad de marca, y dejar el código
-en condiciones de recibir Spring Boot en el Sprint 2.
+La solución planteada fue crear una aplicación web para el e-commerce OverText.
+En este primer avance se resolvió únicamente el **objetivo específico 1** del
+spec —la interfaz con un framework CSS responsivo— más el **diseño** del modelo
+de datos, que el informe del ATF1 exige como diagrama físico.
 
-No se construye backend, ni base de datos, ni seguridad real. El modelo de datos se
-**diseña** pero no se implementa, porque el informe del ATF1 exige el diagrama físico.
+El sitio estático heredado del proyecto anterior se **migró** a Bootstrap 5.3
+conservando la identidad de marca. No se reescribió desde cero: se retiró el CSS
+que competía con el framework y se re-tematizó lo que Bootstrap ya resolvía.
 
-## 2. Estrategia: re-tematizar, no reimplementar
+**Resultado:** 10 páginas HTML, sin backend, con el carrito en `localStorage`.
 
-La decisión que gobierna todo lo demás.
-
-Bootstrap 5 aporta el comportamiento (colapso del menú, apertura del modal, avance del
-carrusel, validación del formulario) y OverText aporta el aspecto. **Donde Bootstrap ya
-tiene el componente, se usa el de Bootstrap y solo se le cambian los colores, las
-tipografías y los espaciados** (constitution art. 4). No se reescribe ningún componente
-que el framework ya resuelva.
-
-Consecuencia práctica: cada componente propio que se migra **se retira**, no se deja
-conviviendo con el de Bootstrap. Un panel de carrito propio y un `offcanvas` en la misma
-página son dos fuentes de verdad para el mismo elemento.
-
-### La trampa que costó tiempo
-
-**El CSS heredado le gana a Bootstrap por especificidad.** Al migrar un componente, si la
-regla vieja sigue viva, la clase de Bootstrap se aplica pero no se ve. La salida correcta
-es **retirar la regla antigua**, nunca añadir `!important` — eso solo mueve el problema.
-De aquí salen las deudas D8, D9 y D10, que son exactamente reglas viejas que sobrevivieron
-a su componente.
-
-## 3. Arquitectura CSS por capas
-
-El orden de carga **es** la arquitectura: cada capa solo puede pisar a la anterior.
-
-| # | Capa | Archivos | Qué le toca |
-|:-:|---|---|---|
-| 1 | **Framework** | `bootstrap.min.css`, `bootstrap-icons.min.css` (CDN) | Reset, grillas, componentes, utilidades. No se edita. |
-| 2 | **Tema** | `css/tema-overtext.css` | Las variables de marca y el reemplazo de los tokens de Bootstrap. **Único sitio donde vive un color.** |
-| 3 | **Base y layout** | `css/main.css`, `css/layout.css` | Tipografía base, estilos de párrafo, estructura de página. |
-| 4 | **Componentes** | `css/componentes/*.css` (10) | Lo que se repite en varias páginas: navegación, botones, formularios, tarjetas, badges, pie, carrito, carrusel, modal, tablas. |
-| 5 | **Páginas** | `css/paginas/*.css` (10) | Solo lo que es exclusivo de una página. Si aparece en dos, sube a la capa 4. |
-
-**Regla de oro de la capa 2:** ningún archivo de las capas 3-5 escribe un color literal.
-Todos consumen las variables de `tema-overtext.css`. Un hex suelto en `paginas/` es un bug,
-no un atajo — es lo que produjo la deuda D3 (los siete colores del configurador estaban
-*aproximados*, no copiados, y pasaron tres revisiones visuales sin que nadie lo notara).
-
-### Por qué CDN y no build
-
-No hay Node, ni bundler, ni paso de compilación. Es deliberado: el Sprint 2 mete el sitio
-dentro de `src/main/resources/static/` de Spring Boot, y unos `<link>` a CDN más CSS plano
-se mudan sin tocar nada. Un pipeline de build habría que desmontarlo. Además el art. 8
-prohíbe añadir capas que ninguna rúbrica pide.
-
-## 4. Los seis componentes del criterio 1
-
-Uno por criterio de la rúbrica ATF1, con la decisión técnica de cada uno.
-
-| Criterio | Componente | Enfoque | Riesgo previsto |
-|---|---|---|---|
-| 1a | `.container` / `.container-fluid` | Sustituye al `.contenedor` propio en las 10 páginas. El hero va a ancho completo. | Doble contenedor anidado → márgenes duplicados. |
-| 1b | `navbar navbar-expand-lg` | Reemplaza el menú propio **y** a `js/nav.js`, que se elimina: el colapso lo hace Bootstrap. Punto de quiebre 992 px. | Dejar el JS viejo escuchando el botón → doble apertura. |
-| 1c | `form-control` / `form-select` / `form-check` + `was-validated` | Validación nativa del navegador; el JS solo añade la clase al enviar. | Ver §7, T5. |
-| 1d | `modal` | Dos: confirmación de contacto (migra un modal propio de 102 líneas) y guía de tallas. | Restos del modal propio interceptando el cierre. |
-| 1e | `carousel` | Dos: portada (3+ diapositivas, autoavance con pausa al pasar el cursor) y galería de la ficha. | **5 de los 7 productos no tienen galería:** deben mostrar la imagen principal sin controles rotos. |
-| 1f | `row` / `col-*` | 1 columna en móvil, 2 en tablet, 3-4 en escritorio. Reemplaza la `.grid-2` propia. | `.grid-2` sobrevive en `style.css` y alguien la "rescata". |
-
-**El carrusel es lo más crítico del sprint:** no existía en el sitio heredado y vale un
-sexto del criterio 1. Es lo único que se construye desde cero.
-
-## 5. Orden de ejecución
-
-Hay una dependencia dura y conviene respetarla:
-
-```
-E1-01 tema  →  E1-02 navbar  →  todo lo demás
-```
-
-El tema y el navbar tocan el `<head>` y el encabezado de **las 10 páginas**. Si alguien
-maqueta encima de una base que aún va a cambiar, el trabajo se pierde. Por eso ambos se
-hacen primero y se integran **el mismo día**.
-
-A partir de ahí los tres duos trabajan en paralelo sobre archivos distintos, que es lo que
-hace viable el art. 9 (un archivo, un escritor):
-
-| Duo | Territorio | Tareas |
-|---|---|---|
-| UI / Front — Joaquín · Dayro | tema, navbar, contenedores, carruseles, grillas | E1-01…06, E1-25 |
-| Datos / Backend — Jonathan · Carlos | formularios, modales, carrito, iconos, modelo de datos | E1-07…11, E1-22, E1-26 |
-| Documento / QA — José · Jhade | limpieza, docs, informe, empaquetado | E1-12…18, E1-20, E1-21, E1-23, E1-24 |
-| Todos | consola sin errores en las 10 páginas | E1-19 |
-
-`E1-19` va al final a propósito: es una verificación, y verificar antes de que todo esté
-integrado no demuestra nada.
-
-## 6. Limpieza — el criterio 2, que no es opcional
-
-El criterio 2 vale tanto como el 1 y se pierde por descuido, no por dificultad.
-
-- **`css/style.css` se elimina entero** (616 líneas). Es código muerto con un `:root`
-  que compite con el del tema. Mientras exista, cualquiera puede "rescatar" de ahí una
-  regla ya retirada y romper una migración.
-- **Cero estilos en línea** (había 15) y **cero scripts incrustados**: el del configurador
-  de packs sale a `js/promociones.js`.
-- **Cero valores de relleno** en el HTML. Los importes y contadores que el JS calcula
-  arrancan vacíos; si se dejan escritos, parpadean al cargar y además duplican un dato
-  que ya vive en el JS (art. 7).
-- **kebab-case en español**, archivo por archivo. Incluye renombrar `promotions.html`.
-- **`assets/` de 39 MB a menos de 15 MB**, ninguna imagen sobre 300 KB. Se consigue
-  pasando a `.webp` y cambiando los PNG de iconos de 4-5 MB por Bootstrap Icons.
-- **Consola limpia en las 10 páginas**, a 375 y a 1440 px. Un 404 de favicon cuenta como
-  error, así que el `<link rel="icon">` entra en el mismo barrido.
-
-## 7. Riesgos técnicos conocidos
-
-Los que ya se manifestaron, para que el Sprint 2 no los repita:
-
-| # | Riesgo | Mitigación |
-|:-:|---|---|
-| T1 | Rutas absolutas (`/css/…`) y `fetch` de JSON: **no funciona con `file://`** | Servir siempre por HTTP. Al pasar a Spring, las rutas ya son las correctas. |
-| T4 | El CSS heredado gana por especificidad y el estilo de Bootstrap no se ve | Retirar la regla vieja. Nunca `!important`. |
-| T5 | `.d-block` de Bootstrap lleva `!important` y gana al atributo `hidden` | Para mostrar u ocultar un `.invalid-feedback` desde JS, añadir y quitar `.d-block`. |
-| T6 | Un icono de fuente **no se dimensiona con `width`** | Al pasar de `<img>` a Bootstrap Icons, cambiar el CSS a `font-size`. No da error: simplemente sale del tamaño del texto. |
-| T7 | Las capturas móviles engañan: `--window-size=375` **recorta** en vez de re-maquetar | Fijar el ancho con emulación de viewport y comparar `scrollWidth` con `clientWidth`. |
-| T9 | `abrirPanel`/`cerrarPanel` de `carrito.js` son **API pública**, no código interno | Se conservan tras migrar a `offcanvas`; por dentro llaman a Bootstrap. Borrarlas rompe "añadir al carrito". |
-
-## 8. Modelo de datos: se diseña, no se implementa
-
-El informe del ATF1 exige el diagrama físico, así que el DDL se escribe ya, completo
-(**las 10 tablas**), aunque el ATF3 solo vaya a usar tres. Un diagrama a medias no
-demuestra el diseño, y las cuatro rúbricas del curso lo piden.
-
-- `esquema-fisico.sql` es la **fuente autoritativa**.
-- `data-model.md` es la vista lógica y el diccionario de datos.
-- Si discrepan, **gana el `.sql`**.
-- El diagrama del informe se **genera** desde ahí, no se dibuja a mano.
-
-## 9. Qué queda preparado para el Sprint 2
-
-El plan es que la migración a Spring Boot sea una mudanza, no una reescritura:
-
-- El HTML ya está limpio y sin scripts incrustados → se corta en fragmentos Thymeleaf
-  (`cabecera`, `pie`) sin desenredar nada primero.
-- Las rutas ya son absolutas → `src/main/resources/static/` las sirve igual.
-- El CSS ya está por capas → se copia tal cual.
-- `js/productos.json` tiene la forma que tendrá la tabla `producto` → el `th:each` del
-  catálogo sustituye al `fetch` sin cambiar el modelo mental.
-
-**Lo que este plan deliberadamente no resuelve** y el Sprint 2 tendrá que abrir: la página
-404 y el sistema de rutas por controladores, que son del criterio 1 del ATF2 y aquí no
-tienen sitio.
-
-## 10. Trazabilidad con el informe
-
-| Sección del informe | Sale de |
+| Página | Rol |
 |---|---|
-| 1.1 Situación problemática | `spec.md` §1 |
-| 1.2 Objetivos | `spec.md` §2 |
-| 2.1.2 Descripción de la solución | **Este documento**, §1 y §2 |
-| 2.1.2.1 Tecnologías usadas | **Este documento**, §3 |
-| 2.1.2.2 Descripción técnica del funcionamiento | **Este documento**, §4 y §5 |
-| 2.2 Requisitos | `spec.md` §4 |
-| 2.3 Diseño de la base de datos | `data-model.md` + `esquema-fisico.sql` |
-| 2.4 Resultados | `informes/capturas/sprint-01/` |
+| `index.html` | Portada, con carrusel de 3 diapositivas |
+| `catalogo.html` | Grilla de los 7 productos, leída de `js/productos.json` |
+| `detalle-producto.html` | Ficha con galería en carrusel y modal de guía de tallas |
+| `promociones.html` | Configurador de packs de 6 prendas |
+| `nosotros.html` | Marca e historia |
+| `contacto.html` | Formulario validado + modal de confirmación |
+| `login.html` | Formulario de inicio de sesión |
+| `checkout.html` | Proceso de compra en 3 pasos |
+| `confirmacion.html` | Comprobante del pedido |
+| `intranet.html` | Panel de administración (cifras aún estáticas) |
 
-## 11. Lista de verificación del plan
+## 2. Decisión de arquitectura: cuatro capas de CSS
 
-- [x] Toda decisión técnica se traza a una historia del `spec.md`
-- [x] El orden de ejecución respeta la dependencia tema → navbar → resto
-- [x] Ningún duo escribe en el archivo de otro (art. 9)
-- [x] No se añade ninguna capa que la rúbrica no pida (art. 8)
-- [x] Los riesgos conocidos están escritos con su mitigación
-- [x] Verificado contra `app-estatico/` a 2026-08-28
-- [ ] **Checkpoint: aprobación del Product Owner** → habilita `tasks.md`
+El problema real del proyecto heredado no era la falta de framework, sino que su
+CSS propio **le ganaba a Bootstrap por especificidad** (trampa T1 de `memory.md`).
+Añadir Bootstrap encima sin retirar lo viejo habría dado un sitio donde las
+clases del framework se aplican pero no se ven.
+
+Por eso el CSS se ordenó en cuatro capas, y **se cargan en este orden**:
+
+```
+1. Bootstrap 5.3 (CDN)      → el componente
+2. css/tema-overtext.css    → variables de marca que re-tematizan Bootstrap
+3. css/main.css + layout.css→ reset, tipografía y rejilla propia
+4. css/componentes/*.css    → capa de tema por componente (10 archivos)
+5. css/paginas/*.css        → ajustes de una sola página (10 archivos)
+```
+
+La regla que gobierna el reparto es el **artículo 4** de la constitución: si
+Bootstrap tiene el componente, se usa el suyo y solo se re-tematiza. El CSS
+propio **tematiza, no sustituye**. Cuando un estilo heredado estorbaba, se
+retiró la regla; nunca se añadió `!important` encima.
+
+**Consecuencia práctica:** `css/style.css` (616 líneas) se eliminó entero en vez
+de arreglarlo, porque su `:root` competía con el del tema.
+
+## 3. Cómo se cubre cada componente de la rúbrica
+
+Los seis componentes del criterio 1 son **de Bootstrap**, no reimplementados
+(artículo 4). Lo propio es la capa de tema.
+
+| Criterio | Componente de Bootstrap | Dónde vive | Capa de tema |
+|---|---|---|---|
+| 1a Contenedores | `.container` / `.container-fluid` | las 10 páginas | `layout.css` |
+| 1b Menú responsivo | `navbar navbar-expand-lg` + `navbar-toggler` + `collapse` | las 10 páginas | `componentes/navegacion.css` |
+| 1b Panel del carrito | `offcanvas offcanvas-end` | 6 páginas con carrito | `componentes/carrito.css` |
+| 1c Formularios | `form-control` / `form-select` / `form-check` + `was-validated` | contacto, login, checkout | `componentes/formularios.css` |
+| 1d Modales | `modal` | contacto (confirmación), detalle-producto (guía de tallas) | `componentes/modal.css` |
+| 1e Carrusel | `carousel` | `#carrusel-portada` (index), `#carrusel-galeria` (detalle) | `componentes/carrusel.css` |
+| 1f Grillas | `row` / `col-*` | catálogo, promociones, nosotros y el pie de las 10 | `layout.css` |
+
+**Extras del sílabo sin rúbrica** (decisión 9 de `memory.md`): tabla de tallas con
+`table table-striped table-hover` (`componentes/tablas.css`), Bootstrap Icons en
+lugar de los PNG de 4-5 MB, y los estilos de párrafo del tema.
+
+## 4. Cómo se organizó el JavaScript
+
+JS vanilla, un archivo por responsabilidad, sin framework ni bundler: el sílabo
+no los ha dictado y el artículo 8 prohíbe añadir lo que ninguna rúbrica pide.
+
+| Archivo | Responsabilidad |
+|---|---|
+| `js/carrito.js` | **Fuente única del carrito.** Estado en `localStorage['ot_carrito']`, expone `window.Carrito` |
+| `js/tienda.js` | Pinta el catálogo y la ficha leyendo `js/productos.json` |
+| `js/contacto.js` | Validación del formulario y disparo del modal |
+| `js/checkout.js` | Los 3 pasos, el ubigeo y el resumen del pedido |
+| `js/confirmacion.js` | Comprobante a partir del pedido guardado |
+| `js/login.js` | Inicio de sesión simulado *(credenciales en el cliente — deuda D12)* |
+| `js/intranet.js` | Panel de administración |
+| `js/promociones.js` | Configurador de packs *(extraído del HTML incrustado, E1-13)* |
+
+**Regla que atraviesa todo el JS: un dato, un origen** (artículo 7).
+
+- Los colores y precios se leen de `js/productos.json`; **ningún array de colores
+  vive en el JS**. `promociones.js` lee el nombre del DOM y el color con
+  `getComputedStyle` a propósito (trampa T10).
+- El umbral de envío gratis existe una sola vez, en
+  `carrito.js` → `UMBRAL_ENVIO_GRATIS`. La barra de progreso, el texto
+  "te faltan S/ …" y la línea ENVÍO del pie del carrito se **derivan** de él.
+- El badge "últimas unidades" se **calcula** desde `stock < 10`, no se guarda.
+
+## 5. Modelo de datos: se diseña ahora, se implementa después
+
+El ATF1 no pide base de datos, pero **sí pide su diagrama físico en el informe**.
+Se decidió escribir el DDL de las **10 tablas completas** ya en este sprint, y no
+solo las 3 que usará el ATF3, porque las cuatro rúbricas del curso piden el
+diagrama y uno a medias no demuestra nada (decisión 16).
+
+| Artefacto | Qué es |
+|---|---|
+| `esquema-fisico.sql` | **Fuente autoritativa.** Tipos, PK/FK/UK, `ON DELETE`, `CHECK`, índices |
+| `data-model.md` | Vista lógica y diccionario de datos |
+| `diagrama-fisico-bd.md` | Cómo leer el diagrama |
+| `informes/capturas/sprint-01/diagrama-fisico-bd.svg` | La Figura 1 del informe |
+
+Las 10 tablas: `categoria`, `producto`, `color`, `variante_producto`,
+`imagen_producto`, `rol`, `usuario`, `pedido`, `detalle_pedido`,
+`mensaje_contacto`.
+
+**Si `data-model.md` y el `.sql` discrepan, gana el `.sql`** (decisión 15). El
+diagrama del informe se **genera** desde ahí, no se dibuja a mano.
+
+## 6. Qué quedó deliberadamente fuera
+
+| Fuera de alcance | Por qué |
+|---|---|
+| Backend, base de datos, seguridad real | Spring Boot se dicta desde la semana 5 (decisión 8) |
+| Profundizar el checkout, el ubigeo y el configurador de packs | Funcionan y no dan puntos de rúbrica (decisión 6, artículo 8) |
+| Historial de pedidos | `localStorage['ot_pedido']` se sobrescribe. Se resuelve en el TF con la tabla `pedido` (I4 del spec) |
+| Credenciales reales | `js/login.js` compara en el cliente. Se borra con Spring Security (deuda D12) |
+
+## 7. Riesgos que se materializaron, y cómo se resolvieron
+
+| Riesgo previsto | Qué pasó |
+|---|---|
+| El CSS heredado le gana a Bootstrap por especificidad | Ocurrió. Se resolvió **retirando** la regla vieja, nunca con `!important` (T4) |
+| El carrusel no existía y vale un sexto del criterio 1 | Se hizo en la sesión 7 como estaba planeado. Tolera productos sin galería |
+| 39 MB de `assets/` inflan el `.rar` | Bajó a **3,7 MB**, ninguna imagen sobre 300 KB (E1-11 + E1-16) |
+| Incoherencias heredadas entre HTML, JS y copy | Las tres decisiones del PO (I1, I2, I3) se cerraron como deudas D3 y D4 |
+
+**Riesgos que aparecieron y no estaban previstos:**
+
+- `.d-block` de Bootstrap lleva `!important` y gana al atributo `hidden`, así que
+  mostrar un `.invalid-feedback` desde JS obliga a añadir y quitar `.d-block` (T5).
+- Un icono de fuente no se dimensiona con `width`; al pasar de `<img>` a Bootstrap
+  Icons hay que cambiar el CSS a `font-size`, **y dejarlo mal no da ningún error** (T6).
+- Las capturas móviles de Chrome headless **recortan** en vez de re-maquetar (T7).
+
+## 8. Verificación
+
+La condición de entrega es el **artículo 3: cero errores en consola**, en las 10
+páginas, a 375 px y a 1440 px. Se verificó en la Sprint Review (E1-19), y el
+`favicon.svg` cerró el último 404.
+
+El sitio usa rutas absolutas (`/css/…`) y `fetch` de JSON: **no funciona con
+`file://`**. Toda verificación se hace sirviendo por HTTP (T1).
+
+## 9. Lista de verificación del plan
+
+- [x] Cada componente de la rúbrica se traza a un componente de Bootstrap real
+- [x] Ninguna capa ni dependencia que la rúbrica no pida (artículo 8)
+- [x] Ningún dato duplicado entre HTML, JS y copy (artículo 7)
+- [x] El modelo de datos tiene una fuente autoritativa única
+- [x] Lo que queda fuera de alcance está dicho explícitamente
+- [x] **Siguiente fase:** [`tasks.md`](tasks.md)
