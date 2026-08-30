@@ -1,0 +1,164 @@
+/* ============================================================
+   OVERTEXT — tema-overtext.css
+   Capa de TEMA: re-tematiza Bootstrap 5.3 con la identidad de marca.
+   Orden de carga: bootstrap (CDN) -> main.css -> ESTE -> componentes -> paginas
+   No reimplementa componentes (constitución art. 4): solo re-tematiza.
+   Paleta y tipografías: docs/contexto.md (reutiliza las variables de main.css).
+   ============================================================ */
+
+/* ============================================================
+   1. Mapeo de la paleta de marca a las variables de Bootstrap
+   Los hex viven en main.css (:root); aquí se enlazan a --bs-*.
+   ============================================================ */
+:root {
+    /* Colores de marca -> tokens de Bootstrap */
+    --bs-primary:              var(--color-rojo);      /* #8B1A1A rojo vino, CTAs y activos */
+    --bs-primary-rgb:          139, 26, 26;
+
+    --bs-body-bg:              var(--color-fondo);     /* #FFFFFF */
+    --bs-body-color:           var(--color-negro);     /* #111111 */
+    --bs-secondary-bg:         var(--color-fondo-alt); /* #F5F5F5 secciones alternas */
+    --bs-tertiary-bg:          var(--color-fondo-alt);
+    --bs-border-color:         var(--color-borde);     /* #E5E5E5 */
+    --bs-secondary-color:      var(--color-texto-suave);
+
+    /* Enlaces en el tono de marca */
+    --bs-link-color:           var(--color-negro);
+    --bs-link-color-rgb:       17, 17, 17;
+    --bs-link-hover-color:     var(--color-rojo);
+    --bs-link-hover-color-rgb: 139, 26, 26;
+
+    /* Tipografías (Oswald + Inter ya se importan en main.css) */
+    --bs-body-font-family:     var(--fuente-principal);
+    --bs-body-font-size:       1rem;
+    --bs-body-line-height:     1.5;
+    --bs-heading-color:        var(--color-negro);
+
+    /* Radios sobrios, acordes a la estética limpia */
+    --bs-border-radius:        4px;
+    --bs-border-radius-sm:     3px;
+    --bs-border-radius-lg:     6px;
+}
+
+/* Acento beige de marca, disponible como token propio (uso moderado) */
+:root {
+    --ot-beige: var(--color-beige); /* #C8B89A */
+}
+
+/* Títulos con la display de marca */
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: var(--fuente-display);
+    letter-spacing: 0.02em;
+}
+
+/* ============================================================
+   2. Botones de marca (re-tematización, no reimplementación)
+   ============================================================ */
+.btn-primary {
+    --bs-btn-bg:             var(--color-rojo);
+    --bs-btn-border-color:   var(--color-rojo);
+    --bs-btn-hover-bg:       #6f1414;
+    --bs-btn-hover-border-color: #6f1414;
+    --bs-btn-active-bg:      #5c1010;
+    --bs-btn-active-border-color: #5c1010;
+    --bs-btn-color:          #ffffff;
+    --bs-btn-hover-color:    #ffffff;
+}
+
+.btn-dark {
+    --bs-btn-bg:             var(--color-negro);
+    --bs-btn-border-color:   var(--color-negro);
+    --bs-btn-hover-bg:       #000000;
+    --bs-btn-hover-border-color: #000000;
+}
+
+/* ============================================================
+   3. Navbar de marca (usada por E1-02 en las 10 páginas)
+   Fondo blanco, texto negro, borde inferior sutil, activo en rojo vino.
+   ============================================================ */
+.barra-navegacion {
+    --bs-navbar-color:              var(--color-negro);
+    --bs-navbar-hover-color:        var(--color-rojo);
+    --bs-navbar-active-color:       var(--color-rojo);
+    --bs-navbar-brand-color:        var(--color-negro);
+    --bs-navbar-brand-hover-color:  var(--color-negro);
+    --bs-navbar-toggler-border-color: var(--color-borde);
+
+    background-color: var(--color-fondo);
+    border-bottom: 1px solid var(--color-borde);
+}
+
+.barra-navegacion .navbar-brand {
+    font-family: var(--fuente-display);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    font-size: 1.5rem;
+}
+
+.barra-navegacion .nav-link {
+    font-family: var(--fuente-display);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 0.95rem;
+    font-weight: 400;
+}
+
+/* Enlace de la página actual en rojo vino */
+.barra-navegacion .nav-link.active {
+    color: var(--color-rojo);
+    font-weight: 700;
+}
+
+/* Acciones (cuenta y carrito) alineadas con el resto del header */
+.barra-navegacion .accion-navegacion {
+    color: var(--color-negro);
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.5rem;
+}
+
+.barra-navegacion .accion-navegacion:hover {
+    color: var(--color-rojo);
+}
+
+/* Badge contador del carrito sobre el ícono */
+.barra-navegacion .carrito-contador {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 4px;
+    border-radius: 9px;
+    background-color: var(--color-rojo);
+    color: #ffffff;
+    font-family: var(--fuente-principal);
+    font-size: 0.7rem;
+    font-weight: 700;
+    line-height: 18px;
+    text-align: center;
+}
+
+/* ============================================================
+   4. E1-25 · [SÍLABO] Estilos de párrafo tipográficos
+   ============================================================ */
+
+/* Los párrafos genéricos (.texto-guia, .parrafo-marca, .texto-apoyo) se
+   retiraron: cada página ya define su propia tipografía de párrafo
+   (`.hero-contacto p`, `.valor-item p`, `.texto-parrafo`…) y esas reglas ganan
+   por especificidad. Tener las dos era el mismo estilo por duplicado (art. 7), y
+   el arreglo correcto es retirar la que sobra, no imponerse con `!important`
+   (T4). En qué capa debe vivir la tipografía de párrafo queda anotado en D15. */
+
+/* El antetítulo NO se define aquí: ese papel ya lo cumple `.subtitulo-superior`
+   (`css/layout.css`), en uso en index, catálogo, nosotros y contacto. Tener las
+   dos sería el mismo estilo con dos nombres, y eso es justo lo que prohíbe el
+   art. 7. Si hay que retocar el antetítulo, se toca `.subtitulo-superior`. */
+
+/* Realce dentro de un párrafo, sin depender de <strong> */
+.enfasis-marca {
+    font-weight: 700;
+    color: var(--color-rojo);
+}

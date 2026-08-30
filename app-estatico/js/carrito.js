@@ -7,7 +7,7 @@
     'use strict';
 
     var CLAVE = 'ot_carrito';
-    var UMBRAL_ENVIO_GRATIS = 180; // S/ para desbloquear envío gratis
+    var UMBRAL_ENVIO_GRATIS = 200; // S/ para desbloquear envío gratis (decisión del PO, 25-ago)
 
     /* --- Persistencia --- */
     function obtenerCarrito() {
@@ -133,13 +133,25 @@
             }
         }
 
-        // Totales del pie (envío se define al finalizar compra)
+        // Totales del pie (el costo exacto del envio se define al finalizar compra)
         var footer = panel.querySelector('.carrito-footer');
         if (footer) {
             var lineaSub = footer.querySelector('.resumen-linea span:last-child');
             if (lineaSub) lineaSub.textContent = formatoSoles(totales.subtotal);
             var monto = footer.querySelector('.total-monto');
             if (monto) monto.textContent = formatoSoles(totales.subtotal);
+
+            // El HTML traia "GRATIS" quemado y contradecia a la barra de arriba
+            // ("te faltan S/ 140"). Se deriva del mismo umbral, igual que el
+            // checkout, que muestra POR DEFINIR hasta saber el tipo de envio.
+            var envio = footer.querySelector('.envio-gratis');
+            if (envio) {
+                var gratis = totales.subtotal >= UMBRAL_ENVIO_GRATIS;
+                envio.textContent = gratis ? 'GRATIS' : 'POR DEFINIR';
+                // .envio-gratis es el gancho fijo del elemento; el verde lo pone
+                // .es-gratis, igual que .envio-gratis-tag en el checkout.
+                envio.classList.toggle('es-gratis', gratis);
+            }
         }
     }
 
@@ -173,22 +185,26 @@
         '</article>';
     }
 
-    /* --- Panel abrir / cerrar --- */
-    function abrirPanel() {
+    /* --- Panel abrir / cerrar (E1-10) ---
+       El panel es un `offcanvas` de Bootstrap: el backdrop, el cierre con Esc,
+       la trampa de foco y el bloqueo del scroll los pone el framework
+       (constitución art. 4). Aquí solo se pide mostrarlo u ocultarlo.
+       Se conservan `abrirPanel`/`cerrarPanel` porque son API pública:
+       `agregar al carrito` llama a `abrirPanel()`. */
+    function panelCarrito() {
         var panel = document.getElementById('carrito-lateral');
-        var overlay = document.getElementById('overlay-carrito');
-        if (!panel) return;
-        panel.classList.add('abierto');
-        if (overlay) overlay.classList.add('activo');
-        document.body.style.overflow = 'hidden';
+        if (!panel || !window.bootstrap) return null;
+        return bootstrap.Offcanvas.getOrCreateInstance(panel);
+    }
+
+    function abrirPanel() {
+        var oc = panelCarrito();
+        if (oc) oc.show();
     }
 
     function cerrarPanel() {
-        var panel = document.getElementById('carrito-lateral');
-        var overlay = document.getElementById('overlay-carrito');
-        if (panel) panel.classList.remove('abierto');
-        if (overlay) overlay.classList.remove('activo');
-        document.body.style.overflow = '';
+        var oc = panelCarrito();
+        if (oc) oc.hide();
     }
 
     /* --- Construir variante desde selectores activos (página de detalle) --- */
@@ -205,15 +221,11 @@
     function init() {
         renderizarCarrito();
 
-        // Abrir/cerrar panel
+        // Abrir el panel desde el icono del header. El cierre (X, "seguir
+        // comprando", Esc y clic fuera) lo resuelve Bootstrap por atributos,
+        // así que ya no necesita escuchadores propios.
         var abrir = document.getElementById('abrir-carrito');
-        var cerrar = document.getElementById('cerrar-carrito');
-        var seguir = document.getElementById('seguir-comprando');
-        var overlay = document.getElementById('overlay-carrito');
         if (abrir) abrir.addEventListener('click', abrirPanel);
-        if (cerrar) cerrar.addEventListener('click', cerrarPanel);
-        if (seguir) seguir.addEventListener('click', cerrarPanel);
-        if (overlay) overlay.addEventListener('click', cerrarPanel);
 
         // Delegación +/−/eliminar dentro del panel
         var lista = document.querySelector('.carrito-items');

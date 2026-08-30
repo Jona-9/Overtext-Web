@@ -124,21 +124,30 @@
     background: var(--color-borde);
 }
 
-/* --- Botón WhatsApp --- */
+/* --- Botón WhatsApp ---
+   D9: estaba definido a la vez aqui y en componentes/botones.css. Solo lo usa
+   login.html, asi que la definicion unica se queda en la pagina; se le
+   incorporaron las propiedades que solo traia botones.css (alto, borde,
+   radio, familia tipografica y cursor). */
 .ot-boton-whatsapp {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
     width: 100%;
+    height: 46px;
     padding: 13px;
     background: #25D366;
     color: #fff;
-    text-decoration: none;
+    border: 1px solid var(--color-borde);
+    border-radius: 3px;
+    font-family: var(--fuente-principal);
     font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
     transition: opacity 0.2s;
 }
 
@@ -146,10 +155,11 @@
     opacity: 0.85;
 }
 
+/* E1-11: Bootstrap Icon, ya no es un <img> */
 .ot-icono-whatsapp {
-    width: 20px;
-    height: 20px;
-    object-fit: contain;
+    font-size: 20px;
+    line-height: 1;
+    flex-shrink: 0;
 }
 
 /* --- Pie del formulario --- */

@@ -4,9 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
     <title>Short Stone Beige — OVERTEXT</title>
+    <!-- Framework: Bootstrap 5.3 por CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- Arquitectura ITCSS OVERTEXT -->
     <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/tema-overtext.css">
     <link rel="stylesheet" href="/css/layout.css">
     <link rel="stylesheet" href="/css/componentes/navegacion.css">
     <link rel="stylesheet" href="/css/componentes/botones.css">
@@ -15,102 +20,112 @@
     <link rel="stylesheet" href="/css/componentes/badges.css">
     <link rel="stylesheet" href="/css/componentes/footer.css">
     <link rel="stylesheet" href="/css/componentes/carrito.css">
+    <link rel="stylesheet" href="/css/componentes/modal.css">
     <link rel="stylesheet" href="/css/paginas/producto.css">
+    <link rel="stylesheet" href="/css/componentes/carrusel.css">
 </head>
 
 <body>
-    <header class="barra-navegacion">
-        <div class="contenedor navegacion-interior">
-            <a href="/index.html" class="marca-logo">OVERTEXT</a>
-            <nav class="menu-principal">
-                <ul class="lista-enlaces">
-                    <li><a href="/index.html" class="enlace">INICIO</a></li>
-                    <li><a href="/catalogo.html" class="enlace activo">CATÁLOGO</a></li>
-                    <li><a href="/promotions.html" class="enlace">PROMOCIONES</a></li>
-                    <li><a href="/nosotros.html" class="enlace">NOSOTROS</a></li>
-                    <li><a href="/contacto.html" class="enlace">CONTACTO</a></li>
-                </ul>
-            </nav>
-            <div class="nav-acciones">
-                <a href="/login.html" class="boton-usuario" aria-label="Mi cuenta">
+    <nav class="navbar navbar-expand-lg barra-navegacion">
+        <div class="container">
+            <a class="navbar-brand" href="/index.html">OVERTEXT</a>
+            <div class="d-flex align-items-center order-lg-last nav-acciones">
+                <a href="/login.html" class="accion-navegacion" aria-label="Mi cuenta">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="12" cy="8" r="4"/>
                         <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
                     </svg>
                 </a>
-                <button class="boton-carrito" id="abrir-carrito" aria-label="Carrito">
-                    <img src="/assets/icon/carrito-de-compras.png" alt="">
-                    <span class="carrito-contador">2</span>
+                <button class="accion-navegacion" id="abrir-carrito" type="button" aria-label="Carrito">
+                    <i class="bi bi-cart3" aria-hidden="true"></i>
+                    <span class="carrito-contador"></span>
                 </button>
-                <button class="btn-hamburger" id="btn-hamburger" aria-label="Menú">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                <button class="navbar-toggler ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#menu-principal" aria-controls="menu-principal" aria-expanded="false" aria-label="Menú">
+                    <span class="navbar-toggler-icon"></span>
                 </button>
             </div>
+            <div class="collapse navbar-collapse" id="menu-principal">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="/index.html">INICIO</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="/catalogo.html">CATÁLOGO</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/promociones.html">PROMOCIONES</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/nosotros.html">NOSOTROS</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/contacto.html">CONTACTO</a></li>
+                </ul>
+            </div>
         </div>
-    </header>
+    </nav>
 
     <!-- OVERLAY -->
-    <div class="overlay-carrito" id="overlay-carrito"></div>
 
-    <!-- CARRITO LATERAL -->
-    <aside id="carrito-lateral">
-        <div class="carrito-header">
+    <!-- CARRITO — offcanvas de Bootstrap (E1-10 · criterio 1b)
+         El backdrop, el cierre con Esc, el foco y el bloqueo del scroll son del
+         framework. Se conserva el id y las clases que consulta js/carrito.js. -->
+    <aside class="offcanvas offcanvas-end" tabindex="-1" id="carrito-lateral"
+           aria-labelledby="carrito-titulo">
+
+        <div class="offcanvas-header carrito-header">
             <div class="carrito-header-izq">
-                <h2>TU CARRITO</h2>
-                <span class="carrito-conteo">2 PRODUCTOS</span>
+                <h2 class="offcanvas-title" id="carrito-titulo">TU CARRITO</h2>
+                <span class="carrito-conteo"></span>
             </div>
-            <button class="btn-cerrar-carrito" id="cerrar-carrito" aria-label="Cerrar carrito">
-                <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-                    <line x1="1" y1="1" x2="12" y2="12"/><line x1="12" y1="1" x2="1" y2="12"/>
-                </svg>
-            </button>
+            <button type="button" class="btn-close" id="cerrar-carrito"
+                    data-bs-dismiss="offcanvas" aria-label="Cerrar carrito"></button>
         </div>
 
-        <div class="envio-gratis-info">
-            <p class="envio-gratis-texto">TE FALTAN S/ 60 PARA ENVÍO GRATIS</p>
-            <div class="envio-gratis-barra">
-                <div class="envio-gratis-progreso"></div>
+        <div class="offcanvas-body carrito-cuerpo">
+            <div class="envio-gratis-info">
+                <p class="envio-gratis-texto"></p>
+                <div class="envio-gratis-barra">
+                    <div class="envio-gratis-progreso"></div>
+                </div>
             </div>
-        </div>
 
-        <div class="carrito-items">
-            <!-- Los productos se renderizan dinámicamente desde js/carrito.js -->
+            <div class="carrito-items">
+                <!-- Los productos se renderizan dinámicamente desde js/carrito.js -->
+            </div>
         </div>
 
         <div class="carrito-footer">
             <div class="resumen-linea">
                 <span>SUBTOTAL</span>
-                <span>S/ 120</span>
+                <span></span>
             </div>
             <div class="resumen-linea">
                 <span>ENVÍO</span>
-                <span class="envio-gratis">GRATIS</span>
+                <span class="envio-gratis"></span>
             </div>
             <div class="resumen-total">
                 <span class="total-label">TOTAL</span>
-                <span class="total-monto">S/ 120</span>
+                <span class="total-monto"></span>
             </div>
             <a href="/checkout.html" class="btn-finalizar">FINALIZAR COMPRA</a>
-            <button class="btn-seguir" id="seguir-comprando">SEGUIR COMPRANDO</button>
+            <button class="btn-seguir" id="seguir-comprando" data-bs-dismiss="offcanvas">SEGUIR COMPRANDO</button>
         </div>
+
     </aside>
 
     <main>
         <section class="seccion-detalle-producto">
-            <div class="contenedor grid-detalle-producto">
+            <div class="container grid-detalle-producto">
 
-                <!-- GALERÍA -->
+                <!-- GALERÍA (carrusel de Bootstrap; lo rellena js/tienda.js) -->
                 <div class="galeria-producto">
-                    <div class="foto-principal-wrapper">
-                        <img src="/assets/img/productos/beige/principal.webp" alt="Short Stone Beige">
-                    </div>
-                    <div class="miniaturas-grid">
-                        <img src="/assets/img/productos/beige/1.webp" alt="Vista 1" class="miniatura">
-                        <img src="/assets/img/productos/beige/2.webp" alt="Vista 2" class="miniatura">
-                        <img src="/assets/img/productos/beige/3.webp" alt="Vista 3" class="miniatura">
-                        <img src="/assets/img/productos/beige/4.webp" alt="Vista 4" class="miniatura">
+                    <div id="carrusel-galeria" class="carousel slide carousel-dark carrusel-galeria" data-bs-ride="carousel">
+                        <div class="carousel-indicators"></div>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="/assets/img/productos/beige/principal.webp" class="d-block w-100" alt="Short Stone Beige">
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carrusel-galeria" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Anterior</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carrusel-galeria" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Siguiente</span>
+                        </button>
                     </div>
                 </div>
 
@@ -130,7 +145,7 @@
                     <div class="selector-campo">
                         <div class="selector-header">
                             <span class="selector-label">Talla</span>
-                            <a href="#acordeon-tallas" class="guia-link">Guía de tallas</a>
+                            <button type="button" class="guia-link" data-bs-toggle="modal" data-bs-target="#modal-tallas">Guía de tallas</button>
                         </div>
                         <div class="grupo-tallas">
                             <button class="btn-talla">S</button>
@@ -159,7 +174,7 @@
                             data-cantidad-el=".valor-cantidad">Añadir al carrito</button>
                     </div>
 
-                    <button class="btn-pack">Arma tu pack</button>
+                    <a href="/promociones.html" class="btn-pack">Arma tu pack</a>
 
                     <!-- Beneficios -->
                     <div class="beneficios-fila">
@@ -193,28 +208,6 @@
                             </div>
                         </details>
 
-                        <details class="acordeon-item" id="acordeon-tallas">
-                            <summary class="acordeon-trigger">Tallas</summary>
-                            <div class="acordeon-interior">
-                                <table class="tabla-tallas-detalle">
-                                    <thead>
-                                        <tr>
-                                            <th>Talla</th>
-                                            <th>Cintura</th>
-                                            <th>Cadera</th>
-                                            <th>Largo</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr><td>S</td><td>70–76 cm</td><td>88–94 cm</td><td>48 cm</td></tr>
-                                        <tr><td>M</td><td>76–82 cm</td><td>94–100 cm</td><td>50 cm</td></tr>
-                                        <tr><td>L</td><td>82–88 cm</td><td>100–106 cm</td><td>52 cm</td></tr>
-                                        <tr><td>XL</td><td>88–94 cm</td><td>106–112 cm</td><td>54 cm</td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </details>
-
                         <details class="acordeon-item">
                             <summary class="acordeon-trigger">Cuidado de la prenda</summary>
                             <div class="acordeon-interior">
@@ -236,40 +229,40 @@
     </main>
 
     <footer class="pie-pagina">
-        <div class="contenedor grid-pie">
-            <div class="pie-info">
+        <div class="container row g-4 pb-5">
+            <div class="col-12 col-md-6 col-lg-4 pie-info">
                 <h2 class="pie-logo">OVERTEXT</h2>
                 <p class="pie-lema">LIMA, PERÚ. STREETWEAR PARA LA NUEVA GENERACIÓN.</p>
             </div>
-            <div class="pie-enlaces">
+            <div class="col-6 col-md-3 col-lg-2 pie-enlaces">
                 <h3>SITIO</h3>
                 <ul>
                     <li><a href="/index.html">INICIO</a></li>
                     <li><a href="/catalogo.html">CATÁLOGO</a></li>
-                    <li><a href="/promotions.html">PROMOCIONES</a></li>
+                    <li><a href="/promociones.html">PROMOCIONES</a></li>
                 </ul>
             </div>
-            <div class="pie-enlaces">
+            <div class="col-6 col-md-3 col-lg-2 pie-enlaces">
                 <h3>AYUDA</h3>
                 <ul>
                     <li><a href="/contacto.html">CONTACTO</a></li>
                     <li><a href="/nosotros.html">NOSOTROS</a></li>
-                    <li><a href="#">ENVÍOS</a></li>
+                    <li><a href="/contacto.html">ENVÍOS</a></li>
                 </ul>
             </div>
-            <div class="pie-boletin">
+            <div class="col-12 col-md-6 col-lg-4 pie-boletin">
                 <h3>NEWSLETTER</h3>
-                <div class="formulario-minimal">
-                    <input type="email" placeholder="TU EMAIL">
-                    <button class="btn-flecha">→</button>
-                </div>
+                <a href="/contacto.html" class="formulario-minimal enlace-boletin">
+                    SUSCRÍBETE
+                    <span class="btn-flecha" aria-hidden="true">→</span>
+                </a>
                 <div class="redes-sociales">
                     <a href="https://www.instagram.com/overcoming.pe/">INSTAGRAM</a>
                     <a href="https://www.tiktok.com/@overcoming.peru">TIKTOK</a>
                 </div>
             </div>
         </div>
-        <div class="contenedor">
+        <div class="container">
             <hr class="divisor">
             <div class="legal-flex">
                 <p>© 2026 OVERTEXT — TODOS LOS DERECHOS RESERVADOS</p>
@@ -279,10 +272,54 @@
     </footer>
 
     <a href="https://wa.me/51904501440" class="wsp-flotante" target="_blank" rel="noopener" aria-label="WhatsApp">
-        <img src="/assets/icon/wsp.png" alt="WhatsApp">
+        <i class="bi bi-whatsapp" aria-hidden="true"></i>
     </a>
 
-    <script src="/js/nav.js"></script>
+    <!-- MODAL GUÍA DE TALLAS (E1-09 · criterio 1d)
+         La tabla vive SOLO aquí: antes estaba duplicada en el acordeón
+         (constitución art. 7, un solo origen de verdad).
+         E1-26 [SÍLABO]: `table table-striped` de Bootstrap. -->
+    <div class="modal fade" id="modal-tallas" tabindex="-1"
+         aria-labelledby="modal-tallas-titulo" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title h5" id="modal-tallas-titulo">Guía de tallas</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
+          <div class="modal-body">
+            <p class="modal-lema">Medidas de la prenda en centímetros.</p>
+            <div class="table-responsive">
+              <table class="table table-striped table-hover align-middle tabla-tallas">
+                <caption class="visually-hidden">Medidas por talla: cintura, cadera y largo</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Talla</th>
+                    <th scope="col">Cintura</th>
+                    <th scope="col">Cadera</th>
+                    <th scope="col">Largo</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><th scope="row">S</th><td>70–76 cm</td><td>88–94 cm</td><td>48 cm</td></tr>
+                  <tr><th scope="row">M</th><td>76–82 cm</td><td>94–100 cm</td><td>50 cm</td></tr>
+                  <tr><th scope="row">L</th><td>82–88 cm</td><td>100–106 cm</td><td>52 cm</td></tr>
+                  <tr><th scope="row">XL</th><td>88–94 cm</td><td>106–112 cm</td><td>54 cm</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="modal-tallas-nota">
+              ¿Entre dos tallas? Elige la mayor: el short es de corte recto.
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Entendido</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/js/carrito.js"></script>
     <script src="/js/tienda.js"></script>
 

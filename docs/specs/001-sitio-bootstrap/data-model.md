@@ -11,6 +11,15 @@
 
 ## 1. Diagrama físico
 
+> **E1-22 (Sprint 1, Jonathan):** el diagrama físico entregable y su DDL viven en
+> `esquema-fisico.sql` (definición autoritativa: tipos, PK/FK/UK, `ON DELETE`,
+> `CHECK` e índices) y `diagrama-fisico-bd.md` (cómo leerlo).
+> La figura para el informe §2.3 es
+> `informes/capturas/sprint-01/diagrama-fisico-bd.svg`.
+> El diagrama de abajo es la **vista lógica de referencia**; si discrepa del `.sql`,
+> gana el `.sql`.
+
+
 ```mermaid
 erDiagram
     CATEGORIA   ||--o{ PRODUCTO          : agrupa
@@ -144,7 +153,7 @@ erDiagram
 | `activo` | BOOLEAN | No | DEFAULT TRUE | Si se publica |
 | `categoria_id` | BIGINT | No | FK → `categoria(id)`, `@NotNull` | Categoría |
 
-> El badge de stock ("últimas unidades") se **calcula** desde `stock`, no se guarda: artículo 7 de la constitución. Umbral pendiente de decisión (spec I3).
+> El badge de stock ("últimas unidades") se **calcula** desde `stock`, no se guarda: artículo 7 de la constitución. Umbral: **`stock < 10`** (decisión del PO, spec I3, 2026-08-25).
 
 ### 2.3 `color` — colores disponibles *(ATF3)*
 
@@ -272,9 +281,9 @@ Roles iniciales: `ADMIN`, `CLIENTE`.
 |---|---|---|
 | RN1 | Precio unitario S/ 20; pack de exactamente 6 prendas por S/ 100 | `promotions.html` |
 | RN2 | Costos de envío: recojo S/ 0 · delivery Lima S/ 15 · provincia S/ 25 | `js/checkout.js` |
-| RN3 | Envío gratis sobre un umbral — **valor pendiente** (S/ 180 vs S/ 200) | spec I2 |
+| RN3 | Envío gratis sobre **S/ 200** (decisión del PO, 2026-08-25) | spec I2 |
 | RN4 | Validación de documento: DNI 8 dígitos · RUC 11 · CE/Pasaporte 6-12 alfanumérico | `js/checkout.js` |
-| RN5 | El badge de stock se calcula desde `producto.stock` — **umbral pendiente** | spec I3 |
+| RN5 | El badge de stock se calcula desde `producto.stock` — **umbral `stock < 10`** (PO, 2026-08-25) | spec I3 |
 | RN6 | Un pedido guarda el precio del momento; los cambios posteriores no lo afectan | decisión de diseño |
 
 ---

@@ -3,18 +3,23 @@
    Grid de productos y swatches de color.
    ============================================================ */
 
+/* --- Hero del catálogo --- */
+.catalogo-titulo {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    letter-spacing: -2px;
+}
+
+.catalogo-intro {
+    max-width: 480px;
+}
+
 /* --- Sección catálogo --- */
 .catalogo-productos {
     padding: var(--espacio-xl) 0;
 }
 
-.productos-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: var(--color-borde);
-    border: 0.5px solid var(--color-borde);
-}
+/* El layout del grid lo da el sistema de columnas de Bootstrap (row/col-*).
+   .productos-grid queda solo como gancho para js/tienda.js. */
 
 /* --- Swatches de color (catálogo) --- */
 .producto-colores {
@@ -36,26 +41,7 @@
     transform: scale(1.2);
 }
 
-/* Paleta de colores del catálogo */
-.color-claro    { background: #F5F0E8; }
-.color-oscuro   { background: #2C2C2C; }
-.color-borgona  { background: #6B1A1A; }
-.color-blanco   { background: #FFFFFF; border-color: var(--color-borde); }
-.color-gris     { background: #9E9E9E; }
-.color-negro    { background: #111111; }
-.color-oliva    { background: #6B7C4B; }
-.color-beige    { background: var(--color-beige); }
-.color-marron   { background: #7A5C3A; }
+/* Sin paleta de clases: js/tienda.js pinta cada .color con el hex de
+   productos.json (art. 7, un dato no se duplica). */
 
-/* --- Responsive --- */
-@media (max-width: 900px) {
-    .productos-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 480px) {
-    .productos-grid {
-        grid-template-columns: 1fr;
-    }
-}
+/* La responsividad del grid la maneja Bootstrap (col-12/col-sm-6/col-lg-4/col-xl-3). */

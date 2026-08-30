@@ -8,7 +8,7 @@
     padding: var(--espacio-lg) 0 var(--espacio-xl);
 }
 
-.seccion-detalle-producto > .contenedor {
+.seccion-detalle-producto > .container {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 60px;
@@ -119,7 +119,10 @@
     color: var(--color-texto-suave);
 }
 
+/* E1-09: pasa de <a href="#..."> a <button> que abre el modal de tallas */
 .guia-link {
+    padding: 0;
+    font-family: var(--fuente-principal);
     font-size: 0.65rem;
     font-weight: 500;
     color: var(--color-texto-suave);
@@ -194,10 +197,6 @@
 .swatch--activa {
     border-color: var(--color-negro);
     box-shadow: inset 0 0 0 3px var(--color-fondo);
-}
-
-.swatch--blanco {
-    border-color: var(--color-borde);
 }
 
 /* --- Control de cantidad y acciones --- */
@@ -313,7 +312,7 @@
 
 /* --- Responsive --- */
 @media (max-width: 900px) {
-    .seccion-detalle-producto > .contenedor {
+    .seccion-detalle-producto > .container {
         grid-template-columns: 1fr;
         gap: var(--espacio-lg);
     }

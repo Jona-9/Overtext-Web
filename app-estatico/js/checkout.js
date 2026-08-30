@@ -115,9 +115,11 @@
             else if (tipo === 'RUC') ok = /^\d{11}$/.test(val);
             else ok = /^[A-Za-z0-9]{6,12}$/.test(val); // Carné de extranjería / Pasaporte
         }
-        input.classList.toggle('campo-invalido', !ok);
-        var msg = input.nextElementSibling;
-        if (msg && msg.classList.contains('error-msg')) msg.style.display = ok ? 'none' : 'block';
+        // E1-07 · Estado de validación con las clases de Bootstrap. El mensaje
+        // .invalid-feedback lo muestra el propio framework, sin tocar estilos
+        // desde JS (constitución art. 4).
+        input.classList.toggle('is-invalid', !ok);
+        input.classList.toggle('is-valid', ok);
         return ok;
     }
 
@@ -135,7 +137,7 @@
     form.querySelectorAll('input[required]').forEach(function (inp) {
         inp.addEventListener('blur', function () { if (esVisible(this)) validarInput(this); });
         inp.addEventListener('input', function () {
-            if (this.classList.contains('campo-invalido')) validarInput(this);
+            if (this.classList.contains('is-invalid')) validarInput(this);
         });
     });
     form.querySelectorAll('select[required]').forEach(function (sel) {
@@ -186,7 +188,7 @@
             subbloques.forEach(function (b) {
                 b.classList.toggle('visible', b.dataset.envio === TIPO);
             });
-            if (errorEnvio) errorEnvio.style.display = 'none';
+            if (errorEnvio) errorEnvio.classList.remove('d-block');
             renderResumen();
         });
     });
@@ -208,11 +210,11 @@
         btn.addEventListener('click', function () {
             var paso = btn.dataset.continuar;
             if (paso === '2' && !TIPO) {
-                if (errorEnvio) errorEnvio.style.display = 'block';
+                if (errorEnvio) errorEnvio.classList.add('d-block');
                 return;
             }
             if (!validarPaso(paso)) {
-                var primero = form.querySelector('.paso[data-paso="' + paso + '"] .campo-invalido');
+                var primero = form.querySelector('.paso[data-paso="' + paso + '"] .is-invalid');
                 if (primero) primero.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 return;
             }
@@ -243,7 +245,7 @@
         }
 
         if (!TIPO) {
-            if (errorEnvio) errorEnvio.style.display = 'block';
+            if (errorEnvio) errorEnvio.classList.add('d-block');
             var paso2 = form.querySelector('.paso[data-paso="2"]');
             if (paso2) paso2.scrollIntoView({ behavior: 'smooth', block: 'center' });
             return;
@@ -254,7 +256,7 @@
             if (esVisible(c) && !validarInput(c)) valido = false;
         });
         if (!valido) {
-            var primero = form.querySelector('.campo-invalido');
+            var primero = form.querySelector('.is-invalid');
             if (primero) primero.scrollIntoView({ behavior: 'smooth', block: 'center' });
             return;
         }

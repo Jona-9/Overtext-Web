@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    <title>Promociones — OVERTEXT</title>
+    <!-- Framework: Bootstrap 5.3 por CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Arquitectura ITCSS OVERTEXT -->
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/tema-overtext.css">
+    <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/componentes/navegacion.css">
+    <link rel="stylesheet" href="/css/componentes/botones.css">
+    <link rel="stylesheet" href="/css/componentes/badges.css">
+    <link rel="stylesheet" href="/css/componentes/footer.css">
+    <link rel="stylesheet" href="/css/componentes/carrito.css">
+    <link rel="stylesheet" href="/css/paginas/promociones.css">
+    <link rel="stylesheet" href="/css/componentes/formularios.css">
+</head>
+<body>
+
+    <!-- NAVEGACIÓN -->
+    <nav class="navbar navbar-expand-lg barra-navegacion">
+        <div class="container">
+            <a class="navbar-brand" href="/index.html">OVERTEXT</a>
+            <div class="d-flex align-items-center order-lg-last nav-acciones">
+                <a href="/login.html" class="accion-navegacion" aria-label="Mi cuenta">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="8" r="4"/>
+                        <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+                    </svg>
+                </a>
+                <button class="accion-navegacion" id="abrir-carrito" type="button" aria-label="Carrito">
+                    <i class="bi bi-cart3" aria-hidden="true"></i>
+                    <span class="carrito-contador"></span>
+                </button>
+                <button class="navbar-toggler ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#menu-principal" aria-controls="menu-principal" aria-expanded="false" aria-label="Menú">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="menu-principal">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="/index.html">INICIO</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/catalogo.html">CATÁLOGO</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="/promociones.html">PROMOCIONES</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/nosotros.html">NOSOTROS</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/contacto.html">CONTACTO</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- OVERLAY + CARRITO LATERAL -->
+    <!-- CARRITO — offcanvas de Bootstrap (E1-10 · criterio 1b)
+         El backdrop, el cierre con Esc, el foco y el bloqueo del scroll son del
+         framework. Se conserva el id y las clases que consulta js/carrito.js. -->
+    <aside class="offcanvas offcanvas-end" tabindex="-1" id="carrito-lateral"
+           aria-labelledby="carrito-titulo">
+
+        <div class="offcanvas-header carrito-header">
+            <div class="carrito-header-izq">
+                <h2 class="offcanvas-title" id="carrito-titulo">TU CARRITO</h2>
+                <span class="carrito-conteo"></span>
+            </div>
+            <button type="button" class="btn-close" id="cerrar-carrito"
+                    data-bs-dismiss="offcanvas" aria-label="Cerrar carrito"></button>
+        </div>
+
+        <div class="offcanvas-body carrito-cuerpo">
+            <div class="envio-gratis-info">
+                <p class="envio-gratis-texto"></p>
+                <div class="envio-gratis-barra">
+                    <div class="envio-gratis-progreso"></div>
+                </div>
+            </div>
+
+            <div class="carrito-items">
+                <!-- Los productos se renderizan dinámicamente desde js/carrito.js -->
+            </div>
+        </div>
+
+        <div class="carrito-footer">
+            <div class="resumen-linea">
+                <span>SUBTOTAL</span>
+                <span></span>
+            </div>
+            <div class="resumen-linea">
+                <span>ENVÍO</span>
+                <span class="envio-gratis"></span>
+            </div>
+            <div class="resumen-total">
+                <span class="total-label">TOTAL</span>
+                <span class="total-monto"></span>
+            </div>
+            <a href="/checkout.html" class="btn-finalizar">FINALIZAR COMPRA</a>
+            <button class="btn-seguir" id="seguir-comprando" data-bs-dismiss="offcanvas">SEGUIR COMPRANDO</button>
+        </div>
+
+    </aside>
+
+    <main>
+
+        <!-- HERO PROMOCIONES -->
+        <section class="promo-main">
+            <div class="container">
+                <p class="promo-subtexto animar-entrada">PERSONALIZA TU ESTILO</p>
+                <h1 class="promo-titulo animar-entrada-2">ARMA<br>TU PACK</h1>
+                <p class="promo-descripcion">Elige los colores que quieres. Nosotros hacemos el resto.</p>
+            </div>
+        </section>
+
+        <!-- CONFIGURADOR DE PACK -->
+        <div class="container seccion-configurador">
+            <div class="contenedor-padre">
+                <img class="imagen-pack" src="/assets/img/sitio/pack-short.webp" alt="Short Overtext">
+
+                <div class="info-pack">
+                    <div class="ofertas">
+                        <p class="oferta-shorts">6 shorts<br>x S/100</p>
+                        <div class="mensaje-promocion">ENVÍO INCLUIDO DESDE 2 PACKS</div>
+                    </div>
+
+                    <div class="seleccion-colores">
+                        <p class="etiqueta-colores">SELECCIONA COLORES</p>
+                        <div class="colores-grid">
+                            <div class="color-opcion">
+                                <div class="color-muestra color-muestra--negro"></div>
+                                <span class="nombre-color">NEGRO</span>
+                                <span class="contador-color"></span>
+                            </div>
+                            <div class="color-opcion">
+                                <div class="color-muestra color-muestra--stone"></div>
+                                <span class="nombre-color">STONE</span>
+                                <span class="contador-color"></span>
+                            </div>
+                            <div class="color-opcion">
+                                <div class="color-muestra color-muestra--guinda"></div>
+                                <span class="nombre-color">GUINDA</span>
+                                <span class="contador-color"></span>
+                            </div>
+                            <div class="color-opcion">
+                                <div class="color-muestra color-muestra--gris"></div>
+                                <span class="nombre-color">GRIS</span>
+                                <span class="contador-color"></span>
+                            </div>
+                            <div class="color-opcion">
+                                <div class="color-muestra color-muestra--oliva"></div>
+                                <span class="nombre-color">OLIVA</span>
+                                <span class="contador-color"></span>
+                            </div>
+                            <div class="color-opcion">
+                                <div class="color-muestra color-muestra--marino"></div>
+                                <span class="nombre-color">MARINO</span>
+                                <span class="contador-color"></span>
+                            </div>
+                            <div class="color-opcion">
+                                <div class="color-muestra color-muestra--marron"></div>
+                                <span class="nombre-color">MARRÓN</span>
+                                <span class="contador-color"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="seleccion-tallas">
+                        <p class="etiqueta-colores">ELIGE LA TALLA Y LUEGO EL COLOR</p>
+                        <div class="tallas-grid">
+                            <button type="button" class="pack-talla" data-talla="S">S</button>
+                            <button type="button" class="pack-talla activo" data-talla="M">M</button>
+                            <button type="button" class="pack-talla" data-talla="L">L</button>
+                            <button type="button" class="pack-talla" data-talla="XL">XL</button>
+                        </div>
+                    </div>
+
+                    <div class="seleccionados">
+                        <div class="seleccionados-header">
+                            <p class="contador-slots">0 DE 6 SELECCIONADOS</p>
+                            <span class="icono-info" title="Toca un slot lleno para quitarlo">&#9432;</span>
+                        </div>
+                        <div class="slots">
+                            <!-- Los slots se renderizan dinámicamente -->
+                        </div>
+                    </div>
+
+                    <button class="boton-carrito-pack">AGREGAR PACK AL CARRITO &rarr;</button>
+                    <p class="garantia">GARANTÍA DE CALIDAD OVERTEXT &#11044; DEVOLUCIONES FÁCILES</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- BANNER PACK -->
+        <section class="banner-beneficios">
+            <div class="container banner-beneficios-inner">
+                <div class="banner-beneficios-texto">
+                    <h2>¿QUIERES MÁS?</h2>
+                    <p>Lleva 2 packs y obtén envío express gratis a todo el Perú.</p>
+                </div>
+                <a href="/promociones.html" class="boton-beneficios">VER PACKS</a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="pie-pagina">
+        <div class="container row g-4 pb-5">
+            <div class="col-12 col-md-6 col-lg-4 pie-info">
+                <h2 class="pie-logo">OVERTEXT</h2>
+                <p class="pie-lema">LIMA, PERÚ. STREETWEAR PARA LA NUEVA GENERACIÓN.</p>
+            </div>
+            <div class="col-6 col-md-3 col-lg-2 pie-enlaces">
+                <h3>SITIO</h3>
+                <ul>
+                    <li><a href="/index.html">INICIO</a></li>
+                    <li><a href="/catalogo.html">CATÁLOGO</a></li>
+                    <li><a href="/promociones.html">PROMOCIONES</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-md-3 col-lg-2 pie-enlaces">
+                <h3>AYUDA</h3>
+                <ul>
+                    <li><a href="/contacto.html">CONTACTO</a></li>
+                    <li><a href="/nosotros.html">NOSOTROS</a></li>
+                    <li><a href="/contacto.html">ENVÍOS</a></li>
+                </ul>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 pie-boletin">
+                <h3>NEWSLETTER</h3>
+                <a href="/contacto.html" class="formulario-minimal enlace-boletin">
+                    SUSCRÍBETE
+                    <span class="btn-flecha" aria-hidden="true">→</span>
+                </a>
+                <div class="redes-sociales">
+                    <a href="https://www.instagram.com/overcoming.pe/" target="_blank" rel="noopener">INSTAGRAM</a>
+                    <a href="https://www.tiktok.com/@overcoming.peru" target="_blank" rel="noopener">TIKTOK</a>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <hr class="divisor">
+            <div class="legal-flex">
+                <p>© 2026 OVERTEXT — TODOS LOS DERECHOS RESERVADOS</p>
+                <p>LIMA, PERÚ</p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/51904501440" class="wsp-flotante" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <i class="bi bi-whatsapp" aria-hidden="true"></i>
+    </a>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/carrito.js"></script>
+    <script src="/js/promociones.js"></script>
+
+</body>
+</html>
