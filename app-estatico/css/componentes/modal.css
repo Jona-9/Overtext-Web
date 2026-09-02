@@ -90,3 +90,29 @@
     color: var(--color-negro);
     letter-spacing: 0.04em;
 }
+
+/* --- Detalle de producto (E2 · intranet, arquetipo "Ver" fila de tabla) --- */
+.modal-detalle-dato {
+    font-family: var(--fuente-principal);
+    font-size: 0.85rem;
+    color: var(--color-negro);
+    margin-bottom: 10px;
+}
+
+.modal-detalle-dato strong {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-texto-suave);
+    margin-right: 6px;
+}
+
+.modal-detalle-swatch {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 1px solid var(--color-borde);
+    vertical-align: middle;
+    margin-right: 6px;
+}

@@ -232,21 +232,26 @@
     border-color: var(--color-negro);
 }
 
-/* Ingresar (login) */
+/* Ingresar (login). Vale para la página y para #modal-login: la única
+   definición vivía en paginas/login.css y le ganaba a esta por orden de
+   carga aunque nunca se veía aquí (D15). */
 .ot-boton-ingresar {
     width: 100%;
-    height: 48px;
-    background-color: var(--color-rojo);
+    padding: 14px;
+    background: var(--color-negro);
     color: var(--color-fondo);
     border: none;
-    border-radius: 3px;
-    font-family: var(--fuente-principal);
-    font-size: 16px;
-    font-weight: 700;
-    letter-spacing: 0.14em;
+    font-family: var(--fuente-display);
+    font-size: 1rem;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
     cursor: pointer;
-    margin-top: 8px;
+    margin-top: var(--espacio-sm);
+    transition: background 0.2s;
+}
+
+.ot-boton-ingresar:hover {
+    background: var(--color-rojo);
 }
 
 /* Beneficios (banner negro) */

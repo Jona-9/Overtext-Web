@@ -1,6 +1,10 @@
 /* ============================================================
    OVERTEXT — Página Login / Sesión
-   Centrado del formulario de acceso.
+   Centrado del formulario de acceso. Los estilos que comparte con
+   #modal-login (mensaje, separador, WhatsApp) viven en
+   componentes/sesion.css; los de campo compartidos, en
+   componentes/formularios.css (.ot-campo-sesion) y componentes/botones.css
+   (.ot-boton-ingresar).
    ============================================================ */
 
 .contenedor-sesion {
@@ -10,26 +14,6 @@
     justify-content: center;
     padding: var(--espacio-xl) var(--espacio-sm);
     background: var(--color-fondo);
-}
-
-/* Mensaje de validación de credenciales */
-.mensaje-sesion {
-    font-family: var(--fuente-principal);
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    text-align: center;
-    margin-top: 14px;
-    min-height: 1em;
-    transition: color 0.2s;
-}
-
-.mensaje-sesion.mensaje-error {
-    color: var(--color-rojo);
-}
-
-.mensaje-sesion.mensaje-ok {
-    color: #2e7d32;
 }
 
 .tarjeta-sesion {
@@ -52,130 +36,4 @@
     font-size: 0.85rem;
     color: var(--color-texto-suave);
     margin-bottom: var(--espacio-md);
-}
-
-/* --- Campos del formulario (específicos del login) --- */
-.ot-campo {
-    margin-bottom: var(--espacio-sm);
-}
-
-.ot-campo label {
-    display: block;
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 6px;
-}
-
-.ot-campo-fila {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    margin-bottom: 6px;
-}
-
-.ot-olvide-contrasena {
-    font-size: 0.7rem;
-    color: var(--color-rojo);
-    text-decoration: none;
-}
-
-.ot-olvide-contrasena:hover {
-    text-decoration: underline;
-}
-
-/* --- Botón principal --- */
-.ot-boton-ingresar {
-    width: 100%;
-    padding: 14px;
-    background: var(--color-negro);
-    color: var(--color-fondo);
-    border: none;
-    font-family: var(--fuente-display);
-    font-size: 1rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    cursor: pointer;
-    margin-top: var(--espacio-sm);
-    transition: background 0.2s;
-}
-
-.ot-boton-ingresar:hover {
-    background: var(--color-rojo);
-}
-
-/* --- Separador "o" --- */
-.ot-separador {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin: var(--espacio-md) 0;
-    font-size: 0.65rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--color-texto-suave);
-}
-
-.ot-separador-linea {
-    flex: 1;
-    height: 0.5px;
-    background: var(--color-borde);
-}
-
-/* --- Botón WhatsApp ---
-   D9: estaba definido a la vez aqui y en componentes/botones.css. Solo lo usa
-   login.html, asi que la definicion unica se queda en la pagina; se le
-   incorporaron las propiedades que solo traia botones.css (alto, borde,
-   radio, familia tipografica y cursor). */
-.ot-boton-whatsapp {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    width: 100%;
-    height: 46px;
-    padding: 13px;
-    background: #25D366;
-    color: #fff;
-    border: 1px solid var(--color-borde);
-    border-radius: 3px;
-    font-family: var(--fuente-principal);
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    text-decoration: none;
-    cursor: pointer;
-    transition: opacity 0.2s;
-}
-
-.ot-boton-whatsapp:hover {
-    opacity: 0.85;
-}
-
-/* E1-11: Bootstrap Icon, ya no es un <img> */
-.ot-icono-whatsapp {
-    font-size: 20px;
-    line-height: 1;
-    flex-shrink: 0;
-}
-
-/* --- Pie del formulario --- */
-.ot-pie-formulario {
-    margin-top: var(--espacio-sm);
-    text-align: center;
-    font-size: 0.8rem;
-    color: var(--color-texto-suave);
-}
-
-.ot-pie-formulario a {
-    color: var(--color-negro);
-    font-weight: 700;
-    text-decoration: none;
-}
-
-.ot-pie-formulario a:hover {
-    color: var(--color-rojo);
 }

@@ -61,7 +61,29 @@
 
 .pie-enlaces ul li a:hover {
     color: var(--color-fondo);
-    background-color: rgba(255, 255, 255, 0.05); 
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Abre #modal-contactanos: mismo aspecto que un enlace del pie, sin serlo. */
+.pie-enlace-boton {
+    background: none;
+    border: none;
+    font-family: inherit;
+    cursor: pointer;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.65);
+    transition: color 0.3s ease, background-color 0.3s ease;
+    display: inline-block;
+    padding: 8px 12px;
+    margin-left: -12px;
+    border-radius: 4px;
+    text-align: left;
+}
+
+.pie-enlace-boton:hover {
+    color: var(--color-fondo);
+    background-color: rgba(255, 255, 255, 0.05);
 }
 
 .redes-sociales {

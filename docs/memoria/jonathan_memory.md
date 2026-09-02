@@ -82,6 +82,68 @@ componentes en el sitio.
 
 ---
 
+## Encargo fuera de sprint — Ventanas modales y formularios · 02-sep-2026
+
+El profesor pidió, directo y fuera de Planning (misma familia que D7/D19): login
+como modal (obligatorio), un ejemplo de «Contáctanos», al menos un modal
+(ya cubierto) y el diagrama físico (ya cubierto). Contrastado con dos proyectos
+de ejemplo suyos (`HTML5Application` y un panel de gestión con tabla + modal de
+detalle + modal de alta). Spec retroactiva en
+`docs/specs/002-modales-formularios/spec.md`, **pendiente del visto de Joaquín**.
+
+**Qué hice:**
+
+- **6 modales nuevos o extendidos**, mismo tema de marca (nunca los headers de
+  color `bg-primary`/`bg-success` del ejemplo — constitución art. 2):
+  `#modal-login` y `#modal-contactanos` en las 10 páginas (icono de cuenta y pie),
+  `#modal-contacto` extendido a las otras 9 (antes solo en `contacto.html`), y en
+  `intranet.html` los dos arquetipos del ejemplo: `#modal-detalle-producto`
+  ("Ver" en una fila de tabla) y `#modal-nuevo-producto` (alta sin persistencia,
+  el CRUD real es del ATF3). También `#modal-cerrar-sesion`, que reemplaza el
+  `confirm()` nativo que tenía `js/intranet.js`.
+- **`login.html` y `contacto.html` se conservan intactas** como páginas
+  completas; el modal no las reemplaza (no se invalida la evidencia del ATF1).
+- **Generalicé `js/login.js` y `js/contacto.js`** de `getElementById` a
+  `querySelector` por clase (`.formulario-sesion`, `.form-contacto`), para que
+  una sola lógica valide la página y el modal sin duplicar código (art. 7). Los
+  campos que se repiten llevan sufijo `-modal` en el `id` pero el mismo `name`.
+  `contacto.js` encadena el cierre de `#modal-contactanos` con la apertura de
+  `#modal-contacto` en el evento `hidden.bs.modal`, para no apilar backdrops.
+- **Reescribí `js/intranet.js`**: tabla de productos desde `productos.json`,
+  el patrón estándar de Bootstrap (`event.relatedTarget.dataset.id`) para que
+  un solo modal de detalle sirva a todas las filas, y quité el `confirm()`.
+
+**Deuda que cerré de paso (misma familia que D15):** `paginas/login.css`
+duplicaba y le ganaba por orden de carga a `componentes/botones.css` y
+`componentes/formularios.css` en `.ot-boton-ingresar`, `.ot-olvide-contrasena` y
+`.ot-campo`/`.ot-campo-fila` — el componente nunca se veía aunque estuviera ahí.
+Dejé una sola definición por selector (con el aspecto negro/rojo que ya se veía)
+y creé `componentes/sesion.css` para lo que de verdad comparten la página y el
+modal (`.mensaje-sesion`, el separador «o», el botón de WhatsApp). También
+corregí la ruta relativa de `nosotros.html:23`
+(`css/componentes/formularios.css` → `/css/...`, trampa T1).
+
+**Verificado:** las 10 páginas + intranet sin errores de consola (Chrome, HTTP
+local); `#modal-login` valida y redirige igual que la página; el envío desde
+`#modal-contactanos` deja **un solo backdrop** al abrir la confirmación; "Ver"
+en filas distintas de la intranet muestra datos distintos; el alta valida los
+4 campos antes de cerrar; cero `confirm()` nativos; sin desborde horizontal a
+375 px (modales y tabla, con `scrollWidth === clientWidth` en un iframe real,
+no capturas headless — trampa T7).
+
+**Para consolidar:**
+- `componentes/modal.css` y el nuevo `componentes/sesion.css` los cargan ahora
+  las **10 páginas**, no solo `contacto.html`/`detalle-producto.html`/`login.html`.
+- `paginas/login.css` quedó recortada a solo maquetación de página
+  (`.contenedor-sesion`, `.tarjeta-sesion`, títulos); todo lo compartido con el
+  modal se movió a `componentes/`.
+- `intranet.html` estrena tabla de productos + 3 modales — es un adelanto visual
+  del CRUD del ATF3, sin backend ni persistencia todavía.
+- La spec `002-modales-formularios` queda **pendiente del visto de Joaquín**,
+  igual que D7.
+
+---
+
 ## Sprint 2 — Spring Boot y Spring Web · 07-sep → 20-sep
 
 **Duo Documento/QA con Jhade.** Sesiones 9-12.

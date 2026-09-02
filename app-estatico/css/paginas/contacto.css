@@ -64,18 +64,8 @@
     margin-bottom: var(--espacio-lg);
 }
 
-.contacto-form {
-    display: flex;
-    flex-direction: column;
-    gap: var(--espacio-sm);
-}
-
-.contacto-enviar {
-    width: auto;
-    align-self: flex-start;
-    padding: 14px 40px;
-    margin-top: var(--espacio-sm);
-}
+/* .contacto-form y .contacto-enviar se movieron a componentes/formularios.css:
+   #modal-contactanos (las 10 páginas) también los necesita. */
 
 /* --- Panel de información de contacto --- */
 .info-panel {
