@@ -30,6 +30,24 @@ label,
     margin-bottom: 0;
 }
 
+/* --- Inicio de sesión (página #tarjeta-sesion y #modal-login) ---
+   Solo lo usa el formulario de sesión; vivía duplicado en paginas/login.css
+   y le ganaba a las reglas genéricas de arriba por orden de carga (D15). */
+.ot-campo.ot-campo-sesion {
+    margin-bottom: var(--espacio-sm);
+}
+
+.ot-campo-sesion label {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 6px;
+}
+
+.ot-campo-fila.ot-campo-sesion {
+    align-items: baseline;
+    margin-bottom: 6px;
+}
+
 /* Inputs de línea inferior (checkout, detalle).
    E1-07: se excluyen los campos de Bootstrap. `input[type="text"]` pesa más
    que `.form-control`, así que sin este :not() el framework nunca se vería. */
@@ -129,11 +147,13 @@ input[type="checkbox"] {
 }
 
 .ot-olvide-contrasena {
-    font-size: 12px;
-    font-weight: 500;
-    font-family: var(--fuente-principal);
-    color: var(--color-texto-suave);
+    font-size: 0.7rem;
+    color: var(--color-rojo);
     text-decoration: none;
+}
+
+.ot-olvide-contrasena:hover {
+    text-decoration: underline;
 }
 
 /* Caja del boletin en el pie. No es un formulario: sin backend no hay a donde
@@ -239,6 +259,20 @@ input[type="checkbox"] {
 .campo-contacto {
     display: flex;
     flex-direction: column;
+}
+
+/* --- Formulario de contacto (página #form-contacto y #modal-contactanos) --- */
+.contacto-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espacio-sm);
+}
+
+.contacto-enviar {
+    width: auto;
+    align-self: flex-start;
+    padding: 14px 40px;
+    margin-top: var(--espacio-sm);
 }
 
 /* La regla global `label { display:block }` rompe la casilla de Bootstrap:

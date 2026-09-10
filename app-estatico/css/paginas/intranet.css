@@ -86,24 +86,21 @@
     margin-top: 10px;
 }
 
-.intranet-panel {
-    border: 1px solid var(--color-borde);
-    padding: var(--espacio-lg);
+/* Cabecera de la tabla de productos (E2-03), mismo patrón que
+   .intranet-cabecera pero para la sección, no la página entera. */
+.intranet-tabla-cabecera {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--espacio-md);
+    margin-bottom: var(--espacio-md);
 }
 
-.intranet-panel h2 {
+.intranet-tabla-cabecera h2 {
     font-family: var(--fuente-display);
     font-size: 1.4rem;
     letter-spacing: 0.04em;
     text-transform: uppercase;
-    margin-bottom: var(--espacio-sm);
-}
-
-.intranet-panel p {
-    font-family: var(--fuente-principal);
-    font-size: 0.9rem;
-    line-height: 1.7;
-    color: var(--color-texto-suave);
 }
 
 @media (max-width: 900px) {

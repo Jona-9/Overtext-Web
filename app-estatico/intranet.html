@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="/css/componentes/navegacion.css">
     <link rel="stylesheet" href="/css/componentes/botones.css">
     <link rel="stylesheet" href="/css/componentes/formularios.css">
+    <link rel="stylesheet" href="/css/componentes/modal.css">
+    <link rel="stylesheet" href="/css/componentes/sesion.css">
     <link rel="stylesheet" href="/css/componentes/footer.css">
     <link rel="stylesheet" href="/css/paginas/intranet.css">
 </head>
@@ -26,12 +28,12 @@
         <div class="container">
             <a class="navbar-brand" href="/index.html">OVERTEXT</a>
             <div class="d-flex align-items-center order-lg-last nav-acciones">
-                <a href="/login.html" class="accion-navegacion" aria-label="Mi cuenta">
+                <button type="button" class="accion-navegacion" data-bs-toggle="modal" data-bs-target="#modal-login" aria-label="Mi cuenta">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="12" cy="8" r="4"/>
                         <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
                     </svg>
-                </a>
+                </button>
                 <button class="accion-navegacion" type="button" aria-label="Carrito">
                     <i class="bi bi-cart3" aria-hidden="true"></i>
                     <span class="carrito-contador"></span>
@@ -60,7 +62,8 @@
                     <h1>Intranet OVERTEXT</h1>
                     <p>Panel de administración — bienvenido de nuevo, Admin.</p>
                 </div>
-                <button type="button" class="btn-cerrar-sesion" id="btn-cerrar-sesion">CERRAR SESIÓN</button>
+                <button type="button" class="btn-cerrar-sesion" id="btn-cerrar-sesion"
+                        data-bs-toggle="modal" data-bs-target="#modal-cerrar-sesion">CERRAR SESIÓN</button>
             </div>
 
             <div class="intranet-grid">
@@ -82,9 +85,33 @@
                 </div>
             </div>
 
-            <div class="intranet-panel">
-                <h2>Bienvenido al panel</h2>
-                <p>Desde aquí administras el catálogo, revisas los pedidos y gestionas los envíos de OVERTEXT. Cuando termines, usa el botón <strong>Cerrar sesión</strong> para salir de forma segura y volver al inicio de sesión.</p>
+            <!-- TABLA DE PRODUCTOS (E2-03 · requisito 3, arquetipo "detalle" del
+                 ejemplo del profesor: fila -> botón Ver -> modal-lg de solo
+                 lectura). Se llena desde js/productos.json (intranet.js). -->
+            <div class="intranet-tabla-cabecera">
+                <h2>Productos</h2>
+                <button type="button" class="btn btn-dark"
+                        data-bs-toggle="modal" data-bs-target="#modal-nuevo-producto">
+                    + Nuevo producto
+                </button>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-striped table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Color</th>
+                            <th>Precio</th>
+                            <th>Tallas</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-productos">
+                        <!-- Filas renderizadas por js/intranet.js -->
+                    </tbody>
+                </table>
             </div>
 
         </section>
@@ -108,6 +135,7 @@
                 <h3>AYUDA</h3>
                 <ul>
                     <li><a href="/contacto.html">CONTACTO</a></li>
+                    <li><button type="button" class="pie-enlace-boton" data-bs-toggle="modal" data-bs-target="#modal-contactanos">ESCRÍBENOS</button></li>
                     <li><a href="/nosotros.html">NOSOTROS</a></li>
                     <li><a href="/contacto.html">ENVÍOS</a></li>
                 </ul>
@@ -137,8 +165,240 @@
         <i class="bi bi-whatsapp" aria-hidden="true"></i>
     </a>
 
+    <!-- MODAL DE INICIO DE SESIÓN (E2-01 · requisito 1: login como ventana modal)
+         Mismo formulario que login.html; login.js valida ambos por igual
+         (selector .formulario-sesion). login.html sigue existiendo como página
+         completa — el pie de este modal enlaza ahí. -->
+    <div class="modal fade" id="modal-login" tabindex="-1"
+         aria-labelledby="modal-login-titulo" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title h5" id="modal-login-titulo">Iniciar sesión</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
+          <div class="modal-body">
+
+            <form class="formulario-sesion needs-validation" action="#" method="POST" novalidate>
+
+              <div class="ot-campo ot-campo-sesion">
+                <label for="usuario-modal" class="form-label">Usuario</label>
+                <input type="email" class="form-control" id="usuario-modal" name="usuario"
+                       placeholder="tu@correo.com" autocomplete="username" required aria-required="true" />
+                <div class="invalid-feedback">Escribe tu correo, por ejemplo nombre@correo.com.</div>
+              </div>
+
+              <div class="ot-campo ot-campo-sesion">
+                <div class="ot-campo-fila ot-campo-sesion">
+                  <label for="contrasena-modal" class="form-label">Contraseña</label>
+                  <a class="ot-olvide-contrasena" href="#">¿La olvidaste?</a>
+                </div>
+                <input type="password" class="form-control" id="contrasena-modal" name="contrasena"
+                       placeholder="••••••••" autocomplete="current-password" required aria-required="true" />
+                <div class="invalid-feedback">Escribe tu contraseña.</div>
+              </div>
+
+              <div class="form-check ot-recordarme">
+                <input class="form-check-input" type="checkbox" value="1" id="recordarme-modal" name="recordarme">
+                <label class="form-check-label" for="recordarme-modal">Mantener la sesión iniciada</label>
+              </div>
+
+              <button type="submit" class="btn btn-dark ot-boton-ingresar">
+                ENTRAR
+              </button>
+
+              <p class="mensaje-sesion" role="alert"></p>
+
+            </form>
+
+            <div class="ot-separador">
+              <div class="ot-separador-linea"></div>
+              <span>o</span>
+              <div class="ot-separador-linea"></div>
+            </div>
+
+            <a class="ot-boton-whatsapp" href="https://wa.me/51904501440" target="_blank" rel="noopener noreferrer">
+              <i class="bi bi-whatsapp ot-icono-whatsapp" aria-hidden="true"></i>
+              Escríbenos al toque
+            </a>
+
+          </div>
+          <div class="modal-footer">
+            <a class="ot-pie-formulario" href="/login.html">Abrir en página completa</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL DE CONTÁCTANOS (E2-02 · requisito 2, «como ejemplo»)
+         Mismo formulario que contacto.html; contacto.js valida ambos por igual
+         (selector .form-contacto). Al enviar, encadena con #modal-contacto. -->
+    <div class="modal fade" id="modal-contactanos" tabindex="-1"
+         aria-labelledby="modal-contactanos-titulo" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title h5" id="modal-contactanos-titulo">Contáctanos</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
+          <div class="modal-body">
+            <form class="contacto-form form-contacto needs-validation" novalidate>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label for="contacto-nombre-modal" class="form-label">Nombre *</label>
+                  <input type="text" class="form-control" id="contacto-nombre-modal" name="contacto-nombre"
+                         placeholder="TU NOMBRE" required autocomplete="name">
+                  <div class="invalid-feedback">Escribe tu nombre.</div>
+                </div>
+                <div class="col-md-6">
+                  <label for="contacto-correo-modal" class="form-label">Correo *</label>
+                  <input type="email" class="form-control" id="contacto-correo-modal" name="contacto-correo"
+                         placeholder="TU@CORREO.COM" required autocomplete="email">
+                  <div class="invalid-feedback">Escribe un correo válido, por ejemplo nombre@correo.com.</div>
+                </div>
+              </div>
+              <div class="campo-contacto">
+                <label for="contacto-asunto-modal" class="form-label">Asunto *</label>
+                <input type="text" class="form-control" id="contacto-asunto-modal" name="contacto-asunto"
+                       placeholder="¿SOBRE QUÉ NOS ESCRIBES?" required>
+                <div class="invalid-feedback">Cuéntanos sobre qué nos escribes.</div>
+              </div>
+              <div class="campo-contacto">
+                <label for="contacto-mensaje-modal" class="form-label">Mensaje *</label>
+                <textarea class="form-control" id="contacto-mensaje-modal" name="contacto-mensaje" rows="5"
+                          placeholder="ESCRIBE TU MENSAJE..." required></textarea>
+                <div class="invalid-feedback">Escribe tu mensaje antes de enviar.</div>
+              </div>
+              <button type="submit" class="btn btn-dark contacto-enviar">ENVIAR MENSAJE</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL DE CONFIRMACIÓN DE CONTACTO (comparte #modal-contactanos de esta
+         página con contacto.html: mismo componente, sin duplicar — art. 7) -->
+    <div class="modal fade" id="modal-contacto" tabindex="-1"
+         aria-labelledby="modal-contacto-titulo" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title h5" id="modal-contacto-titulo">Mensaje enviado</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
+          <div class="modal-body">
+            <p class="modal-lema">Estos son los datos que nos enviaste:</p>
+            <div class="modal-datos" id="modal-datos"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL DE DETALLE DE PRODUCTO (arquetipo "Ver" del ejemplo del
+         profesor: modal-lg, solo lectura, se llena con el data-id de la
+         fila que lo abrió — event.relatedTarget, patrón estándar de
+         Bootstrap para un modal que reutilizan varias filas). -->
+    <div class="modal fade" id="modal-detalle-producto" tabindex="-1"
+         aria-labelledby="modal-detalle-producto-titulo" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title h5" id="modal-detalle-producto-titulo">Detalle del producto</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-6" id="modal-detalle-col-izq"></div>
+              <div class="col-md-6" id="modal-detalle-col-der"></div>
+            </div>
+            <hr>
+            <h5>Descripción</h5>
+            <p id="modal-detalle-descripcion"></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL DE ALTA DE PRODUCTO (arquetipo "+ Nuevo Proyecto" del ejemplo
+         del profesor). Sin persistencia: el CRUD real es del ATF3 (art. 8);
+         al guardar válido solo se cierra y avisa en la propia página. -->
+    <div class="modal fade" id="modal-nuevo-producto" tabindex="-1"
+         aria-labelledby="modal-nuevo-producto-titulo" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title h5" id="modal-nuevo-producto-titulo">Registrar nuevo producto</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
+          <div class="modal-body">
+            <form id="formulario-nuevo-producto" class="needs-validation" novalidate>
+              <div class="mb-3">
+                <label for="nuevo-producto-nombre" class="form-label">Nombre del producto</label>
+                <input type="text" class="form-control" id="nuevo-producto-nombre" name="nombre"
+                       placeholder="Ejemplo: SHORT NEGRO CLÁSICO" required>
+                <div class="invalid-feedback">Escribe el nombre del producto.</div>
+              </div>
+              <div class="mb-3">
+                <label for="nuevo-producto-precio" class="form-label">Precio (S/)</label>
+                <input type="number" class="form-control" id="nuevo-producto-precio" name="precio"
+                       min="1" step="0.01" placeholder="0.00" required>
+                <div class="invalid-feedback">Escribe un precio válido.</div>
+              </div>
+              <div class="mb-3">
+                <label for="nuevo-producto-color" class="form-label">Color</label>
+                <select class="form-select" id="nuevo-producto-color" name="color" required>
+                  <option value="" selected disabled>Seleccione…</option>
+                  <!-- Opciones renderizadas por js/intranet.js desde productos.json -->
+                </select>
+                <div class="invalid-feedback">Selecciona un color.</div>
+              </div>
+              <div class="mb-3">
+                <label for="nuevo-producto-descripcion" class="form-label">Descripción</label>
+                <textarea class="form-control" id="nuevo-producto-descripcion" name="descripcion"
+                          rows="3" placeholder="Descripción del producto" required></textarea>
+                <div class="invalid-feedback">Escribe una descripción.</div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" form="formulario-nuevo-producto" class="btn btn-dark">Guardar producto</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL DE CERRAR SESIÓN — reemplaza el confirm() nativo (bloqueante,
+         sin estilo de marca) por el mismo componente modal del resto del sitio. -->
+    <div class="modal fade" id="modal-cerrar-sesion" tabindex="-1"
+         aria-labelledby="modal-cerrar-sesion-titulo" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title h5" id="modal-cerrar-sesion-titulo">Cerrar sesión</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
+          <div class="modal-body">
+            <p class="modal-lema">¿Deseas cerrar sesión? Volverás al inicio de sesión.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <a href="/login.html" class="btn btn-dark">Cerrar sesión</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/js/carrito.js"></script>
+    <script src="/js/login.js"></script>
+    <script src="/js/contacto.js"></script>
     <script src="/js/intranet.js"></script>
 
 </body>
