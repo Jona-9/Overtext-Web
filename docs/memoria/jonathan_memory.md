@@ -157,6 +157,29 @@ no capturas headless — trampa T7).
 
 > El riesgo real de este sprint es que al mover CSS, JS e imágenes a `static/` se rompan las rutas absolutas (`/css/...`) y el sitio se vea destruido sin que nadie lo note hasta la review.
 
+### 2026-09-14 — Adelanté E2-01 (tarea de Joaquín), no mía
+
+E2-01 ("crear el proyecto Spring Boot") es de Joaquín, no mía, pero bloqueaba a todo el
+equipo y su ventana (11-12 sep) ya había pasado el 14 sep sin moverse. Lo hice yo con
+apoyo de Claude para desbloquear a José/Carlos/Dayro, en rama **`joaquin-sprint2`**
+(commit autorado por mí, no por Joaquín — no tengo su identidad de git y no iba a
+inventarla). El PR lo abro yo manualmente.
+
+Qué quedó:
+- `overtext/` — Maven, **Spring Boot 4.0.8** (no 3.x: `start.spring.io` ya retiró esa
+  línea del catálogo; decisión tomada el mismo día, ver "Para consolidar").
+- `HomeController` en `pe.edu.utp.overtext.controller` sirviendo `/` vía Thymeleaf
+  (`templates/index.html`, placeholder).
+- Verificado en frío: `mvn clean package` sin errores, `mvn spring-boot:run` responde
+  HTTP 200. Probado en el puerto 8081/8082 porque el 8080 lo tenía ocupado otro proceso
+  mío en IntelliJ — no lo toqué.
+- Los 3 puntos de la DoD del sprint (`sprint-2.md` §6) cumplidos.
+
+Lo que **no** hice, porque es de otros: mover `css/js/imágenes` a `static/` (José),
+`layout/plantilla.html` y los fragments (José/Carlos), ni los demás controllers
+(Joaquín/Dayro). Tampoco escribí `docs/specs/002-migracion-thymeleaf/spec.md` — no
+existe todavía y `sprint-2.md` lo referencia; falta crearlo.
+
 ---
 
 ## Sprint 3 — Thymeleaf, rutas y 404 · 21-sep → 01-oct
@@ -833,6 +856,19 @@ tenemos trae fechas de mayo de **2025** y figura como «Vencido» — es del cic
 
 ## Para consolidar en memory.md
 
+- [ ] **Aviso para Joaquín y el equipo — E2-01 (proyecto Spring Boot) ya está hecho,
+      pero en rama `joaquin-sprint2` con MI autoría, no la suya.** Lo adelanté el 14-sep
+      porque bloqueaba a todos y su ventana ya había pasado. El PR a `testing` lo abro yo
+      manualmente. **Joaquín debería revisarlo como si fuera su propio código** antes de
+      seguir con E2-05/E2-06 (controllers), y decidir si quiere quedarse con esta base o
+      rehacerla — no toqué su bitácora (`joaquin_memory.md`) porque no es mi archivo.
+- [ ] **Decisión nueva — Spring Boot 4.0.8, no 3.x como dice `sprint-2.md`.**
+      `start.spring.io` ya no ofrece la línea 3.x (mínimo actual: 4.0.8). Sale al Planning
+      con dueño: hay que decidir si se actualiza `sprint-2.md` o si alguien fija 3.x a
+      mano vía Maven Central (sigue existiendo ahí aunque el Initializr no la liste).
+- [ ] **`docs/specs/002-migracion-thymeleaf/` no existe.** `sprint-2.md` lo referencia
+      como el spec de esta feature y no está creado. Falta antes de seguir con E2-02 en
+      adelante (CLAUDE.md §4: no se implementa sin spec aprobado).
 - [ ] **Nueva convención — `--pad-panel` en `.info-pack` (promociones).** El panel del
       configurador tiene un solo margen lateral (25px) declarado como variable; ofertas,
       colores, tallas, slots y botón la consumen. Si alguien mete un bloque nuevo ahí,
