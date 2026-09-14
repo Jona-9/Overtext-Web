@@ -204,6 +204,29 @@ Demuestro en vivo: entrar a `/admin` sin sesión, iniciar sesión, y mostrar el 
 
 **Estado de las tareas de Dayro:** E1-03 ✅ · E1-04 ✅ · E1-05 ✅ · E1-06 ✅ (catálogo/nosotros/pie; promociones = decisión de alcance). Falta solo la QA visual para cerrar la Definición de Hecho.
 
+### 2026-08-28 — cierre del Sprint 1 · QA visual firmada
+
+- **Hice:** cerré el **único pendiente** que me quedaba de la Definición de Hecho, la
+  **QA visual a 375 px y 1440 px con la consola abierta** (criterio 2d). Revisadas las
+  **10 páginas**. Resultado: **sin errores ni avisos en consola** y **sin scroll
+  horizontal** en móvil. El `404 /favicon.ico` que ensuciaba todas las páginas ya no
+  aparece: lo cerró José con `assets/favicon.svg` enlazado en las 10.
+- **Verifiqué en concreto de lo mío:**
+  - **E1-04** — el carrusel de la portada avanza solo, se **detiene al pasar el cursor**,
+    y los controles e indicadores funcionan con teclado.
+  - **E1-05** — la galería de la ficha: con **beige** y **negro** salen los 4 slides con
+    controles; con **guinda** (y los otros 4 colores sin galería) el carrusel se muestra
+    con la imagen principal y **sin controles**, que era justo el caso que quedaba por
+    confirmar. No lanza error.
+  - **E1-03 / E1-06** — `.container` y las grillas `row`/`col-*` re-maquetan bien en los
+    dos anchos; el pie pasa de 4 columnas a 1 sin desbordar.
+- **Decidí / aprendí:** el caso "producto sin galería" no necesitaba código defensivo
+  extra — al generar los slides desde el array de imágenes, con un solo elemento Bootstrap
+  se comporta bien por sí mismo. Confirmarlo a mano era la única forma de saberlo.
+- **Bloqueo:** ninguno. **Mis 4 tareas quedan cerradas y con la Definición de Hecho
+  completa.**
+- **Archivos tocados:** ninguno (solo verificación).
+
 ### 2026-08-20
 - Hice: —
 - Decidí / aprendí: —
@@ -217,7 +240,8 @@ Demuestro en vivo: entrar a `/admin` sin sesión, iniciar sesión, y mostrar el 
 - **Criterio 1e (carrusel) cubierto:** carrusel de Bootstrap en portada (E1-04) y en la galería de la ficha (E1-05, tolerante a productos sin galería). Componente nuevo `css/componentes/carrusel.css`.
 - **Criterio 1f (grillas) cubierto** con `row`/`col-*` en catálogo (JS), nosotros y el pie de las 10 páginas. Promociones no aplica (grillas dentro del configurador congelado, art. 8).
 - **Criterio 1a (contenedores) cubierto:** las 10 páginas usan `.container` de Bootstrap (E1-03); se retiró el `.contenedor` propio de `layout.css`.
-- **Único pendiente del sprint:** **QA visual a 375/1440 px + consola sin errores (2d)** antes de cerrar la Definición de Hecho. Todas las tareas de código (E1-03/04/05/06) están hechas.
+- **QA visual cerrada (28-ago):** las 10 páginas revisadas a **375 px y 1440 px** con la consola abierta — **cero errores y cero avisos** (criterio 2d), y sin scroll horizontal en móvil. Confirmado también el caso "producto sin galería" (guinda): el carrusel se muestra sin controles y no lanza error. **Ya no queda ningún pendiente de mis tareas: E1-03/04/05/06 con Definición de Hecho completa.**
+- **Dato útil para quien toque el carrusel:** un producto con una sola imagen no necesita código defensivo; Bootstrap se comporta bien con un único slide. No añadir condicionales "por si acaso".
 - *(Nota: E1-03/04/05/06 fueron avanzadas por Joaquín los días 25-ago; ver bitácora.)*
 
 ---
@@ -232,4 +256,6 @@ Demuestro en vivo: entrar a `/admin` sin sesión, iniciar sesión, y mostrar el 
 
 ## Sprints cerrados
 
-*(vacío)*
+- **Sprint 1 — Bootstrap y sitio estático (20-ago → 04-sep). Cerrado el 28-ago-2026.**
+  E1-03 ✅ · E1-04 ✅ · E1-05 ✅ · E1-06 ✅ (catálogo, nosotros y pie; promociones quedó
+  fuera por decisión de alcance, art. 8). Criterios **1a**, **1e** y **1f** cubiertos.

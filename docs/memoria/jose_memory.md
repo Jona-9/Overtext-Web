@@ -214,6 +214,36 @@ Carlos sigue con la demostración del CRUD.
 
 ## Bitácora — Sprint 1
 
+### 2026-08-28 — cierre del Sprint 1
+
+- **Mis 7 tareas cerradas** (E1-12 a E1-18). El criterio 2 completo, sus cuatro puntos:
+  **2a** estructurado (script del configurador fuera del HTML, docs al día), **2b** limpio
+  (`style.css` borrado, 0 estilos en línea, 0 placeholders de relleno), **2c** kebab-case
+  auditado archivo por archivo, **2d** JS sin errores.
+- **El pendiente humano de E1-19 quedó firmado.** Lo que dejé abierto era abrir DevTools
+  página por página, cosa que no podía hacer con verificación estática. Lo firmaron
+  Jonathan, Carlos y Dayro sobre las 10 páginas, a 375 y 1440 px: **cero errores y cero
+  avisos**. Con el favicon que añadí ya no queda ni el `404 /favicon.ico`.
+- **Las dos deudas que dejé abiertas por el art. 9 ya están cerradas.** Jonathan aplicó
+  D3 y D4 el 28-ago:
+  - **D3** — el configurador ofrece los **7 colores del catálogo**. El swatch **BLANCO**,
+    que yo solo había des-inlineado (`.color-muestra--blanco`), **desapareció**, y entró
+    **Marrón**, que faltaba. También se renombró `--borgona` → `--guinda` y `--olivo` →
+    `--oliva` para que los nombres coincidan con `productos.json`. **Los hex ahora salen
+    del catálogo**, no de un valor aproximado.
+  - **D4** — `UMBRAL_ENVIO_GRATIS = 200`.
+- **Confirmé que mi cambio de E1-13 aguanta el cambio de D3.** `promociones.js` lee el
+  color con `getComputedStyle` y el nombre desde el DOM (`.nombre-color`), así que
+  **no tiene ninguna lista de colores quemada**: quitar el blanco y añadir el marrón fue
+  editar HTML y CSS, sin tocar el JS. Ese fue el motivo de hacerlo así.
+- **Deuda menor que dejo apuntada (no es mía, no la toqué):** quedan dos reglas CSS
+  muertas que nombran colores inexistentes — `.color-borgona` en
+  `css/paginas/catalogo.css:47` y `.swatch--blanco` en `css/paginas/producto.css:202`.
+  Los swatches reales se generan con el hex en línea desde `productos.json`
+  (`tienda.js`), así que **ninguna de las dos se usa**. Es limpieza, no un fallo.
+- **Bloqueo:** ninguno.
+- **Archivos tocados:** ninguno.
+
 ### 2026-08-20
 - Hice: —
 - Decidí / aprendí: —
@@ -250,7 +280,19 @@ Carlos sigue con la demostración del CRUD.
 - [x] **Estilos en línea eliminados** y **placeholders del carrito vaciados** (incumplían art. 7): nuevas clases `.color-muestra--<color>`, `.seccion-configurador`, `.hero-acciones`, `.detalle-cta`, `.catalogo-titulo`, `.catalogo-intro`; regla `.carrito-contador:empty` en `navegacion.css`.
 - [x] **E1-16 (assets < 15 MB) — HECHO:** comprimí las imágenes manualmente. `assets/` bajó de 26 MB → **3,8 MB** y **ninguna imagen supera 300 KB** (cumple RNF-0005 y el `LEEME`). Deuda D1 cerrada.
 - [x] **Favicon de marca** (`assets/favicon.svg`) enlazado en las 10 páginas: elimina el único `404 /favicon.ico` del servidor. No es de mis 7 tareas, pero cierra el criterio de "cero errores/404".
-- [ ] **Siguen abiertas para otros duos:** D3 (quitar el color BLANCO inexistente del configurador — el swatch se conserva, solo se des-inlineó) y D4 (`UMBRAL_ENVIO_GRATIS = 180` → 200 en `carrito.js`, no lo toqué por art. 9).
+- [x] ~~Siguen abiertas para otros duos: D3 y D4.~~ **Cerradas el 28-ago por Jonathan.**
+      **D3** — fuera el BLANCO, dentro Marrón, y `--borgona`/`--olivo` renombradas a
+      `--guinda`/`--oliva`; los 7 hex salen ahora de `productos.json`. **D4** —
+      `UMBRAL_ENVIO_GRATIS = 200`.
+- [x] **`promociones.js` no tiene lista de colores quemada, y es a propósito:** lee el
+      nombre del DOM (`.nombre-color`) y el color con `getComputedStyle`. Por eso cambiar
+      la paleta del configurador (D3) fue editar HTML y CSS **sin tocar el JS**.
+      Quien vaya a "mejorarlo" metiendo un array de colores, rompe esa propiedad.
+- [ ] **Limpieza pendiente, menor:** dos reglas CSS muertas que nombran colores que no
+      existen — `.color-borgona` (`css/paginas/catalogo.css:47`) y `.swatch--blanco`
+      (`css/paginas/producto.css:202`). Los swatches reales se pintan con el hex en línea
+      desde `productos.json` vía `tienda.js`, así que ninguna se usa. Va con la limpieza
+      del Sprint 2, no es un fallo del ATF1.
 
 ---
 
@@ -264,4 +306,6 @@ Carlos sigue con la demostración del CRUD.
 
 ## Sprints cerrados
 
-*(vacío)*
+- **Sprint 1 — Bootstrap y sitio estático (20-ago → 04-sep). Cerrado el 28-ago-2026.**
+  E1-12 ✅ · E1-13 ✅ · E1-14 ✅ · E1-15 ✅ · E1-16 ✅ · E1-17 ✅ · E1-18 ✅.
+  **Criterio 2 completo (2a, 2b, 2c, 2d).** Deudas D1, D2 y D5 cerradas.

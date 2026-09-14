@@ -143,44 +143,19 @@ h1, h2, h3, h4, h5, h6,
 
 /* ============================================================
    4. E1-25 · [SÍLABO] Estilos de párrafo tipográficos
-   Clases reutilizables de párrafo para el cuerpo del sitio.
    ============================================================ */
 
-/* Párrafo introductorio / de guía, algo más grande y aireado */
-.texto-guia {
-    font-family: var(--fuente-principal);
-    font-size: 1.125rem;
-    line-height: 1.7;
-    color: var(--color-negro);
-    max-width: 60ch;
-}
+/* Los párrafos genéricos (.texto-guia, .parrafo-marca, .texto-apoyo) se
+   retiraron: cada página ya define su propia tipografía de párrafo
+   (`.hero-contacto p`, `.valor-item p`, `.texto-parrafo`…) y esas reglas ganan
+   por especificidad. Tener las dos era el mismo estilo por duplicado (art. 7), y
+   el arreglo correcto es retirar la que sobra, no imponerse con `!important`
+   (T4). En qué capa debe vivir la tipografía de párrafo queda anotado en D15. */
 
-/* Párrafo de marca estándar, medida de línea cómoda para lectura */
-.parrafo-marca {
-    font-family: var(--fuente-principal);
-    font-size: 1rem;
-    line-height: 1.6;
-    color: var(--color-negro);
-    max-width: 65ch;
-}
-
-/* Texto secundario / apoyo, en gris suave */
-.texto-apoyo {
-    font-family: var(--fuente-principal);
-    font-size: 0.9375rem;
-    line-height: 1.6;
-    color: var(--color-texto-suave);
-}
-
-/* Antetítulo / etiqueta en mayúsculas con tracking amplio (display) */
-.antetitulo {
-    font-family: var(--fuente-display);
-    text-transform: uppercase;
-    letter-spacing: 0.18em;
-    font-size: 0.8125rem;
-    font-weight: 700;
-    color: var(--color-rojo);
-}
+/* El antetítulo NO se define aquí: ese papel ya lo cumple `.subtitulo-superior`
+   (`css/layout.css`), en uso en index, catálogo, nosotros y contacto. Tener las
+   dos sería el mismo estilo con dos nombres, y eso es justo lo que prohíbe el
+   art. 7. Si hay que retocar el antetítulo, se toca `.subtitulo-superior`. */
 
 /* Realce dentro de un párrafo, sin depender de <strong> */
 .enfasis-marca {

@@ -110,9 +110,13 @@
     background-color: #6e1414;
 }
 
-/* Armar pack (detalle producto) */
+/* Armar pack (detalle producto). Es un enlace a /promociones.html, no un
+   <button>: navega, no ejecuta nada en la pagina. */
 .btn-pack {
+    display: block;
     width: 100%;
+    text-align: center;
+    text-decoration: none;
     background: none;
     color: var(--color-negro);
     border: 1.5px solid var(--color-negro);
@@ -174,18 +178,16 @@
     background-color: #6e1414;
 }
 
-/* Flecha newsletter (footer) */
+/* Flecha del boletin (pie). Es un <span> dentro de .enlace-boletin, no un
+   boton: el desplazamiento lo dispara el hover del enlace que la contiene. */
 .btn-flecha {
-    background: none;
-    border: none;
-    cursor: pointer;
     color: var(--color-fondo);
     font-size: 1.2rem;
     transition: transform 0.2s;
     line-height: 1;
 }
 
-.btn-flecha:hover {
+.enlace-boletin:hover .btn-flecha {
     transform: translateX(3px);
 }
 
@@ -230,47 +232,26 @@
     border-color: var(--color-negro);
 }
 
-/* Ingresar (login) */
+/* Ingresar (login). Vale para la página y para #modal-login: la única
+   definición vivía en paginas/login.css y le ganaba a esta por orden de
+   carga aunque nunca se veía aquí (D15). */
 .ot-boton-ingresar {
     width: 100%;
-    height: 48px;
-    background-color: var(--color-rojo);
+    padding: 14px;
+    background: var(--color-negro);
     color: var(--color-fondo);
     border: none;
-    border-radius: 3px;
-    font-family: var(--fuente-principal);
-    font-size: 16px;
-    font-weight: 700;
-    letter-spacing: 0.14em;
+    font-family: var(--fuente-display);
+    font-size: 1rem;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
     cursor: pointer;
-    margin-top: 8px;
+    margin-top: var(--espacio-sm);
+    transition: background 0.2s;
 }
 
-/* WhatsApp alternativo (login) */
-.ot-boton-whatsapp {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    width: 100%;
-    height: 46px;
-    background: var(--color-fondo);
-    color: var(--color-negro);
-    border: 1px solid var(--color-borde);
-    border-radius: 3px;
-    font-family: var(--fuente-principal);
-    font-size: 13px;
-    font-weight: 500;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-/* E1-11: Bootstrap Icon, ya no es un <img> */
-.ot-icono-whatsapp {
-    font-size: 20px;
-    line-height: 1;
-    flex-shrink: 0;
+.ot-boton-ingresar:hover {
+    background: var(--color-rojo);
 }
 
 /* Beneficios (banner negro) */

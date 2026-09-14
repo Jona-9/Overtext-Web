@@ -1,0 +1,13 @@
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Editores
+.vscode/
+.idea/
+*.swp
+
+# El informe vive en Markdown (decisión 3): el .docx y el .pdf se exportan,
+# no se versionan.
+informes/*.docx
+informes/*.pdf

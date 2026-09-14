@@ -210,6 +210,40 @@ Luego los objetivos general y específicos, y paso a Jonathan con la arquitectur
 - **Bloqueo:** ninguno. Falta verificación visual en navegador a 375/1440 px y consola sin errores (criterio 2d) — pendiente de la review.
 - **Archivos tocados:** `docs/specs/001-sitio-bootstrap/spec.md`, `.../data-model.md`, `app-estatico/css/tema-overtext.css` (nuevo), las 10 páginas `app-estatico/*.html`, y eliminado `app-estatico/js/nav.js`.
 
+### 2026-08-28 — validación del ATF1 como Product Owner · sprint aceptado
+
+- **Hice (como PO):** revisé el incremento contra la **rúbrica del ATF1** criterio por
+  criterio y **acepté el Sprint 1**. Los seis componentes de Bootstrap que pide el
+  criterio 1 están en producción y son verificables en el sitio servido:
+
+  | Criterio | Evidencia | Responsable |
+  |---|---|---|
+  | 1a Contenedores e iconos | `.container` en las 10 páginas + Bootstrap Icons | Dayro, Carlos |
+  | 1b Navbar y offcanvas | `navbar navbar-expand-lg` + carrito en `offcanvas` | Joaquín, Carlos |
+  | 1c Formularios | `form-control`/`form-select`/`form-check` con `was-validated` | Jonathan |
+  | 1d Modales | Modal de contacto y modal de guía de tallas | Carlos |
+  | 1e Carrusel | Portada y galería de la ficha | Dayro |
+  | 1f Grillas | `row`/`col-*` en catálogo, nosotros y el pie | Dayro |
+  | 2b/2c/2d Código limpio | `style.css` fuera, 0 estilos en línea, kebab-case, consola limpia | José |
+  | 3 Informe y diagrama | Plantilla limpia + diagrama físico | Jhade, Jonathan |
+  | 4 Entrega | `ATF1_GRUPO_01` verificado en otra máquina | Jhade, José |
+
+- **Cerré mis dos deudas de PO.** Las dos que dejé apuntadas el 25-ago para otros duos
+  quedaron resueltas por Jonathan el 28-ago, y las **valido como PO**:
+  - **D3 ✅** — el configurador de packs ya ofrece **exactamente los 7 colores del
+    catálogo**: Negro, Stone, Guinda, Gris, Oliva, Marino y Marrón. **Fuera el BLANCO**
+    (que nunca existió como producto) y **dentro Marrón**, que faltaba. Es la decisión
+    **I1** aplicada al fin.
+  - **D4 ✅** — `UMBRAL_ENVIO_GRATIS` pasa de 180 a **200** en `js/carrito.js`. Coincide
+    con la decisión **I2** y con el copy "ENVÍO INCLUIDO DESDE 2 PACKS".
+- **Decidí / aprendí:** una decisión de PO no está cerrada cuando la escribo, sino cuando
+  está **en el código**. I1 e I2 las resolví el 25-ago y sobrevivieron tres días en las
+  memorias de tres personas sin llegar al archivo, porque cada una respetaba el art. 9 y
+  esperaba a que la aplicara el duo dueño. **A partir del Sprint 2, toda decisión de PO
+  que toque código sale del Planning con un dueño y un número de tarea**, no como nota.
+- **Bloqueo:** ninguno. Sprint 1 aceptado.
+- **Archivos tocados:** ninguno (validación).
+
 ### 2026-08-20
 - Hice: —
 - Decidí / aprendí: —
@@ -222,7 +256,9 @@ Luego los objetivos general y específicos, y paso a Jonathan con la arquitectur
 
 - **Decisiones de PO tomadas (2026-08-25):** I1 = 7 colores del catálogo, sin BLANCO · I2 = envío gratis **S/ 200** · I3 = badge calculado con `stock < 10`. `spec.md` **aprobado**; queda habilitado escribir `plan.md`/`tasks.md`.
 - **Base desbloqueante lista:** Bootstrap 5.3 (CDN) + `tema-overtext.css` cargados en las 10 páginas, y navbar de Bootstrap migrada en todas. **El equipo ya puede maquetar encima** (E1-01/E1-02 cerradas). `js/nav.js` eliminado.
-- **Deudas heredadas que siguen abiertas para su duo:** **D3** — alinear el configurador de packs al catálogo (quitar BLANCO, agregar marrón) en `promotions.html`. **D4** — corregir `UMBRAL_ENVIO_GRATIS` a **200** en `js/carrito.js` y el texto de la barra del carrito ("TE FALTAN S/ …").
+- ~~**Deudas heredadas que siguen abiertas para su duo:** D3 y D4.~~ **Cerradas y validadas el 28-ago.** **D3** — el configurador ofrece los **7 colores del catálogo** (fuera BLANCO, dentro Marrón), aplicando por fin la decisión I1. **D4** — `UMBRAL_ENVIO_GRATIS = 200` en `js/carrito.js`, aplicando I2.
+- **Sprint 1 aceptado como PO (28-ago).** Los seis componentes de Bootstrap del criterio 1 (1a-1f) están en producción y verificados en el sitio servido; ver la tabla de evidencia en mi bitácora.
+- **Lección de proceso para el Planning del Sprint 2:** una decisión de PO que toca código **sale del Planning con dueño y número de tarea**. I1 e I2 se decidieron el 25-ago y tardaron tres días en llegar al archivo, porque quedaron como nota en tres memorias y nadie era su dueño (todos respetaban bien el art. 9). El art. 9 protege el código, pero no asigna trabajo: eso es del backlog.
 - **Nota para Doc/QA:** `nosotros.html` tenía un `<link>` relativo `href="css/componentes/formularios.css"` (sin `/`); no lo toqué (lane de limpieza E1-12/E1-14).
 
 ---
@@ -237,4 +273,6 @@ Luego los objetivos general y específicos, y paso a Jonathan con la arquitectur
 
 ## Sprints cerrados
 
-*(vacío)*
+- **Sprint 1 — Bootstrap y sitio estático (20-ago → 04-sep). Cerrado el 28-ago-2026.**
+  Como PO: aclaraciones I1/I2/I3 resueltas y `spec.md` aprobado. Como duo UI:
+  E1-01 ✅ · E1-02 ✅ · E1-25 ✅. Incremento **aceptado**; entrega ATF1.

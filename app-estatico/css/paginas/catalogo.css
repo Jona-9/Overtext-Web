@@ -41,15 +41,7 @@
     transform: scale(1.2);
 }
 
-/* Paleta de colores del catálogo */
-.color-claro    { background: #F5F0E8; }
-.color-oscuro   { background: #2C2C2C; }
-.color-borgona  { background: #6B1A1A; }
-.color-blanco   { background: #FFFFFF; border-color: var(--color-borde); }
-.color-gris     { background: #9E9E9E; }
-.color-negro    { background: #111111; }
-.color-oliva    { background: #6B7C4B; }
-.color-beige    { background: var(--color-beige); }
-.color-marron   { background: #7A5C3A; }
+/* Sin paleta de clases: js/tienda.js pinta cada .color con el hex de
+   productos.json (art. 7, un dato no se duplica). */
 
 /* La responsividad del grid la maneja Bootstrap (col-12/col-sm-6/col-lg-4/col-xl-3). */

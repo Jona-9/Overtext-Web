@@ -271,7 +271,9 @@
     margin-bottom: 8px;
 }
 
-.resumen-linea .envio-gratis {
+/* El verde marca envio gratis conseguido; js/carrito.js pone .es-gratis solo
+   cuando el subtotal alcanza el umbral. Sin ella, la linea dice POR DEFINIR. */
+.resumen-linea .envio-gratis.es-gratis {
     font-weight: 700;
     color: #2e7d32;
 }
