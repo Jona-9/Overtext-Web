@@ -1,0 +1,113 @@
+/* ============================================================
+   OVERTEXT — Página Confirmación de pedido
+   ============================================================ */
+
+.confirmacion {
+    padding: var(--espacio-xl) 0;
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+.confirmacion-cabecera {
+    text-align: center;
+    margin-bottom: var(--espacio-lg);
+}
+
+.confirmacion-check {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: #2e7d32;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin: 0 auto var(--espacio-sm);
+    animation: aparecer-check 0.4s ease;
+}
+
+@keyframes aparecer-check {
+    from { transform: scale(0); opacity: 0; }
+    to   { transform: scale(1); opacity: 1; }
+}
+
+.confirmacion-cabecera h1 {
+    font-family: var(--fuente-display);
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    letter-spacing: -0.5px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.confirmacion-lema {
+    font-family: var(--fuente-principal);
+    font-size: 0.85rem;
+    color: var(--color-texto-suave);
+    letter-spacing: 0.04em;
+}
+
+.confirmacion-meta {
+    display: flex;
+    justify-content: center;
+    gap: var(--espacio-md);
+    flex-wrap: wrap;
+    margin-top: var(--espacio-sm);
+    font-family: var(--fuente-principal);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-negro);
+}
+
+.confirmacion-tarjeta {
+    border: 1px solid var(--color-borde);
+    padding: var(--espacio-lg);
+    margin-bottom: var(--espacio-md);
+    background: var(--color-fondo);
+}
+
+.confirmacion-tarjeta h3 {
+    font-family: var(--fuente-principal);
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: var(--espacio-sm);
+    padding-bottom: var(--espacio-xs);
+    border-bottom: 0.5px solid var(--color-borde);
+}
+
+.confirmacion-datos {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px 24px;
+    font-family: var(--fuente-principal);
+    font-size: 0.8rem;
+    line-height: 1.5;
+}
+
+.confirmacion-datos span {
+    display: block;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-texto-suave);
+    margin-bottom: 2px;
+}
+
+.confirmacion-vacio {
+    text-align: center;
+    padding: var(--espacio-xl) 0;
+}
+
+.confirmacion .btn-finalizar {
+    max-width: 320px;
+    margin: var(--espacio-md) auto 0;
+}
+
+@media (max-width: 600px) {
+    .confirmacion-datos { grid-template-columns: 1fr; }
+}

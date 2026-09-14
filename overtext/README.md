@@ -30,4 +30,4 @@ Levanta en `http://localhost:8080`. Si ese puerto ya está ocupado en tu máquin
 
 - Spring Boot **4.0.8** (decisión del 14-sep: start.spring.io ya no ofrece la línea 3.x que pedía originalmente `sprint-2.md`).
 - Paquete base: `pe.edu.utp.overtext`. Controllers en `pe.edu.utp.overtext.controller` (constitución art. 5).
-- `HomeController` + `templates/index.html` son un placeholder mínimo para probar que el proyecto levanta (E2-01). José/Carlos lo reemplazan con la plantilla y los fragments reales (E2-02/E2-03/E2-04).
+- `HomeController` sirve `templates/paginas/index.html`, la portada real del ATF1 (E2-02). CSS, JS e imágenes viven en `static/` con las mismas rutas absolutas (`/css/...`, `/js/...`, `/assets/...`) que ya usaban las 10 páginas, así que no hubo que tocarlas. La plantilla base y los fragments (`layout/plantilla.html`) son de Carlos, E2-03/E2-04.
