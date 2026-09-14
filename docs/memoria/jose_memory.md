@@ -296,6 +296,81 @@ Carlos sigue con la demostración del CRUD.
 
 ---
 
+## Bitácora — Sprint 2
+
+### 2026-09-14
+
+- **Spec 002 escrito y aprobado.** `sprint-02.md` nombraba
+  `docs/specs/002-migracion-thymeleaf/spec.md`, pero no existía (incumplía CLAUDE.md §4).
+  Lo escribí con el formato de `skills/sdd-scrum/references/formato-spec.md` y **Joaquín
+  (PO) lo aprobó en la misma sesión** — checkpoint dado, ya habilita implementar.
+  Ambigüedades resueltas ahí: A1 se **copia** `app-estatico/` (no se mueve, sigue
+  congelado como línea base del ATF1), A2 se mantiene Spring Boot 4.0.8 (ya decidido en
+  E2-01), A3 los enlaces `/x.html` quedan para E2-06/E2-23, A4 `app-estatico/docs/` no es
+  un recurso y no se migra.
+- **E1-19 (mío, Sprint 1):** `overtext/` existe desde el 14-sep (Jonathan adelantó E2-01,
+  ver su bitácora), con Spring Boot **4.0.8** y un placeholder de `HomeController`.
+- **E2-02 — recursos y páginas trasladados a `overtext/`:**
+  - Copié (no moví) `app-estatico/{css,js,assets}` → `overtext/src/main/resources/static/`,
+    misma estructura de carpetas, así las rutas absolutas `/css/...`, `/js/...`,
+    `/assets/...` que ya usaban las 10 páginas siguen resolviendo igual.
+  - Copié las 10 páginas `app-estatico/*.html` → `overtext/src/main/resources/templates/paginas/`,
+    **sin tocar su contenido** — los fragments (`layout/plantilla.html`) son de Carlos, E2-03/E2-04.
+  - Verifiqué con `diff -r` que las tres carpetas copiadas y las 10 páginas son
+    **idénticas** al original en `app-estatico/`.
+  - Sustituí el placeholder que dejó Jonathan: borré
+    `templates/index.html` y cambié `HomeController.inicio()` para que devuelva
+    `"paginas/index"` (la portada real), como pedía el `README.md` del proyecto.
+    Actualicé esa nota del `README.md`.
+- **E2-14 — verificación de rutas de recursos:**
+  - `./mvnw.cmd clean package` → **BUILD SUCCESS**, test de contexto en verde.
+  - Levanté el server en el puerto **8081** (el 8080 puede estar ocupado, según la nota
+    de Jonathan) y armé la lista completa de rutas absolutas que usan las 10 plantillas
+    (`href`/`src`) más los `fetch()` de los JS.
+  - **Los 42 recursos** (CSS, JS, imágenes, los dos JSON) responden **HTTP 200**. Cero
+    fallos.
+  - `GET /` sirve la portada real (título `OVERTEXT`, `id="carrusel-portada"` presente),
+    confirmando que pasa por el controlador y no por el placeholder.
+  - **Bloqueo esperado, no un fallo:** los 7 enlaces internos `/x.html` que aparecen en
+    las plantillas (`/catalogo.html`, `/checkout.html`, `/contacto.html`, `/index.html`,
+    `/login.html`, `/nosotros.html`, `/promociones.html`) dan **404**, porque las rutas
+    por sección (`/catalogo`, `/producto/{id}`, etc.) son **E2-06, de Dayro**, y no
+    existen todavía. Lo dejo anotado en vez de resolverlo — no es mi tarea y el spec 002
+    (ambigüedad A3) ya lo traza así.
+  - Verificación de consola en navegador (375/1440 px) queda como **pendiente humano**
+    de la review, igual que E1-19 en el Sprint 1: no la puedo firmar con verificación
+    estática/HTTP.
+  - Detuve el servidor al terminar.
+- **Decidí / aprendí:** copiar en vez de mover fue clave para no romper la línea base
+  congelada del ATF1 (`memory.md` §4) mientras `overtext/` toma forma en paralelo.
+- **Bloqueo:** las 9 páginas restantes (todo menos `/`) no se pueden abrir todavía desde
+  Spring — dependen de los controladores por sección de Dayro (E2-06).
+- **Archivos tocados:** nuevo `docs/specs/002-migracion-thymeleaf/spec.md`; copiados
+  `overtext/src/main/resources/static/{css,js,assets}/**` y
+  `overtext/src/main/resources/templates/paginas/*.html`; borrado
+  `overtext/src/main/resources/templates/index.html`; editados
+  `overtext/src/main/java/pe/edu/utp/overtext/controller/HomeController.java` y
+  `overtext/README.md`; esta memoria.
+
+### Para consolidar en memory.md
+
+- [ ] **Spec 002 creado y aprobado** por el PO — `docs/specs/002-migracion-thymeleaf/spec.md`.
+- [ ] **A partir de ahora el CSS y el JS se editan en `overtext/src/main/resources/static/`,
+      no en `app-estatico/`.** `app-estatico/` sigue viva solo como línea base congelada
+      del ATF1 (no se borra ni se edita).
+- [ ] Las 10 páginas viven además en `overtext/src/main/resources/templates/paginas/`.
+- [ ] Los enlaces `/x.html` dan 404 en `overtext/` hasta que Dayro cierre E2-06 (rutas
+      por sección) y yo/Carlos cerremos E2-23 (`th:href="@{...}"`) en el Sprint 3.
+- [ ] **Discrepancia con `memory.md` §4:** dice *"`overtext/` — Proyecto Spring Boot.
+      **Aún no existe** — se crea en el Sprint 2"*, pero ya existe desde el 14-sep
+      (Jonathan adelantó E2-01) y ahora ya tiene recursos y páginas (E2-02). Gana el
+      código (CLAUDE.md §3); se corrige en la próxima consolidación.
+- [ ] `joaquin_memory.md` tiene sin marcar *"Aprobar `docs/specs/002-migracion-thymeleaf/spec.md`"*
+      en su lista de Sprint 2 — ya lo aprobó en esta sesión, pero el checkbox de su propia
+      memoria le corresponde marcarlo a él (art. 9).
+
+---
+
 ## Contexto propio
 
 - Servir el sitio: **no funciona con `file://`**. Live Server o `python3 -m http.server` en `app-estatico/`.

@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    <title>Short Stone Beige — OVERTEXT</title>
+    <!-- Framework: Bootstrap 5.3 por CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Arquitectura ITCSS OVERTEXT -->
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/tema-overtext.css">
+    <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/componentes/navegacion.css">
+    <link rel="stylesheet" href="/css/componentes/botones.css">
+    <link rel="stylesheet" href="/css/componentes/formularios.css">
+    <link rel="stylesheet" href="/css/componentes/sesion.css">
+    <link rel="stylesheet" href="/css/componentes/tablas.css">
+    <link rel="stylesheet" href="/css/componentes/badges.css">
+    <link rel="stylesheet" href="/css/componentes/footer.css">
+    <link rel="stylesheet" href="/css/componentes/carrito.css">
+    <link rel="stylesheet" href="/css/componentes/modal.css">
+    <link rel="stylesheet" href="/css/paginas/producto.css">
+    <link rel="stylesheet" href="/css/componentes/carrusel.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg barra-navegacion">
+        <div class="container">
+            <a class="navbar-brand" href="/index.html">OVERTEXT</a>
+            <div class="d-flex align-items-center order-lg-last nav-acciones">
+                <button type="button" class="accion-navegacion" data-bs-toggle="modal" data-bs-target="#modal-login" aria-label="Mi cuenta">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="8" r="4"/>
+                        <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+                    </svg>
+                </button>
+                <button class="accion-navegacion" id="abrir-carrito" type="button" aria-label="Carrito">
+                    <i class="bi bi-cart3" aria-hidden="true"></i>
+                    <span class="carrito-contador"></span>
+                </button>
+                <button class="navbar-toggler ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#menu-principal" aria-controls="menu-principal" aria-expanded="false" aria-label="Menú">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="menu-principal">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="/index.html">INICIO</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="/catalogo.html">CATÁLOGO</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/promociones.html">PROMOCIONES</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/nosotros.html">NOSOTROS</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/contacto.html">CONTACTO</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- OVERLAY -->
+
+    <!-- CARRITO — offcanvas de Bootstrap (E1-10 · criterio 1b)
+         El backdrop, el cierre con Esc, el foco y el bloqueo del scroll son del
+         framework. Se conserva el id y las clases que consulta js/carrito.js. -->
+    <aside class="offcanvas offcanvas-end" tabindex="-1" id="carrito-lateral"
+           aria-labelledby="carrito-titulo">
+
+        <div class="offcanvas-header carrito-header">
+            <div class="carrito-header-izq">
+                <h2 class="offcanvas-title" id="carrito-titulo">TU CARRITO</h2>
+                <span class="carrito-conteo"></span>
+            </div>
+            <button type="button" class="btn-close" id="cerrar-carrito"
+                    data-bs-dismiss="offcanvas" aria-label="Cerrar carrito"></button>
+        </div>
+
+        <div class="offcanvas-body carrito-cuerpo">
+            <div class="envio-gratis-info">
+                <p class="envio-gratis-texto"></p>
+                <div class="envio-gratis-barra">
+                    <div class="envio-gratis-progreso"></div>
+                </div>
+            </div>
+
+            <div class="carrito-items">
+                <!-- Los productos se renderizan dinámicamente desde js/carrito.js -->
+            </div>
+        </div>
+
+        <div class="carrito-footer">
+            <div class="resumen-linea">
+                <span>SUBTOTAL</span>
+                <span></span>
+            </div>
+            <div class="resumen-linea">
+                <span>ENVÍO</span>
+                <span class="envio-gratis"></span>
+            </div>
+            <div class="resumen-total">
+                <span class="total-label">TOTAL</span>
+                <span class="total-monto"></span>
+            </div>
+            <a href="/checkout.html" class="btn-finalizar">FINALIZAR COMPRA</a>
+            <button class="btn-seguir" id="seguir-comprando" data-bs-dismiss="offcanvas">SEGUIR COMPRANDO</button>
+        </div>
+
+    </aside>
+
+    <main>
+        <section class="seccion-detalle-producto">
+            <div class="container grid-detalle-producto">
+
+                <!-- GALERÍA (carrusel de Bootstrap; lo rellena js/tienda.js) -->
+                <div class="galeria-producto">
+                    <div id="carrusel-galeria" class="carousel slide carousel-dark carrusel-galeria" data-bs-ride="carousel">
+                        <div class="carousel-indicators"></div>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="/assets/img/productos/beige/principal.webp" class="d-block w-100" alt="Short Stone Beige">
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carrusel-galeria" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Anterior</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carrusel-galeria" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Siguiente</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- INFO -->
+                <div class="info-detalle-producto">
+
+                    <p class="coleccion-tag">OVERCOMING</p>
+                    <h1 class="nombre-detalle">Short Stone Beige</h1>
+                    <p class="slogan-detalle">Lo que buscabas sin pagar de mas.</p>
+
+                    <div class="bloque-precio">
+                        <p class="precio-principal">S/ 20 <span>unidad</span></p>
+                        <p class="precio-pack">o arma tu pack: 6 x S/ 100</p>
+                    </div>
+
+                    <!-- Talla -->
+                    <div class="selector-campo">
+                        <div class="selector-header">
+                            <span class="selector-label">Talla</span>
+                            <button type="button" class="guia-link" data-bs-toggle="modal" data-bs-target="#modal-tallas">Guía de tallas</button>
+                        </div>
+                        <div class="grupo-tallas">
+                            <button class="btn-talla">S</button>
+                            <button class="btn-talla btn-talla--activa">M</button>
+                            <button class="btn-talla">L</button>
+                            <button class="btn-talla">XL</button>
+                        </div>
+                    </div>
+
+                    <!-- Color: indicador de color único (lo rellena js/tienda.js) -->
+                    <div class="selector-campo">
+                        <span class="selector-label">Color</span>
+                        <div class="grupo-colores"></div>
+                    </div>
+
+                    <!-- Cantidad + Carrito -->
+                    <div class="fila-acciones">
+                        <div class="control-cantidad">
+                            <button class="btn-cantidad">−</button>
+                            <span class="valor-cantidad">1</span>
+                            <button class="btn-cantidad">+</button>
+                        </div>
+                        <button class="btn-carrito" data-agregar-carrito data-variante-auto
+                            data-id="short-beige" data-nombre="SHORT STONE BEIGE" data-precio="20"
+                            data-imagen="/assets/img/productos/beige/principal.webp"
+                            data-cantidad-el=".valor-cantidad">Añadir al carrito</button>
+                    </div>
+
+                    <a href="/promociones.html" class="btn-pack">Arma tu pack</a>
+
+                    <!-- Beneficios -->
+                    <div class="beneficios-fila">
+                        <div class="beneficio-item">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 5v4h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
+                            </svg>
+                            <span>Envío rápido</span>
+                        </div>
+                        <div class="beneficio-item">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                            </svg>
+                            <span>Calidad premium</span>
+                        </div>
+                        <div class="beneficio-item">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15"/>
+                            </svg>
+                            <span>Cambios simples</span>
+                        </div>
+                    </div>
+
+                    <!-- Acordeones nativos con <details> — sin JS -->
+                    <div class="acordeones-detalle">
+
+                        <details class="acordeon-item">
+                            <summary class="acordeon-trigger">Detalles del producto</summary>
+                            <div class="acordeon-interior">
+                                <p>Short de algodón stretch con corte relajado y elástico en la cintura. Confeccionado con materiales de alta calidad para mayor comodidad y durabilidad. Ideal para el día a día urbano.</p>
+                            </div>
+                        </details>
+
+                        <details class="acordeon-item">
+                            <summary class="acordeon-trigger">Cuidado de la prenda</summary>
+                            <div class="acordeon-interior">
+                                <ul>
+                                    <li>Lavar a máquina en frío (30°C)</li>
+                                    <li>No usar secadora</li>
+                                    <li>Planchar a temperatura media</li>
+                                    <li>No lavar en seco</li>
+                                    <li>No usar blanqueador</li>
+                                </ul>
+                            </div>
+                        </details>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="pie-pagina">
+        <div class="container row g-4 pb-5">
+            <div class="col-12 col-md-6 col-lg-4 pie-info">
+                <h2 class="pie-logo">OVERTEXT</h2>
+                <p class="pie-lema">LIMA, PERÚ. STREETWEAR PARA LA NUEVA GENERACIÓN.</p>
+            </div>
+            <div class="col-6 col-md-3 col-lg-2 pie-enlaces">
+                <h3>SITIO</h3>
+                <ul>
+                    <li><a href="/index.html">INICIO</a></li>
+                    <li><a href="/catalogo.html">CATÁLOGO</a></li>
+                    <li><a href="/promociones.html">PROMOCIONES</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-md-3 col-lg-2 pie-enlaces">
+                <h3>AYUDA</h3>
+                <ul>
+                    <li><a href="/contacto.html">CONTACTO</a></li>
+                    <li><button type="button" class="pie-enlace-boton" data-bs-toggle="modal" data-bs-target="#modal-contactanos">ESCRÍBENOS</button></li>
+                    <li><a href="/nosotros.html">NOSOTROS</a></li>
+                    <li><a href="/contacto.html">ENVÍOS</a></li>
+                </ul>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 pie-boletin">
+                <h3>NEWSLETTER</h3>
+                <a href="/contacto.html" class="formulario-minimal enlace-boletin">
+                    SUSCRÍBETE
+                    <span class="btn-flecha" aria-hidden="true">→</span>
+                </a>
+                <div class="redes-sociales">
+                    <a href="https://www.instagram.com/overcoming.pe/">INSTAGRAM</a>
+                    <a href="https://www.tiktok.com/@overcoming.peru">TIKTOK</a>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <hr class="divisor">
+            <div class="legal-flex">
+                <p>© 2026 OVERTEXT — TODOS LOS DERECHOS RESERVADOS</p>
+                <p>LIMA, PERÚ</p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/51904501440" class="wsp-flotante" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <i class="bi bi-whatsapp" aria-hidden="true"></i>
+    </a>
+
+    <!-- MODAL GUÍA DE TALLAS (E1-09 · criterio 1d)
+         La tabla vive SOLO aquí: antes estaba duplicada en el acordeón
+         (constitución art. 7, un solo origen de verdad).
+         E1-26 [SÍLABO]: `table table-striped` de Bootstrap. -->
+    <div class="modal fade" id="modal-tallas" tabindex="-1"
+         aria-labelledby="modal-tallas-titulo" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title h5" id="modal-tallas-titulo">Guía de tallas</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
+          <div class="modal-body">
+            <p class="modal-lema">Medidas de la prenda en centímetros.</p>
+            <div class="table-responsive">
+              <table class="table table-striped table-hover align-middle tabla-tallas">
+                <caption class="visually-hidden">Medidas por talla: cintura, cadera y largo</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Talla</th>
+                    <th scope="col">Cintura</th>
+                    <th scope="col">Cadera</th>
+                    <th scope="col">Largo</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><th scope="row">S</th><td>70–76 cm</td><td>88–94 cm</td><td>48 cm</td></tr>
+                  <tr><th scope="row">M</th><td>76–82 cm</td><td>94–100 cm</td><td>50 cm</td></tr>
+                  <tr><th scope="row">L</th><td>82–88 cm</td><td>100–106 cm</td><td>52 cm</td></tr>
+                  <tr><th scope="row">XL</th><td>88–94 cm</td><td>106–112 cm</td><td>54 cm</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="modal-tallas-nota">
+              ¿Entre dos tallas? Elige la mayor: el short es de corte recto.
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Entendido</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL DE INICIO DE SESIÓN (E2-01 · requisito 1: login como ventana modal)
+         Mismo formulario que login.html; login.js valida ambos por igual
+         (selector .formulario-sesion). login.html sigue existiendo como página
+         completa — el pie de este modal enlaza ahí. -->
+    <div class="modal fade" id="modal-login" tabindex="-1"
+         aria-labelledby="modal-login-titulo" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title h5" id="modal-login-titulo">Iniciar sesión</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
+          <div class="modal-body">
+
+            <form class="formulario-sesion needs-validation" action="#" method="POST" novalidate>
+
+              <div class="ot-campo ot-campo-sesion">
+                <label for="usuario-modal" class="form-label">Usuario</label>
+                <input type="email" class="form-control" id="usuario-modal" name="usuario"
+                       placeholder="tu@correo.com" autocomplete="username" required aria-required="true" />
+                <div class="invalid-feedback">Escribe tu correo, por ejemplo nombre@correo.com.</div>
+              </div>
+
+              <div class="ot-campo ot-campo-sesion">
+                <div class="ot-campo-fila ot-campo-sesion">
+                  <label for="contrasena-modal" class="form-label">Contraseña</label>
+                  <a class="ot-olvide-contrasena" href="#">¿La olvidaste?</a>
+                </div>
+                <input type="password" class="form-control" id="contrasena-modal" name="contrasena"
+                       placeholder="••••••••" autocomplete="current-password" required aria-required="true" />
+                <div class="invalid-feedback">Escribe tu contraseña.</div>
+              </div>
+
+              <div class="form-check ot-recordarme">
+                <input class="form-check-input" type="checkbox" value="1" id="recordarme-modal" name="recordarme">
+                <label class="form-check-label" for="recordarme-modal">Mantener la sesión iniciada</label>
+              </div>
+
+              <button type="submit" class="btn btn-dark ot-boton-ingresar">
+                ENTRAR
+              </button>
+
+              <p class="mensaje-sesion" role="alert"></p>
+
+            </form>
+
+            <div class="ot-separador">
+              <div class="ot-separador-linea"></div>
+              <span>o</span>
+              <div class="ot-separador-linea"></div>
+            </div>
+
+            <a class="ot-boton-whatsapp" href="https://wa.me/51904501440" target="_blank" rel="noopener noreferrer">
+              <i class="bi bi-whatsapp ot-icono-whatsapp" aria-hidden="true"></i>
+              Escríbenos al toque
+            </a>
+
+          </div>
+          <div class="modal-footer">
+            <a class="ot-pie-formulario" href="/login.html">Abrir en página completa</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL DE CONTÁCTANOS (E2-02 · requisito 2, «como ejemplo»)
+         Mismo formulario que contacto.html; contacto.js valida ambos por igual
+         (selector .form-contacto). Al enviar, encadena con #modal-contacto. -->
+    <div class="modal fade" id="modal-contactanos" tabindex="-1"
+         aria-labelledby="modal-contactanos-titulo" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title h5" id="modal-contactanos-titulo">Contáctanos</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
+          <div class="modal-body">
+            <form class="contacto-form form-contacto needs-validation" novalidate>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label for="contacto-nombre-modal" class="form-label">Nombre *</label>
+                  <input type="text" class="form-control" id="contacto-nombre-modal" name="contacto-nombre"
+                         placeholder="TU NOMBRE" required autocomplete="name">
+                  <div class="invalid-feedback">Escribe tu nombre.</div>
+                </div>
+                <div class="col-md-6">
+                  <label for="contacto-correo-modal" class="form-label">Correo *</label>
+                  <input type="email" class="form-control" id="contacto-correo-modal" name="contacto-correo"
+                         placeholder="TU@CORREO.COM" required autocomplete="email">
+                  <div class="invalid-feedback">Escribe un correo válido, por ejemplo nombre@correo.com.</div>
+                </div>
+              </div>
+              <div class="campo-contacto">
+                <label for="contacto-asunto-modal" class="form-label">Asunto *</label>
+                <input type="text" class="form-control" id="contacto-asunto-modal" name="contacto-asunto"
+                       placeholder="¿SOBRE QUÉ NOS ESCRIBES?" required>
+                <div class="invalid-feedback">Cuéntanos sobre qué nos escribes.</div>
+              </div>
+              <div class="campo-contacto">
+                <label for="contacto-mensaje-modal" class="form-label">Mensaje *</label>
+                <textarea class="form-control" id="contacto-mensaje-modal" name="contacto-mensaje" rows="5"
+                          placeholder="ESCRIBE TU MENSAJE..." required></textarea>
+                <div class="invalid-feedback">Escribe tu mensaje antes de enviar.</div>
+              </div>
+              <button type="submit" class="btn btn-dark contacto-enviar">ENVIAR MENSAJE</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL DE CONFIRMACIÓN DE CONTACTO (comparte #modal-contactanos de esta
+         página con contacto.html: mismo componente, sin duplicar — art. 7) -->
+    <div class="modal fade" id="modal-contacto" tabindex="-1"
+         aria-labelledby="modal-contacto-titulo" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title h5" id="modal-contacto-titulo">Mensaje enviado</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
+          <div class="modal-body">
+            <p class="modal-lema">Estos son los datos que nos enviaste:</p>
+            <div class="modal-datos" id="modal-datos"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/carrito.js"></script>
+    <script src="/js/login.js"></script>
+    <script src="/js/contacto.js"></script>
+    <script src="/js/tienda.js"></script>
+
+</body>
+</html>
