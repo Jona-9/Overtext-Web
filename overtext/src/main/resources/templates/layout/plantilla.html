@@ -9,7 +9,7 @@
      el fragment `carrito`, si no carrito.js no encuentra el offcanvas (T9). -->
 <nav th:fragment="cabecera(paginaActiva, mostrarCarrito)" class="navbar navbar-expand-lg barra-navegacion">
     <div class="container">
-        <a class="navbar-brand" href="/index.html">OVERTEXT</a>
+        <a class="navbar-brand" href="/">OVERTEXT</a>
         <div class="d-flex align-items-center order-lg-last nav-acciones">
             <button type="button" class="accion-navegacion" data-bs-toggle="modal" data-bs-target="#modal-login" aria-label="Mi cuenta">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -27,11 +27,11 @@
         </div>
         <div class="collapse navbar-collapse" id="menu-principal">
             <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-                <li class="nav-item"><a class="nav-link" th:classappend="${paginaActiva == 'inicio'} ? 'active'" th:attr="aria-current=${paginaActiva == 'inicio'} ? 'page'" href="/index.html">INICIO</a></li>
-                <li class="nav-item"><a class="nav-link" th:classappend="${paginaActiva == 'catalogo'} ? 'active'" th:attr="aria-current=${paginaActiva == 'catalogo'} ? 'page'" href="/catalogo.html">CATÁLOGO</a></li>
-                <li class="nav-item"><a class="nav-link" th:classappend="${paginaActiva == 'promociones'} ? 'active'" th:attr="aria-current=${paginaActiva == 'promociones'} ? 'page'" href="/promociones.html">PROMOCIONES</a></li>
-                <li class="nav-item"><a class="nav-link" th:classappend="${paginaActiva == 'nosotros'} ? 'active'" th:attr="aria-current=${paginaActiva == 'nosotros'} ? 'page'" href="/nosotros.html">NOSOTROS</a></li>
-                <li class="nav-item"><a class="nav-link" th:classappend="${paginaActiva == 'contacto'} ? 'active'" th:attr="aria-current=${paginaActiva == 'contacto'} ? 'page'" href="/contacto.html">CONTACTO</a></li>
+                <li class="nav-item"><a class="nav-link" th:classappend="${paginaActiva == 'inicio'} ? 'active'" th:attr="aria-current=${paginaActiva == 'inicio'} ? 'page'" href="/">INICIO</a></li>
+                <li class="nav-item"><a class="nav-link" th:classappend="${paginaActiva == 'catalogo'} ? 'active'" th:attr="aria-current=${paginaActiva == 'catalogo'} ? 'page'" href="/catalogo">CATÁLOGO</a></li>
+                <li class="nav-item"><a class="nav-link" th:classappend="${paginaActiva == 'promociones'} ? 'active'" th:attr="aria-current=${paginaActiva == 'promociones'} ? 'page'" href="/promociones">PROMOCIONES</a></li>
+                <li class="nav-item"><a class="nav-link" th:classappend="${paginaActiva == 'nosotros'} ? 'active'" th:attr="aria-current=${paginaActiva == 'nosotros'} ? 'page'" href="/nosotros">NOSOTROS</a></li>
+                <li class="nav-item"><a class="nav-link" th:classappend="${paginaActiva == 'contacto'} ? 'active'" th:attr="aria-current=${paginaActiva == 'contacto'} ? 'page'" href="/contacto">CONTACTO</a></li>
             </ul>
         </div>
     </div>
@@ -79,7 +79,7 @@
             <span class="total-label">TOTAL</span>
             <span class="total-monto"></span>
         </div>
-        <a href="/checkout.html" class="btn-finalizar">FINALIZAR COMPRA</a>
+        <a href="/checkout" class="btn-finalizar">FINALIZAR COMPRA</a>
         <button class="btn-seguir" id="seguir-comprando" data-bs-dismiss="offcanvas">SEGUIR COMPRANDO</button>
     </div>
 
@@ -97,23 +97,23 @@
         <div class="col-6 col-md-3 col-lg-2 pie-enlaces">
             <h3>SITIO</h3>
             <ul>
-                <li><a href="/index.html">INICIO</a></li>
-                <li><a href="/catalogo.html">CATÁLOGO</a></li>
-                <li><a href="/promociones.html">PROMOCIONES</a></li>
+                <li><a href="/">INICIO</a></li>
+                <li><a href="/catalogo">CATÁLOGO</a></li>
+                <li><a href="/promociones">PROMOCIONES</a></li>
             </ul>
         </div>
         <div class="col-6 col-md-3 col-lg-2 pie-enlaces">
             <h3>AYUDA</h3>
             <ul>
-                <li><a href="/contacto.html">CONTACTO</a></li>
+                <li><a href="/contacto">CONTACTO</a></li>
                 <li><button type="button" class="pie-enlace-boton" data-bs-toggle="modal" data-bs-target="#modal-contactanos">ESCRÍBENOS</button></li>
-                <li><a href="/nosotros.html">NOSOTROS</a></li>
-                <li><a href="/contacto.html">ENVÍOS</a></li>
+                <li><a href="/nosotros">NOSOTROS</a></li>
+                <li><a href="/contacto">ENVÍOS</a></li>
             </ul>
         </div>
         <div class="col-12 col-md-6 col-lg-4 pie-boletin">
             <h3>NEWSLETTER</h3>
-            <a href="/contacto.html" class="formulario-minimal enlace-boletin">
+            <a href="/contacto" class="formulario-minimal enlace-boletin">
                 SUSCRÍBETE
                 <span class="btn-flecha" aria-hidden="true">→</span>
             </a>

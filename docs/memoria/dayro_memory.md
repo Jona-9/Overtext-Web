@@ -262,6 +262,51 @@ Demuestro en vivo: entrar a `/admin` sin sesión, iniciar sesión, y mostrar el 
   - `overtext/src/main/java/pe/edu/utp/overtext/controller/HomeController.java`
     *(solo Javadoc; lógica sin cambios)*
 
+### 2026-09-16 — E2-06 · Controllers por sección con rutas limpias
+
+- **Hice:** completé la tarea **E2-06** (criterio **1a**).
+  - Creé **8 controllers** en `pe.edu.utp.overtext.controller`, uno por sección,
+    con las rutas limpias pedidas en la tarea:
+
+    | Controller | Ruta(s) | Vista |
+    |---|---|---|
+    | `CatalogoController` | `GET /catalogo` | `paginas/catalogo` |
+    | `ProductoController` | `GET /producto/{id}` | `paginas/detalle-producto` |
+    | `PromocionesController` | `GET /promociones` | `paginas/promociones` |
+    | `NosotrosController` | `GET /nosotros` | `paginas/nosotros` |
+    | `ContactoController` | `GET /contacto` | `paginas/contacto` |
+    | `LoginController` | `GET /login` | `paginas/login` |
+    | `CheckoutController` | `GET /checkout`, `GET /confirmacion` | `paginas/checkout`, `paginas/confirmacion` |
+    | `IntranetController` | `GET /admin` | `paginas/intranet` |
+
+  - Migré **todos los `href` de `plantilla.html`** (navbar, carrito y footer)
+    de rutas `.html` a rutas limpias Spring MVC.
+  - Migré los `href` del hero, banner y modal de login en `index.html`.
+  - Compilación con `mvnw compile` — **sin errores**.
+- **Decidí / aprendí:**
+  - `CheckoutController` agrupa `/checkout` y `/confirmacion` porque son el
+    mismo flujo de compra; no justifica dos clases (art. 8 — simplicidad).
+  - `ContactoController` solo tiene el `@GetMapping` por ahora. El
+    `@PostMapping` va en el Sprint 3 — E2-20. Dejé un comentario en el
+    Javadoc para que no sorprenda.
+  - La ruta `/admin` es la URL limpia para `intranet.html`; se protegerá
+    con rol `ADMIN` en el Sprint 6 (E4-02).
+  - El criterio **1a** pide al menos 5 páginas con ruta propia — con 7
+    secciones (+confirmación+admin) vamos muy sobrados.
+- **Bloqueo:** ninguno. **E2-06 cerrada con Definición de Hecho completa.**
+- **Archivos tocados:**
+  - `overtext/src/main/java/pe/edu/utp/overtext/controller/CatalogoController.java` *(nuevo)*
+  - `overtext/src/main/java/pe/edu/utp/overtext/controller/ProductoController.java` *(nuevo)*
+  - `overtext/src/main/java/pe/edu/utp/overtext/controller/PromocionesController.java` *(nuevo)*
+  - `overtext/src/main/java/pe/edu/utp/overtext/controller/NosotrosController.java` *(nuevo)*
+  - `overtext/src/main/java/pe/edu/utp/overtext/controller/ContactoController.java` *(nuevo)*
+  - `overtext/src/main/java/pe/edu/utp/overtext/controller/LoginController.java` *(nuevo)*
+  - `overtext/src/main/java/pe/edu/utp/overtext/controller/CheckoutController.java` *(nuevo)*
+  - `overtext/src/main/java/pe/edu/utp/overtext/controller/IntranetController.java` *(nuevo)*
+  - `overtext/src/main/resources/templates/layout/plantilla.html` *(hrefs navbar + footer → rutas limpias)*
+  - `overtext/src/main/resources/templates/paginas/index.html` *(hrefs hero + modales → rutas limpias)*
+
+
 ---
 
 
@@ -272,6 +317,7 @@ Demuestro en vivo: entrar a `/admin` sin sesión, iniciar sesión, y mostrar el 
 - **Dato útil para quien toque el carrusel:** un producto con una sola imagen no necesita código defensivo; Bootstrap se comporta bien con un único slide. No añadir condicionales "por si acaso".
 - *(Nota: E1-03/04/05/06 fueron avanzadas por Joaquín los días 25-ago; ver bitácora.)*
 - **Criterio 1b cubierto (Sprint 2 — E2-05):** `HomeController` en `pe.edu.utp.overtext.controller` sirve `GET /` → `paginas/index` via Thymeleaf. Nomenclatura correcta según art. 5. Compila sin errores.
+- **Criterio 1a cubierto (Sprint 2 — E2-06):** 8 controllers con rutas limpias (`/catalogo`, `/producto/{id}`, `/promociones`, `/nosotros`, `/contacto`, `/login`, `/checkout`, `/confirmacion`, `/admin`). Todos en `pe.edu.utp.overtext.controller`. Hrefs de navbar, footer, carrito y hero migrados de `.html` a rutas Spring MVC. Compila sin errores.
 
 ---
 
