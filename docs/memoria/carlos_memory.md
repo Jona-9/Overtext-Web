@@ -47,9 +47,9 @@
 - [x] Capturas archivadas en `informes/capturas/sprint-01/`
 - [x] Criterios de rúbrica marcados en `docs/scrum/checklist-entrega.md`
 - [x] Bloque "Para consolidar" escrito en esta memoria
-- [x] **Código subido vía PR revisado por otro duo** — *cerrado (2026-08-28).* El SM resolvió que la rama de integración del equipo es **`testing`**, no `develop`; el trabajo del duo Datos entró por PR revisado y la DoD se lee sobre `testing`.
+- [ ] **Código subido vía PR revisado por otro duo** — pendiente. Va junto con lo de Jonathan, en el PR del duo Datos.
 
-> La DoD decía *"código en `develop` vía PR"* y **`develop` nunca existió**. El SM lo zanjó el 28-ago: **la rama de integración es `testing`** y la Definición de Hecho queda redactada así para los siguientes sprints.
+> Como en la memoria de Jonathan: la DoD dice *"código en `develop` vía PR"* y **`develop` no existe**. El equipo mergea contra `testing`. Que lo decida el SM.
 
 ### Por qué mis tareas rinden doble
 
@@ -213,22 +213,6 @@ Demuestro en vivo: crear un producto, editarlo, enviar el formulario vacío para
 ---
 
 ## Bitácora — Sprint 1
-
-### 2026-08-28 — cierre del Sprint 1
-
-- **Mis 5 tareas quedan cerradas con la Definición de Hecho completa** (E1-08, E1-09,
-  E1-10, E1-11 y E1-26). El último `[ ]` que me quedaba era el del PR contra `develop`;
-  el SM confirmó que la rama de integración es **`testing`** y con eso se cierra.
-- **Dos cosas mías que ya no aplican y conviene no arrastrar:**
-  - La cifra de **`assets/` en 26 MB** que dejé anotada era la foto del 26-ago, a mitad de
-    la limpieza. José terminó E1-16 ese mismo día y **`assets/` quedó en 3,8 MB**, sin
-    ninguna imagen por encima de 300 KB. **La cifra buena es la suya**; la D1 está cerrada.
-  - La barra del carrito ya **no dice S/ 180**. Jonathan corrigió `UMBRAL_ENVIO_GRATIS` a
-    **200** el 28-ago (deuda D4), que es lo que fijó el PO. Mis capturas del offcanvas son
-    de antes de ese cambio: **si se reusan en el informe del ATF2, hay que volver a
-    tomarlas**, porque muestran el umbral viejo.
-- **Bloqueo:** ninguno.
-- **Archivos tocados:** ninguno.
 
 ### 2026-08-20
 - Hice: —
@@ -398,11 +382,10 @@ de arreglar nada.
 - [ ] **Cobertura de rúbrica ATF1:** marcar **1d Ventanas modales** ✅ (modal de contacto
       y modal de guía de tallas), **1b** ✅ también por el `offcanvas` del carrito, y
       **1a** ✅ en su parte de iconos.
-- [x] **Deuda D1 cerrada.** Mi parte bajó `assets/` de 39 MB a 26 MB borrando
-      `carta.png`, `instagram.png` y `ubicacion.png` (13,4 MB entre los tres, para dibujar
-      iconos de 26 px). José remató con E1-16 el mismo día y **quedó en 3,8 MB, sin
-      ninguna imagen sobre 300 KB**. *La cifra de 26 MB que aparece más arriba en esta
-      memoria es una foto intermedia; la válida es 3,8 MB.*
+- [ ] **Deuda D1 a la mitad: `assets/` pasa de 39 MB a 26 MB.** Solo con borrar
+      `carta.png`, `instagram.png` y `ubicacion.png` (13,4 MB entre los tres, para
+      dibujar iconos de 26 px). El objetivo sigue siendo < 15 MB: **lo que queda son
+      fotos de producto**, y eso es E1-16, no mío.
 - [ ] **`abrirPanel`/`cerrarPanel` de `carrito.js` son API pública**, no código interno:
       "añadir al carrito" abre el panel por JS. Siguen existiendo tras pasar a
       `offcanvas`, pero por dentro llaman a Bootstrap. **Quien las borre por "ya no
@@ -420,10 +403,9 @@ de arreglar nada.
 - [ ] **CSS muerto que encontré y no me toca:** `.btn-hamburger.abierto` y
       `.menu-principal.abierto` siguen en `navegacion.css` desde que Joaquín eliminó
       `js/nav.js` en E1-02. Nadie las usa. Para el duo de limpieza.
-- [x] ~~La barra del carrito dice "TE FALTAN S/ … PARA ENVÍO GRATIS" sobre S/ 180~~
-      **Deuda D4 cerrada el 28-ago:** `UMBRAL_ENVIO_GRATIS = 200` en `js/carrito.js`, que
-      es lo que fijó el PO. **Aviso: mis capturas del offcanvas son anteriores y muestran
-      el umbral viejo** — hay que volver a tomarlas si se reusan en el ATF2.
+- [ ] **La barra del carrito sigue diciendo "TE FALTAN S/ … PARA ENVÍO GRATIS" sobre
+      S/ 180**, cuando el PO fijó **S/ 200** el 25-ago. Es la deuda **D4** y sigue
+      abierta: se ve en mis capturas del offcanvas.
 
 ---
 
@@ -439,6 +421,79 @@ de arreglar nada.
 
 ## Sprints cerrados
 
-- **Sprint 1 — Bootstrap y sitio estático (20-ago → 04-sep). Cerrado el 28-ago-2026.**
-  E1-08 ✅ · E1-09 ✅ · E1-10 ✅ · E1-11 ✅ · E1-26 ✅. Criterios **1d** (modales),
-  **1b** (offcanvas) y **1a** (iconos) cubiertos. Deuda D1 cerrada entre E1-11 y E1-16.
+*(vacío)*
+
+---
+
+## Bitácora — Sprint 2
+
+### 2026-09-16 — E2-03/E2-04 · Fragments de Thymeleaf (criterio 2a)
+
+**Duo UI con José.** Analicé las 10 páginas que José trasladó a
+`templates/paginas/` (E2-02/E2-14, `28cad04`) antes de tocar nada: confirmé que
+los 42 recursos estáticos que él verificó siguen resolviendo, y mapeé byte a
+byte dónde eran idénticos la cabecera, el pie, el carrito y los scripts, y
+dónde no.
+
+- **Hice:** creé `overtext/src/main/resources/templates/layout/plantilla.html`
+  con 4 `th:fragment`: `cabecera(paginaActiva, mostrarCarrito)`, `pie`,
+  `carrito`, `scripts`. Reemplacé el bloque duplicado por su `th:replace` en
+  las 10 páginas de `templates/paginas/`. **No toqué ningún controlador ni
+  creé rutas** — fue condición explícita de esta tarea; la verificación de las
+  9 páginas que aún no tienen ruta (E2-06, Dayro) queda pendiente.
+- **Decisiones de diseño:**
+  - **No expandí el carrito a las 4 páginas que hoy no lo tienen**
+    (checkout, confirmacion, intranet, login). `id="abrir-carrito"` en la
+    cabecera y la inclusión del fragment `carrito` viajan siempre juntos vía
+    el parámetro `mostrarCarrito` — si no, se reintroduce el bug que la
+    trampa **T9** ya documentó evitar (el botón con id pero sin panel).
+  - **Parametricé `cabecera` con `paginaActiva`** para no perder el enlace
+    activo de cada página. Esto se solapa con **E2-08** (Sprint 3, "menú con
+    `th:classappend` marcando el activo") — no es trabajo de más, era el
+    mínimo para que el fragment no fuera una regresión, pero anoto el
+    solapamiento para que nadie lo repita en el Sprint 3.
+  - El botón flotante de WhatsApp (100% duplicado, pegado al footer en las
+    10 páginas) se plegó **dentro** del fragment `pie`, sin fragment propio.
+  - `scripts` no lleva parámetro: emite los 4 tags comunes en orden fijo:
+    Bootstrap bundle CDN + `carrito.js` + `login.js` + `contacto.js`. Cada
+    página conserva su script propio (si lo tiene) justo debajo.
+- **Dos arreglos "gratis" de la unificación, documentados para que no
+  parezcan cambios sueltos en la review:**
+  - `login.html` tenía `contacto.js` antes que `login.js` (único caso
+    invertido de las 10); ahora sigue el orden común.
+  - `detalle-producto.html` le faltaba `target="_blank" rel="noopener"` en
+    los dos enlaces sociales del pie; el resto de páginas sí lo tenían. Al
+    unificar en un solo `pie`, quedó igual que las demás.
+- **Verificación:** `mvnw clean package` → BUILD SUCCESS. Corrí el `.jar`
+  empaquetado en un puerto suelto (8099, fuera del repo, sin tocar
+  controladores) solo para confirmar que Thymeleaf resuelve los 4 fragments
+  sin error en `/` (la única ruta que existe hoy): `id="abrir-carrito"`,
+  `active` en INICIO, `#carrito-lateral`, el pie y el WhatsApp aparecen una
+  sola vez cada uno. Las otras 9 páginas no se pudieron abrir por navegador
+  porque no tienen ruta todavía — **queda pendiente coordinarlo con Dayro**
+  cuando cierre E2-06.
+  - Reducción medida: **1.086 líneas eliminadas, 39 añadidas** en las 10
+    páginas (`git diff --stat`), en línea con el ~44% que estimaba
+    `memory.md`.
+- **Bloqueo:** ninguno propio. La verificación visual completa de 9/10
+  páginas depende de E2-06.
+- **Archivos tocados:** nuevo
+  `overtext/src/main/resources/templates/layout/plantilla.html`; editadas las
+  10 `overtext/src/main/resources/templates/paginas/*.html`.
+
+### Para consolidar en memory.md
+
+- [ ] **E2-03/E2-04 cerradas.** `layout/plantilla.html` existe con los 4
+      fragments (`cabecera`, `pie`, `carrito`, `scripts`); las 10 páginas los
+      usan. Criterio 2a (fragments) cubierto en su parte estructural.
+- [ ] **`memory.md` §4 sigue diciendo que `overtext/` "aún no existe"** —
+      discrepancia ya anotada por José el 14-sep, sigue sin corregirse. Gana
+      el código (CLAUDE.md §3).
+- [ ] **Aviso para el Sprint 3 (José/quien tome E2-08):** el enlace activo del
+      menú ya se resuelve con `th:classappend` dentro de `cabecera`, vía el
+      parámetro `paginaActiva`. No hace falta rehacerlo — al llegar a E2-08,
+      revisar si esto ya lo satisface antes de tocar el fragment de nuevo.
+- [ ] **Verificación pendiente de 9/10 páginas** (todas menos `/`): no tienen
+      ruta hasta que Dayro cierre E2-06. Cuando exista, falta abrir cada una a
+      375/1440 px y confirmar consola limpia (art. 3), igual que E1-19 en el
+      Sprint 1.
