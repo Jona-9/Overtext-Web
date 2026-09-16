@@ -1,0 +1,32 @@
+/* ============================================================
+   OVERTEXT — carrusel.css
+   Tematiza el componente `carousel` de Bootstrap (criterio ATF1-1e).
+   Usado en la portada (E1-04) y en la galería de la ficha (E1-05).
+   ============================================================ */
+
+/* --- Carrusel de la portada (hero) --- */
+.carrusel-portada {
+    overflow: hidden;
+}
+
+.carrusel-portada .carousel-item img {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    min-height: 480px;
+    max-height: 820px;
+    object-fit: cover;
+}
+
+/* --- Carrusel de la galería de producto --- */
+.carrusel-galeria .carousel-item img {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+}
+
+/* Cuando el producto no tiene galería (una sola foto), los controles y los
+   indicadores se ocultan desde el JS con .d-none: no quedan flechas rotas. */
+.carrusel-galeria .carousel-control-prev.d-none,
+.carrusel-galeria .carousel-control-next.d-none {
+    display: none !important;
+}

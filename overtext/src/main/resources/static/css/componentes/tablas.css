@@ -1,0 +1,60 @@
+/* ============================================================
+   OVERTEXT — Tablas
+   Estilos para todas las tablas del sitio.
+   ============================================================ */
+
+/* Contenedor con scroll horizontal en mobile */
+.tabla-envolvente {
+    overflow-x: auto;
+    border: 0.5px solid var(--color-borde);
+    margin-top: var(--espacio-md);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    font-family: var(--fuente-principal);
+}
+
+thead tr {
+    background: var(--color-negro);
+}
+
+th {
+    padding: 0.85rem 1.25rem;
+    text-align: left;
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 500;
+}
+
+tbody tr {
+    border-bottom: 0.5px solid var(--color-borde);
+    transition: background 0.2s;
+}
+
+tbody tr:last-child {
+    border-bottom: none;
+}
+
+tbody tr:hover {
+    background: var(--color-fondo-alt);
+}
+
+td {
+    padding: 0.85rem 1.25rem;
+    color: var(--color-texto-suave);
+    vertical-align: middle;
+}
+
+td strong {
+    color: var(--color-negro);
+    font-weight: 500;
+}
+
+/* La tabla de tallas se retiró de aquí en E1-26: ahora vive en el modal
+   con `table table-striped` de Bootstrap, re-tematizada en
+   css/componentes/modal.css (constitución art. 4). */

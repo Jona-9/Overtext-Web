@@ -82,6 +82,68 @@ componentes en el sitio.
 
 ---
 
+## Encargo fuera de sprint — Ventanas modales y formularios · 02-sep-2026
+
+El profesor pidió, directo y fuera de Planning (misma familia que D7/D19): login
+como modal (obligatorio), un ejemplo de «Contáctanos», al menos un modal
+(ya cubierto) y el diagrama físico (ya cubierto). Contrastado con dos proyectos
+de ejemplo suyos (`HTML5Application` y un panel de gestión con tabla + modal de
+detalle + modal de alta). Spec retroactiva en
+`docs/specs/002-modales-formularios/spec.md`, **pendiente del visto de Joaquín**.
+
+**Qué hice:**
+
+- **6 modales nuevos o extendidos**, mismo tema de marca (nunca los headers de
+  color `bg-primary`/`bg-success` del ejemplo — constitución art. 2):
+  `#modal-login` y `#modal-contactanos` en las 10 páginas (icono de cuenta y pie),
+  `#modal-contacto` extendido a las otras 9 (antes solo en `contacto.html`), y en
+  `intranet.html` los dos arquetipos del ejemplo: `#modal-detalle-producto`
+  ("Ver" en una fila de tabla) y `#modal-nuevo-producto` (alta sin persistencia,
+  el CRUD real es del ATF3). También `#modal-cerrar-sesion`, que reemplaza el
+  `confirm()` nativo que tenía `js/intranet.js`.
+- **`login.html` y `contacto.html` se conservan intactas** como páginas
+  completas; el modal no las reemplaza (no se invalida la evidencia del ATF1).
+- **Generalicé `js/login.js` y `js/contacto.js`** de `getElementById` a
+  `querySelector` por clase (`.formulario-sesion`, `.form-contacto`), para que
+  una sola lógica valide la página y el modal sin duplicar código (art. 7). Los
+  campos que se repiten llevan sufijo `-modal` en el `id` pero el mismo `name`.
+  `contacto.js` encadena el cierre de `#modal-contactanos` con la apertura de
+  `#modal-contacto` en el evento `hidden.bs.modal`, para no apilar backdrops.
+- **Reescribí `js/intranet.js`**: tabla de productos desde `productos.json`,
+  el patrón estándar de Bootstrap (`event.relatedTarget.dataset.id`) para que
+  un solo modal de detalle sirva a todas las filas, y quité el `confirm()`.
+
+**Deuda que cerré de paso (misma familia que D15):** `paginas/login.css`
+duplicaba y le ganaba por orden de carga a `componentes/botones.css` y
+`componentes/formularios.css` en `.ot-boton-ingresar`, `.ot-olvide-contrasena` y
+`.ot-campo`/`.ot-campo-fila` — el componente nunca se veía aunque estuviera ahí.
+Dejé una sola definición por selector (con el aspecto negro/rojo que ya se veía)
+y creé `componentes/sesion.css` para lo que de verdad comparten la página y el
+modal (`.mensaje-sesion`, el separador «o», el botón de WhatsApp). También
+corregí la ruta relativa de `nosotros.html:23`
+(`css/componentes/formularios.css` → `/css/...`, trampa T1).
+
+**Verificado:** las 10 páginas + intranet sin errores de consola (Chrome, HTTP
+local); `#modal-login` valida y redirige igual que la página; el envío desde
+`#modal-contactanos` deja **un solo backdrop** al abrir la confirmación; "Ver"
+en filas distintas de la intranet muestra datos distintos; el alta valida los
+4 campos antes de cerrar; cero `confirm()` nativos; sin desborde horizontal a
+375 px (modales y tabla, con `scrollWidth === clientWidth` en un iframe real,
+no capturas headless — trampa T7).
+
+**Para consolidar:**
+- `componentes/modal.css` y el nuevo `componentes/sesion.css` los cargan ahora
+  las **10 páginas**, no solo `contacto.html`/`detalle-producto.html`/`login.html`.
+- `paginas/login.css` quedó recortada a solo maquetación de página
+  (`.contenedor-sesion`, `.tarjeta-sesion`, títulos); todo lo compartido con el
+  modal se movió a `componentes/`.
+- `intranet.html` estrena tabla de productos + 3 modales — es un adelanto visual
+  del CRUD del ATF3, sin backend ni persistencia todavía.
+- La spec `002-modales-formularios` queda **pendiente del visto de Joaquín**,
+  igual que D7.
+
+---
+
 ## Sprint 2 — Spring Boot y Spring Web · 07-sep → 20-sep
 
 **Duo Documento/QA con Jhade.** Sesiones 9-12.
@@ -94,6 +156,29 @@ componentes en el sitio.
 | E2-18 | **Regresión ATF1**: los 6 componentes de Bootstrap siguen funcionando tras mover los recursos | ATF1-1 |
 
 > El riesgo real de este sprint es que al mover CSS, JS e imágenes a `static/` se rompan las rutas absolutas (`/css/...`) y el sitio se vea destruido sin que nadie lo note hasta la review.
+
+### 2026-09-14 — Adelanté E2-01 (tarea de Joaquín), no mía
+
+E2-01 ("crear el proyecto Spring Boot") es de Joaquín, no mía, pero bloqueaba a todo el
+equipo y su ventana (11-12 sep) ya había pasado el 14 sep sin moverse. Lo hice yo con
+apoyo de Claude para desbloquear a José/Carlos/Dayro, en rama **`joaquin-sprint2`**
+(commit autorado por mí, no por Joaquín — no tengo su identidad de git y no iba a
+inventarla). El PR lo abro yo manualmente.
+
+Qué quedó:
+- `overtext/` — Maven, **Spring Boot 4.0.8** (no 3.x: `start.spring.io` ya retiró esa
+  línea del catálogo; decisión tomada el mismo día, ver "Para consolidar").
+- `HomeController` en `pe.edu.utp.overtext.controller` sirviendo `/` vía Thymeleaf
+  (`templates/index.html`, placeholder).
+- Verificado en frío: `mvn clean package` sin errores, `mvn spring-boot:run` responde
+  HTTP 200. Probado en el puerto 8081/8082 porque el 8080 lo tenía ocupado otro proceso
+  mío en IntelliJ — no lo toqué.
+- Los 3 puntos de la DoD del sprint (`sprint-2.md` §6) cumplidos.
+
+Lo que **no** hice, porque es de otros: mover `css/js/imágenes` a `static/` (José),
+`layout/plantilla.html` y los fragments (José/Carlos), ni los demás controllers
+(Joaquín/Dayro). Tampoco escribí `docs/specs/002-migracion-thymeleaf/spec.md` — no
+existe todavía y `sprint-2.md` lo referencia; falta crearlo.
 
 ---
 
@@ -771,6 +856,19 @@ tenemos trae fechas de mayo de **2025** y figura como «Vencido» — es del cic
 
 ## Para consolidar en memory.md
 
+- [ ] **Aviso para Joaquín y el equipo — E2-01 (proyecto Spring Boot) ya está hecho,
+      pero en rama `joaquin-sprint2` con MI autoría, no la suya.** Lo adelanté el 14-sep
+      porque bloqueaba a todos y su ventana ya había pasado. El PR a `testing` lo abro yo
+      manualmente. **Joaquín debería revisarlo como si fuera su propio código** antes de
+      seguir con E2-05/E2-06 (controllers), y decidir si quiere quedarse con esta base o
+      rehacerla — no toqué su bitácora (`joaquin_memory.md`) porque no es mi archivo.
+- [ ] **Decisión nueva — Spring Boot 4.0.8, no 3.x como dice `sprint-2.md`.**
+      `start.spring.io` ya no ofrece la línea 3.x (mínimo actual: 4.0.8). Sale al Planning
+      con dueño: hay que decidir si se actualiza `sprint-2.md` o si alguien fija 3.x a
+      mano vía Maven Central (sigue existiendo ahí aunque el Initializr no la liste).
+- [ ] **`docs/specs/002-migracion-thymeleaf/` no existe.** `sprint-2.md` lo referencia
+      como el spec de esta feature y no está creado. Falta antes de seguir con E2-02 en
+      adelante (CLAUDE.md §4: no se implementa sin spec aprobado).
 - [ ] **Nueva convención — `--pad-panel` en `.info-pack` (promociones).** El panel del
       configurador tiene un solo margen lateral (25px) declarado como variable; ofertas,
       colores, tallas, slots y botón la consumen. Si alguien mete un bloque nuevo ahí,

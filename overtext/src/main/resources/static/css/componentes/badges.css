@@ -1,0 +1,78 @@
+/* ============================================================
+   OVERTEXT — Badges, Tags y Etiquetas
+   Indicadores visuales: overlays de producto, estados, colecciones.
+   ============================================================ */
+
+/* --- Badge overlay de tarjeta (catálogo) --- */
+.producto-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: var(--color-rojo);
+    color: var(--color-fondo);
+    font-family: var(--fuente-principal);
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    z-index: 1;
+    animation-name: pulso-urgencia;
+    animation-duration: 2.5s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+}
+
+/* --- Badge de atención (contacto) --- */
+.badge-24 {
+    display: inline-block;
+    background: var(--color-negro);
+    color: var(--color-fondo);
+    font-family: var(--fuente-principal);
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    margin-top: 4px;
+}
+
+/* --- Tag de estado (tabla de contacto) --- */
+.tag {
+    display: inline-block;
+    font-family: var(--fuente-principal);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+}
+
+.tag-avail,
+.tag-disponible {
+    background: rgba(0, 0, 0, 0.06);
+    color: var(--color-negro);
+}
+
+/* --- Etiqueta de colección (detalle de producto) --- */
+.coleccion-tag {
+    font-family: var(--fuente-principal);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-rojo);
+    margin-bottom: 8px;
+}
+
+/* --- Garantía (promociones) --- */
+.garantia {
+    font-family: var(--fuente-principal);
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--color-texto-suave);
+    text-transform: uppercase;
+    text-align: center;
+    padding-bottom: 28px;
+}
