@@ -51,9 +51,9 @@ Reparto por sprint: ver [`roadmap.md`](roadmap.md) y `sprints/sprint-0N.md`.
 | E2-02 | Mover recursos a `static/` y páginas a `templates/paginas/` | — | UI | ⬜ |
 | E2-03 | Construir `layout/plantilla.html` con `th:fragment` | **2a** | UI | ⬜ |
 | E2-04 | Fragments `cabecera`, `pie`, `carrito` y `scripts` | **2a** | UI | ⬜ |
-| E2-05 | `HomeController` — página de inicio por defecto | **1b** | Datos | ⬜ |
-| E2-06 | Un `@Controller` por sección con rutas limpias (5+ páginas) | **1a** | Datos | ⬜ |
-| E2-13 | `application.properties` con variables de entorno; `README` de arranque | — | Datos | ⬜ |
+| E2-05 | `HomeController` — página de inicio por defecto | **1b** | Datos | ✅ |
+| E2-06 | Un `@Controller` por sección con rutas limpias (5+ páginas) | **1a** | Datos | ✅ |
+| E2-13 | `application.properties` con variables de entorno; `README` de arranque | — | Datos | ✅ |
 | E2-14 | Verificar que las rutas de recursos estáticos funcionan tras el traslado | — | UI | ⬜ |
 | E2-15 | Redactar la INTRODUCCIÓN del informe (adelantada) | 3 | Doc/QA | ⬜ |
 | E2-16 | Actualizar 2.1.2 con Spring Boot y Spring Web | 3 | Doc/QA | ⬜ |

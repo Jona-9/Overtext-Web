@@ -17,7 +17,7 @@ cd overtext
 Levanta en `http://localhost:8080`. Si ese puerto ya está ocupado en tu máquina:
 
 ```bash
-./mvnw spring-boot:run -Dspring-boot.run.arguments=--server.port=8081
+OVERTEXT_PORT=8081 ./mvnw spring-boot:run
 ```
 
 ## Compilar
@@ -25,6 +25,20 @@ Levanta en `http://localhost:8080`. Si ese puerto ya está ocupado en tu máquin
 ```bash
 ./mvnw clean package
 ```
+
+## Variables de entorno (E2-13)
+
+Todas tienen valor por defecto: el proyecto arranca sin configurar nada.
+
+| Variable | Por defecto | Para qué sirve |
+|---|---|---|
+| `OVERTEXT_PORT` | `8080` | Puerto donde escucha la app |
+| `OVERTEXT_THYMELEAF_CACHE` | `false` | Caché de plantillas Thymeleaf (en `false` los cambios en `.html` se ven sin reiniciar) |
+| `OVERTEXT_LOG_LEVEL` | `INFO` | Nivel de log del paquete `pe.edu.utp.overtext` |
+
+No se versionan credenciales en `application.properties` (constitución art. 6). Cuando
+llegue MySQL (Sprint 4, E3-19) sus credenciales entrarán también por variable de
+entorno, nunca escritas en el repo.
 
 ## Notas
 

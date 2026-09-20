@@ -29,7 +29,7 @@
     /* --- Catálogo: cada producto es de un solo color --- */
     function renderCatalogo(productos) {
         grid.innerHTML = productos.map(function (p) {
-            var url = '/detalle-producto.html?id=' + encodeURIComponent(p.id);
+            var url = '/producto/' + encodeURIComponent(p.id);
             var punto = '<span class="color" style="background:' + esc(p.color.hex) +
                 '" title="' + esc(p.color.nombre) + '"></span>';
             return '' +
@@ -53,7 +53,7 @@
 
     /* --- Detalle --- */
     function renderDetalle(productos) {
-        var id = new URLSearchParams(location.search).get('id');
+        var id = detalle.dataset.productoId;
         var p = productos.find(function (x) { return x.id === id; }) || productos[0];
         var fallback = esc(p.imagen);
         // Si una foto de galería aún no existe, cae a la foto principal del producto

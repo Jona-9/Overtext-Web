@@ -2,7 +2,7 @@
    OVERTEXT — Formulario de contacto
    Valida con Bootstrap (was-validated) y, si los datos son válidos,
    muestra lo ingresado en el modal #modal-contacto.
-   Sirve tanto a la página (contacto.html) como a #modal-contactanos
+   Sirve tanto a la página (/contacto) como a #modal-contactanos
    (E2-02): ambos formularios llevan la clase .form-contacto, así que la
    misma lógica atiende cualquiera de los dos sin duplicar código (art. 7).
    ============================================================ */
