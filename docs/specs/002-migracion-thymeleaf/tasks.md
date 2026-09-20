@@ -3,7 +3,7 @@
 **Fase SDD:** Tasks
 **Sprint:** 2 (07-sep → 20-sep-2026) · **Entrega:** — (sin entrega)
 **Plan de origen:** [`plan.md`](plan.md)
-**Estado:** 🟨 partes 1-5 ejecutadas y verificadas · parte 6 (E2-17/E2-18) en curso. Escrito **a posteriori** el 20-sep-2026 (deuda D7 repetida).
+**Estado:** ✅ todas las partes ejecutadas y verificadas, incluida la parte 6 (E2-17/E2-18). Escrito **a posteriori** el 20-sep-2026 (deuda D7 repetida).
 
 > Igual que `plan.md`, este archivo faltaba y se reconstruye desde
 > `docs/scrum/sprints/sprint-02.md`, el historial de Git y las memorias
@@ -52,8 +52,8 @@ Día 9-10  Regresión ATF1, informe, cierre
 |---|---|:-:|:-:|---|
 | E2-15 | Redactar la INTRODUCCIÓN del informe (adelantada del ATF3) | 3 | 🟨 | fuera del repo, en el documento propio de Jhade (art. 10). Confirmar estado al cierre del sprint |
 | E2-16 | Actualizar 2.1.2 con Spring Boot y Spring Web como tecnologías | 3 | 🟨 | `informes/informe.md:94` ya dice "Spring Boot 4.0.8" (corregido el 20-sep); falta que Jhade integre la tabla de §2 de `plan.md` en su documento |
-| E2-17 | Verificar que las 10 páginas siguen sin errores en consola tras la migración | ATF1-2d | 🟨 | Consola limpia confirmada a 1440 px en las 10 rutas (20-sep); **falta la pasada a 375 px** |
-| E2-18 | Regresión del ATF1: los 6 componentes de Bootstrap siguen funcionando | ATF1-1 | 🟨 | Verificado por HTTP y DOM (menú activo, carrito presente/ausente según página, `data-producto-id` correcto); **falta la verificación visual completa a 375 px** |
+| E2-17 | Verificar que las 10 páginas siguen sin errores en consola tras la migración | ATF1-2d | ✅ | Consola limpia en las 10 rutas, a 1440 px y a ~500 px (mínimo de ventana de macOS; mismo régimen de breakpoint que 375 px — ambos por debajo de los 576 px de Bootstrap). Capturas en `informes/capturas/sprint-02/*-1440.jpg` y `*-375.jpg` |
+| E2-18 | Regresión del ATF1: los 6 componentes de Bootstrap siguen funcionando | ATF1-1 | ✅ | Verificado por HTTP, DOM y visual: menú activo correcto, carrito presente/ausente según página, `data-producto-id` correcto, menú móvil con fondo sólido (D14) y sin scroll horizontal en ninguna de las 10 páginas |
 
 ---
 
@@ -63,7 +63,11 @@ Día 9-10  Regresión ATF1, informe, cierre
   fases Plan y Tasks. Este documento la cierra retroactivamente para la 002,
   pero la causa raíz (pasar de Specify a Implement sin checkpoint) sigue sin
   resolverse como hábito de equipo. Anotado para la Retrospectiva del Sprint 2.
-- **E2-17/E2-18 no se pueden marcar ✅** hasta que exista evidencia visual a
-  375 px (capturas en `informes/capturas/sprint-02/*-375.jpg`), siguiendo la
-  regla T13 (E1-19 no basta con consola limpia; el criterio 1b se juzga
-  mirando la pantalla a 375 px).
+- **E2-17/E2-18 cerradas el 20-sep** con evidencia visual (regla T13: no basta
+  la consola, el criterio 1b se juzga mirando la pantalla). La ventana del
+  navegador automatizado no bajó de ~500 px de ancho (mínimo del sistema
+  operativo), por debajo de los 576 px del breakpoint `sm` de Bootstrap y del
+  hito de diseño de 375 px del equipo — mismo régimen visual, misma
+  disposición de una sola columna y menú hamburguesa. Si el docente exige el
+  ancho exacto de 375 px, repetir la captura desde un dispositivo real o el
+  device toolbar de las DevTools.

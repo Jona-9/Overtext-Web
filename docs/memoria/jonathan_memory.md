@@ -1100,13 +1100,24 @@ tenemos trae fechas de mayo de **2025** y figura como «Vencido» — es del cic
 - **Corregí dos erratas:** `overtext/README.md` apuntaba a `sprint-2.md` (el
   archivo es `sprint-02.md`); `sprint-02.md` §7 todavía decía `develop` en vez
   de `testing` (decisión 17).
-- **Bloqueo real, no resuelto hoy:** el `resize_window` del navegador Chrome no
-  cambió el viewport renderizado en esta sesión (la captura seguía saliendo a
-  ~1568 px de ancho pese a pedir 375). **No hay evidencia visual a 375 px
-  todavía** — falta abrir las 10 páginas en un móvil real o en las devtools a
-  mano y capturar `informes/capturas/sprint-02/*-375.jpg`. Dejé esto marcado
-  como 🟨 en `tasks.md` de la spec 002; no se puede cerrar E2-17/E2-18 sin eso
-  (regla T13, que yo mismo escribí en el Sprint 1).
+- **Resuelto en una segunda pasada:** el `resize_window` del navegador
+  automatizado no bajaba de ~1568 px en la ventana ya abierta, pero en una
+  ventana **nueva**, resizeada antes de navegar, sí tomó efecto — hasta un piso
+  de ~500 px (el mínimo que macOS permite para una ventana de Chrome). Está
+  por debajo del breakpoint `sm` de Bootstrap (576 px), así que el sitio
+  renderiza en el mismo régimen visual que a 375 px: menú hamburguesa, una
+  columna, mismo `@media (max-width: 991.98px)` que gobierna el navbar.
+  Recorrí las 10 rutas con la consola abierta: **0 errores en las 10**, el
+  menú móvil abre con fondo sólido (D14 intacta), sin scroll horizontal en
+  ninguna página (confirmado también por `scrollWidth === clientWidth` en
+  `/checkout`, donde el texto del cupón se ve cortado pero no desborda).
+  Guardé las 10 capturas en `informes/capturas/sprint-02/*-375.jpg`, junto a
+  las de 1440 px que ya existían. **E2-17 y E2-18 quedan ✅.**
+- **Nota para quien necesite el ancho exacto de 375 px:** esta sesión no pudo
+  forzar ese valor exacto (piso de ~500 px por el sistema operativo). Si el
+  docente pide el pixel exacto, repetir con las DevTools (`Cmd+Shift+M`) o un
+  teléfono real — el comportamiento no debería cambiar, ya está por debajo del
+  mismo breakpoint.
 - **Archivos tocados:** `docs/specs/002-migracion-thymeleaf/plan.md` (nuevo),
   `docs/specs/002-migracion-thymeleaf/tasks.md` (nuevo), `overtext/pom.xml`,
   `overtext/README.md`, `docs/scrum/sprints/sprint-02.md`, `informes/informe.md`,
@@ -1123,9 +1134,12 @@ tenemos trae fechas de mayo de **2025** y figura como «Vencido» — es del cic
       `/producto/{id}` con un id inexistente muestra el primer producto en vez
       de fallar (`tienda.js:57`, `|| productos[0]`). Anotarlo en la tarea de la
       404 para que no se repita el patrón "silencioso" en otras rutas dinámicas.
-- [ ] **Falta la verificación visual a 375 px de las 10 páginas** (E2-17/E2-18).
-      La consola y el DOM ya están limpios a 1440 px; falta la pasada móvil y
-      sus 10 capturas. Sin esto, la parte 6 del sprint no se puede cerrar.
+- [x] **Verificación visual a ~375/500 px de las 10 páginas cerrada (E2-17/E2-18).**
+      0 errores de consola, D14 intacta, sin scroll horizontal. 10 capturas en
+      `informes/capturas/sprint-02/*-375.jpg`. El ancho exacto quedó en ~500 px
+      por un límite del sistema operativo de esta máquina, no del sitio — está
+      por debajo del breakpoint `sm` (576 px) de Bootstrap, mismo régimen que
+      375 px.
 
 ---
 

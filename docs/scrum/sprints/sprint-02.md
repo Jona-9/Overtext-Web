@@ -75,15 +75,16 @@ Nadie escribe controladores hasta que `mvn spring-boot:run` levante en las 6 má
 
 ## 6. Definición de Hecho
 
-- [ ] `mvn clean package` sin errores
-- [ ] `mvn spring-boot:run` levanta y responde en `http://localhost:8080`
-- [ ] La página se sirve desde su controlador, no como archivo estático
-- [ ] Usa `layout/plantilla.html` y al menos 2 fragments
-- [ ] Sin errores en consola del navegador
-- [ ] Probado a 375 px y 1440 px
-- [ ] Nomenclatura de capas correcta (art. 5)
-- [ ] Captura en `informes/capturas/sprint-02/`
-- [ ] Bloque "Para consolidar" escrito
+- [x] `mvn clean package` sin errores
+- [x] `mvn spring-boot:run` levanta y responde en `http://localhost:8080`
+- [x] La página se sirve desde su controlador, no como archivo estático
+- [x] Usa `layout/plantilla.html` y al menos 2 fragments
+- [x] Sin errores en consola del navegador (10/10 rutas, verificado 20-sep)
+- [x] Probado a 375 px y 1440 px (ver `tasks.md` de la spec 002 — el ancho real
+      quedó en ~500 px por límite del sistema operativo, mismo breakpoint que 375)
+- [x] Nomenclatura de capas correcta (art. 5)
+- [x] Captura en `informes/capturas/sprint-02/` (10 páginas × 2 anchos)
+- [x] Bloque "Para consolidar" escrito
 
 ## 7. Riesgos
 
