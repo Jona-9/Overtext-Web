@@ -33,7 +33,7 @@ Los criterios 1c (404), 1d (menú activo), 2b (`th:if`) y 2c (`th:each`) se cier
 
 | # | Historia | Criterio | Sesión |
 |---|---|:-:|:-:|
-| E2-01 | Crear el proyecto Spring Boot 3.x con Maven, Java 17+, `web` y `thymeleaf` | — | 9-10 |
+| E2-01 | Crear el proyecto Spring Boot con Maven (decisión: 4.0.8, spec 002 §A2), Java 17+, `web` y `thymeleaf` | — | 9-10 |
 | E2-05 | `HomeController` con `@GetMapping("/")` — página de inicio por defecto | **1b** | 11-12 |
 | E2-06 | Un `@Controller` por sección con rutas limpias: `/catalogo`, `/producto/{id}`, `/promociones`, `/nosotros`, `/contacto`, `/login`, `/checkout` | **1a** | 11-12 |
 | E2-13 | `application.properties` con variables de entorno; `README` de arranque | — | 9-10 |
@@ -93,7 +93,7 @@ Nadie escribe controladores hasta que `mvn spring-boot:run` levante en las 6 má
 | Entorno Java/Maven distinto en cada máquina | Día 1: todos compilan y levantan. Versión de Java fijada en el `pom.xml`. |
 | Al mover recursos se rompen las rutas absolutas (`/css/...`) | E2-14 tiene tarea propia; se verifica página por página |
 | Se rompe algo del ATF1 al migrar | E2-18 regresión obligatoria antes del cierre |
-| Seis personas tocando `plantilla.html` a la vez | Un solo duo es dueño del layout (art. 9); el resto espera a que esté en `develop` |
+| Seis personas tocando `plantilla.html` a la vez | Un solo duo es dueño del layout (art. 9); el resto espera a que esté en `testing` |
 
 ## 8. Ceremonias
 
