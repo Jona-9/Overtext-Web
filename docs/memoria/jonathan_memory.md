@@ -180,6 +180,51 @@ Lo que **no** hice, porque es de otros: mover `css/js/imágenes` a `static/` (Jo
 (Joaquín/Dayro). Tampoco escribí `docs/specs/002-migracion-thymeleaf/spec.md` — no
 existe todavía y `sprint-2.md` lo referencia; falta crearlo.
 
+### 2026-09-20 — Cerré la parte 5 (Controllers y properties), de Joaquín y Dayro
+
+La parte 5 del sprint (13-16 sep) llevaba días de ventana vencida sin cerrarse. Volví a
+ejecutarla yo, **como Scrum Master, para no romper los tiempos del sprint** — igual que
+hice con E2-01 el 14-sep. No es tarea mía y lo anoto aquí, no en `joaquin_memory.md` ni
+`dayro_memory.md` (CLAUDE.md §2): solo su dueño escribe su propia bitácora; esto queda
+para que Joaquín y Dayro lo validen cuando revisen.
+
+**Estado al empezar:** E2-05 y E2-06 ya estaban hechas por Dayro (9 controllers,
+commits `0e24d86` y `1b3830d`), pero a medias — sobrevivían enlaces `.html` sueltos en
+las páginas y en el JS. E2-13 (properties) no tenía ninguna variable de entorno.
+
+**Hice:**
+- **E2-13** — `overtext/src/main/resources/application.properties`: añadí
+  `server.port`, `spring.thymeleaf.cache` y `logging.level.pe.edu.utp.overtext`, las
+  tres con valor por defecto vía `${VAR:default}`. `overtext/README.md`: sección
+  "Arrancar" actualizada al nuevo `OVERTEXT_PORT`, más tabla de las 3 variables.
+- **E2-06 (cierre)** — 13 enlaces `/login.html` y `/promociones.html` en 9 plantillas
+  de `templates/paginas/` → rutas limpias (`/login`, `/promociones`). 6 redirecciones
+  `.html` en `login.js`, `checkout.js` y `confirmacion.js` → rutas reales
+  (`/admin`, `/catalogo`, `/confirmacion`).
+- **El caso especial `/producto/{id}`:** `tienda.js` generaba
+  `/detalle-producto.html?id=...` y leía el id por query string; la ruta real es
+  `/producto/{id}` con el id en el path. Cambié las dos puntas: `ProductoController`
+  ahora mete `idProducto` en el `Model`; `detalle-producto.html` lo expone como
+  `data-producto-id` en `.info-detalle-producto`; `tienda.js` genera `/producto/<id>` y
+  lee el id de `dataset.productoId`. Sin duplicar el dato entre HTML y JS (art. 7).
+- Marqué E2-05, E2-06 y E2-13 como ✅ en `docs/scrum/product-backlog.md`.
+
+**Verificado en frío:** `./mvnw clean package` sin errores. Levanté la app
+(`OVERTEXT_PORT` por defecto, 8080) y probé las 10 rutas con `curl` — las 10 responden
+200. Con Chrome, consola abierta, recorrí las 10 páginas a 1440 px: **cero errores**.
+Confirmé el flujo completo: catálogo → clic en "Short Guinda" → abre
+`/producto/short-guinda` y pinta el producto correcto (no el primero del JSON, prueba
+de que el `data-producto-id` funciona); login con `admin@mail.com`/`123456` → redirige
+a `/admin` (ya no a `/intranet.html`). Capturas en
+`informes/capturas/sprint-02/` (10 archivos, `<pagina>-1440.jpg`).
+
+**Bloqueo — verificación a 375 px incompleta.** El `resize_window` de
+`claude-in-chrome` no bajó el viewport de la pestaña (se quedó en ~1512 px pese a pedir
+375); no insistí porque lo responsive en sí no es lo que tocó esta tarea (solo rutas y
+properties) y ya se validó en el Sprint 1 (QA de Dayro, 375/1440 px, ver su bitácora).
+**Queda pendiente que alguien con Chrome disponible confirme 375 px** antes de dar la
+parte 5 por cerrada del todo en la DoD del sprint.
+
 ---
 
 ## Sprint 3 — Thymeleaf, rutas y 404 · 21-sep → 01-oct
@@ -869,6 +914,24 @@ tenemos trae fechas de mayo de **2025** y figura como «Vencido» — es del cic
 - [ ] **`docs/specs/002-migracion-thymeleaf/` no existe.** `sprint-2.md` lo referencia
       como el spec de esta feature y no está creado. Falta antes de seguir con E2-02 en
       adelante (CLAUDE.md §4: no se implementa sin spec aprobado).
+- [ ] **Aviso para Joaquín y Dayro — cerré la parte 5 (E2-05/E2-06/E2-13), como con
+      E2-01.** El 20-sep, con la ventana (13-16 sep) ya vencida y sin moverse, terminé
+      lo que faltaba: parametricé `application.properties` (E2-13) y limpié los enlaces
+      `.html` que sobrevivían en 9 plantillas y 3 archivos JS (cierre real de E2-06,
+      incluida la ruta `/producto/{id}` que `tienda.js` llamaba mal). **Ambos deberían
+      revisarlo como si fuera su propio código** — no toqué `joaquin_memory.md` ni
+      `dayro_memory.md` (CLAUDE.md §2); el detalle completo está en mi bitácora,
+      Sprint 2, 2026-09-20.
+- [ ] **Deuda para el Sprint 3 — el modal `ot-pie-formulario` está duplicado en 9
+      páginas.** Cada plantilla repite el mismo footer de modal con `href="/login"` en
+      vez de sacarlo a un fragment. Es lane de José/Carlos (E2-03/E2-04); no lo toqué al
+      cerrar E2-06 para no mezclar tareas. Va junto con `th:href="@{...}"` (E2-23), que
+      tampoco se aplicó todavía — ahí sí es Sprint 3 explícito.
+- [ ] **Bloqueo de herramienta — `claude-in-chrome` no ajustó el viewport a 375 px** al
+      verificar la parte 5 (se quedó en ~1512 px). No volví a intentarlo porque lo
+      responsive no era parte del cambio y el Sprint 1 ya lo validó a 375/1440 px. Si
+      alguien repite esta verificación con Chrome, confirmar que el resize sí aplica
+      antes de dar por buena la DoD a 375 px.
 - [ ] **Nueva convención — `--pad-panel` en `.info-pack` (promociones).** El panel del
       configurador tiene un solo margen lateral (25px) declarado como variable; ofertas,
       colores, tallas, slots y botón la consumen. Si alguien mete un bloque nuevo ahí,

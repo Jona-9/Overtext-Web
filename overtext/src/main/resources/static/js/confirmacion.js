@@ -28,7 +28,7 @@
             '<div class="confirmacion-vacio">' +
                 '<h1>NO HAY PEDIDO QUE MOSTRAR</h1>' +
                 '<p class="confirmacion-lema">Aún no has finalizado una compra.</p>' +
-                '<a href="/catalogo.html" class="btn-finalizar">IR AL CATÁLOGO</a>' +
+                '<a href="/catalogo" class="btn-finalizar">IR AL CATÁLOGO</a>' +
             '</div>';
         return;
     }
@@ -108,6 +108,6 @@
             '</div>' +
         '</div>' +
 
-        '<a href="/catalogo.html" class="btn-finalizar">SEGUIR COMPRANDO</a>';
+        '<a href="/catalogo" class="btn-finalizar">SEGUIR COMPRANDO</a>';
 
 }());

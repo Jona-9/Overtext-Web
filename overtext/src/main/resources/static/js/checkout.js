@@ -70,7 +70,7 @@
         if (cont) {
             if (items.length === 0) {
                 cont.innerHTML = '<p class="resumen-vacio">Tu carrito está vacío. ' +
-                    '<a href="/catalogo.html">Ver catálogo</a></p>';
+                    '<a href="/catalogo">Ver catálogo</a></p>';
             } else {
                 cont.innerHTML = items.map(function (it) {
                     return '' +
@@ -240,7 +240,7 @@
         var resumen = renderResumen();
         if (resumen.items.length === 0) {
             alert('Tu carrito está vacío. Agrega productos antes de finalizar la compra.');
-            window.location.href = '/catalogo.html';
+            window.location.href = '/catalogo';
             return;
         }
 
@@ -298,7 +298,7 @@
 
         localStorage.setItem('ot_pedido', JSON.stringify(pedido));
         Carrito.vaciar();
-        window.location.href = '/confirmacion.html';
+        window.location.href = '/confirmacion';
     });
 
     // Render inicial del resumen al cargar la página

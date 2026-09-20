@@ -57,7 +57,7 @@
                 </div>
 
                 <!-- INFO -->
-                <div class="info-detalle-producto">
+                <div class="info-detalle-producto" th:attr="data-producto-id=${idProducto}">
 
                     <p class="coleccion-tag">OVERCOMING</p>
                     <h1 class="nombre-detalle">Short Stone Beige</h1>
@@ -101,7 +101,7 @@
                             data-cantidad-el=".valor-cantidad">Añadir al carrito</button>
                     </div>
 
-                    <a href="/promociones.html" class="btn-pack">Arma tu pack</a>
+                    <a href="/promociones" class="btn-pack">Arma tu pack</a>
 
                     <!-- Beneficios -->
                     <div class="beneficios-fila">
@@ -260,7 +260,7 @@
 
           </div>
           <div class="modal-footer">
-            <a class="ot-pie-formulario" href="/login.html">Abrir en página completa</a>
+            <a class="ot-pie-formulario" href="/login">Abrir en página completa</a>
           </div>
         </div>
       </div>

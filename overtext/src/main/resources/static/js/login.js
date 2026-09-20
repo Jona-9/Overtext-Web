@@ -1,7 +1,7 @@
 /* ============================================================
    OVERTEXT — Validación de inicio de sesión
-   Credenciales válidas: admin@mail.com / 123456 → intranet.html
-   Sirve tanto a la página (login.html) como a #modal-login (E2-01):
+   Credenciales válidas: admin@mail.com / 123456 → /admin
+   Sirve tanto a la página (/login) como a #modal-login (E2-01):
    ambos formularios llevan la clase .formulario-sesion, así que la misma
    lógica valida cualquiera de los dos sin duplicar código (art. 7).
    ============================================================ */
@@ -37,7 +37,7 @@
                     mensaje.textContent = 'Acceso correcto. Redirigiendo…';
                     mensaje.className = 'mensaje-sesion mensaje-ok';
                 }
-                window.location.href = '/intranet.html';
+                window.location.href = '/admin';
             } else {
                 // Sin console.error: una credencial equivocada es un caso
                 // previsto, no un fallo de la página (criterio 2d, consola limpia).
