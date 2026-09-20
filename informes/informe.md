@@ -91,7 +91,7 @@ OverText — Plataforma de comercio electrónico para streetwear peruano
 
 ##### 2.1.2.1 Tecnologías usadas
 
-`[TF]` ⬜ — Lenguajes, bibliotecas, programas y herramientas: Java, HTML, CSS, JavaScript, Bootstrap 5.3, Spring Boot 3.x, Spring Web, Thymeleaf, Spring Data JPA, Hibernate, Spring Security, MySQL 8, Maven, Git.
+`[TF]` ⬜ — Lenguajes, bibliotecas, programas y herramientas: Java, HTML, CSS, JavaScript, Bootstrap 5.3, Spring Boot 4.0.8, Spring Web, Thymeleaf, Spring Data JPA, Hibernate, Spring Security, MySQL 8, Maven, Git.
 
 ##### 2.1.2.2 Descripción técnica del funcionamiento
 

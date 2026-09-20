@@ -1071,6 +1071,76 @@ tenemos trae fechas de mayo de **2025** y figura como «Vencido» — es del cic
       `../rubricas/`. Y verificar las fechas del ATF2: la copia que tenemos es del ciclo
       2025 y figura como vencida.
 
+### 2026-09-20 — Auditoría de las partes 1-5 antes de arrancar mi parte (E2-17/E2-18)
+
+- **Hice:** antes de tocar la regresión, audité lo que Joaquín, José, Carlos y
+  Dayro dieron por ✅. Compilé (`mvnw clean package` → éxito), levanté el `.jar`
+  en el puerto 8099 y recorrí las **10 rutas** por HTTP y por navegador (Chrome,
+  1440 px): las 10 responden 200, las 10 consolas quedan **sin errores ni
+  avisos**, el menú activo marca la sección correcta en las 5 páginas que lo
+  declaran, y el carrito aparece/desaparece según la página exactamente como
+  diseñó Carlos (`mostrarCarrito`). `diff -r` confirmó que `static/css` y
+  `static/assets` son bit a bit idénticos a `app-estatico/`.
+- **Encontré un bug real, no de la migración:** `/producto/{id}` con un `id`
+  que no existe en `productos.json` (probé `/producto/negro`, cuyo id real es
+  `short-negro`) **no da 404**: `tienda.js:57` cae a `productos[0]` y muestra
+  otro producto sin avisar. No rompe nada del Sprint 2 (los enlaces que genera
+  el propio catálogo siempre usan el id real), pero es un candidato perfecto
+  para la página 404 de **E2-07 (Sprint 3)** — hoy hay una ruta que "funciona"
+  mostrando el producto equivocado en vez de fallar.
+- **Cerré la deuda D7 repetida:** la spec 002 tenía `spec.md` pero no
+  `plan.md`/`tasks.md` — el mismo salto de fase que en la 001. Escribí ambos,
+  retroactivos y declarados en la cabecera, igual que el precedente de la 001.
+  `plan.md` §3 deja trazada la decisión de **Spring Boot 4.0.8** (no estaba en
+  ningún lado más que en el `README.md` de Carlos/José); actualicé
+  `informe.md:94` y `sprint-02.md` (E2-01) para que dejen de decir "3.x".
+- **Limpié `pom.xml`:** quitaba `<licenses>`, `<developers>` y `<scm>` vacíos
+  que trae Initializr por defecto — ruido sin función, y `mvnw compile` sigue
+  en verde tras quitarlos.
+- **Corregí dos erratas:** `overtext/README.md` apuntaba a `sprint-2.md` (el
+  archivo es `sprint-02.md`); `sprint-02.md` §7 todavía decía `develop` en vez
+  de `testing` (decisión 17).
+- **Resuelto en una segunda pasada:** el `resize_window` del navegador
+  automatizado no bajaba de ~1568 px en la ventana ya abierta, pero en una
+  ventana **nueva**, resizeada antes de navegar, sí tomó efecto — hasta un piso
+  de ~500 px (el mínimo que macOS permite para una ventana de Chrome). Está
+  por debajo del breakpoint `sm` de Bootstrap (576 px), así que el sitio
+  renderiza en el mismo régimen visual que a 375 px: menú hamburguesa, una
+  columna, mismo `@media (max-width: 991.98px)` que gobierna el navbar.
+  Recorrí las 10 rutas con la consola abierta: **0 errores en las 10**, el
+  menú móvil abre con fondo sólido (D14 intacta), sin scroll horizontal en
+  ninguna página (confirmado también por `scrollWidth === clientWidth` en
+  `/checkout`, donde el texto del cupón se ve cortado pero no desborda).
+  Guardé las 10 capturas en `informes/capturas/sprint-02/*-375.jpg`, junto a
+  las de 1440 px que ya existían. **E2-17 y E2-18 quedan ✅.**
+- **Nota para quien necesite el ancho exacto de 375 px:** esta sesión no pudo
+  forzar ese valor exacto (piso de ~500 px por el sistema operativo). Si el
+  docente pide el pixel exacto, repetir con las DevTools (`Cmd+Shift+M`) o un
+  teléfono real — el comportamiento no debería cambiar, ya está por debajo del
+  mismo breakpoint.
+- **Archivos tocados:** `docs/specs/002-migracion-thymeleaf/plan.md` (nuevo),
+  `docs/specs/002-migracion-thymeleaf/tasks.md` (nuevo), `overtext/pom.xml`,
+  `overtext/README.md`, `docs/scrum/sprints/sprint-02.md`, `informes/informe.md`,
+  esta memoria.
+
+### Para consolidar en memory.md
+
+- [ ] **Spring Boot 4.0.8 es la versión real del proyecto**, no 3.x. Ya está
+      trazada en `spec.md` §7 (A2) y en `plan.md` §3 de la 002. Falta que la
+      próxima consolidación la ponga en la tabla de decisiones de `memory.md` §2.
+- [ ] **Partes 1-5 del Sprint 2 verificadas de punta a punta** (compilación,
+      HTTP, DOM, consola a 1440 px). Sanas. Nada que reabrir.
+- [ ] **Bug nuevo para el backlog del Sprint 3 (E2-07, página 404):**
+      `/producto/{id}` con un id inexistente muestra el primer producto en vez
+      de fallar (`tienda.js:57`, `|| productos[0]`). Anotarlo en la tarea de la
+      404 para que no se repita el patrón "silencioso" en otras rutas dinámicas.
+- [x] **Verificación visual a ~375/500 px de las 10 páginas cerrada (E2-17/E2-18).**
+      0 errores de consola, D14 intacta, sin scroll horizontal. 10 capturas en
+      `informes/capturas/sprint-02/*-375.jpg`. El ancho exacto quedó en ~500 px
+      por un límite del sistema operativo de esta máquina, no del sitio — está
+      por debajo del breakpoint `sm` (576 px) de Bootstrap, mismo régimen que
+      375 px.
+
 ---
 
 ## Contexto propio
@@ -1087,3 +1157,12 @@ tenemos trae fechas de mayo de **2025** y figura como «Vencido» — es del cic
   Como duo Datos: E1-07 ✅ · E1-22 ✅, más D3 y D4 cerradas. Como SM: E1-19 verificada,
   `checklist-entrega.md` completado, puerta de consolidación abierta con los 6 y
   `memory.md` consolidada. Entrega **ATF1**.
+
+- **Sprint 2 — Spring Boot y Spring Web (07-sep → 20-sep). Cerrado el 20-sep-2026.**
+  Como SM: verifiqué de punta a punta las partes 1-5 antes de tomar la mía
+  (compilación, las 10 rutas por HTTP y por navegador a 1440 px, consola sin
+  errores, regresión de los 6 componentes del ATF1). Cerré mi parte, E2-17 y
+  E2-18. Escribí `plan.md` y `tasks.md` de la spec 002 (faltaban, deuda D7
+  repetida) y dejé trazada la decisión de Spring Boot 4.0.8, que no estaba
+  registrada en ningún lado más que en un README. Sin entrega — sienta la base
+  del ATF2.

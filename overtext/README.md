@@ -1,6 +1,6 @@
 # overtext — proyecto Spring Boot
 
-Backend del Sprint 2 (ATF2). Ver `docs/scrum/sprints/sprint-2.md` en la raíz del repo.
+Backend del Sprint 2 (ATF2). Ver `docs/scrum/sprints/sprint-02.md` en la raíz del repo.
 
 ## Requisitos
 
