@@ -105,7 +105,7 @@ Nadie escribe controladores hasta que `mvn spring-boot:run` levante en las 6 má
 | Review | vie 18-sep |
 | Retro + consolidación | vie 18-sep, tras la review |
 
-**Puerta de consolidación:** ⬜ Joaquín · ⬜ José · ✅ Jonathan · ⬜ Dayro · ⬜ Carlos · ⬜ Jhade
+**Puerta de consolidación:** ✅ Joaquín · ✅ José · ✅ Jonathan · ✅ Dayro · ✅ Carlos · ✅ Jhade
 
 ---
 
