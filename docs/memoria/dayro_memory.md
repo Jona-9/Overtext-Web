@@ -322,6 +322,49 @@ Demuestro en vivo: entrar a `/admin` sin sesión, iniciar sesión, y mostrar el 
 ---
 
 
+## Bitácora — Sprint 3
+
+> ⚠️ **Entrada escrita por Jonathan (SM), no por Dayro** — a pedido explícito
+> para dejar el ítem 7 del orden de trabajo del equipo cerrado y a tiempo,
+> mismo precedente que la entrada del 25-ago (Sprint 1). Excepción puntual
+> al art. 9, declarada, no silenciosa. Dayro revisa y ajusta lo que vea al
+> retomar.
+
+### 2026-09-20 — ProductoService (ítem 7 del orden de trabajo)
+
+- **Hice:** implementé `ProductoService` (criterio ATF2-2c), con la
+  separación de capas del art. 5:
+  - `model/Producto.java` — record que espeja `productos.json`, con `Color`
+    anidado.
+  - `service/ProductoService.java` — interfaz: `listarTodos()`,
+    `buscarPorId(String)`.
+  - `service/ProductoServiceImpl.java` — `@Service` que lee
+    `static/js/productos.json` del **classpath** con Jackson y lo cachea en
+    memoria al arrancar.
+  - `CatalogoController` expone `productos` al modelo (listo para que
+    E2-21 lo consuma con `th:each`).
+  - `ProductoController.detalle()` usa `buscarPorId(id).orElseThrow(...
+    NOT_FOUND)`: `/producto/no-existe` ya responde **404** real en vez de
+    caer al primer producto del catálogo (`tienda.js:57`).
+- **Un solo origen de verdad (art. 7):** el servicio lee el mismo
+  `productos.json` que sigue usando `tienda.js` por `fetch`. No reescribí
+  el catálogo en Java.
+- **Trampa de la máquina:** Spring Boot 4.0.8 trae **Jackson 3.x**, cuyo
+  paquete es `tools.jackson.databind`, no `com.fasterxml.jackson.databind`
+  (Jackson 2.x). El primer intento de compilar falló por eso.
+- **Verificado:** `mvnw clean package` compila y pasa el test; las 10 rutas
+  responden 200; `/producto/short-negro` → 200 con la ficha real;
+  `/producto/no-existe` → 404; consola sin errores.
+- **Bloqueo:** ninguno. **Ítem 7 cerrado.**
+- **Archivos tocados:**
+  - `overtext/src/main/java/pe/edu/utp/overtext/model/Producto.java` *(nuevo)*
+  - `overtext/src/main/java/pe/edu/utp/overtext/service/ProductoService.java` *(nuevo)*
+  - `overtext/src/main/java/pe/edu/utp/overtext/service/ProductoServiceImpl.java` *(nuevo)*
+  - `overtext/src/main/java/pe/edu/utp/overtext/controller/CatalogoController.java` *(expone `productos`)*
+  - `overtext/src/main/java/pe/edu/utp/overtext/controller/ProductoController.java` *(404 real vía `buscarPorId`)*
+
+---
+
 ## Contexto propio
 
 - Servir el sitio: **no funciona con `file://`** (rutas absolutas y `fetch`). Live Server o `python3 -m http.server` en `app-estatico/`.
