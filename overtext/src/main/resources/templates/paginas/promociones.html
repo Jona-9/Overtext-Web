@@ -55,39 +55,9 @@
                     <div class="seleccion-colores">
                         <p class="etiqueta-colores">SELECCIONA COLORES</p>
                         <div class="colores-grid">
-                            <div class="color-opcion">
-                                <div class="color-muestra color-muestra--negro"></div>
-                                <span class="nombre-color">NEGRO</span>
-                                <span class="contador-color"></span>
-                            </div>
-                            <div class="color-opcion">
-                                <div class="color-muestra color-muestra--stone"></div>
-                                <span class="nombre-color">STONE</span>
-                                <span class="contador-color"></span>
-                            </div>
-                            <div class="color-opcion">
-                                <div class="color-muestra color-muestra--guinda"></div>
-                                <span class="nombre-color">GUINDA</span>
-                                <span class="contador-color"></span>
-                            </div>
-                            <div class="color-opcion">
-                                <div class="color-muestra color-muestra--gris"></div>
-                                <span class="nombre-color">GRIS</span>
-                                <span class="contador-color"></span>
-                            </div>
-                            <div class="color-opcion">
-                                <div class="color-muestra color-muestra--oliva"></div>
-                                <span class="nombre-color">OLIVA</span>
-                                <span class="contador-color"></span>
-                            </div>
-                            <div class="color-opcion">
-                                <div class="color-muestra color-muestra--marino"></div>
-                                <span class="nombre-color">MARINO</span>
-                                <span class="contador-color"></span>
-                            </div>
-                            <div class="color-opcion">
-                                <div class="color-muestra color-muestra--marron"></div>
-                                <span class="nombre-color">MARRÓN</span>
+                            <div class="color-opcion" th:each="producto : ${productos}">
+                                <div class="color-muestra" th:style="'background-color:' + ${producto.color.hex}"></div>
+                                <span class="nombre-color" th:text="${producto.color.nombre}">COLOR</span>
                                 <span class="contador-color"></span>
                             </div>
                         </div>

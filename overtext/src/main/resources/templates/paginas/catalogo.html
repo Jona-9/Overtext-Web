@@ -47,8 +47,27 @@
         <section class="catalogo-productos">
             <div class="container">
                 <div class="productos-grid row g-4">
-                    <!-- Las tarjetas se renderizan dinámicamente desde js/tienda.js
-                         (cada una envuelta en una columna Bootstrap) -->
+                    <div class="col-12 col-sm-6 col-lg-4 col-xl-3" th:each="producto : ${productos}">
+                        <article class="producto-card">
+                            <span class="producto-badge" th:text="${producto.badge}">BADGE</span>
+                            <a th:href="@{'/producto/' + ${producto.id}}">
+                                <img th:src="@{${producto.imagen}}" th:alt="${producto.nombre}">
+                            </a>
+                            <h3><a th:href="@{'/producto/' + ${producto.id}}" style="color:inherit;text-decoration:none;" th:text="${producto.nombre}">Nombre</a></h3>
+                            <p th:text="${producto.descripcion}">Descripción</p>
+                            <p class="precio">S/ [[${producto.precio}]] <span>/ pack [[${producto.precioPack}]]</span></p>
+                            <div class="producto-colores">
+                                <span class="color" th:style="'background:' + ${producto.color.hex}" th:title="${producto.color.nombre}"></span>
+                            </div>
+                            <a th:href="@{'/producto/' + ${producto.id}}" class="btn-agregar">VER PRODUCTO</a>
+                            <button class="btn-agregar-carrito" data-agregar-carrito
+                                th:data-id="${producto.id}"
+                                th:data-nombre="${producto.nombre}"
+                                th:data-precio="${producto.precio}"
+                                th:data-variante="${#strings.toUpperCase(producto.color.nombre)}"
+                                th:data-imagen="${producto.imagen}">AÑADIR AL CARRITO</button>
+                        </article>
+                    </div>
                 </div>
             </div>
         </section>
@@ -201,7 +220,6 @@
     </div>
 
     <th:block th:replace="~{layout/plantilla :: scripts}"></th:block>
-    <script src="/js/tienda.js"></script>
 
 </body>
 </html>

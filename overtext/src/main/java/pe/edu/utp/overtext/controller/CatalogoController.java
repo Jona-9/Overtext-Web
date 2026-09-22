@@ -13,10 +13,10 @@ import pe.edu.utp.overtext.service.ProductoService;
  * Thymeleaf resuelve la vista {@code templates/paginas/catalogo.html}.
  *
  * <p>Expone {@code productos} desde {@link ProductoService} para que la
- * vista pueda iterarlos con {@code th:each} (tarea E2-21, `sprint-03.md`). Hasta
- * que esa tarea se cierre, {@code tienda.js} sigue pintando el catálogo por
- * su cuenta desde el mismo {@code productos.json}; ambos caminos leen la
- * misma fuente, sin duplicar el dato (art. 7).
+ * vista los itere con {@code th:each} (E2-21). {@code tienda.js} ya no pinta
+ * este catálogo — solo conserva {@code renderDetalle} para la ficha de
+ * producto — así que hay un solo camino de renderizado, sin duplicar el dato
+ * (art. 7).
  *
  * <p>Nomenclatura: constitución art. 5 — sufijo {@code Controller},
  * paquete {@code pe.edu.utp.overtext.controller}.

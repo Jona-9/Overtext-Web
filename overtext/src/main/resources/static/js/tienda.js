@@ -1,54 +1,27 @@
 /* ============================================================
    OVERTEXT — Tienda (datos desde js/productos.json)
-   Renderiza el catálogo y la página de detalle desde una sola
-   fuente de datos. Los clics de "añadir al carrito" los maneja
-   carrito.js por delegación, así que aquí solo se pinta HTML.
+   Renderiza la página de detalle desde una sola fuente de datos.
+   El catálogo ya no pasa por aquí: sus tarjetas las pinta
+   Thymeleaf con th:each sobre el mismo ProductoService (E2-21).
+   Los clics de "añadir al carrito" los maneja carrito.js por
+   delegación, así que aquí solo se pinta HTML.
    Requiere servirse por HTTP (Live Server) para que fetch funcione.
    ============================================================ */
 (function () {
     'use strict';
 
-    var grid = document.querySelector('.productos-grid');
     var detalle = document.querySelector('.info-detalle-producto');
-    if (!grid && !detalle) return;
+    if (!detalle) return;
 
     fetch('/js/productos.json')
         .then(function (r) { return r.json(); })
-        .then(function (productos) {
-            if (grid) renderCatalogo(productos);
-            if (detalle) renderDetalle(productos);
-        })
+        .then(function (productos) { renderDetalle(productos); })
         .catch(function (e) { console.error('No se pudo cargar productos.json:', e); });
 
     function esc(t) {
         return String(t == null ? '' : t).replace(/[&<>"]/g, function (c) {
             return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
         });
-    }
-
-    /* --- Catálogo: cada producto es de un solo color --- */
-    function renderCatalogo(productos) {
-        grid.innerHTML = productos.map(function (p) {
-            var url = '/producto/' + encodeURIComponent(p.id);
-            var punto = '<span class="color" style="background:' + esc(p.color.hex) +
-                '" title="' + esc(p.color.nombre) + '"></span>';
-            return '' +
-            '<div class="col-12 col-sm-6 col-lg-4 col-xl-3">' +
-            '<article class="producto-card">' +
-                '<span class="producto-badge">' + esc(p.badge) + '</span>' +
-                '<a href="' + url + '"><img src="' + esc(p.imagen) + '" alt="' + esc(p.nombre) + '"></a>' +
-                '<h3><a href="' + url + '" style="color:inherit;text-decoration:none;">' + esc(p.nombre) + '</a></h3>' +
-                '<p>' + esc(p.descripcion) + '</p>' +
-                '<p class="precio">S/ ' + p.precio + ' <span>/ pack ' + esc(p.precioPack) + '</span></p>' +
-                '<div class="producto-colores">' + punto + '</div>' +
-                '<a href="' + url + '" class="btn-agregar">VER PRODUCTO</a>' +
-                '<button class="btn-agregar-carrito" data-agregar-carrito ' +
-                    'data-id="' + esc(p.id) + '" data-nombre="' + esc(p.nombre) + '" data-precio="' + p.precio + '" ' +
-                    'data-variante="' + esc(p.color.nombre.toUpperCase()) + '" ' +
-                    'data-imagen="' + esc(p.imagen) + '">AÑADIR AL CARRITO</button>' +
-            '</article>' +
-            '</div>';
-        }).join('');
     }
 
     /* --- Detalle --- */
