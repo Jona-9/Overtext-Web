@@ -371,6 +371,165 @@ Carlos sigue con la demostración del CRUD.
 
 ---
 
+## Bitácora — Sprint 3
+
+### 2026-09-22
+
+- **Hice (análisis, sin tocar código de `overtext/` todavía):**
+  - Repasé `sprint-03.md` §4 y confirmé mi reparto: **E2-21** (`th:each` tarjetas del
+    catálogo), **E2-22** (`th:each` colores del configurador) y **E2-24** (verificar
+    2+ fragments en las 10 páginas). E2-08/E2-10/E2-23 son de Carlos.
+  - **Verifiqué que el backend de E2-21 ya está listo**: Dayro cerró E2-09 el 20-sep
+    (`ProductoService`, `model/Producto.java`) y `CatalogoController` ya expone
+    `productos` al modelo. No falta nada en Java para mi tarea.
+  - **`catalogo.html` (líneas 47-54): el grid está vacío**, no tiene 7 tarjetas escritas
+    a mano como yo suponía — hoy las pinta `static/js/tienda.js` (`renderCatalogo()`,
+    líneas 30-52) por `fetch`/`innerHTML` sobre `.productos-grid`. Si dejo `tienda.js`
+    activo en esa página después de meter el `th:each`, hay doble renderizado (mismo
+    resultado visual, pero código muerto — contradice el 2b, que es mi especialidad).
+  - **`promociones.html` (líneas 58-92): sí hay 7 `div.color-opcion` a mano**, uno por
+    color. Comparé los 7 hex de `promociones.css` (~líneas 180-186) contra los 7
+    `producto.color.hex` de `productos.json`: **coinciden 1:1**. Es el mismo dato
+    duplicado en dos archivos (deuda menor de art. 7).
+  - Leí `promociones.js` completo: no tiene colores quemados, lee `.nombre-color` (texto)
+    y `getComputedStyle(.color-muestra)` (color ya resuelto). Confirmé que da igual si el
+    color llega por clase CSS o por `style` inline — el `getComputedStyle` resuelve los
+    dos casos igual.
+  - **E2-24 ya se cumple hoy.** Conté los `th:replace` de las 10 páginas de
+    `templates/paginas/`: todas usan `cabecera` + `pie` + `scripts` como mínimo (3), y
+    las 6 que muestran el carrito (`index`, `catalogo`, `detalle-producto`, `nosotros`,
+    `contacto`, `promociones`) usan además `carrito` (4). Ninguna tiene menos de 2.
+
+    | Página | Fragments | Total |
+    |---|---|:-:|
+    | `index.html` | cabecera, carrito, pie, scripts | 4 |
+    | `catalogo.html` | cabecera, carrito, pie, scripts | 4 |
+    | `detalle-producto.html` | cabecera, carrito, pie, scripts | 4 |
+    | `nosotros.html` | cabecera, carrito, pie, scripts | 4 |
+    | `contacto.html` | cabecera, carrito, pie, scripts | 4 |
+    | `promociones.html` | cabecera, carrito, pie, scripts | 4 |
+    | `checkout.html` | cabecera, pie, scripts | 3 |
+    | `confirmacion.html` | cabecera, pie, scripts | 3 |
+    | `login.html` | cabecera, pie, scripts | 3 |
+    | `intranet.html` | cabecera, pie, scripts | 3 |
+
+  - Confirmé de paso que **E2-08 (Carlos) ya está resuelto**: el fragment `cabecera` en
+    `layout/plantilla.html` (líneas 30-34) ya usa `th:classappend` con `paginaActiva`
+    para el enlace activo. No es mío, pero queda anotado para que nadie lo repita.
+- **Bloqueo de proceso encontrado — CLAUDE.md §4:** no existe ningún `spec.md` para este
+  trabajo. `docs/specs/002-migracion-thymeleaf/spec.md` §2.3 lo excluye explícitamente
+  ("fuera de alcance, para el Sprint 3") y no hay ninguna carpeta `003-*`. `sprint-03.md`
+  es backlog, no spec SDD. **A diferencia de D7 y D16, esta vez no implementé nada sin
+  spec.** Escribí `docs/specs/003-thymeleaf-interacciones/spec.md` con las decisiones de
+  diseño resueltas (retirar el renderizado de catálogo de `tienda.js`; pintar el color del
+  configurador con `th:style` del hex del modelo en vez de una clase `color-muestra--*`,
+  cerrando la duplicación de hex) y **lo dejé sin marcar el checkpoint** — pendiente de que
+  Joaquín (PO) lo apruebe antes de tocar ningún archivo de `overtext/`.
+- **Decidí / aprendí:**
+  - Mi supuesto inicial (que el catálogo tenía 7 tarjetas hardcodeadas, igual que
+    `promociones.html`) era incorrecto — solo `promociones.html` las tiene a mano. El
+    catálogo depende de JS, no de HTML repetido. Bueno anotarlo para no repetir el mismo
+    supuesto en otra tarea.
+  - `tienda.js` hace **dos** cosas con una sola guarda de existencia de elemento
+    (`renderCatalogo` si existe `.productos-grid`, `renderDetalle` si existe
+    `.info-detalle-producto`): al "apagar" el catálogo hay que tocar solo la mitad del
+    archivo, sin afectar la ficha de producto.
+- **Bloqueo:** ninguno — resuelto el mismo día, ver siguiente entrada.
+- **Archivos tocados:** nuevo `docs/specs/003-thymeleaf-interacciones/spec.md`; esta
+  memoria.
+
+### 2026-09-22 (continuación) — Joaquín aprobó el spec 003; implementé E2-21, E2-22 y E2-24
+
+- **Joaquín (PO) aprobó `docs/specs/003-thymeleaf-interacciones/spec.md`** el mismo día
+  (ver su bitácora, `joaquin_memory.md`), sin pedir ajustes a las cuatro decisiones de
+  diseño de la §5. Recién ahí empecé a tocar `overtext/`.
+- **Hice — E2-21 (`th:each` del catálogo):**
+  - `catalogo.html` (antes líneas 47-54, grid vacío): reemplacé el comentario por
+    `th:each="producto : ${productos}"` sobre el mismo bloque que hoy construye
+    `tienda.js:renderCatalogo` (badge, imagen+enlace, nombre, descripción, precio con
+    `[[${...}]]` inline, punto de color con `th:style` del hex, botón "añadir al carrito"
+    con los `data-*` que ya lee `carrito.js` por delegación).
+  - Quité `<script src="/js/tienda.js"></script>` de `catalogo.html`.
+  - En `tienda.js`: eliminé `renderCatalogo()` y la variable `grid`; `renderDetalle()` y
+    su uso en `detalle-producto.html` quedaron intactos — no son parte de esta tarea.
+  - Actualicé el Javadoc de `CatalogoController` (ya no dice "hasta que E2-21 se cierre").
+- **Hice — E2-22 (`th:each` del configurador):**
+  - `PromocionesController` ahora inyecta `ProductoService` y expone `productos` al
+    modelo (mismo patrón que `CatalogoController`).
+  - `promociones.html` (antes líneas 58-92, 7 `div.color-opcion` a mano): un solo bloque
+    con `th:each="producto : ${productos}"`, pintando `.color-muestra` con
+    `th:style="'background-color:' + ${producto.color.hex}"` y `.nombre-color` con
+    `th:text="${producto.color.nombre}"`.
+  - Retiré las 7 reglas `.color-muestra--*` de `promociones.css` (quedaban sin uso).
+  - **No toqué `promociones.js`**: confirmé que sigue leyendo `.nombre-color` y
+    `getComputedStyle(.color-muestra)`, sin importarle si el color venía de una clase o
+    de un `style` inline.
+- **Verifiqué (con el servidor local, puerto 8098, y sin editar nada más):**
+  - `mvnw clean compile` → sin errores.
+  - `GET /catalogo` → **200**, 7 `article.producto-card` en el HTML devuelto por el
+    servidor (visible en "ver código fuente", sin esperar a que corra JS) — confirmé una
+    tarjeta completa (`short-beige`): nombre, precio "S/ 20 / pack 6 x S/ 100", color
+    "Stone Beige" con su hex, enlace `/producto/short-beige`, los 5 `data-*` del botón de
+    carrito.
+  - `GET /promociones` → **200**, 7 `div.color-opcion` con su hex en `style` y su nombre.
+  - `GET /producto/short-beige` → **200** y sigue usando `tienda.js` (`renderDetalle`
+    intacto); `GET /producto/no-existe` → **404** (la de Dayro, E2-09, sin regresión).
+  - `node --check` en `tienda.js` y `promociones.js`: sin errores de sintaxis.
+  - `grep -r "renderCatalogo"` en `src/`: cero resultados — no quedó código muerto.
+  - **Pendiente humano, igual que E1-19/E2-17 en sprints anteriores:** no pude abrir
+    Chrome con la extensión conectada en esta sesión, así que **la verificación visual a
+    375/1440 px y la consola del navegador quedan sin firmar**. El HTML generado por el
+    servidor y los `node --check` no reemplazan esa verificación.
+- **Decidí / aprendí — dos diferencias visuales menores que no anticipé en el spec:**
+  - **El orden de los 7 colores cambia.** El HTML a mano tenía Negro primero; `productos.json`
+    (y por tanto `${productos}`) tiene Stone Beige primero. Nuevo orden: Stone Beige,
+    Negro, Guinda, Gris, Oliva Militar, Azul Marino, Marrón. No metí un comparador para
+    forzar el orden viejo — sería una regla nueva que nadie pidió (art. 8) y el criterio
+    2c no exige un orden específico. Si en la Review alguien prefiere el orden anterior,
+    se resuelve con un `Comparator` de una línea en `ProductoServiceImpl`, no aquí.
+  - **Tres nombres de color salen más largos que antes.** El HTML a mano decía "STONE",
+    "OLIVA" y "MARINO"; `producto.color.nombre` da "Stone Beige", "Oliva Militar" y
+    "Azul Marino" (el CSS ya los pone en mayúsculas con `text-transform`, así que la
+    diferencia es de contenido, no de estilo). Elegí el nombre completo del modelo en vez
+    de acortarlo a mano porque acortar reintroduce un texto que no viene de
+    `productos.json` — exactamente la duplicación que E2-22 buscaba cerrar. No hay
+    `max-width`/`white-space:nowrap` en `.color-opcion span` que lo rompa, pero si en la
+    Review se ve apretado, es un ajuste de CSS, no de datos.
+- **Bloqueo:** ninguno. **E2-21, E2-22 cerradas** (con el pendiente humano de arriba);
+  **E2-24 confirmada** (tabla de la entrada anterior).
+- **Archivos tocados:** `overtext/src/main/resources/templates/paginas/catalogo.html`,
+  `overtext/src/main/resources/templates/paginas/promociones.html`,
+  `overtext/src/main/resources/static/js/tienda.js`,
+  `overtext/src/main/resources/static/css/paginas/promociones.css`,
+  `overtext/src/main/java/pe/edu/utp/overtext/controller/CatalogoController.java`,
+  `overtext/src/main/java/pe/edu/utp/overtext/controller/PromocionesController.java`;
+  esta memoria.
+
+### Para consolidar en memory.md
+
+- [x] **Spec 003 escrito y aprobado por el PO el mismo día** —
+      `docs/specs/003-thymeleaf-interacciones/spec.md`. Primera vez que el equipo pide el
+      checkpoint antes de implementar en vez de después (no repite D7/D16).
+- [x] **E2-21 y E2-22 cerradas.** Catálogo y configurador ya se pintan con `th:each` desde
+      `ProductoService`; `tienda.js` dejó de renderizar el catálogo (solo le queda la
+      ficha de producto) y el hex de los 7 colores ya no está duplicado en
+      `promociones.css`.
+- [x] **E2-24 confirmada:** las 10 páginas tienen 3 o 4 fragments, ninguna menos de 2
+      (tabla en la entrada anterior). Falta el `[x]` formal en `sprint-03.md` en la Review
+      del 30-sep.
+- [ ] **Aviso para Carlos (E2-23):** las tarjetas nuevas del catálogo ya usan
+      `th:href="@{...}"` en sus 3 enlaces por tarjeta — un bloque menos que convertir.
+- [ ] **Pendiente humano de la Review:** abrir `/catalogo` y `/promociones` en un
+      navegador real a 375 px y 1440 px y confirmar consola sin errores (art. 3) — no se
+      pudo firmar en esta sesión porque la extensión de Chrome no estaba conectada.
+- [ ] **Nota para la Retrospectiva:** el orden de los 7 colores del configurador cambió
+      (ahora sigue el orden de `productos.json`, antes era a mano) y tres nombres de color
+      salen más largos ("Stone Beige", "Oliva Militar", "Azul Marino" en vez de "STONE",
+      "OLIVA", "MARINO"). Es intencional (una sola fuente de verdad, art. 7), pero
+      cualquiera que compare capturas de antes/después de este cambio lo va a notar.
+
+---
+
 ## Contexto propio
 
 - Servir el sitio: **no funciona con `file://`**. Live Server o `python3 -m http.server` en `app-estatico/`.

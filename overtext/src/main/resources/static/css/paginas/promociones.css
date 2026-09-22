@@ -175,15 +175,9 @@
     visibility: visible;
 }
 
-/* Color de cada muestra: la fuente de verdad de estos hex es el catálogo
-   (js/productos.json). Los 7 colores son exactamente los del catálogo. */
-.color-muestra--negro  { background-color: #111111; }
-.color-muestra--stone  { background-color: #C4A882; }
-.color-muestra--guinda { background-color: #8B1A2C; }
-.color-muestra--gris   { background-color: #9E9E9E; }
-.color-muestra--oliva  { background-color: #5C6B3A; }
-.color-muestra--marino { background-color: #1A3A7A; }
-.color-muestra--marron { background-color: #6B4A2E; }
+/* Color de cada muestra: ya no vive aquí. E2-22 lo pinta con th:style desde
+   el hex de ProductoService (mismo productos.json), así que el color no está
+   duplicado entre este archivo y el catálogo (art. 7). */
 
 /* --- Slots de selección --- */
 .seleccionados {
