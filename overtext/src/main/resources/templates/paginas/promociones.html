@@ -44,7 +44,7 @@
         <!-- CONFIGURADOR DE PACK -->
         <div class="container seccion-configurador">
             <div class="contenedor-padre">
-                <img class="imagen-pack" src="/assets/img/sitio/pack-short.webp" alt="Short Overtext">
+                <img class="imagen-pack" th:src="@{/assets/img/sitio/pack-short.webp}" alt="Short Overtext">
 
                 <div class="info-pack">
                     <div class="ofertas">
@@ -96,7 +96,7 @@
                     <h2>¿QUIERES MÁS?</h2>
                     <p>Lleva 2 packs y obtén envío express gratis a todo el Perú.</p>
                 </div>
-                <a href="/promociones" class="boton-beneficios">VER PACKS</a>
+                <a th:href="@{/promociones}" class="boton-beneficios">VER PACKS</a>
             </div>
         </section>
 
@@ -164,7 +164,7 @@
 
           </div>
           <div class="modal-footer">
-            <a class="ot-pie-formulario" href="/login">Abrir en página completa</a>
+            <a class="ot-pie-formulario" th:href="@{/login}">Abrir en página completa</a>
           </div>
         </div>
       </div>

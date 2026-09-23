@@ -37,7 +37,7 @@
             <div class="container cuadricula-portada">
 
                 <div class="portada-visual">
-                    <img src="/assets/img/sitio/sobre-nosotros.webp" alt="Modelos usando streetwear de Overtext"
+                    <img th:src="@{/assets/img/sitio/sobre-nosotros.webp}" alt="Modelos usando streetwear de Overtext"
                         class="imagen-principal animar-zoom">
                 </div>
 
@@ -125,14 +125,14 @@
         <section class="detalle">
             <div class="container grid-detalle">
                 <div class="zona-textura">
-                    <img src="/assets/img/sitio/tela.webp" alt="Calidad textil">
+                    <img th:src="@{/assets/img/sitio/tela.webp}" alt="Calidad textil">
                     <div class="info-tela">
                         <h2>SIN ETIQUETAS, SOLO CALIDAD.</h2>
                         <p>"La exclusividad está en la construcción."</p>
                     </div>
                 </div>
                 <div class="zona-outfit">
-                    <img src="/assets/img/sitio/modelo-urbano.webp" alt="Prenda completa">
+                    <img th:src="@{/assets/img/sitio/modelo-urbano.webp}" alt="Prenda completa">
                 </div>
             </div>
         </section>
@@ -199,7 +199,7 @@
 
           </div>
           <div class="modal-footer">
-            <a class="ot-pie-formulario" href="/login">Abrir en página completa</a>
+            <a class="ot-pie-formulario" th:href="@{/login}">Abrir en página completa</a>
           </div>
         </div>
       </div>
