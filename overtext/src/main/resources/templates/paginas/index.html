@@ -48,13 +48,13 @@
                         </div>
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img src="/assets/img/sitio/modelo.webp" class="d-block w-100" alt="Modelo vistiendo OVERTEXT">
+                                <img th:src="@{/assets/img/sitio/modelo.webp}" class="d-block w-100" alt="Modelo vistiendo OVERTEXT">
                             </div>
                             <div class="carousel-item">
-                                <img src="/assets/img/sitio/modelo-urbano.webp" class="d-block w-100" alt="Estilo urbano OVERTEXT">
+                                <img th:src="@{/assets/img/sitio/modelo-urbano.webp}" class="d-block w-100" alt="Estilo urbano OVERTEXT">
                             </div>
                             <div class="carousel-item">
-                                <img src="/assets/img/sitio/imagen-principal.webp" class="d-block w-100" alt="Short OVERTEXT en detalle">
+                                <img th:src="@{/assets/img/sitio/imagen-principal.webp}" class="d-block w-100" alt="Short OVERTEXT en detalle">
                             </div>
                         </div>
                         <button class="carousel-control-prev" type="button" data-bs-target="#carrusel-portada" data-bs-slide="prev">
@@ -80,8 +80,8 @@
                             ALGODÓN PERUANO · ENVÍO A TODO EL PAÍS · GARANTÍA DE FÁBRICA
                         </p>
                         <div class="hero-acciones">
-                            <a href="/catalogo" class="btn-primario">VER COLECCIÓN</a>
-                            <a href="/promociones" class="btn-secundario">ARMA TU PACK</a>
+                            <a th:href="@{/catalogo}" class="btn-primario">VER COLECCIÓN</a>
+                            <a th:href="@{/promociones}" class="btn-secundario">ARMA TU PACK</a>
                         </div>
                     </div>
                 </div>
@@ -120,15 +120,15 @@
         <section class="detalle">
             <div class="container grid-detalle">
                 <div class="zona-textura">
-                    <img src="/assets/img/sitio/tela.webp" alt="Textura del algodón OVERTEXT">
+                    <img th:src="@{/assets/img/sitio/tela.webp}" alt="Textura del algodón OVERTEXT">
                     <div class="info-tela">
                         <h2>CALIDAD DE EXPORTACIÓN.</h2>
                         <p>"Utilizamos las mejores fibras peruanas. Cada prenda pasa por 12 puntos de control antes de llegar a tus manos."</p>
-                        <a href="/nosotros" class="btn-secundario detalle-cta">CONOCE MÁS</a>
+                        <a th:href="@{/nosotros}" class="btn-secundario detalle-cta">CONOCE MÁS</a>
                     </div>
                 </div>
                 <div class="zona-outfit">
-                    <img src="/assets/img/sitio/imagen-principal.webp" alt="Short OVERTEXT">
+                    <img th:src="@{/assets/img/sitio/imagen-principal.webp}" alt="Short OVERTEXT">
                 </div>
             </div>
         </section>
@@ -140,7 +140,7 @@
                     <h2>ARMA TU PACK DE 6.</h2>
                     <p>Elige los colores que quieres. Nosotros hacemos el resto.</p>
                 </div>
-                <a href="/promociones" class="boton-beneficios">VER PACKS</a>
+                <a th:href="@{/promociones}" class="boton-beneficios">VER PACKS</a>
             </div>
         </section>
     </main>
@@ -207,7 +207,7 @@
 
           </div>
           <div class="modal-footer">
-            <a class="ot-pie-formulario" href="/login">Abrir en página completa</a>
+            <a class="ot-pie-formulario" th:href="@{/login}">Abrir en página completa</a>
           </div>
         </div>
       </div>

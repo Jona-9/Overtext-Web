@@ -497,3 +497,105 @@ dónde no.
       ruta hasta que Dayro cierre E2-06. Cuando exista, falta abrir cada una a
       375/1440 px y confirmar consola limpia (art. 3), igual que E1-19 en el
       Sprint 1.
+
+---
+
+## Bitácora — Sprint 3
+
+### 2026-09-22 — E2-08 confirmado y E2-23 · `th:href`/`th:src` en enlaces e imágenes internas (criterio 1a)
+
+**Duo UI con José.**
+
+- **E2-08 — sin trabajo nuevo.** Confirmé que `cabecera(paginaActiva, mostrarCarrito)`
+  en `layout/plantilla.html` (líneas 30-34) ya resuelve el enlace activo con
+  `th:classappend` desde el Sprint 2 (mi propia nota de esa bitácora ya lo avisaba).
+  El spec `003-thymeleaf-interacciones` (aprobado por Joaquín, 2026-09-22) lo confirma
+  igual en su §2.3. No toqué el fragment por esto.
+
+- **E2-23 — hecho, con alcance acotado.** Convertí a `th:href="@{...}"` /
+  `th:src="@{...}"` todos los enlaces internos (`<a>`) e imágenes internas (`<img>`)
+  que aún usaban `href`/`src` literal, en `layout/plantilla.html` y en las 8 páginas
+  de `templates/paginas/` que me correspondían (todas menos `detalle-producto.html`,
+  ver más abajo).
+  - **Decisión de alcance:** no toqué `<link rel="stylesheet">` ni `<script src="...">`
+    de recursos estáticos (CSS/JS propios, CDN de Bootstrap). El criterio ATF2-1a
+    (`docs/scrum/roadmap.md` línea 42) es sobre **controladores y sistema de rutas**,
+    no sobre referencias a archivos estáticos; y el propio fragment `scripts` (E2-04,
+    Sprint 2) ya dejaba esos `<script src="/js/...">` sin `th:src` como precedente.
+    Extenderlo a `<link>`/`<script>` habría tocado ~90 líneas más sin que ningún
+    criterio lo pida (art. 8, "gana la solución más corta"). Si el PO quiere que
+    también se conviertan, es una ampliación de criterio, no algo que decidí solo.
+  - **No toqué `detalle-producto.html`.** El spec 003 §5.1 lo excluye
+    explícitamente ("Cualquier cambio a `detalle-producto.html`... fuera de alcance"),
+    sin excepción para E2-23. Ese archivo se queda con `href="/promociones"`,
+    `src="/assets/img/productos/beige/principal.webp"` y el `href="/login"` del
+    modal sin convertir. **Queda pendiente para cuando alguien abra un spec que sí
+    cubra esa página.**
+  - Dejé sin tocar, a propósito: los `href="#"` de "¿La olvidaste?" y "Crea tu
+    cuenta" (no tienen ruta destino — no son parte de esta tarea, son placeholders de
+    un flujo que no existe todavía) y todos los enlaces externos (`wa.me`,
+    Instagram, TikTok, `mailto:`).
+  - Verificación: `./mvnw clean package -DskipTests` → **BUILD SUCCESS**. No corrí
+    el servidor con navegador esta vez (cambio puramente de sintaxis de atributo,
+    sin cambio de URL resultante en un despliegue sin `context-path`); si alguien
+    quiere el visual, las 9 páginas tocadas siguen sirviendo las mismas rutas.
+
+- **E2-10 — NO implementado. Me detuve por CLAUDE.md §4.** El spec 003 §2.3 deja
+  este criterio "documentado pero fuera de esta implementación: no se prescribe su
+  solución aquí". Al revisar el código encontré que la solución no es mecánica:
+  - **"Badge de stock":** `memory.md` decisión 14 dice que el badge de bajo stock se
+    calcula con `stock < 10`. Pero `Producto` (record, `model/Producto.java`) **no
+    tiene campo `stock`**, y `productos.json` trae el mismo texto fijo
+    `"badge": "ÚLTIMAS UNIDADES"` en los 7 productos — no hay ningún dato que un
+    `th:if` pueda condicionar. Hacerlo bien exige decidir **una** de estas dos cosas,
+    y las dos son decisiones de diseño, no sintaxis:
+    1. añadir un campo `stock` (numérico) a `Producto`/`productos.json` y calcular
+       el badge con `th:if="${producto.stock < 10}"` — pero la constitución art. 8
+       prohíbe añadir un campo que ninguna rúbrica pide, y el criterio 2b solo pide
+       *un* condicional, no un dato nuevo;
+    2. reinterpretar el criterio como "ocultar el `<span>` del badge cuando venga
+       vacío" (`th:if="${!#strings.isEmpty(producto.badge)}"`), que no exige tocar
+       el modelo pero **tampoco es "el badge de stock"** tal como lo nombra la tarea.
+  - **"Carrito vacío":** el offcanvas (`carrito` fragment) no tiene ningún dato de
+    carrito en el modelo del controlador — lo pinta enteramente `carrito.js` del
+    lado del cliente (`localStorage`, sin sesión de servidor). Un `th:if`/`th:unless`
+    real sobre "carrito vacío" necesitaría que el servidor supiera el estado del
+    carrito, lo que hoy no existe en ninguna capa (ni sesión, ni `CarritoService`).
+    Sin ese dato, la única forma de cumplir el criterio con Thymeleaf sería escribir
+    un bloque estático que JS alterna por clase — que no es un condicional de
+    **renderizado** en el sentido que pide el criterio 2b.
+  - No adiviné ninguna de las dos. Anoto esto como `[NECESITA ACLARACIÓN]` para que
+    Joaquín (PO) decida antes de que alguien implemente E2-10, y lo dejo trazado
+    aquí en vez de en un spec nuevo porque el spec 003 ya es el documento vigente de
+    este sprint y solo le faltaría esta resolución en una próxima revisión.
+
+- **Restricción del encargo de hoy:** no toqué controladores ni lógica de servidor
+  (ninguna de las dos tareas hechas lo necesitaba), y no hice `git commit` ni
+  `git push` — los cambios quedan en el árbol de trabajo para que yo los revise y
+  suba.
+
+- **Bloqueo:** **E2-10 sin resolver**, ver arriba — necesita una decisión del PO
+  sobre si "stock" se convierte en dato real o si el criterio se reinterpreta sin
+  tocar el modelo. Sin eso, no hay `th:if` que escribir sin adivinar.
+
+- **Archivos tocados:** `overtext/src/main/resources/templates/layout/plantilla.html`
+  y `overtext/src/main/resources/templates/paginas/{index,catalogo,promociones,
+  checkout,intranet,nosotros,contacto,confirmacion,login}.html`. **No tocado:**
+  `detalle-producto.html` (fuera de alcance del spec 003) ni ningún controlador.
+
+### Para consolidar en memory.md
+
+- [ ] **E2-08 confirmado sin cambios** (ya estaba resuelto desde Sprint 2) y
+      **E2-23 cerrada** para `<a>`/`<img>` internos en 9/10 páginas + layout.
+      `detalle-producto.html` queda pendiente de un spec que cubra esa página.
+- [ ] **E2-10 bloqueada, necesita decisión del PO.** No hay campo `stock` en
+      `Producto`/`productos.json` (todos los productos comparten el mismo texto de
+      badge) ni estado de carrito en el servidor (todo vive en `carrito.js`/
+      `localStorage`). Implementar el criterio 2b con estos datos exige o bien
+      añadir un dato nuevo al modelo (tensiona con el art. 8) o reinterpretar el
+      criterio. Alguien con autoridad de PO debe elegir antes de que se escriba
+      código para E2-10.
+- [ ] **Decisión de alcance sin escalar (documentada, no bloqueante):** `<link>` y
+      `<script>` de recursos estáticos no se convirtieron a `th:href`/`th:src` en
+      E2-23 — el criterio ATF2-1a es de rutas/controladores, no de assets estáticos,
+      y el fragment `scripts` (Sprint 2) ya sentaba ese precedente.
