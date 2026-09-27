@@ -46,6 +46,10 @@
             formulario.classList.add('was-validated');
             if (!formulario.checkValidity()) return;
 
+            // E2-20 · envío asíncrono al servidor, sin bloquear el modal de
+            // confirmación que ya abre esta misma función (spec 004, decisión C).
+            fetch('/contacto', { method: 'POST', body: new FormData(formulario) }).catch(function () {});
+
             var datos = {
                 nombre:  valor(formulario, 'contacto-nombre'),
                 correo:  valor(formulario, 'contacto-correo'),
