@@ -599,3 +599,47 @@ dónde no.
       `<script>` de recursos estáticos no se convirtieron a `th:href`/`th:src` en
       E2-23 — el criterio ATF2-1a es de rutas/controladores, no de assets estáticos,
       y el fragment `scripts` (Sprint 2) ya sentaba ese precedente.
+
+### 2026-09-27 — Auditoría de fragments/rutas y cierre de E2-23 en `detalle-producto.html`
+
+- **Hice (análisis, sin cambios):** recorrí `layout/plantilla.html`, las 10 vistas y
+  `error/404.html`/`500.html`. Los 4 fragments se incluyen bien en todas y
+  `mostrarCarrito=true` va exactamente en las 6 páginas con `carrito` (T9 sigue
+  evitada). Los 34 recursos `/css`, `/js` y `/assets` referenciados existen en `static/`,
+  las rutas escritas en JS (`/catalogo`, `/confirmacion`, `/admin`, `/contacto`) tienen
+  controlador y las tarjetas del catálogo enlazan con `@{'/producto/' + ${producto.id}}`.
+  **Ningún enlace interno da 404.**
+- **Hice (código):** E2-23 en `detalle-producto.html`. Línea 45 `src` → `th:src="@{...}"`,
+  línea 104 `href="/promociones"` → `th:href="@{/promociones}"` y línea 263
+  `href="/login"` → `th:href="@{/login}"`. `data-imagen` (línea 100) no se toca: es un
+  dato que lee `tienda.js`, no un enlace.
+  - **Excepción al spec 003 §2.3**, que excluye esa página. La aplico por decisión mía
+    (Carlos) del 27-sep: son 3 atributos, la URL resultante es idéntica y no toca
+    `renderDetalle()`. **Joaquín (PO) debe validarla en la review.**
+  - Verificación: `mvnw clean package -DskipTests` OK. En el `.jar` (puerto 8099,
+    apagado después) `GET /producto/short-beige` da 200, el HTML servido trae los 3
+    atributos resueltos a la misma URL y sin restos de `th:`. `/promociones`, `/login`
+    y la imagen responden 200.
+- **Hallazgo confirmado, no es mío:** en `error/404.html` y `error/500.html` (Joaquín,
+  spec 004) la cabecera tiene "Mi cuenta" → `#modal-login` y el pie "ESCRÍBENOS" →
+  `#modal-contactanos`, pero esas páginas no incluyen los modales. En Bootstrap 5.3.3
+  el clic hace `Modal.getOrCreateInstance(null)` y el constructor sale sin `_config`,
+  así que `_initializeBackDrop()` lanza
+  `TypeError: Cannot read properties of undefined (reading 'backdrop')`. Lo verifiqué en
+  el código fuente (`js/src/modal.js:339-360`, `:158-160`), no en navegador. Solo pasa
+  **al pulsar**, no al cargar la página, pero rompe el art. 3.
+- **Bloqueo / pendiente:** `modal-login` (idéntico en 9 de las 10 páginas) y
+  `modal-contactanos` están copiados en las 10 vistas (~64 líneas cada uno). Moverlos a
+  fragments de `plantilla.html` quitaría ~1.100 líneas y arreglaría también el hallazgo
+  de 404/500 si esas páginas los incluyen. **Es trabajo nuevo, necesita spec** (CLAUDE.md §4).
+- **Archivos tocados:** `overtext/src/main/resources/templates/paginas/detalle-producto.html`
+  (3 líneas). Ningún controlador. Sin commit ni push.
+
+### Para consolidar en memory.md (27-sep)
+
+- [ ] **E2-23 completa en las 10 páginas + layout.** `detalle-producto.html` se cerró
+      como excepción al spec 003 §2.3; la tiene que validar el PO.
+- [ ] **Para Joaquín, bug en 404/500:** "Mi cuenta" y "ESCRÍBENOS" lanzan `TypeError`
+      en consola al pulsarlos, porque apuntan a modales que esas páginas no tienen.
+- [ ] **Propuesta pendiente de spec:** fragments `modal-login` y `modal-contactanos` en
+      `plantilla.html` (art. 7, ~1.100 líneas duplicadas).

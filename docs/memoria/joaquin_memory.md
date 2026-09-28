@@ -91,6 +91,8 @@ El `spec.md` tiene tres `[NECESITA ACLARACIÓN]` que bloquean el modelo de datos
 
 - [x] Aprobar `docs/specs/003-thymeleaf-interacciones/spec.md` *(2026-09-22)* — cubre
       E2-21, E2-22 y E2-24 de José. Ver bitácora.
+- [x] Aprobar `docs/specs/004-errores-y-contacto/spec.md` *(2026-09-27)* — cubre
+      mis E2-07, E2-19 y E2-20. Ver bitácora.
 
 ### Como PO — antes de entregar
 
@@ -314,6 +316,62 @@ Luego los objetivos general y específicos, y paso a Jonathan con la arquitectur
 - [ ] **Primera vez que el equipo pide el checkpoint del PO antes de escribir código**, no
       después. Vale la pena repetirlo en la Retrospectiva del Sprint 3 como lo que
       corrigió a D7/D16, no solo como una excepción de José.
+
+### 2026-09-27 — E2-07, E2-19 y E2-20 (duo Datos/Backend, con Dayro)
+
+- **Hice (como PO):** escribí y aprobé en el mismo checkpoint
+  `docs/specs/004-errores-y-contacto/spec.md` — ni E2-07, ni E2-19, ni E2-20 tenían
+  spec (el 002 los excluía a propósito para el Sprint 3, y el 003 solo cubre las
+  tareas de José). Mismo patrón que el spec 003: aprobación antes de tocar código,
+  no retroactiva.
+- **Hice (Duo Datos):**
+  - **E2-07 y E2-19** — Página 404 y 500 personalizadas. **Decisión de diseño:** sin
+    `ManejadorErroresGlobal`/`@ControllerAdvice` — Spring Boot ya resuelve
+    `templates/error/404.html` y `error/500.html` automáticamente por código de
+    estado (`BasicErrorController`), así que el `@ControllerAdvice` que pedía el
+    ticket habría sido una capa redundante (art. 8). Las dos plantillas reusan
+    `layout/plantilla :: cabecera` (con `mostrarCarrito=false`, sin el fragment
+    `carrito` — ver trampa T9) y `:: pie`.
+  - **E2-20** — `ContactoController` gana un `@PostMapping("/contacto")`. No toqué
+    el flujo de confirmación por modal que ya existe (E1-07/E1-08): `contacto.js`
+    ahora dispara un `fetch` asíncrono al mismo endpoint, sin bloquear el modal. El
+    controller valida que los 4 campos no lleguen vacíos (400 si alguno sí, caso
+    que en la práctica solo pasa sin JS) y por ahora solo registra el mensaje por
+    log — la tabla `mensaje_contacto` es Sprint 7 (E4-11), no se adelantó.
+- **Verifiqué en vivo** (servidor levantado en `:8099`, no el 8080 real, para no
+  chocar con nadie): `/pagina-que-no-existe` → 404 con navbar y pie del sitio;
+  `/producto/no-existe` → mismo 404 (antes cerraba en 404 "pelado" desde el
+  `ResponseStatusException` de `ProductoController`, ahora con diseño); un endpoint
+  temporal que lanzaba una excepción sin capturar → 500 con el mismo tratamiento
+  (lo creé, lo probé y lo borré, no queda en el repo); `POST /contacto` con los 4
+  campos → 200; con un campo vacío → 400. `mvnw compile` limpio, sin el archivo de
+  prueba.
+- **Decidí / aprendí:** un `curl` sin `-H "Accept: text/html"` recibe el error como
+  JSON (`BasicErrorController` negocia el formato); un navegador real manda
+  `Accept: text/html` y sí ve la plantilla. No es un bug, es cómo negocia
+  contenido Spring — quien vuelva a probar por `curl` que no se asuste si ve JSON.
+- **Bloqueo:** ninguno. E2-07, E2-19 y E2-20 cerradas con Definición de Hecho
+  completa (falta solo la captura en `informes/capturas/sprint-03/`, que es tarea
+  del duo Documento/QA — E2-25).
+- **Archivos tocados:**
+  `docs/specs/004-errores-y-contacto/spec.md` (nuevo),
+  `overtext/src/main/resources/templates/error/404.html` (nuevo),
+  `overtext/src/main/resources/templates/error/500.html` (nuevo),
+  `overtext/src/main/java/pe/edu/utp/overtext/controller/ContactoController.java`,
+  `overtext/src/main/resources/static/js/contacto.js`,
+  esta memoria.
+
+### Para consolidar en memory.md
+
+- [ ] **Spec 004 aprobado (2026-09-27)** — `docs/specs/004-errores-y-contacto/spec.md`.
+      Cierra ATF2-1c (404) por completo.
+- [ ] **E2-07, E2-19 y E2-20 cerradas.** 404/500 personalizados sin
+      `@ControllerAdvice` (Spring Boot los resuelve solo por convención de nombre de
+      plantilla); `POST /contacto` real, sin romper el modal de confirmación que
+      ya existía.
+- [ ] **Falta la captura del 404** en `informes/capturas/sprint-03/` (E2-25, duo
+      Documento/QA) y la verificación final de los 4 criterios del ATF2 antes de
+      empaquetar (mi checklist de "antes de entregar", sigue pendiente).
 
 ---
 
