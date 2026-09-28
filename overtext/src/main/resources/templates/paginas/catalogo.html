@@ -46,14 +46,14 @@
         <!-- GRID DE PRODUCTOS -->
         <section class="catalogo-productos">
             <div class="container">
-                <div class="productos-grid row g-4">
+                <div class="productos-grid row g-4" th:unless="${#lists.isEmpty(productos)}">
                     <div class="col-12 col-sm-6 col-lg-4 col-xl-3" th:each="producto : ${productos}">
                         <article class="producto-card">
-                            <span class="producto-badge" th:text="${producto.badge}">BADGE</span>
+                            <span class="producto-badge" th:if="${!#strings.isEmpty(producto.badge)}" th:text="${producto.badge}">BADGE</span>
                             <a th:href="@{'/producto/' + ${producto.id}}">
                                 <img th:src="@{${producto.imagen}}" th:alt="${producto.nombre}">
                             </a>
-                            <h3><a th:href="@{'/producto/' + ${producto.id}}" style="color:inherit;text-decoration:none;" th:text="${producto.nombre}">Nombre</a></h3>
+                            <h3><a th:href="@{'/producto/' + ${producto.id}}" th:text="${producto.nombre}">Nombre</a></h3>
                             <p th:text="${producto.descripcion}">Descripción</p>
                             <p class="precio">S/ [[${producto.precio}]] <span>/ pack [[${producto.precioPack}]]</span></p>
                             <div class="producto-colores">
@@ -69,6 +69,7 @@
                         </article>
                     </div>
                 </div>
+                <p class="texto-parrafo text-center py-5" th:if="${#lists.isEmpty(productos)}">No hay productos disponibles por ahora.</p>
             </div>
         </section>
 
