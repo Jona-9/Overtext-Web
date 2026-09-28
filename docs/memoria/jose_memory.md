@@ -528,6 +528,61 @@ Carlos sigue con la demostración del CRUD.
       "OLIVA", "MARINO"). Es intencional (una sola fuente de verdad, art. 7), pero
       cualquiera que compare capturas de antes/después de este cambio lo va a notar.
 
+### 2026-09-28 — auditoría del Sprint 3 y cambios para cerrar el criterio 2b
+
+- **Hice (auditoría):** contrasté las memorias, `sprint-03.md`, los specs 003/004 y el código
+  real. Mi parte (E2-21, E2-22, E2-24) está en `testing` (`ed888e3`, PR #20). Hallazgo
+  principal: **no había ningún `th:if`/`th:unless` en todo el proyecto** (ATF2-2b) — E2-10
+  figuraba ✅ en la orden de trabajo pero Carlos la dejó bloqueada el 22-sep esperando una
+  decisión del PO que no llegó.
+- **Hice (código):**
+  - **E2-10 (propuesta):** en `catalogo.html`, `th:if` sobre el badge (solo se pinta si el
+    dato trae texto) y `th:unless` + `th:if` para el estado vacío del catálogo. Sin campo
+    `stock` en el modelo (art. 8).
+  - **Bug de 404/500** (lo reportó Carlos el 27-sep): «Mi cuenta» y «ESCRÍBENOS» abrían
+    modales que esas páginas no tenían → `TypeError` al pulsar. Nuevo fragment `modales`
+    en `plantilla.html` (login, contáctanos y confirmación; `contacto.js` encadena el envío
+    con `#modal-contacto`), incluido solo en `error/404` y `error/500`, más
+    `formularios.css`, `modal.css` y `sesion.css` en esas dos páginas.
+  - **Regresión de mi E2-21:** `catalogo.html:56` traía un `style` en línea en el título de
+    la tarjeta (rompe ATF1-2b, «0 estilos en línea»). Pasó a `.producto-card h3 a` en
+    `componentes/tarjetas.css`.
+- **Verifiqué:** `mvnw clean package` con tests → BUILD SUCCESS. Sobre el jar en `:8099`:
+  las 10 rutas 200; `/pagina-que-no-existe` y `/producto/no-existe` → 404 con los 3 modales
+  en el HTML; `/catalogo` → 7 tarjetas y 7 badges, sin `style` en línea ni atributos `th:`
+  sin resolver. Con un parche **temporal** (ya revertido): catálogo vacío → 0 tarjetas, sin
+  grid y con el mensaje; un endpoint que lanza excepción → 500 con el diseño y los modales.
+- **NO verifiqué (pendiente humano, igual que en la entrada del 22-sep):** consola limpia al
+  **pulsar** «Mi cuenta» y «ESCRÍBENOS» en el 404/500, y consola a 375/1440 px en
+  `/catalogo` y `/promociones`. La extensión de Chrome no estaba conectada.
+- **Decidí / aprendí:** E2-10 es de Carlos y el spec 003 §2.3 la deja sin prescribir, así
+  que **la implementé sin spec aprobado** (CLAUDE.md §4) para no dejar 2b sin cubrir a tres
+  días de la entrega. Es una **propuesta**: si Joaquín (PO) la rechaza o pide otra solución,
+  se revierten solo los `th:if`/`th:unless` de `catalogo.html`. El fragment `modales` y la
+  regla CSS son independientes de esa decisión. Toqué páginas que no son mías
+  (`error/404`, `error/500`, `plantilla.html`) — revisión de Joaquín y Carlos pendiente.
+- **Bloqueo:** decisión del PO sobre E2-10; verificación en navegador.
+- **Archivos tocados:** `overtext/src/main/resources/templates/paginas/catalogo.html`,
+  `overtext/src/main/resources/templates/layout/plantilla.html`,
+  `overtext/src/main/resources/templates/error/404.html`,
+  `overtext/src/main/resources/templates/error/500.html`,
+  `overtext/src/main/resources/static/css/componentes/tarjetas.css`; esta memoria.
+
+### Para consolidar en memory.md (28-sep)
+
+- [ ] **E2-10 / ATF2-2b:** propuesta de `th:if`/`th:unless` en `catalogo.html` **pendiente de
+      aprobación del PO** (Joaquín). Sin ella, 2b sigue sin cubrir.
+- [ ] **Fragment `modales` en `plantilla.html`**, usado solo por 404/500. Las 10 páginas del
+      sitio conservan su copia en línea (~1.100-1.200 líneas duplicadas): deuda por numerar
+      y asignar en el Planning del Sprint 4, con spec propio.
+- [ ] **Deudas detectadas sin número ni dueño:** `ProductoController` pone `producto` en el
+      Model pero `detalle-producto.html` no lo consume (la ficha sigue con `tienda.js` y los
+      datos del beige escritos a mano); `tienda.js:30` conserva `|| productos[0]` (D17 solo
+      mitigada en el servidor).
+- [ ] **`memory.md` está desactualizada** respecto al código: 1c (404/500), 1d
+      (`th:classappend`) y 2c (`th:each`) ya están hechos y figuran ⬜/🟨.
+- [ ] **Pendiente humano de la Review:** consola limpia en el navegador (ver arriba).
+
 ---
 
 ## Contexto propio
