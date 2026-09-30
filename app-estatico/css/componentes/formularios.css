@@ -1,7 +1,4 @@
-/* ============================================================
-   OVERTEXT — Formularios
-   Inputs, labels, textarea, selects. Aplica a todos los formularios.
-   ============================================================ */
+
 
 .ot-campo {
     margin-bottom: 20px;
@@ -30,9 +27,6 @@ label,
     margin-bottom: 0;
 }
 
-/* --- Inicio de sesión (página #tarjeta-sesion y #modal-login) ---
-   Solo lo usa el formulario de sesión; vivía duplicado en paginas/login.css
-   y le ganaba a las reglas genéricas de arriba por orden de carga (D15). */
 .ot-campo.ot-campo-sesion {
     margin-bottom: var(--espacio-sm);
 }
@@ -48,9 +42,6 @@ label,
     margin-bottom: 6px;
 }
 
-/* Inputs de línea inferior (checkout, detalle).
-   E1-07: se excluyen los campos de Bootstrap. `input[type="text"]` pesa más
-   que `.form-control`, así que sin este :not() el framework nunca se vería. */
 input[type="text"]:not(.form-control),
 input[type="email"]:not(.form-control),
 input[type="tel"]:not(.form-control),
@@ -74,7 +65,6 @@ input[type="tel"]:not(.form-control):focus,
     border-bottom-color: var(--color-negro);
 }
 
-/* Inputs con borde completo (login sin Bootstrap; se conserva para el resto) */
 .ot-campo input[type="text"]:not(.form-control),
 .ot-campo input[type="password"]:not(.form-control) {
     width: 100%;
@@ -94,7 +84,6 @@ input[type="tel"]:not(.form-control):focus,
     border-color: var(--color-negro);
 }
 
-/* Textarea */
 textarea:not(.form-control),
 .textarea-campo {
     width: 100%;
@@ -114,7 +103,6 @@ textarea:not(.form-control):focus,
     border-color: var(--color-negro);
 }
 
-/* Select */
 select:not(.form-select),
 .select-campo {
     width: 100%;
@@ -156,16 +144,13 @@ input[type="checkbox"] {
     text-decoration: underline;
 }
 
-/* Caja del boletin en el pie. No es un formulario: sin backend no hay a donde
-   enviar el correo, asi que es un enlace a /contacto.html, que si tiene un
-   formulario real. Conserva la caja para no cambiar el diseno del pie. */
 .formulario-minimal {
     display: flex;
     align-items: center;
     border: 1px solid rgba(255, 255, 255, 0.22);
-    padding: 0 12px;
+    padding: 0 16px;
     height: 44px;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
 }
 
 .enlace-boletin {
@@ -175,22 +160,15 @@ input[type="checkbox"] {
     font-size: 0.72rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    transition: border-color 0.2s;
+    transition: border-color 0.25s ease, background-color 0.25s ease;
 }
 
 .enlace-boletin:hover {
     border-color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(255, 255, 255, 0.04);
     color: var(--color-fondo);
 }
 
-/* ============================================================
-   E1-07 · Capa de tema para los formularios de Bootstrap
-   Solo re-tematiza .form-control / .form-select / .form-check
-   y los estados de validación. No reimplementa nada (art. 4).
-   Sustituye a la antigua grilla .grid-2, hoy .row/.col-* (art. 4).
-   ============================================================ */
-
-/* Etiqueta de campo con la tipografía de marca */
 .form-label {
     font-family: var(--fuente-principal);
     font-size: 0.72rem;
@@ -200,7 +178,6 @@ input[type="checkbox"] {
     color: var(--color-negro);
 }
 
-/* Campo con el trazo sobrio del sitio */
 .form-control,
 .form-select {
     font-family: var(--fuente-principal);
@@ -208,7 +185,6 @@ input[type="checkbox"] {
     padding: 12px 14px;
 }
 
-/* Foco en el rojo de marca, no en el azul por defecto de Bootstrap */
 .form-control:focus,
 .form-select:focus,
 .form-check-input:focus {
@@ -221,7 +197,6 @@ input[type="checkbox"] {
     border-color: var(--color-rojo);
 }
 
-/* Estados de validación en el rojo de marca */
 .form-control.is-invalid,
 .form-select.is-invalid {
     border-color: var(--color-rojo);
@@ -242,26 +217,21 @@ input[type="checkbox"] {
     color: var(--color-rojo);
 }
 
-/* El tilde verde de Bootstrap no pega con la paleta: se marca solo el borde */
 .form-control.is-valid {
     border-color: var(--color-borde);
     background-image: none;
 }
 
-/* En el select hay que devolver la flecha: `background-image: none` quitaria
-   tambien el desplegable, no solo el tilde de Bootstrap. */
 .form-select.is-valid {
     border-color: var(--color-borde);
     background-image: var(--bs-form-select-bg-img);
 }
 
-/* Separación de los campos apilados del formulario de contacto */
 .campo-contacto {
     display: flex;
     flex-direction: column;
 }
 
-/* --- Formulario de contacto (página #form-contacto y #modal-contactanos) --- */
 .contacto-form {
     display: flex;
     flex-direction: column;
@@ -275,8 +245,6 @@ input[type="checkbox"] {
     margin-top: var(--espacio-sm);
 }
 
-/* La regla global `label { display:block }` rompe la casilla de Bootstrap:
-   la etiqueta debe quedar en línea junto al cuadrito. */
 .form-check-label {
     display: inline;
     margin-bottom: 0;
@@ -284,7 +252,6 @@ input[type="checkbox"] {
     letter-spacing: normal;
 }
 
-/* Casilla "mantener sesión" del inicio de sesión */
 .ot-recordarme {
     margin: var(--espacio-sm) 0;
 }

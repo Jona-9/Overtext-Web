@@ -1,18 +1,9 @@
-/* ============================================================
-   OVERTEXT — main.css
-   Capa base ITCSS: Settings → Generic → Base
-   Importar como PRIMER archivo CSS en cada página.
-   ============================================================ */
 
-/* --- Fuentes (debe ir antes de cualquier regla) --- */
+
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
-
-/* ============================================================
-   SETTINGS — Variables de diseño
-   ============================================================ */
 :root {
-    /* --- Colores --- */
+
     --color-fondo:        #FFFFFF;
     --color-fondo-alt:    #F5F5F5;
     --color-negro:        #111111;
@@ -22,11 +13,9 @@
     --color-texto-suave:  #777777;
     --color-placeholder:  #BDBDBD;
 
-    /* --- Tipografías --- */
 --fuente-display: 'Oswald', sans-serif;
 --fuente-principal: 'Inter', sans-serif;
 
-    /* --- Espaciados --- */
     --espacio-xs:   8px;
     --espacio-sm:   16px;
     --espacio-md:   24px;
@@ -34,15 +23,10 @@
     --espacio-xl:   80px;
     --espacio-xxl:  128px;
 
-    /* --- Layout --- */
     --ancho-maximo:       1300px;
     --padding-contenedor: 0 25px;
 }
 
-
-/* ============================================================
-   GENERIC — Reset
-   ============================================================ */
 *, *::before, *::after {
     margin: 0;
     padding: 0;
@@ -74,10 +58,6 @@ img {
     display: block;
 }
 
-
-/* ============================================================
-   BASE — Elementos globales del documento
-   ============================================================ */
 body {
     font-family: var(--fuente-principal);
     background-color: var(--color-fondo);
@@ -88,25 +68,22 @@ body {
 }
 
 ::-webkit-scrollbar {
-    width: 8px; 
+    width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-    background: var(--color-fondo-alt); 
+    background: var(--color-fondo-alt);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--color-negro); 
-    border-radius: 10px; 
+    background: var(--color-negro);
+    border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--color-rojo); 
+    background: var(--color-rojo);
 }
 
-/* ============================================================
-   ANIMATIONS — Keyframes globales reutilizables
-   ============================================================ */
 @keyframes entrada-hero {
     from {
         opacity: 0;

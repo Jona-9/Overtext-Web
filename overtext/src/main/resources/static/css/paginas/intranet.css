@@ -1,6 +1,4 @@
-/* ============================================================
-   OVERTEXT — Página Intranet (panel administrativo)
-   ============================================================ */
+
 
 .intranet {
     padding: var(--espacio-xl) 0;
@@ -86,8 +84,6 @@
     margin-top: 10px;
 }
 
-/* Cabecera de la tabla de productos (E2-03), mismo patrón que
-   .intranet-cabecera pero para la sección, no la página entera. */
 .intranet-tabla-cabecera {
     display: flex;
     justify-content: space-between;

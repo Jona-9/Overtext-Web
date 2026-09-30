@@ -1,9 +1,5 @@
-/* ============================================================
-   OVERTEXT — Botones
-   Todos los estilos de botones del sitio en un solo lugar.
-   ============================================================ */
 
-/* CTA principal */
+
 .btn-primario {
     display: inline-flex;
     align-items: center;
@@ -26,7 +22,6 @@
     background-color: #6e1414;
 }
 
-/* Outline */
 .btn-secundario {
     display: inline-flex;
     align-items: center;
@@ -49,7 +44,6 @@
     border-color: var(--color-negro);
 }
 
-/* Agregar al carrito (catálogo) */
 .btn-agregar {
     width: 100%;
     background-color: var(--color-negro);
@@ -69,7 +63,6 @@
     background-color: var(--color-rojo);
 }
 
-/* Añadir al carrito (tarjeta de catálogo) */
 .btn-agregar-carrito {
     width: 100%;
     margin-top: 8px;
@@ -90,7 +83,6 @@
     background-color: #6e1414;
 }
 
-/* Añadir al carrito (detalle producto) */
 .btn-carrito {
     flex: 1;
     background-color: var(--color-rojo);
@@ -110,8 +102,6 @@
     background-color: #6e1414;
 }
 
-/* Armar pack (detalle producto). Es un enlace a /promociones.html, no un
-   <button>: navega, no ejecuta nada en la pagina. */
 .btn-pack {
     display: block;
     width: 100%;
@@ -135,7 +125,6 @@
     color: var(--color-fondo);
 }
 
-/* Agregar pack al carrito (promociones) */
 .boton-carrito-pack {
     display: block;
     width: calc(100% - 50px);
@@ -157,7 +146,6 @@
     background-color: #6e1414;
 }
 
-/* Realizar pedido (checkout) */
 .btn-pedido {
     width: 100%;
     background-color: var(--color-rojo);
@@ -178,8 +166,6 @@
     background-color: #6e1414;
 }
 
-/* Flecha del boletin (pie). Es un <span> dentro de .enlace-boletin, no un
-   boton: el desplazamiento lo dispara el hover del enlace que la contiene. */
 .btn-flecha {
     color: var(--color-fondo);
     font-size: 1.2rem;
@@ -191,7 +177,6 @@
     transform: translateX(3px);
 }
 
-/* Finalizar compra (carrito lateral) */
 .btn-finalizar {
     width: 100%;
     background-color: var(--color-rojo);
@@ -212,7 +197,6 @@
     background-color: #6e1414;
 }
 
-/* Seguir comprando (carrito lateral) */
 .btn-seguir {
     width: 100%;
     background: none;
@@ -232,9 +216,6 @@
     border-color: var(--color-negro);
 }
 
-/* Ingresar (login). Vale para la página y para #modal-login: la única
-   definición vivía en paginas/login.css y le ganaba a esta por orden de
-   carga aunque nunca se veía aquí (D15). */
 .ot-boton-ingresar {
     width: 100%;
     padding: 14px;
@@ -254,7 +235,6 @@
     background: var(--color-rojo);
 }
 
-/* Beneficios (banner negro) */
 .boton-beneficios {
     display: inline-flex;
     align-items: center;

@@ -1,13 +1,9 @@
-/* ============================================================
-   OVERTEXT — Configurador de packs (página promociones)
-   Cada prenda es color + talla; se arma un pack de 6.
-   Depende de window.Carrito (js/carrito.js), que debe cargarse antes.
-   ============================================================ */
+
 (function () {
     'use strict';
 
     var MAX = 6;
-    var seleccion = [];        // [{ nombre, color, talla }]
+    var seleccion = [];
     var tallaActual = 'M';
     var opciones = document.querySelectorAll('.color-opcion');
     var tallas = document.querySelectorAll('.pack-talla');
@@ -16,8 +12,6 @@
     var btnPack = document.querySelector('.boton-carrito-pack');
     if (!btnPack || !slotsCont) return;
 
-    // Luminancia aproximada de un 'rgb(r, g, b)' para decidir si la talla
-    // del slot se escribe en blanco o en negro.
     function esClaro(rgb) {
         var n = rgb.match(/\d+/g);
         if (!n) return false;
@@ -41,8 +35,6 @@
         marcarColores();
     }
 
-    // El resaltado de una muestra significa "este color ya esta en el pack",
-    // asi que se recalcula desde la seleccion en cada render.
     function marcarColores() {
         opciones.forEach(function (op) {
             var nombre = op.querySelector('.nombre-color').textContent.trim();
@@ -65,15 +57,13 @@
         op.addEventListener('click', function () {
             if (seleccion.length >= MAX) return;
             var nombre = op.querySelector('.nombre-color').textContent.trim();
-            // El color de cada muestra ahora vive en una clase CSS, no en un
-            // atributo style, así que se lee el valor ya resuelto por el navegador.
+
             var color = getComputedStyle(op.querySelector('.color-muestra')).backgroundColor;
             seleccion.push({ nombre: nombre, color: color, talla: tallaActual });
             render();
         });
     });
 
-    // Tocar un slot lleno lo quita
     slotsCont.addEventListener('click', function (e) {
         var slot = e.target.closest('.slot.lleno');
         if (!slot) return;

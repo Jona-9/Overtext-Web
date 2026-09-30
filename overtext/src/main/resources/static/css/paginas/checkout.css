@@ -1,9 +1,5 @@
-/* ============================================================
-   OVERTEXT — Página Checkout (Finalizar Compra)
-   Layout de dos columnas: formulario + resumen de pedido.
-   ============================================================ */
 
-/* --- Cabecera de página --- */
+
 .cupon {
     font-family: var(--fuente-principal);
     font-size: 0.72rem;
@@ -30,7 +26,6 @@
     margin: var(--espacio-lg) 0 var(--espacio-md);
 }
 
-/* --- Layout dos columnas --- */
 .checkout-contenido {
     display: grid;
     grid-template-columns: 1fr 420px;
@@ -39,7 +34,6 @@
     padding-bottom: var(--espacio-xl);
 }
 
-/* --- Formulario --- */
 .checkout-formulario {
     display: flex;
     flex-direction: column;
@@ -58,7 +52,6 @@
     border-bottom: 0.5px solid var(--color-borde);
 }
 
-/* --- Resumen lateral --- */
 .checkout-resumen {
     border: 1px solid var(--color-borde);
     padding: 25px;
@@ -86,7 +79,6 @@
     margin: var(--espacio-md) 0 var(--espacio-xs);
 }
 
-/* --- Resumen vacío --- */
 .resumen-vacio {
     font-family: var(--fuente-principal);
     font-size: 0.8rem;
@@ -99,7 +91,6 @@
     text-decoration: underline;
 }
 
-/* --- Producto en resumen --- */
 .producto-resumen {
     display: grid;
     grid-template-columns: 70px 1fr;
@@ -139,7 +130,6 @@
     color: var(--color-negro);
 }
 
-/* --- Opciones de envío --- */
 .opcion-envio {
     display: flex;
     align-items: center;
@@ -159,7 +149,6 @@
     color: var(--color-texto-suave);
 }
 
-/* --- Totales --- */
 .checkout-resumen > p {
     font-family: var(--fuente-principal);
     font-size: 0.78rem;
@@ -178,7 +167,6 @@
     color: var(--color-negro);
 }
 
-/* --- Botón finalizar pedido --- */
 .btn-pedido {
     width: 100%;
     padding: 16px;
@@ -198,7 +186,6 @@
     background: var(--color-rojo);
 }
 
-/* --- Datos de recojo en almacén --- */
 .recojo-info {
     background: var(--color-fondo-alt);
     padding: var(--espacio-md);
@@ -218,11 +205,6 @@
     margin-bottom: 8px;
 }
 
-/* --- Validación de campos ---
-   E1-07: la sustituyen .is-invalid y .invalid-feedback de Bootstrap,
-   re-tematizadas en css/componentes/formularios.css. --- */
-
-/* --- Totales mejorados --- */
 .totales-seccion {
     margin-top: var(--espacio-sm);
     border-top: 1px solid var(--color-borde);
@@ -266,7 +248,6 @@
     color: #2e7d32;
 }
 
-/* --- Info de pago en resumen --- */
 .pago-detalle {
     background: var(--color-fondo-alt);
     padding: var(--espacio-sm);
@@ -285,9 +266,6 @@
 
 .pago-detalle p:last-child { margin-bottom: 0; }
 
-/* ============================================================
-   Pasos progresivos del checkout (1 · 2 · 3)
-   ============================================================ */
 .paso {
     border: 1px solid var(--color-borde);
     margin-bottom: var(--espacio-md);
@@ -298,7 +276,6 @@
     border-color: var(--color-negro);
 }
 
-/* Un paso bloqueado se atenúa y no se puede interactuar */
 .paso-bloqueado {
     opacity: 0.4;
     pointer-events: none;
@@ -351,7 +328,6 @@
     opacity: 1;
 }
 
-/* El cuerpo se oculta cuando el paso queda completado (resumen compacto) */
 .paso-cuerpo {
     display: flex;
     flex-direction: column;
@@ -382,7 +358,6 @@
     background: var(--color-rojo);
 }
 
-/* --- Opciones de envío tipo tarjeta --- */
 .envio-opciones {
     display: grid;
     gap: 10px;
@@ -417,7 +392,6 @@
     color: var(--color-texto-suave);
 }
 
-/* --- Sub-bloque de campos: aparición dinámica --- */
 .envio-campos {
     display: flex;
     flex-direction: column;
@@ -434,7 +408,6 @@
     margin-top: var(--espacio-sm);
 }
 
-/* --- Responsive --- */
 @media (max-width: 900px) {
     .checkout-contenido {
         grid-template-columns: 1fr;

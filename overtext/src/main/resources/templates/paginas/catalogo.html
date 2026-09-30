@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
     <title>Catálogo — OVERTEXT</title>
-    <!-- Framework: Bootstrap 5.3 por CDN -->
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <!-- Arquitectura ITCSS OVERTEXT -->
+
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/tema-overtext.css">
     <link rel="stylesheet" href="/css/layout.css">
@@ -27,14 +27,12 @@
 
 <body>
 
-    <!-- NAVEGACIÓN -->
     <nav th:replace="~{layout/plantilla :: cabecera(paginaActiva='catalogo', mostrarCarrito=true)}"></nav>
 
-    <!-- CARRITO -->
     <aside th:replace="~{layout/plantilla :: carrito}"></aside>
 
     <main>
-        <!-- HERO DEL CATÁLOGO -->
+
         <section class="hero-strip">
             <div class="container">
                 <span class="subtitulo-superior animar-entrada">COLECCIÓN ACTUAL</span>
@@ -43,7 +41,6 @@
             </div>
         </section>
 
-        <!-- GRID DE PRODUCTOS -->
         <section class="catalogo-productos">
             <div class="container">
                 <div class="productos-grid row g-4" th:unless="${#lists.isEmpty(productos)}">
@@ -73,7 +70,6 @@
             </div>
         </section>
 
-        <!-- BANNER PACK -->
         <section class="banner-beneficios">
             <div class="container banner-beneficios-inner">
                 <div class="banner-beneficios-texto">
@@ -85,13 +81,8 @@
         </section>
     </main>
 
-    <!-- FOOTER -->
     <th:block th:replace="~{layout/plantilla :: pie}"></th:block>
 
-    <!-- MODAL DE INICIO DE SESIÓN (E2-01 · requisito 1: login como ventana modal)
-         Mismo formulario que login.html; login.js valida ambos por igual
-         (selector .formulario-sesion). login.html sigue existiendo como página
-         completa — el pie de este modal enlaza ahí. -->
     <div class="modal fade" id="modal-login" tabindex="-1"
          aria-labelledby="modal-login-titulo" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -153,9 +144,6 @@
       </div>
     </div>
 
-    <!-- MODAL DE CONTÁCTANOS (E2-02 · requisito 2, «como ejemplo»)
-         Mismo formulario que contacto.html; contacto.js valida ambos por igual
-         (selector .form-contacto). Al enviar, encadena con #modal-contacto. -->
     <div class="modal fade" id="modal-contactanos" tabindex="-1"
          aria-labelledby="modal-contactanos-titulo" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -199,8 +187,6 @@
       </div>
     </div>
 
-    <!-- MODAL DE CONFIRMACIÓN DE CONTACTO (comparte #modal-contactanos de esta
-         página con contacto.html: mismo componente, sin duplicar — art. 7) -->
     <div class="modal fade" id="modal-contacto" tabindex="-1"
          aria-labelledby="modal-contacto-titulo" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">

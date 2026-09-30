@@ -1,14 +1,5 @@
-/* ============================================================
-   OVERTEXT — Sesión (componente)
-   Lo que comparten la página #tarjeta-sesion (login.html) y #modal-login:
-   mensaje de validación, separador "o" y botón de WhatsApp. La maquetación
-   propia de la página (tarjeta, título) se queda en paginas/login.css.
 
-   Salió de paginas/login.css (D15): esas reglas ya no son "de página", las
-   necesita también el modal en las otras 9 páginas.
-   ============================================================ */
 
-/* Mensaje de validación de credenciales */
 .mensaje-sesion {
     font-family: var(--fuente-principal);
     font-size: 0.72rem;
@@ -28,7 +19,6 @@
     color: #2e7d32;
 }
 
-/* --- Separador "o" --- */
 .ot-separador {
     display: flex;
     align-items: center;
@@ -47,10 +37,6 @@
     background: var(--color-borde);
 }
 
-/* --- Botón WhatsApp ---
-   D9: estaba definido a la vez en botones.css y en paginas/login.css. Solo
-   lo usa la sesión (página y modal), así que la definición única se queda
-   aquí, junto al resto de sus estilos. */
 .ot-boton-whatsapp {
     display: flex;
     align-items: center;
@@ -77,14 +63,12 @@
     opacity: 0.85;
 }
 
-/* E1-11: Bootstrap Icon, ya no es un <img> */
 .ot-icono-whatsapp {
     font-size: 20px;
     line-height: 1;
     flex-shrink: 0;
 }
 
-/* --- Pie del formulario --- */
 .ot-pie-formulario {
     margin-top: var(--espacio-sm);
     text-align: center;

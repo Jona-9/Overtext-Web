@@ -1,9 +1,5 @@
-/* ============================================================
-   OVERTEXT — Badges, Tags y Etiquetas
-   Indicadores visuales: overlays de producto, estados, colecciones.
-   ============================================================ */
 
-/* --- Badge overlay de tarjeta (catálogo) --- */
+
 .producto-badge {
     position: absolute;
     top: 12px;
@@ -23,7 +19,6 @@
     animation-iteration-count: infinite;
 }
 
-/* --- Badge de atención (contacto) --- */
 .badge-24 {
     display: inline-block;
     background: var(--color-negro);
@@ -37,7 +32,6 @@
     margin-top: 4px;
 }
 
-/* --- Tag de estado (tabla de contacto) --- */
 .tag {
     display: inline-block;
     font-family: var(--fuente-principal);
@@ -54,7 +48,6 @@
     color: var(--color-negro);
 }
 
-/* --- Etiqueta de colección (detalle de producto) --- */
 .coleccion-tag {
     font-family: var(--fuente-principal);
     font-size: 0.65rem;
@@ -65,7 +58,6 @@
     margin-bottom: 8px;
 }
 
-/* --- Garantía (promociones) --- */
 .garantia {
     font-family: var(--fuente-principal);
     font-size: 0.62rem;

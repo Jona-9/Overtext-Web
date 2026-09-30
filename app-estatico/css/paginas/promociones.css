@@ -1,9 +1,5 @@
-/* ============================================================
-   OVERTEXT — Página Promociones
-   Selector de pack, colores, slots y hero de la promo.
-   ============================================================ */
 
-/* --- Hero de promociones --- */
+
 .promo-main {
     width: 100%;
     padding: var(--espacio-xl) var(--espacio-lg);
@@ -38,12 +34,10 @@
     margin-bottom: var(--espacio-lg);
 }
 
-/* --- Sección del configurador (envoltura del selector de pack) --- */
 .seccion-configurador {
     padding: var(--espacio-xl) 25px;
 }
 
-/* --- Layout padre (imagen + panel) --- */
 .contenedor-padre {
     display: flex;
     justify-content: center;
@@ -59,15 +53,13 @@
 }
 
 .info-pack {
-    /* Margen lateral unico del panel: todos los bloques internos
-       (ofertas, colores, tallas, slots, boton) parten de esta misma linea. */
+
     --pad-panel: 25px;
     background-color: var(--color-fondo);
     width: 55%;
     max-width: 600px;
 }
 
-/* --- Bloque de ofertas --- */
 .ofertas {
     display: flex;
     align-items: center;
@@ -99,11 +91,10 @@
     line-height: 1.4;
     text-align: left;
     display: inline-block;
-    /* Corta en dos lineas: "ENVIO INCLUIDO / DESDE 2 PACKS" */
+
     max-width: 230px;
 }
 
-/* --- Selección de colores --- */
 .seleccion-colores {
     padding: 0 var(--pad-panel) 30px;
     text-align: left;
@@ -152,8 +143,6 @@
     outline-offset: 2px;
 }
 
-/* .activo = el color ya esta dentro del pack. Lo marca el JS al
-   agregar o quitar prendas; no se escribe a mano en el HTML. */
 .color-opcion.activo .color-muestra {
     outline: 2px solid var(--color-negro);
     outline-offset: 2px;
@@ -163,7 +152,6 @@
     color: var(--color-negro);
 }
 
-/* Cuantas prendas de ese color hay en el pack */
 .color-opcion .contador-color {
     font-size: 0.55rem;
     font-weight: 700;
@@ -175,8 +163,6 @@
     visibility: visible;
 }
 
-/* Color de cada muestra: la fuente de verdad de estos hex es el catálogo
-   (js/productos.json). Los 7 colores son exactamente los del catálogo. */
 .color-muestra--negro  { background-color: #111111; }
 .color-muestra--stone  { background-color: #C4A882; }
 .color-muestra--guinda { background-color: #8B1A2C; }
@@ -185,7 +171,6 @@
 .color-muestra--marino { background-color: #1A3A7A; }
 .color-muestra--marron { background-color: #6B4A2E; }
 
-/* --- Slots de selección --- */
 .seleccionados {
     margin: 0 var(--pad-panel) 20px;
     background-color: var(--color-fondo-alt);
@@ -238,7 +223,6 @@
     font-weight: 700;
 }
 
-/* --- Selección de talla del pack --- */
 .seleccion-tallas {
     padding: 0 var(--pad-panel) 20px;
     text-align: left;
@@ -273,7 +257,6 @@
     border-color: var(--color-negro);
 }
 
-/* Talla dentro del slot lleno */
 .slot.lleno {
     cursor: pointer;
 }
@@ -285,18 +268,15 @@
     font-weight: 800;
 }
 
-/* Sobre muestras claras (stone, gris) el texto va en negro */
 .slot.lleno.slot--claro .slot-talla {
     color: var(--color-negro);
 }
 
-/* Botón deshabilitado hasta completar los 6 */
 .boton-carrito-pack:disabled {
     opacity: 0.4;
     cursor: not-allowed;
 }
 
-/* --- Banner beneficios (variante promo) --- */
 .banner-interior {
     display: flex;
     align-items: center;
@@ -320,7 +300,6 @@
     max-width: 480px;
 }
 
-/* --- Texto de garantía bajo el botón --- */
 .garantia {
     font-family: var(--fuente-principal);
     font-size: 0.62rem;
@@ -332,7 +311,6 @@
     padding: 0 25px 25px;
 }
 
-/* --- Responsive --- */
 @media (max-width: 900px) {
     .contenedor-padre {
         flex-direction: column;

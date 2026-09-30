@@ -1,11 +1,4 @@
-/* ============================================================
-   OVERTEXT — Página Login / Sesión
-   Centrado del formulario de acceso. Los estilos que comparte con
-   #modal-login (mensaje, separador, WhatsApp) viven en
-   componentes/sesion.css; los de campo compartidos, en
-   componentes/formularios.css (.ot-campo-sesion) y componentes/botones.css
-   (.ot-boton-ingresar).
-   ============================================================ */
+
 
 .contenedor-sesion {
     min-height: calc(100vh - 70px);

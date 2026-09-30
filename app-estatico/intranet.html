@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
     <title>Intranet — OVERTEXT</title>
-    <!-- Framework: Bootstrap 5.3 por CDN -->
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <!-- Arquitectura ITCSS OVERTEXT -->
+
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/tema-overtext.css">
     <link rel="stylesheet" href="/css/layout.css">
@@ -85,9 +85,6 @@
                 </div>
             </div>
 
-            <!-- TABLA DE PRODUCTOS (E2-03 · requisito 3, arquetipo "detalle" del
-                 ejemplo del profesor: fila -> botón Ver -> modal-lg de solo
-                 lectura). Se llena desde js/productos.json (intranet.js). -->
             <div class="intranet-tabla-cabecera">
                 <h2>Productos</h2>
                 <button type="button" class="btn btn-dark"
@@ -109,7 +106,7 @@
                         </tr>
                     </thead>
                     <tbody id="tabla-productos">
-                        <!-- Filas renderizadas por js/intranet.js -->
+
                     </tbody>
                 </table>
             </div>
@@ -118,7 +115,8 @@
     </main>
 
     <footer class="pie-pagina">
-        <div class="container row g-4 pb-5">
+        <div class="container pb-5">
+            <div class="row g-4 g-lg-5 justify-content-between">
             <div class="col-12 col-md-6 col-lg-4 pie-info">
                 <h2 class="pie-logo">OVERTEXT</h2>
                 <p class="pie-lema">LIMA, PERÚ. STREETWEAR PARA LA NUEVA GENERACIÓN.</p>
@@ -151,6 +149,7 @@
                     <a href="https://www.tiktok.com/@overcoming.peru" target="_blank" rel="noopener">TIKTOK</a>
                 </div>
             </div>
+            </div>
         </div>
         <div class="container">
             <hr class="divisor">
@@ -165,10 +164,6 @@
         <i class="bi bi-whatsapp" aria-hidden="true"></i>
     </a>
 
-    <!-- MODAL DE INICIO DE SESIÓN (E2-01 · requisito 1: login como ventana modal)
-         Mismo formulario que login.html; login.js valida ambos por igual
-         (selector .formulario-sesion). login.html sigue existiendo como página
-         completa — el pie de este modal enlaza ahí. -->
     <div class="modal fade" id="modal-login" tabindex="-1"
          aria-labelledby="modal-login-titulo" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -230,9 +225,6 @@
       </div>
     </div>
 
-    <!-- MODAL DE CONTÁCTANOS (E2-02 · requisito 2, «como ejemplo»)
-         Mismo formulario que contacto.html; contacto.js valida ambos por igual
-         (selector .form-contacto). Al enviar, encadena con #modal-contacto. -->
     <div class="modal fade" id="modal-contactanos" tabindex="-1"
          aria-labelledby="modal-contactanos-titulo" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -276,8 +268,6 @@
       </div>
     </div>
 
-    <!-- MODAL DE CONFIRMACIÓN DE CONTACTO (comparte #modal-contactanos de esta
-         página con contacto.html: mismo componente, sin duplicar — art. 7) -->
     <div class="modal fade" id="modal-contacto" tabindex="-1"
          aria-labelledby="modal-contacto-titulo" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -297,10 +287,6 @@
       </div>
     </div>
 
-    <!-- MODAL DE DETALLE DE PRODUCTO (arquetipo "Ver" del ejemplo del
-         profesor: modal-lg, solo lectura, se llena con el data-id de la
-         fila que lo abrió — event.relatedTarget, patrón estándar de
-         Bootstrap para un modal que reutilizan varias filas). -->
     <div class="modal fade" id="modal-detalle-producto" tabindex="-1"
          aria-labelledby="modal-detalle-producto-titulo" aria-hidden="true">
       <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
@@ -325,9 +311,6 @@
       </div>
     </div>
 
-    <!-- MODAL DE ALTA DE PRODUCTO (arquetipo "+ Nuevo Proyecto" del ejemplo
-         del profesor). Sin persistencia: el CRUD real es del ATF3 (art. 8);
-         al guardar válido solo se cierra y avisa en la propia página. -->
     <div class="modal fade" id="modal-nuevo-producto" tabindex="-1"
          aria-labelledby="modal-nuevo-producto-titulo" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
@@ -354,7 +337,7 @@
                 <label for="nuevo-producto-color" class="form-label">Color</label>
                 <select class="form-select" id="nuevo-producto-color" name="color" required>
                   <option value="" selected disabled>Seleccione…</option>
-                  <!-- Opciones renderizadas por js/intranet.js desde productos.json -->
+
                 </select>
                 <div class="invalid-feedback">Selecciona un color.</div>
               </div>
@@ -374,8 +357,6 @@
       </div>
     </div>
 
-    <!-- MODAL DE CERRAR SESIÓN — reemplaza el confirm() nativo (bloqueante,
-         sin estilo de marca) por el mismo componente modal del resto del sitio. -->
     <div class="modal fade" id="modal-cerrar-sesion" tabindex="-1"
          aria-labelledby="modal-cerrar-sesion-titulo" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">

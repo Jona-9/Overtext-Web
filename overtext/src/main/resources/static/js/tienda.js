@@ -1,12 +1,4 @@
-/* ============================================================
-   OVERTEXT — Tienda (datos desde js/productos.json)
-   Renderiza la página de detalle desde una sola fuente de datos.
-   El catálogo ya no pasa por aquí: sus tarjetas las pinta
-   Thymeleaf con th:each sobre el mismo ProductoService (E2-21).
-   Los clics de "añadir al carrito" los maneja carrito.js por
-   delegación, así que aquí solo se pinta HTML.
-   Requiere servirse por HTTP (Live Server) para que fetch funcione.
-   ============================================================ */
+
 (function () {
     'use strict';
 
@@ -24,12 +16,11 @@
         });
     }
 
-    /* --- Detalle --- */
     function renderDetalle(productos) {
         var id = detalle.dataset.productoId;
         var p = productos.find(function (x) { return x.id === id; }) || productos[0];
         var fallback = esc(p.imagen);
-        // Si una foto de galería aún no existe, cae a la foto principal del producto
+
         var onerr = ' onerror="this.onerror=null;this.src=\'' + fallback + '\'"';
 
         document.title = p.nombre + ' — OVERTEXT';
@@ -40,9 +31,6 @@
         if (precioPrincipal) precioPrincipal.innerHTML = 'S/ ' + p.precio + ' <span>unidad</span>';
         set('.precio-pack', 'o arma tu pack: ' + p.precioPack);
 
-        // Galería como carrusel de Bootstrap. Si el producto no tiene galería
-        // (5 de 7 hoy), se muestra solo la foto principal y se ocultan los
-        // controles y los indicadores: sin flechas rotas.
         var imgs = (p.galeria && p.galeria.length) ? p.galeria : [p.imagen];
         var inner = document.querySelector('#carrusel-galeria .carousel-inner');
         if (inner) {
@@ -67,8 +55,6 @@
         document.querySelectorAll('#carrusel-galeria .carousel-control-prev, #carrusel-galeria .carousel-control-next')
             .forEach(function (c) { c.classList.toggle('d-none', soloUna); });
 
-        // Color: indicador de color único (no un selector). varianteAuto() de
-        // carrito.js lee el .swatch--activa[title] para armar "COLOR · TALLA".
         var grupoColores = document.querySelector('.grupo-colores');
         if (grupoColores) {
             grupoColores.innerHTML =
@@ -98,5 +84,4 @@
         if (el) el.textContent = txt;
     }
 
-    // La navegación de la galería la maneja el carrusel de Bootstrap (E1-05).
 }());

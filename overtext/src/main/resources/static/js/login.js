@@ -1,10 +1,4 @@
-/* ============================================================
-   OVERTEXT — Validación de inicio de sesión
-   Credenciales válidas: admin@mail.com / 123456 → /admin
-   Sirve tanto a la página (/login) como a #modal-login (E2-01):
-   ambos formularios llevan la clase .formulario-sesion, así que la misma
-   lógica valida cualquiera de los dos sin duplicar código (art. 7).
-   ============================================================ */
+
 (function () {
     'use strict';
 
@@ -24,8 +18,6 @@
             e.preventDefault();
             e.stopPropagation();
 
-            // E1-07 · Validación de Bootstrap: sin campos válidos no se
-            // comprueban las credenciales.
             formulario.classList.add('was-validated');
             if (!formulario.checkValidity()) return;
 
@@ -39,8 +31,7 @@
                 }
                 window.location.href = '/admin';
             } else {
-                // Sin console.error: una credencial equivocada es un caso
-                // previsto, no un fallo de la página (criterio 2d, consola limpia).
+
                 if (mensaje) {
                     mensaje.textContent = 'Credenciales no válidas. Verifica tu usuario y contraseña.';
                     mensaje.className = 'mensaje-sesion mensaje-error';

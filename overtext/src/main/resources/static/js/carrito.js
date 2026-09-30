@@ -1,15 +1,10 @@
-/* ============================================================
-   OVERTEXT — Carrito de compras (fuente única de verdad)
-   Estado persistente en localStorage['ot_carrito'].
-   Expone window.Carrito y auto-inicializa en cada página.
-   ============================================================ */
+
 (function () {
     'use strict';
 
     var CLAVE = 'ot_carrito';
-    var UMBRAL_ENVIO_GRATIS = 200; // S/ para desbloquear envío gratis (decisión del PO, 25-ago)
+    var UMBRAL_ENVIO_GRATIS = 200;
 
-    /* --- Persistencia --- */
     function obtenerCarrito() {
         try {
             var datos = JSON.parse(localStorage.getItem(CLAVE));
@@ -29,7 +24,6 @@
         renderizarCarrito();
     }
 
-    /* --- Operaciones --- */
     function agregarProducto(prod) {
         if (!prod || !prod.id) return;
         var items = obtenerCarrito();
@@ -87,28 +81,24 @@
         return 'S/ ' + monto.toFixed(2);
     }
 
-    /* --- Render del panel lateral y del badge --- */
     function renderizarCarrito() {
         var totales = calcularTotales();
         var items = obtenerCarrito();
 
-        // Badge del header (puede existir en todas las páginas)
         document.querySelectorAll('.carrito-contador').forEach(function (b) {
             b.textContent = totales.cantidadTotal;
             b.style.display = totales.cantidadTotal > 0 ? '' : 'none';
         });
 
         var panel = document.getElementById('carrito-lateral');
-        if (!panel) return; // páginas sin panel (ej. checkout) solo actualizan badge
+        if (!panel) return;
 
-        // Conteo
         var conteo = panel.querySelector('.carrito-conteo');
         if (conteo) {
             conteo.textContent = totales.cantidadTotal +
                 (totales.cantidadTotal === 1 ? ' PRODUCTO' : ' PRODUCTOS');
         }
 
-        // Lista de items
         var contenedor = panel.querySelector('.carrito-items');
         if (contenedor) {
             if (items.length === 0) {
@@ -119,7 +109,6 @@
             }
         }
 
-        // Barra de envío gratis
         var texto = panel.querySelector('.envio-gratis-texto');
         var progreso = panel.querySelector('.envio-gratis-progreso');
         if (texto && progreso) {
@@ -133,7 +122,6 @@
             }
         }
 
-        // Totales del pie (el costo exacto del envio se define al finalizar compra)
         var footer = panel.querySelector('.carrito-footer');
         if (footer) {
             var lineaSub = footer.querySelector('.resumen-linea span:last-child');
@@ -141,15 +129,11 @@
             var monto = footer.querySelector('.total-monto');
             if (monto) monto.textContent = formatoSoles(totales.subtotal);
 
-            // El HTML traia "GRATIS" quemado y contradecia a la barra de arriba
-            // ("te faltan S/ 140"). Se deriva del mismo umbral, igual que el
-            // checkout, que muestra POR DEFINIR hasta saber el tipo de envio.
             var envio = footer.querySelector('.envio-gratis');
             if (envio) {
                 var gratis = totales.subtotal >= UMBRAL_ENVIO_GRATIS;
                 envio.textContent = gratis ? 'GRATIS' : 'POR DEFINIR';
-                // .envio-gratis es el gancho fijo del elemento; el verde lo pone
-                // .es-gratis, igual que .envio-gratis-tag en el checkout.
+
                 envio.classList.toggle('es-gratis', gratis);
             }
         }
@@ -185,12 +169,6 @@
         '</article>';
     }
 
-    /* --- Panel abrir / cerrar (E1-10) ---
-       El panel es un `offcanvas` de Bootstrap: el backdrop, el cierre con Esc,
-       la trampa de foco y el bloqueo del scroll los pone el framework
-       (constitución art. 4). Aquí solo se pide mostrarlo u ocultarlo.
-       Se conservan `abrirPanel`/`cerrarPanel` porque son API pública:
-       `agregar al carrito` llama a `abrirPanel()`. */
     function panelCarrito() {
         var panel = document.getElementById('carrito-lateral');
         if (!panel || !window.bootstrap) return null;
@@ -207,7 +185,6 @@
         if (oc) oc.hide();
     }
 
-    /* --- Construir variante desde selectores activos (página de detalle) --- */
     function varianteAuto() {
         var partes = [];
         var talla = document.querySelector('.btn-talla--activa');
@@ -217,17 +194,12 @@
         return partes.join(' · ');
     }
 
-    /* --- Inicialización --- */
     function init() {
         renderizarCarrito();
 
-        // Abrir el panel desde el icono del header. El cierre (X, "seguir
-        // comprando", Esc y clic fuera) lo resuelve Bootstrap por atributos,
-        // así que ya no necesita escuchadores propios.
         var abrir = document.getElementById('abrir-carrito');
         if (abrir) abrir.addEventListener('click', abrirPanel);
 
-        // Delegación +/−/eliminar dentro del panel
         var lista = document.querySelector('.carrito-items');
         if (lista) {
             lista.addEventListener('click', function (e) {
@@ -244,22 +216,19 @@
             });
         }
 
-        // Selectores de cantidad (+/−) en páginas de producto
         document.querySelectorAll('.control-cantidad').forEach(function (ctrl) {
             var valor = ctrl.querySelector('.valor-cantidad');
             ctrl.querySelectorAll('.btn-cantidad').forEach(function (btn, idx) {
                 btn.addEventListener('click', function () {
                     var n = parseInt(valor.textContent, 10) || 1;
-                    n = idx === 0 ? Math.max(1, n - 1) : n + 1; // primer botón = menos
+                    n = idx === 0 ? Math.max(1, n - 1) : n + 1;
                     valor.textContent = n;
                 });
             });
         });
 
-        // Delegación en document: funciona con nodos renderizados dinámicamente
-        // (catálogo y detalle se pintan desde js/tienda.js después de este init).
         document.addEventListener('click', function (e) {
-            // Selección de talla (página de detalle)
+
             var talla = e.target.closest('.grupo-tallas .btn-talla');
             if (talla) {
                 talla.parentElement.querySelectorAll('.btn-talla')
@@ -267,7 +236,7 @@
                 talla.classList.add('btn-talla--activa');
                 return;
             }
-            // Selección de color (página de detalle)
+
             var sw = e.target.closest('.grupo-colores .swatch');
             if (sw) {
                 sw.parentElement.querySelectorAll('.swatch')
@@ -275,7 +244,7 @@
                 sw.classList.add('swatch--activa');
                 return;
             }
-            // Botones declarativos "Agregar al carrito"
+
             var btn = e.target.closest('[data-agregar-carrito]');
             if (btn) {
                 e.preventDefault();
@@ -300,7 +269,6 @@
         });
     }
 
-    /* --- API pública --- */
     window.Carrito = {
         obtener: obtenerCarrito,
         guardar: guardarCarrito,

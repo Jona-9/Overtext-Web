@@ -1141,6 +1141,18 @@ tenemos trae fechas de mayo de **2025** y figura como «Vencido» — es del cic
       por debajo del breakpoint `sm` (576 px) de Bootstrap, mismo régimen que
       375 px.
 
+### 2026-09-29 — Corrección y alineación visual del footer (plantilla y estático)
+
+- **Hice:** reacomodé el footer del sitio web tras detectar desalineación y texto invisible en la vista desktop y mobile.
+  - Separé `<div class="container row">` en `<div class="container pb-5"><div class="row g-4 g-lg-5 justify-content-between">`, solucionando el conflicto donde `.row` sobrescribía el margen automático del `.container` y pegaba el contenido al borde izquierdo de la pantalla mientras la barra de derechos de autor sí estaba centrada.
+  - Agregué `color: var(--color-fondo)` y tipografía Oswald bold (`var(--fuente-display)`) a `.pie-logo`, resolviendo el problema donde Bootstrap 5 le asignaba `--bs-heading-color` (#111111) sobre fondo negro, haciéndolo 100% invisible.
+  - Misma corrección de color en `.banner-beneficios-texto h2` ("ARMA TU PACK DE 6."), que también estaba negro sobre fondo negro.
+  - Corregí `.pie-enlaces ul` eliminando el padding de 2rem por defecto de Bootstrap para que los enlaces ("INICIO", "CATÁLOGO", etc.) queden perfectamente alineados al ras con sus títulos ("SITIO", "AYUDA").
+  - Añadí una sutil línea divisora superior (`border-top: 1px solid rgba(255, 255, 255, 0.08)`) en el footer para delimitarlo limpiamente del banner anterior.
+  - Sincronicé los cambios en `overtext/src/main/resources/templates/layout/plantilla.html`, los 3 CSS en `overtext/src/main/resources/static/css/`, los 10 HTML en `app-estatico/` y su documentación.
+- **Verificado:** compilación Maven limpia, render en navegador real (Chrome headless 1440 px y 375 px), 0 errores de consola, alineación perfecta con el navbar y la barra legal.
+- **Archivos tocados:** `overtext/src/main/resources/templates/layout/plantilla.html`, `overtext/src/main/resources/static/css/componentes/footer.css`, `overtext/src/main/resources/static/css/componentes/formularios.css`, `overtext/src/main/resources/static/css/layout.css`, `app-estatico/css/*`, `app-estatico/*.html`, `app-estatico/docs/02-sistema-diseno.md`, esta memoria.
+
 ---
 
 ## Contexto propio

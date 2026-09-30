@@ -1,13 +1,4 @@
-/* ============================================================
-   OVERTEXT — Intranet
-   Tabla de productos (desde js/productos.json) con los dos arquetipos
-   de ventana modal del ejemplo del profesor:
-     - "Ver" en cada fila -> #modal-detalle-producto (solo lectura)
-     - "+ Nuevo producto"  -> #modal-nuevo-producto  (alta, sin persistencia:
-       el CRUD real es del ATF3, art. 8)
-   El botón "Cerrar sesión" ya no usa confirm() nativo: abre
-   #modal-cerrar-sesion, el mismo componente que el resto del sitio.
-   ============================================================ */
+
 (function () {
     'use strict';
 
@@ -70,9 +61,6 @@
         selectColor.insertAdjacentHTML('beforeend', opciones);
     }
 
-    // Patrón estándar de Bootstrap: un solo modal reutilizado por todas las
-    // filas, relleno con el `data-id` del botón que lo abrió
-    // (event.relatedTarget), no con un modal por fila.
     if (modalDetalle) {
         modalDetalle.addEventListener('show.bs.modal', function (event) {
             var id = event.relatedTarget && event.relatedTarget.dataset.id;
@@ -94,8 +82,6 @@
         });
     }
 
-    // Alta sin persistencia (art. 8): valida y avisa, no escribe en
-    // productos.json — eso llega con el backend del ATF3.
     if (formularioNuevo) {
         formularioNuevo.addEventListener('submit', function (e) {
             e.preventDefault();

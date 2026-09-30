@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
     <title>Short Stone Beige — OVERTEXT</title>
-    <!-- Framework: Bootstrap 5.3 por CDN -->
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <!-- Arquitectura ITCSS OVERTEXT -->
+
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/tema-overtext.css">
     <link rel="stylesheet" href="/css/layout.css">
@@ -57,11 +57,6 @@
         </div>
     </nav>
 
-    <!-- OVERLAY -->
-
-    <!-- CARRITO — offcanvas de Bootstrap (E1-10 · criterio 1b)
-         El backdrop, el cierre con Esc, el foco y el bloqueo del scroll son del
-         framework. Se conserva el id y las clases que consulta js/carrito.js. -->
     <aside class="offcanvas offcanvas-end" tabindex="-1" id="carrito-lateral"
            aria-labelledby="carrito-titulo">
 
@@ -83,7 +78,7 @@
             </div>
 
             <div class="carrito-items">
-                <!-- Los productos se renderizan dinámicamente desde js/carrito.js -->
+
             </div>
         </div>
 
@@ -110,7 +105,6 @@
         <section class="seccion-detalle-producto">
             <div class="container grid-detalle-producto">
 
-                <!-- GALERÍA (carrusel de Bootstrap; lo rellena js/tienda.js) -->
                 <div class="galeria-producto">
                     <div id="carrusel-galeria" class="carousel slide carousel-dark carrusel-galeria" data-bs-ride="carousel">
                         <div class="carousel-indicators"></div>
@@ -130,7 +124,6 @@
                     </div>
                 </div>
 
-                <!-- INFO -->
                 <div class="info-detalle-producto">
 
                     <p class="coleccion-tag">OVERCOMING</p>
@@ -142,7 +135,6 @@
                         <p class="precio-pack">o arma tu pack: 6 x S/ 100</p>
                     </div>
 
-                    <!-- Talla -->
                     <div class="selector-campo">
                         <div class="selector-header">
                             <span class="selector-label">Talla</span>
@@ -156,13 +148,11 @@
                         </div>
                     </div>
 
-                    <!-- Color: indicador de color único (lo rellena js/tienda.js) -->
                     <div class="selector-campo">
                         <span class="selector-label">Color</span>
                         <div class="grupo-colores"></div>
                     </div>
 
-                    <!-- Cantidad + Carrito -->
                     <div class="fila-acciones">
                         <div class="control-cantidad">
                             <button class="btn-cantidad">−</button>
@@ -177,7 +167,6 @@
 
                     <a href="/promociones.html" class="btn-pack">Arma tu pack</a>
 
-                    <!-- Beneficios -->
                     <div class="beneficios-fila">
                         <div class="beneficio-item">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -199,7 +188,6 @@
                         </div>
                     </div>
 
-                    <!-- Acordeones nativos con <details> — sin JS -->
                     <div class="acordeones-detalle">
 
                         <details class="acordeon-item">
@@ -230,7 +218,8 @@
     </main>
 
     <footer class="pie-pagina">
-        <div class="container row g-4 pb-5">
+        <div class="container pb-5">
+            <div class="row g-4 g-lg-5 justify-content-between">
             <div class="col-12 col-md-6 col-lg-4 pie-info">
                 <h2 class="pie-logo">OVERTEXT</h2>
                 <p class="pie-lema">LIMA, PERÚ. STREETWEAR PARA LA NUEVA GENERACIÓN.</p>
@@ -263,6 +252,7 @@
                     <a href="https://www.tiktok.com/@overcoming.peru">TIKTOK</a>
                 </div>
             </div>
+            </div>
         </div>
         <div class="container">
             <hr class="divisor">
@@ -277,10 +267,6 @@
         <i class="bi bi-whatsapp" aria-hidden="true"></i>
     </a>
 
-    <!-- MODAL GUÍA DE TALLAS (E1-09 · criterio 1d)
-         La tabla vive SOLO aquí: antes estaba duplicada en el acordeón
-         (constitución art. 7, un solo origen de verdad).
-         E1-26 [SÍLABO]: `table table-striped` de Bootstrap. -->
     <div class="modal fade" id="modal-tallas" tabindex="-1"
          aria-labelledby="modal-tallas-titulo" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -321,10 +307,6 @@
       </div>
     </div>
 
-    <!-- MODAL DE INICIO DE SESIÓN (E2-01 · requisito 1: login como ventana modal)
-         Mismo formulario que login.html; login.js valida ambos por igual
-         (selector .formulario-sesion). login.html sigue existiendo como página
-         completa — el pie de este modal enlaza ahí. -->
     <div class="modal fade" id="modal-login" tabindex="-1"
          aria-labelledby="modal-login-titulo" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -386,9 +368,6 @@
       </div>
     </div>
 
-    <!-- MODAL DE CONTÁCTANOS (E2-02 · requisito 2, «como ejemplo»)
-         Mismo formulario que contacto.html; contacto.js valida ambos por igual
-         (selector .form-contacto). Al enviar, encadena con #modal-contacto. -->
     <div class="modal fade" id="modal-contactanos" tabindex="-1"
          aria-labelledby="modal-contactanos-titulo" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -432,8 +411,6 @@
       </div>
     </div>
 
-    <!-- MODAL DE CONFIRMACIÓN DE CONTACTO (comparte #modal-contactanos de esta
-         página con contacto.html: mismo componente, sin duplicar — art. 7) -->
     <div class="modal fade" id="modal-contacto" tabindex="-1"
          aria-labelledby="modal-contacto-titulo" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
