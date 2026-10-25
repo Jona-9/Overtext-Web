@@ -36,15 +36,15 @@ mvn spring-boot:run
 |---|---|
 | **SDD** — Specify → Plan → Tasks → Implement | `docs/specs/` |
 | **Scrum** — 7 sprints de 2 semanas | `docs/scrum/` |
-| **Memorias** — una por integrante, sin conflictos | `docs/memoria/` |
+| **Memorias** — seguimiento por integrante | `docs/` |
 
-**Antes de tocar nada, lee `CLAUDE.md`.** Vale igual para personas y para agentes.
+**Antes de tocar nada, lee `AGENTS.md` (y `PC3_INSTRUCCIONES.md` para la entrega actual).** Vale igual para personas y para agentes de IA.
 
 ### Las tres reglas que más se incumplen
 
-1. **Un archivo, un escritor.** `memory.md` lo escribe solo el Scrum Master, y solo cuando los 6 cerramos el sprint.
-2. **No se implementa sin `spec.md` aprobado** por el Product Owner.
-3. **kebab-case en español** y **cero errores en consola** en toda página que se entregue.
+1. **Un archivo, un escritor.** `memory.md` lo escribe solo el Scrum Master (Jonathan), y solo cuando cerramos el sprint.
+2. **Alcance 100% Backend para la PC3:** Sin maquetado frontend. Todo el CRUD se opera mediante APIs REST en Postman y cURL.
+3. **Contrato de tipos estricto:** Respeta los tipos de datos definidos en `AGENTS.md` y `PC3_INSTRUCCIONES.md`.
 
 ---
 
@@ -52,19 +52,15 @@ mvn spring-boot:run
 
 | Ruta | Qué es |
 |---|---|
-| `CLAUDE.md` | Contrato de trabajo para agentes y personas |
-| `memory.md` | Memoria general — última foto estable del proyecto |
+| `AGENTS.md` | Contrato de trabajo y directivas para agentes de IA y desarrolladores |
+| `PC3_INSTRUCCIONES.md` | Guía de implementación técnica, contrato canónico de datos y responsabilidades de la PC3 |
+| `docs/pc3-tablero-control.md` | Tablero operativo de seguimiento y checklist por casillas de la PC3 |
+| `memory.md` | Memoria general — última foto estable y decisiones vigentes del proyecto |
 | `docs/constitution.md` | Los 10 principios no negociables |
 | `docs/contexto.md` | Manual de marca: tono, paleta, copy |
-| `docs/memoria/` | Una memoria por integrante |
-| `docs/specs/` | Specs SDD por feature |
-| `docs/scrum/roadmap.md` | **Planificación completa del ciclo**: sílabo → sprint → rúbrica |
-| `docs/scrum/sprints/` | Los 7 sprints, uno por archivo |
-| `docs/scrum/product-backlog.md` | 130 historias, cada una trazada a su criterio |
-| `docs/scrum/checklist-entrega.md` | Verificación previa a cada entrega |
-| `informes/informe.md` | El informe (documento vivo en Markdown) |
-| `app-estatico/` | Sitio del ATF1; se congela tras la entrega |
-| `overtext/` | Proyecto Spring Boot (desde el Sprint 2) |
+| `informes/informe.md` | El informe general (documento vivo en Markdown) |
+| `informes/capturas/pc3/` | Carpeta oficial de las 14 capturas de evaluación de la PC3 |
+| `overtext/` | Proyecto Spring Boot (Backend REST activo) |
 
 ---
 
