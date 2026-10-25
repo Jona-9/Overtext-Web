@@ -46,7 +46,7 @@ ON CONFLICT (slug) DO NOTHING;
 
 -- Inserción de los 7 productos representativos con sus colores oficiales
 INSERT INTO producto (
-    codigo, nombre, slogan, descripcion, precio, precioPack, stock,
+    codigo, nombre, slogan, descripcion, precio, precio_pack, stock,
     imagen_principal, color_nombre, color_hex, correo_proveedor, activo, categoria_id
 )
 VALUES

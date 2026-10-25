@@ -72,10 +72,10 @@ Fase 3A: Carlos               Fase 3B: José
   - [ ] Crear proyecto en [Supabase](https://supabase.com).
   - [ ] Ejecutar script DDL `schema-supabase.sql` en el SQL Editor de Supabase.
   - [ ] Verificar creación de tablas `categoria` y `producto` con los 7 registros iniciales.
-- [ ] **Configuración de Spring Boot:**
-  - [ ] Añadir dependencias en `overtext/pom.xml` (`postgresql`, `spring-boot-starter-data-jpa`, `spring-boot-starter-validation`).
-  - [ ] Configurar credenciales y URL JDBC en `overtext/src/main/resources/application.properties`.
-  - [ ] Probar arranque limpio de Spring Boot y conexión HikariCP a Supabase como API REST pura.
+- [x] **Configuración de Spring Boot:**
+  - [x] Añadir dependencias en `overtext/pom.xml` (`postgresql`, `spring-boot-starter-data-jpa`, `spring-boot-starter-validation`).
+  - [x] Configurar credenciales y URL JDBC en `overtext/src/main/resources/application.properties`.
+  - [x] Probar arranque limpio de Spring Boot y conexión HikariCP a Supabase como API REST pura.
 - [ ] **Capturas Obligatorias:**
   - [ ] `informes/capturas/pc3/01-supabase-dashboard.png` (Dashboard web del proyecto activo).
   - [ ] `informes/capturas/pc3/02-supabase-tablas.png` (Table Editor con registros).
