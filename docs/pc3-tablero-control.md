@@ -64,10 +64,10 @@ Fase 3A: Carlos               Fase 3B: José
 ## 3. Checklist de Responsabilidades por Integrante
 
 ### 1. Jonathan — DevOps, Limpieza de Frontend y Supabase *(Est.: 3-4h | Límite: Lun 26 12:00)*
-- [ ] **Limpieza de Frontend y Conversión a Backend REST Puro:**
-  - [ ] Retirar dependencia `spring-boot-starter-thymeleaf` de `overtext/pom.xml`.
-  - [ ] Retirar controladores de vistas HTML de P2 (`CatalogoController`, `HomeController`, etc.), preparando el proyecto exclusivamente para los `@RestController`.
-  - [ ] Desacoplar plantillas `templates/` y estáticos para que el proyecto sea 100% Backend REST JSON.
+- [x] **Limpieza de Frontend y Conversión a Backend REST Puro:**
+  - [x] Retirar dependencia `spring-boot-starter-thymeleaf` de `overtext/pom.xml`.
+  - [x] Retirar controladores de vistas HTML de P2 (`CatalogoController`, `HomeController`, etc.), preparando el proyecto exclusivamente para los `@RestController`.
+  - [x] Desacoplar plantillas `templates/` y estáticos para que el proyecto sea 100% Backend REST JSON.
 - [ ] **Configuración en Supabase:**
   - [ ] Crear proyecto en [Supabase](https://supabase.com).
   - [ ] Ejecutar script DDL `schema-supabase.sql` en el SQL Editor de Supabase.
