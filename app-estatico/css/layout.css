@@ -1,18 +1,5 @@
-/* ============================================================
-   OVERTEXT — layout.css
-   Capa Objects ITCSS: Contenedor + estructura de secciones.
-   ============================================================ */
 
 
-/* El contenedor del sitio ahora es el `.container` de Bootstrap (E1-03).
-   El `.contenedor` propio se retiró: Bootstrap gobierna el ancho y el centrado. */
-
-
-/* ============================================================
-   OBJECTS — Secciones y grillas de página
-   ============================================================ */
-
-/* --- Sección portada (inicio, nosotros) --- */
 .seccion-portada {
     padding: var(--espacio-xl) 0;
 }
@@ -32,7 +19,6 @@
     object-fit: cover;
 }
 
-/* --- Textos del hero --- */
 .subtitulo-superior {
     font-size: 0.72rem;
     font-weight: 600;
@@ -92,7 +78,6 @@
     text-transform: uppercase;
 }
 
-/* --- Sección proceso (3 columnas) --- */
 .proceso {
     background-color: var(--color-fondo-alt);
     padding: var(--espacio-xl) 0;
@@ -129,7 +114,6 @@
     color: var(--color-texto-suave);
 }
 
-/* --- Sección detalle de tela (inicio) --- */
 .detalle {
     padding: var(--espacio-xl) 0;
 }
@@ -172,13 +156,11 @@
     object-fit: cover;
 }
 
-/* --- Hero strip (catálogo, nosotros) --- */
 .hero-strip {
     padding: var(--espacio-lg) 0;
     border-bottom: 0.5px solid var(--color-borde);
 }
 
-/* --- Banner de beneficios (inicio) --- */
 .banner-beneficios {
     background: var(--color-negro);
     color: var(--color-fondo);
@@ -198,6 +180,7 @@
     letter-spacing: -0.5px;
     line-height: 1.1;
     margin-bottom: 8px;
+    color: var(--color-fondo);
 }
 
 .banner-beneficios-texto p {
@@ -207,7 +190,6 @@
     color: rgba(255, 255, 255, 0.55);
 }
 
-/* --- Responsive --- */
 @media (max-width: 900px) {
     .cuadricula-portada {
         grid-template-columns: 1fr;

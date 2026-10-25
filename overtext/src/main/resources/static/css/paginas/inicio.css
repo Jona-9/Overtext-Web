@@ -1,0 +1,12 @@
+
+
+.hero-acciones {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.detalle-cta {
+    margin-top: 24px;
+    display: inline-flex;
+}

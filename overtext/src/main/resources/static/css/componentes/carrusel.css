@@ -1,0 +1,24 @@
+
+
+.carrusel-portada {
+    overflow: hidden;
+}
+
+.carrusel-portada .carousel-item img {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    min-height: 480px;
+    max-height: 820px;
+    object-fit: cover;
+}
+
+.carrusel-galeria .carousel-item img {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+}
+
+.carrusel-galeria .carousel-control-prev.d-none,
+.carrusel-galeria .carousel-control-next.d-none {
+    display: none !important;
+}

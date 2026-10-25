@@ -1,9 +1,5 @@
-/* ============================================================
-   OVERTEXT — Tablas
-   Estilos para todas las tablas del sitio.
-   ============================================================ */
 
-/* Contenedor con scroll horizontal en mobile */
+
 .tabla-envolvente {
     overflow-x: auto;
     border: 0.5px solid var(--color-borde);
@@ -55,6 +51,3 @@ td strong {
     font-weight: 500;
 }
 
-/* La tabla de tallas se retiró de aquí en E1-26: ahora vive en el modal
-   con `table table-striped` de Bootstrap, re-tematizada en
-   css/componentes/modal.css (constitución art. 4). */

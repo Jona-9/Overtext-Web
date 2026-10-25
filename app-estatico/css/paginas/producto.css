@@ -1,9 +1,5 @@
-/* ============================================================
-   OVERTEXT — Página Detalle de Producto
-   Galería, selectores de talla/color, acordeones.
-   ============================================================ */
 
-/* --- Layout principal --- */
+
 .seccion-detalle-producto {
     padding: var(--espacio-lg) 0 var(--espacio-xl);
 }
@@ -15,7 +11,6 @@
     align-items: start;
 }
 
-/* --- Galería --- */
 .galeria-producto {
     position: sticky;
     top: 80px;
@@ -56,7 +51,6 @@
     border-color: var(--color-negro);
 }
 
-/* --- Info del producto --- */
 .nombre-detalle {
     font-family: var(--fuente-display);
     font-size: clamp(2rem, 4vw, 3rem);
@@ -73,7 +67,6 @@
     margin-bottom: var(--espacio-md);
 }
 
-/* --- Precios --- */
 .bloque-precio {
     margin-bottom: var(--espacio-md);
 }
@@ -98,7 +91,6 @@
     font-weight: 500;
 }
 
-/* --- Selectores de talla y color --- */
 .selector-campo {
     margin-bottom: var(--espacio-md);
 }
@@ -119,7 +111,6 @@
     color: var(--color-texto-suave);
 }
 
-/* E1-09: pasa de <a href="#..."> a <button> que abre el modal de tallas */
 .guia-link {
     padding: 0;
     font-family: var(--fuente-principal);
@@ -169,7 +160,6 @@
     flex-wrap: wrap;
 }
 
-/* Nombre del color junto al swatch (indicador de color único) */
 .selector-valor {
     font-family: var(--fuente-principal);
     font-size: 0.8rem;
@@ -192,14 +182,11 @@
     transform: scale(1.1);
 }
 
-/* El anillo se dibuja dentro de la caja (borde + hueco inset). Con outline
-   sobresalía del flujo y descuadraba el swatch respecto a la columna. */
 .swatch--activa {
     border-color: var(--color-negro);
     box-shadow: inset 0 0 0 3px var(--color-fondo);
 }
 
-/* --- Control de cantidad y acciones --- */
 .fila-acciones {
     display: flex;
     gap: 12px;
@@ -237,7 +224,6 @@
     text-align: center;
 }
 
-/* --- Beneficios --- */
 .beneficios-fila {
     display: flex;
     gap: var(--espacio-md);
@@ -265,7 +251,6 @@
     object-fit: contain;
 }
 
-/* --- Acordeones (details/summary) --- */
 .acordeones-detalle {
     border-top: 0.5px solid var(--color-borde);
 }
@@ -310,7 +295,6 @@
     line-height: 1.6;
 }
 
-/* --- Responsive --- */
 @media (max-width: 900px) {
     .seccion-detalle-producto > .container {
         grid-template-columns: 1fr;

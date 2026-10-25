@@ -1,7 +1,4 @@
-/* ============================================================
-   OVERTEXT — Confirmación de pedido
-   Lee localStorage['ot_pedido'] y muestra el detalle del pedido.
-   ============================================================ */
+
 (function () {
     'use strict';
 
@@ -46,7 +43,6 @@
         '</div>';
     }).join('');
 
-    // Datos de entrega según tipo
     var entrega = '';
     if (pedido.tipoEnvio === 'delivery') {
         entrega =

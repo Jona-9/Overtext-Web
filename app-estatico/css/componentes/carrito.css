@@ -1,12 +1,5 @@
-/* ============================================================
-   OVERTEXT — Carrito Lateral
-   Panel deslizante compartido: inicio, catálogo y detalle.
-   ============================================================ */
 
-/* --- Panel (E1-10) ---
-   El overlay propio y el deslizamiento a mano se fueron: los hace el
-   `offcanvas` de Bootstrap. Aquí solo queda el ancho de marca y la sombra;
-   nada de position, transition ni z-index (constitución art. 4). */
+
 #carrito-lateral.offcanvas {
     --bs-offcanvas-width: 460px;
     --bs-offcanvas-bg: var(--color-fondo);
@@ -14,7 +7,6 @@
     box-shadow: -6px 0 40px rgba(0, 0, 0, 0.1);
 }
 
-/* --- Cabecera --- */
 .carrito-header {
     display: flex;
     justify-content: space-between;
@@ -48,14 +40,11 @@
     color: var(--color-texto-suave);
 }
 
-/* E1-10: el botón propio de cerrar pasó a ser el `.btn-close` de Bootstrap.
-   Solo se ajusta su posición dentro de la cabecera de marca. */
 .carrito-header .btn-close {
     margin: 0;
     flex-shrink: 0;
 }
 
-/* --- Barra envío gratis --- */
 .envio-gratis-info {
     padding: 13px 28px;
     background: var(--color-fondo-alt);
@@ -86,7 +75,6 @@
     transition: width 0.5s ease;
 }
 
-/* --- Lista de items --- */
 .carrito-cuerpo {
     padding: 0;
     display: flex;
@@ -113,7 +101,6 @@
     background: var(--color-borde);
 }
 
-/* --- Estado vacío --- */
 .carrito-vacio {
     font-family: var(--fuente-principal);
     font-size: 0.8rem;
@@ -124,7 +111,6 @@
     line-height: 1.6;
 }
 
-/* --- Item individual --- */
 .item-carrito {
     display: grid;
     grid-template-columns: 90px 1fr 28px;
@@ -188,7 +174,6 @@
     justify-content: space-between;
 }
 
-/* --- Selector cantidad --- */
 .selector-cantidad {
     display: flex;
     align-items: center;
@@ -231,7 +216,6 @@
     color: var(--color-negro);
 }
 
-/* --- Botón eliminar --- */
 .btn-eliminar {
     display: flex;
     align-items: center;
@@ -250,7 +234,6 @@
     color: var(--color-rojo);
 }
 
-/* --- Pie del carrito --- */
 .carrito-footer {
     padding: 20px 28px 28px;
     border-top: 1px solid var(--color-borde);
@@ -271,8 +254,6 @@
     margin-bottom: 8px;
 }
 
-/* El verde marca envio gratis conseguido; js/carrito.js pone .es-gratis solo
-   cuando el subtotal alcanza el umbral. Sin ella, la linea dice POR DEFINIR. */
 .resumen-linea .envio-gratis.es-gratis {
     font-weight: 700;
     color: #2e7d32;
@@ -302,7 +283,6 @@
     line-height: 1;
 }
 
-/* --- Botones del carrito --- */
 .btn-finalizar {
     display: block;
     width: 100%;
@@ -349,7 +329,6 @@
     color: var(--color-negro);
 }
 
-/* --- Responsive --- */
 @media (max-width: 480px) {
     #carrito-lateral.offcanvas {
         --bs-offcanvas-width: 100vw;

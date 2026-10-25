@@ -296,6 +296,295 @@ Carlos sigue con la demostración del CRUD.
 
 ---
 
+## Bitácora — Sprint 2
+
+### 2026-09-14
+
+- **Spec 002 escrito y aprobado.** `sprint-02.md` nombraba
+  `docs/specs/002-migracion-thymeleaf/spec.md`, pero no existía (incumplía CLAUDE.md §4).
+  Lo escribí con el formato de `skills/sdd-scrum/references/formato-spec.md` y **Joaquín
+  (PO) lo aprobó en la misma sesión** — checkpoint dado, ya habilita implementar.
+  Ambigüedades resueltas ahí: A1 se **copia** `app-estatico/` (no se mueve, sigue
+  congelado como línea base del ATF1), A2 se mantiene Spring Boot 4.0.8 (ya decidido en
+  E2-01), A3 los enlaces `/x.html` quedan para E2-06/E2-23, A4 `app-estatico/docs/` no es
+  un recurso y no se migra.
+- **E1-19 (mío, Sprint 1):** `overtext/` existe desde el 14-sep (Jonathan adelantó E2-01,
+  ver su bitácora), con Spring Boot **4.0.8** y un placeholder de `HomeController`.
+- **E2-02 — recursos y páginas trasladados a `overtext/`:**
+  - Copié (no moví) `app-estatico/{css,js,assets}` → `overtext/src/main/resources/static/`,
+    misma estructura de carpetas, así las rutas absolutas `/css/...`, `/js/...`,
+    `/assets/...` que ya usaban las 10 páginas siguen resolviendo igual.
+  - Copié las 10 páginas `app-estatico/*.html` → `overtext/src/main/resources/templates/paginas/`,
+    **sin tocar su contenido** — los fragments (`layout/plantilla.html`) son de Carlos, E2-03/E2-04.
+  - Verifiqué con `diff -r` que las tres carpetas copiadas y las 10 páginas son
+    **idénticas** al original en `app-estatico/`.
+  - Sustituí el placeholder que dejó Jonathan: borré
+    `templates/index.html` y cambié `HomeController.inicio()` para que devuelva
+    `"paginas/index"` (la portada real), como pedía el `README.md` del proyecto.
+    Actualicé esa nota del `README.md`.
+- **E2-14 — verificación de rutas de recursos:**
+  - `./mvnw.cmd clean package` → **BUILD SUCCESS**, test de contexto en verde.
+  - Levanté el server en el puerto **8081** (el 8080 puede estar ocupado, según la nota
+    de Jonathan) y armé la lista completa de rutas absolutas que usan las 10 plantillas
+    (`href`/`src`) más los `fetch()` de los JS.
+  - **Los 42 recursos** (CSS, JS, imágenes, los dos JSON) responden **HTTP 200**. Cero
+    fallos.
+  - `GET /` sirve la portada real (título `OVERTEXT`, `id="carrusel-portada"` presente),
+    confirmando que pasa por el controlador y no por el placeholder.
+  - **Bloqueo esperado, no un fallo:** los 7 enlaces internos `/x.html` que aparecen en
+    las plantillas (`/catalogo.html`, `/checkout.html`, `/contacto.html`, `/index.html`,
+    `/login.html`, `/nosotros.html`, `/promociones.html`) dan **404**, porque las rutas
+    por sección (`/catalogo`, `/producto/{id}`, etc.) son **E2-06, de Dayro**, y no
+    existen todavía. Lo dejo anotado en vez de resolverlo — no es mi tarea y el spec 002
+    (ambigüedad A3) ya lo traza así.
+  - Verificación de consola en navegador (375/1440 px) queda como **pendiente humano**
+    de la review, igual que E1-19 en el Sprint 1: no la puedo firmar con verificación
+    estática/HTTP.
+  - Detuve el servidor al terminar.
+- **Decidí / aprendí:** copiar en vez de mover fue clave para no romper la línea base
+  congelada del ATF1 (`memory.md` §4) mientras `overtext/` toma forma en paralelo.
+- **Bloqueo:** las 9 páginas restantes (todo menos `/`) no se pueden abrir todavía desde
+  Spring — dependen de los controladores por sección de Dayro (E2-06).
+- **Archivos tocados:** nuevo `docs/specs/002-migracion-thymeleaf/spec.md`; copiados
+  `overtext/src/main/resources/static/{css,js,assets}/**` y
+  `overtext/src/main/resources/templates/paginas/*.html`; borrado
+  `overtext/src/main/resources/templates/index.html`; editados
+  `overtext/src/main/java/pe/edu/utp/overtext/controller/HomeController.java` y
+  `overtext/README.md`; esta memoria.
+
+### Para consolidar en memory.md
+
+- [ ] **Spec 002 creado y aprobado** por el PO — `docs/specs/002-migracion-thymeleaf/spec.md`.
+- [ ] **A partir de ahora el CSS y el JS se editan en `overtext/src/main/resources/static/`,
+      no en `app-estatico/`.** `app-estatico/` sigue viva solo como línea base congelada
+      del ATF1 (no se borra ni se edita).
+- [ ] Las 10 páginas viven además en `overtext/src/main/resources/templates/paginas/`.
+- [ ] Los enlaces `/x.html` dan 404 en `overtext/` hasta que Dayro cierre E2-06 (rutas
+      por sección) y yo/Carlos cerremos E2-23 (`th:href="@{...}"`) en el Sprint 3.
+- [ ] **Discrepancia con `memory.md` §4:** dice *"`overtext/` — Proyecto Spring Boot.
+      **Aún no existe** — se crea en el Sprint 2"*, pero ya existe desde el 14-sep
+      (Jonathan adelantó E2-01) y ahora ya tiene recursos y páginas (E2-02). Gana el
+      código (CLAUDE.md §3); se corrige en la próxima consolidación.
+- [ ] `joaquin_memory.md` tiene sin marcar *"Aprobar `docs/specs/002-migracion-thymeleaf/spec.md`"*
+      en su lista de Sprint 2 — ya lo aprobó en esta sesión, pero el checkbox de su propia
+      memoria le corresponde marcarlo a él (art. 9).
+
+---
+
+## Bitácora — Sprint 3
+
+### 2026-09-22
+
+- **Hice (análisis, sin tocar código de `overtext/` todavía):**
+  - Repasé `sprint-03.md` §4 y confirmé mi reparto: **E2-21** (`th:each` tarjetas del
+    catálogo), **E2-22** (`th:each` colores del configurador) y **E2-24** (verificar
+    2+ fragments en las 10 páginas). E2-08/E2-10/E2-23 son de Carlos.
+  - **Verifiqué que el backend de E2-21 ya está listo**: Dayro cerró E2-09 el 20-sep
+    (`ProductoService`, `model/Producto.java`) y `CatalogoController` ya expone
+    `productos` al modelo. No falta nada en Java para mi tarea.
+  - **`catalogo.html` (líneas 47-54): el grid está vacío**, no tiene 7 tarjetas escritas
+    a mano como yo suponía — hoy las pinta `static/js/tienda.js` (`renderCatalogo()`,
+    líneas 30-52) por `fetch`/`innerHTML` sobre `.productos-grid`. Si dejo `tienda.js`
+    activo en esa página después de meter el `th:each`, hay doble renderizado (mismo
+    resultado visual, pero código muerto — contradice el 2b, que es mi especialidad).
+  - **`promociones.html` (líneas 58-92): sí hay 7 `div.color-opcion` a mano**, uno por
+    color. Comparé los 7 hex de `promociones.css` (~líneas 180-186) contra los 7
+    `producto.color.hex` de `productos.json`: **coinciden 1:1**. Es el mismo dato
+    duplicado en dos archivos (deuda menor de art. 7).
+  - Leí `promociones.js` completo: no tiene colores quemados, lee `.nombre-color` (texto)
+    y `getComputedStyle(.color-muestra)` (color ya resuelto). Confirmé que da igual si el
+    color llega por clase CSS o por `style` inline — el `getComputedStyle` resuelve los
+    dos casos igual.
+  - **E2-24 ya se cumple hoy.** Conté los `th:replace` de las 10 páginas de
+    `templates/paginas/`: todas usan `cabecera` + `pie` + `scripts` como mínimo (3), y
+    las 6 que muestran el carrito (`index`, `catalogo`, `detalle-producto`, `nosotros`,
+    `contacto`, `promociones`) usan además `carrito` (4). Ninguna tiene menos de 2.
+
+    | Página | Fragments | Total |
+    |---|---|:-:|
+    | `index.html` | cabecera, carrito, pie, scripts | 4 |
+    | `catalogo.html` | cabecera, carrito, pie, scripts | 4 |
+    | `detalle-producto.html` | cabecera, carrito, pie, scripts | 4 |
+    | `nosotros.html` | cabecera, carrito, pie, scripts | 4 |
+    | `contacto.html` | cabecera, carrito, pie, scripts | 4 |
+    | `promociones.html` | cabecera, carrito, pie, scripts | 4 |
+    | `checkout.html` | cabecera, pie, scripts | 3 |
+    | `confirmacion.html` | cabecera, pie, scripts | 3 |
+    | `login.html` | cabecera, pie, scripts | 3 |
+    | `intranet.html` | cabecera, pie, scripts | 3 |
+
+  - Confirmé de paso que **E2-08 (Carlos) ya está resuelto**: el fragment `cabecera` en
+    `layout/plantilla.html` (líneas 30-34) ya usa `th:classappend` con `paginaActiva`
+    para el enlace activo. No es mío, pero queda anotado para que nadie lo repita.
+- **Bloqueo de proceso encontrado — CLAUDE.md §4:** no existe ningún `spec.md` para este
+  trabajo. `docs/specs/002-migracion-thymeleaf/spec.md` §2.3 lo excluye explícitamente
+  ("fuera de alcance, para el Sprint 3") y no hay ninguna carpeta `003-*`. `sprint-03.md`
+  es backlog, no spec SDD. **A diferencia de D7 y D16, esta vez no implementé nada sin
+  spec.** Escribí `docs/specs/003-thymeleaf-interacciones/spec.md` con las decisiones de
+  diseño resueltas (retirar el renderizado de catálogo de `tienda.js`; pintar el color del
+  configurador con `th:style` del hex del modelo en vez de una clase `color-muestra--*`,
+  cerrando la duplicación de hex) y **lo dejé sin marcar el checkpoint** — pendiente de que
+  Joaquín (PO) lo apruebe antes de tocar ningún archivo de `overtext/`.
+- **Decidí / aprendí:**
+  - Mi supuesto inicial (que el catálogo tenía 7 tarjetas hardcodeadas, igual que
+    `promociones.html`) era incorrecto — solo `promociones.html` las tiene a mano. El
+    catálogo depende de JS, no de HTML repetido. Bueno anotarlo para no repetir el mismo
+    supuesto en otra tarea.
+  - `tienda.js` hace **dos** cosas con una sola guarda de existencia de elemento
+    (`renderCatalogo` si existe `.productos-grid`, `renderDetalle` si existe
+    `.info-detalle-producto`): al "apagar" el catálogo hay que tocar solo la mitad del
+    archivo, sin afectar la ficha de producto.
+- **Bloqueo:** ninguno — resuelto el mismo día, ver siguiente entrada.
+- **Archivos tocados:** nuevo `docs/specs/003-thymeleaf-interacciones/spec.md`; esta
+  memoria.
+
+### 2026-09-22 (continuación) — Joaquín aprobó el spec 003; implementé E2-21, E2-22 y E2-24
+
+- **Joaquín (PO) aprobó `docs/specs/003-thymeleaf-interacciones/spec.md`** el mismo día
+  (ver su bitácora, `joaquin_memory.md`), sin pedir ajustes a las cuatro decisiones de
+  diseño de la §5. Recién ahí empecé a tocar `overtext/`.
+- **Hice — E2-21 (`th:each` del catálogo):**
+  - `catalogo.html` (antes líneas 47-54, grid vacío): reemplacé el comentario por
+    `th:each="producto : ${productos}"` sobre el mismo bloque que hoy construye
+    `tienda.js:renderCatalogo` (badge, imagen+enlace, nombre, descripción, precio con
+    `[[${...}]]` inline, punto de color con `th:style` del hex, botón "añadir al carrito"
+    con los `data-*` que ya lee `carrito.js` por delegación).
+  - Quité `<script src="/js/tienda.js"></script>` de `catalogo.html`.
+  - En `tienda.js`: eliminé `renderCatalogo()` y la variable `grid`; `renderDetalle()` y
+    su uso en `detalle-producto.html` quedaron intactos — no son parte de esta tarea.
+  - Actualicé el Javadoc de `CatalogoController` (ya no dice "hasta que E2-21 se cierre").
+- **Hice — E2-22 (`th:each` del configurador):**
+  - `PromocionesController` ahora inyecta `ProductoService` y expone `productos` al
+    modelo (mismo patrón que `CatalogoController`).
+  - `promociones.html` (antes líneas 58-92, 7 `div.color-opcion` a mano): un solo bloque
+    con `th:each="producto : ${productos}"`, pintando `.color-muestra` con
+    `th:style="'background-color:' + ${producto.color.hex}"` y `.nombre-color` con
+    `th:text="${producto.color.nombre}"`.
+  - Retiré las 7 reglas `.color-muestra--*` de `promociones.css` (quedaban sin uso).
+  - **No toqué `promociones.js`**: confirmé que sigue leyendo `.nombre-color` y
+    `getComputedStyle(.color-muestra)`, sin importarle si el color venía de una clase o
+    de un `style` inline.
+- **Verifiqué (con el servidor local, puerto 8098, y sin editar nada más):**
+  - `mvnw clean compile` → sin errores.
+  - `GET /catalogo` → **200**, 7 `article.producto-card` en el HTML devuelto por el
+    servidor (visible en "ver código fuente", sin esperar a que corra JS) — confirmé una
+    tarjeta completa (`short-beige`): nombre, precio "S/ 20 / pack 6 x S/ 100", color
+    "Stone Beige" con su hex, enlace `/producto/short-beige`, los 5 `data-*` del botón de
+    carrito.
+  - `GET /promociones` → **200**, 7 `div.color-opcion` con su hex en `style` y su nombre.
+  - `GET /producto/short-beige` → **200** y sigue usando `tienda.js` (`renderDetalle`
+    intacto); `GET /producto/no-existe` → **404** (la de Dayro, E2-09, sin regresión).
+  - `node --check` en `tienda.js` y `promociones.js`: sin errores de sintaxis.
+  - `grep -r "renderCatalogo"` en `src/`: cero resultados — no quedó código muerto.
+  - **Pendiente humano, igual que E1-19/E2-17 en sprints anteriores:** no pude abrir
+    Chrome con la extensión conectada en esta sesión, así que **la verificación visual a
+    375/1440 px y la consola del navegador quedan sin firmar**. El HTML generado por el
+    servidor y los `node --check` no reemplazan esa verificación.
+- **Decidí / aprendí — dos diferencias visuales menores que no anticipé en el spec:**
+  - **El orden de los 7 colores cambia.** El HTML a mano tenía Negro primero; `productos.json`
+    (y por tanto `${productos}`) tiene Stone Beige primero. Nuevo orden: Stone Beige,
+    Negro, Guinda, Gris, Oliva Militar, Azul Marino, Marrón. No metí un comparador para
+    forzar el orden viejo — sería una regla nueva que nadie pidió (art. 8) y el criterio
+    2c no exige un orden específico. Si en la Review alguien prefiere el orden anterior,
+    se resuelve con un `Comparator` de una línea en `ProductoServiceImpl`, no aquí.
+  - **Tres nombres de color salen más largos que antes.** El HTML a mano decía "STONE",
+    "OLIVA" y "MARINO"; `producto.color.nombre` da "Stone Beige", "Oliva Militar" y
+    "Azul Marino" (el CSS ya los pone en mayúsculas con `text-transform`, así que la
+    diferencia es de contenido, no de estilo). Elegí el nombre completo del modelo en vez
+    de acortarlo a mano porque acortar reintroduce un texto que no viene de
+    `productos.json` — exactamente la duplicación que E2-22 buscaba cerrar. No hay
+    `max-width`/`white-space:nowrap` en `.color-opcion span` que lo rompa, pero si en la
+    Review se ve apretado, es un ajuste de CSS, no de datos.
+- **Bloqueo:** ninguno. **E2-21, E2-22 cerradas** (con el pendiente humano de arriba);
+  **E2-24 confirmada** (tabla de la entrada anterior).
+- **Archivos tocados:** `overtext/src/main/resources/templates/paginas/catalogo.html`,
+  `overtext/src/main/resources/templates/paginas/promociones.html`,
+  `overtext/src/main/resources/static/js/tienda.js`,
+  `overtext/src/main/resources/static/css/paginas/promociones.css`,
+  `overtext/src/main/java/pe/edu/utp/overtext/controller/CatalogoController.java`,
+  `overtext/src/main/java/pe/edu/utp/overtext/controller/PromocionesController.java`;
+  esta memoria.
+
+### Para consolidar en memory.md
+
+- [x] **Spec 003 escrito y aprobado por el PO el mismo día** —
+      `docs/specs/003-thymeleaf-interacciones/spec.md`. Primera vez que el equipo pide el
+      checkpoint antes de implementar en vez de después (no repite D7/D16).
+- [x] **E2-21 y E2-22 cerradas.** Catálogo y configurador ya se pintan con `th:each` desde
+      `ProductoService`; `tienda.js` dejó de renderizar el catálogo (solo le queda la
+      ficha de producto) y el hex de los 7 colores ya no está duplicado en
+      `promociones.css`.
+- [x] **E2-24 confirmada:** las 10 páginas tienen 3 o 4 fragments, ninguna menos de 2
+      (tabla en la entrada anterior). Falta el `[x]` formal en `sprint-03.md` en la Review
+      del 30-sep.
+- [ ] **Aviso para Carlos (E2-23):** las tarjetas nuevas del catálogo ya usan
+      `th:href="@{...}"` en sus 3 enlaces por tarjeta — un bloque menos que convertir.
+- [ ] **Pendiente humano de la Review:** abrir `/catalogo` y `/promociones` en un
+      navegador real a 375 px y 1440 px y confirmar consola sin errores (art. 3) — no se
+      pudo firmar en esta sesión porque la extensión de Chrome no estaba conectada.
+- [ ] **Nota para la Retrospectiva:** el orden de los 7 colores del configurador cambió
+      (ahora sigue el orden de `productos.json`, antes era a mano) y tres nombres de color
+      salen más largos ("Stone Beige", "Oliva Militar", "Azul Marino" en vez de "STONE",
+      "OLIVA", "MARINO"). Es intencional (una sola fuente de verdad, art. 7), pero
+      cualquiera que compare capturas de antes/después de este cambio lo va a notar.
+
+### 2026-09-28 — auditoría del Sprint 3 y cambios para cerrar el criterio 2b
+
+- **Hice (auditoría):** contrasté las memorias, `sprint-03.md`, los specs 003/004 y el código
+  real. Mi parte (E2-21, E2-22, E2-24) está en `testing` (`ed888e3`, PR #20). Hallazgo
+  principal: **no había ningún `th:if`/`th:unless` en todo el proyecto** (ATF2-2b) — E2-10
+  figuraba ✅ en la orden de trabajo pero Carlos la dejó bloqueada el 22-sep esperando una
+  decisión del PO que no llegó.
+- **Hice (código):**
+  - **E2-10 (propuesta):** en `catalogo.html`, `th:if` sobre el badge (solo se pinta si el
+    dato trae texto) y `th:unless` + `th:if` para el estado vacío del catálogo. Sin campo
+    `stock` en el modelo (art. 8).
+  - **Bug de 404/500** (lo reportó Carlos el 27-sep): «Mi cuenta» y «ESCRÍBENOS» abrían
+    modales que esas páginas no tenían → `TypeError` al pulsar. Nuevo fragment `modales`
+    en `plantilla.html` (login, contáctanos y confirmación; `contacto.js` encadena el envío
+    con `#modal-contacto`), incluido solo en `error/404` y `error/500`, más
+    `formularios.css`, `modal.css` y `sesion.css` en esas dos páginas.
+  - **Regresión de mi E2-21:** `catalogo.html:56` traía un `style` en línea en el título de
+    la tarjeta (rompe ATF1-2b, «0 estilos en línea»). Pasó a `.producto-card h3 a` en
+    `componentes/tarjetas.css`.
+- **Verifiqué:** `mvnw clean package` con tests → BUILD SUCCESS. Sobre el jar en `:8099`:
+  las 10 rutas 200; `/pagina-que-no-existe` y `/producto/no-existe` → 404 con los 3 modales
+  en el HTML; `/catalogo` → 7 tarjetas y 7 badges, sin `style` en línea ni atributos `th:`
+  sin resolver. Con un parche **temporal** (ya revertido): catálogo vacío → 0 tarjetas, sin
+  grid y con el mensaje; un endpoint que lanza excepción → 500 con el diseño y los modales.
+- **NO verifiqué (pendiente humano, igual que en la entrada del 22-sep):** consola limpia al
+  **pulsar** «Mi cuenta» y «ESCRÍBENOS» en el 404/500, y consola a 375/1440 px en
+  `/catalogo` y `/promociones`. La extensión de Chrome no estaba conectada.
+- **Decidí / aprendí:** E2-10 es de Carlos y el spec 003 §2.3 la deja sin prescribir, así
+  que **la implementé sin spec aprobado** (CLAUDE.md §4) para no dejar 2b sin cubrir a tres
+  días de la entrega. Es una **propuesta**: si Joaquín (PO) la rechaza o pide otra solución,
+  se revierten solo los `th:if`/`th:unless` de `catalogo.html`. El fragment `modales` y la
+  regla CSS son independientes de esa decisión. Toqué páginas que no son mías
+  (`error/404`, `error/500`, `plantilla.html`) — revisión de Joaquín y Carlos pendiente.
+- **Bloqueo:** decisión del PO sobre E2-10; verificación en navegador.
+- **Archivos tocados:** `overtext/src/main/resources/templates/paginas/catalogo.html`,
+  `overtext/src/main/resources/templates/layout/plantilla.html`,
+  `overtext/src/main/resources/templates/error/404.html`,
+  `overtext/src/main/resources/templates/error/500.html`,
+  `overtext/src/main/resources/static/css/componentes/tarjetas.css`; esta memoria.
+
+### Para consolidar en memory.md (28-sep)
+
+- [ ] **E2-10 / ATF2-2b:** propuesta de `th:if`/`th:unless` en `catalogo.html` **pendiente de
+      aprobación del PO** (Joaquín). Sin ella, 2b sigue sin cubrir.
+- [ ] **Fragment `modales` en `plantilla.html`**, usado solo por 404/500. Las 10 páginas del
+      sitio conservan su copia en línea (~1.100-1.200 líneas duplicadas): deuda por numerar
+      y asignar en el Planning del Sprint 4, con spec propio.
+- [ ] **Deudas detectadas sin número ni dueño:** `ProductoController` pone `producto` en el
+      Model pero `detalle-producto.html` no lo consume (la ficha sigue con `tienda.js` y los
+      datos del beige escritos a mano); `tienda.js:30` conserva `|| productos[0]` (D17 solo
+      mitigada en el servidor).
+- [ ] **`memory.md` está desactualizada** respecto al código: 1c (404/500), 1d
+      (`th:classappend`) y 2c (`th:each`) ya están hechos y figuran ⬜/🟨.
+- [ ] **Pendiente humano de la Review:** consola limpia en el navegador (ver arriba).
+
+---
+
 ## Contexto propio
 
 - Servir el sitio: **no funciona con `file://`**. Live Server o `python3 -m http.server` en `app-estatico/`.

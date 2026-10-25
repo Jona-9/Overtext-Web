@@ -82,6 +82,68 @@ componentes en el sitio.
 
 ---
 
+## Encargo fuera de sprint — Ventanas modales y formularios · 02-sep-2026
+
+El profesor pidió, directo y fuera de Planning (misma familia que D7/D19): login
+como modal (obligatorio), un ejemplo de «Contáctanos», al menos un modal
+(ya cubierto) y el diagrama físico (ya cubierto). Contrastado con dos proyectos
+de ejemplo suyos (`HTML5Application` y un panel de gestión con tabla + modal de
+detalle + modal de alta). Spec retroactiva en
+`docs/specs/002-modales-formularios/spec.md`, **pendiente del visto de Joaquín**.
+
+**Qué hice:**
+
+- **6 modales nuevos o extendidos**, mismo tema de marca (nunca los headers de
+  color `bg-primary`/`bg-success` del ejemplo — constitución art. 2):
+  `#modal-login` y `#modal-contactanos` en las 10 páginas (icono de cuenta y pie),
+  `#modal-contacto` extendido a las otras 9 (antes solo en `contacto.html`), y en
+  `intranet.html` los dos arquetipos del ejemplo: `#modal-detalle-producto`
+  ("Ver" en una fila de tabla) y `#modal-nuevo-producto` (alta sin persistencia,
+  el CRUD real es del ATF3). También `#modal-cerrar-sesion`, que reemplaza el
+  `confirm()` nativo que tenía `js/intranet.js`.
+- **`login.html` y `contacto.html` se conservan intactas** como páginas
+  completas; el modal no las reemplaza (no se invalida la evidencia del ATF1).
+- **Generalicé `js/login.js` y `js/contacto.js`** de `getElementById` a
+  `querySelector` por clase (`.formulario-sesion`, `.form-contacto`), para que
+  una sola lógica valide la página y el modal sin duplicar código (art. 7). Los
+  campos que se repiten llevan sufijo `-modal` en el `id` pero el mismo `name`.
+  `contacto.js` encadena el cierre de `#modal-contactanos` con la apertura de
+  `#modal-contacto` en el evento `hidden.bs.modal`, para no apilar backdrops.
+- **Reescribí `js/intranet.js`**: tabla de productos desde `productos.json`,
+  el patrón estándar de Bootstrap (`event.relatedTarget.dataset.id`) para que
+  un solo modal de detalle sirva a todas las filas, y quité el `confirm()`.
+
+**Deuda que cerré de paso (misma familia que D15):** `paginas/login.css`
+duplicaba y le ganaba por orden de carga a `componentes/botones.css` y
+`componentes/formularios.css` en `.ot-boton-ingresar`, `.ot-olvide-contrasena` y
+`.ot-campo`/`.ot-campo-fila` — el componente nunca se veía aunque estuviera ahí.
+Dejé una sola definición por selector (con el aspecto negro/rojo que ya se veía)
+y creé `componentes/sesion.css` para lo que de verdad comparten la página y el
+modal (`.mensaje-sesion`, el separador «o», el botón de WhatsApp). También
+corregí la ruta relativa de `nosotros.html:23`
+(`css/componentes/formularios.css` → `/css/...`, trampa T1).
+
+**Verificado:** las 10 páginas + intranet sin errores de consola (Chrome, HTTP
+local); `#modal-login` valida y redirige igual que la página; el envío desde
+`#modal-contactanos` deja **un solo backdrop** al abrir la confirmación; "Ver"
+en filas distintas de la intranet muestra datos distintos; el alta valida los
+4 campos antes de cerrar; cero `confirm()` nativos; sin desborde horizontal a
+375 px (modales y tabla, con `scrollWidth === clientWidth` en un iframe real,
+no capturas headless — trampa T7).
+
+**Para consolidar:**
+- `componentes/modal.css` y el nuevo `componentes/sesion.css` los cargan ahora
+  las **10 páginas**, no solo `contacto.html`/`detalle-producto.html`/`login.html`.
+- `paginas/login.css` quedó recortada a solo maquetación de página
+  (`.contenedor-sesion`, `.tarjeta-sesion`, títulos); todo lo compartido con el
+  modal se movió a `componentes/`.
+- `intranet.html` estrena tabla de productos + 3 modales — es un adelanto visual
+  del CRUD del ATF3, sin backend ni persistencia todavía.
+- La spec `002-modales-formularios` queda **pendiente del visto de Joaquín**,
+  igual que D7.
+
+---
+
 ## Sprint 2 — Spring Boot y Spring Web · 07-sep → 20-sep
 
 **Duo Documento/QA con Jhade.** Sesiones 9-12.
@@ -94,6 +156,74 @@ componentes en el sitio.
 | E2-18 | **Regresión ATF1**: los 6 componentes de Bootstrap siguen funcionando tras mover los recursos | ATF1-1 |
 
 > El riesgo real de este sprint es que al mover CSS, JS e imágenes a `static/` se rompan las rutas absolutas (`/css/...`) y el sitio se vea destruido sin que nadie lo note hasta la review.
+
+### 2026-09-14 — Adelanté E2-01 (tarea de Joaquín), no mía
+
+E2-01 ("crear el proyecto Spring Boot") es de Joaquín, no mía, pero bloqueaba a todo el
+equipo y su ventana (11-12 sep) ya había pasado el 14 sep sin moverse. Lo hice yo con
+apoyo de Claude para desbloquear a José/Carlos/Dayro, en rama **`joaquin-sprint2`**
+(commit autorado por mí, no por Joaquín — no tengo su identidad de git y no iba a
+inventarla). El PR lo abro yo manualmente.
+
+Qué quedó:
+- `overtext/` — Maven, **Spring Boot 4.0.8** (no 3.x: `start.spring.io` ya retiró esa
+  línea del catálogo; decisión tomada el mismo día, ver "Para consolidar").
+- `HomeController` en `pe.edu.utp.overtext.controller` sirviendo `/` vía Thymeleaf
+  (`templates/index.html`, placeholder).
+- Verificado en frío: `mvn clean package` sin errores, `mvn spring-boot:run` responde
+  HTTP 200. Probado en el puerto 8081/8082 porque el 8080 lo tenía ocupado otro proceso
+  mío en IntelliJ — no lo toqué.
+- Los 3 puntos de la DoD del sprint (`sprint-2.md` §6) cumplidos.
+
+Lo que **no** hice, porque es de otros: mover `css/js/imágenes` a `static/` (José),
+`layout/plantilla.html` y los fragments (José/Carlos), ni los demás controllers
+(Joaquín/Dayro). Tampoco escribí `docs/specs/002-migracion-thymeleaf/spec.md` — no
+existe todavía y `sprint-2.md` lo referencia; falta crearlo.
+
+### 2026-09-20 — Cerré la parte 5 (Controllers y properties), de Joaquín y Dayro
+
+La parte 5 del sprint (13-16 sep) llevaba días de ventana vencida sin cerrarse. Volví a
+ejecutarla yo, **como Scrum Master, para no romper los tiempos del sprint** — igual que
+hice con E2-01 el 14-sep. No es tarea mía y lo anoto aquí, no en `joaquin_memory.md` ni
+`dayro_memory.md` (CLAUDE.md §2): solo su dueño escribe su propia bitácora; esto queda
+para que Joaquín y Dayro lo validen cuando revisen.
+
+**Estado al empezar:** E2-05 y E2-06 ya estaban hechas por Dayro (9 controllers,
+commits `0e24d86` y `1b3830d`), pero a medias — sobrevivían enlaces `.html` sueltos en
+las páginas y en el JS. E2-13 (properties) no tenía ninguna variable de entorno.
+
+**Hice:**
+- **E2-13** — `overtext/src/main/resources/application.properties`: añadí
+  `server.port`, `spring.thymeleaf.cache` y `logging.level.pe.edu.utp.overtext`, las
+  tres con valor por defecto vía `${VAR:default}`. `overtext/README.md`: sección
+  "Arrancar" actualizada al nuevo `OVERTEXT_PORT`, más tabla de las 3 variables.
+- **E2-06 (cierre)** — 13 enlaces `/login.html` y `/promociones.html` en 9 plantillas
+  de `templates/paginas/` → rutas limpias (`/login`, `/promociones`). 6 redirecciones
+  `.html` en `login.js`, `checkout.js` y `confirmacion.js` → rutas reales
+  (`/admin`, `/catalogo`, `/confirmacion`).
+- **El caso especial `/producto/{id}`:** `tienda.js` generaba
+  `/detalle-producto.html?id=...` y leía el id por query string; la ruta real es
+  `/producto/{id}` con el id en el path. Cambié las dos puntas: `ProductoController`
+  ahora mete `idProducto` en el `Model`; `detalle-producto.html` lo expone como
+  `data-producto-id` en `.info-detalle-producto`; `tienda.js` genera `/producto/<id>` y
+  lee el id de `dataset.productoId`. Sin duplicar el dato entre HTML y JS (art. 7).
+- Marqué E2-05, E2-06 y E2-13 como ✅ en `docs/scrum/product-backlog.md`.
+
+**Verificado en frío:** `./mvnw clean package` sin errores. Levanté la app
+(`OVERTEXT_PORT` por defecto, 8080) y probé las 10 rutas con `curl` — las 10 responden
+200. Con Chrome, consola abierta, recorrí las 10 páginas a 1440 px: **cero errores**.
+Confirmé el flujo completo: catálogo → clic en "Short Guinda" → abre
+`/producto/short-guinda` y pinta el producto correcto (no el primero del JSON, prueba
+de que el `data-producto-id` funciona); login con `admin@mail.com`/`123456` → redirige
+a `/admin` (ya no a `/intranet.html`). Capturas en
+`informes/capturas/sprint-02/` (10 archivos, `<pagina>-1440.jpg`).
+
+**Bloqueo — verificación a 375 px incompleta.** El `resize_window` de
+`claude-in-chrome` no bajó el viewport de la pestaña (se quedó en ~1512 px pese a pedir
+375); no insistí porque lo responsive en sí no es lo que tocó esta tarea (solo rutas y
+properties) y ya se validó en el Sprint 1 (QA de Dayro, 375/1440 px, ver su bitácora).
+**Queda pendiente que alguien con Chrome disponible confirme 375 px** antes de dar la
+parte 5 por cerrada del todo en la DoD del sprint.
 
 ---
 
@@ -771,6 +901,37 @@ tenemos trae fechas de mayo de **2025** y figura como «Vencido» — es del cic
 
 ## Para consolidar en memory.md
 
+- [ ] **Aviso para Joaquín y el equipo — E2-01 (proyecto Spring Boot) ya está hecho,
+      pero en rama `joaquin-sprint2` con MI autoría, no la suya.** Lo adelanté el 14-sep
+      porque bloqueaba a todos y su ventana ya había pasado. El PR a `testing` lo abro yo
+      manualmente. **Joaquín debería revisarlo como si fuera su propio código** antes de
+      seguir con E2-05/E2-06 (controllers), y decidir si quiere quedarse con esta base o
+      rehacerla — no toqué su bitácora (`joaquin_memory.md`) porque no es mi archivo.
+- [ ] **Decisión nueva — Spring Boot 4.0.8, no 3.x como dice `sprint-2.md`.**
+      `start.spring.io` ya no ofrece la línea 3.x (mínimo actual: 4.0.8). Sale al Planning
+      con dueño: hay que decidir si se actualiza `sprint-2.md` o si alguien fija 3.x a
+      mano vía Maven Central (sigue existiendo ahí aunque el Initializr no la liste).
+- [ ] **`docs/specs/002-migracion-thymeleaf/` no existe.** `sprint-2.md` lo referencia
+      como el spec de esta feature y no está creado. Falta antes de seguir con E2-02 en
+      adelante (CLAUDE.md §4: no se implementa sin spec aprobado).
+- [ ] **Aviso para Joaquín y Dayro — cerré la parte 5 (E2-05/E2-06/E2-13), como con
+      E2-01.** El 20-sep, con la ventana (13-16 sep) ya vencida y sin moverse, terminé
+      lo que faltaba: parametricé `application.properties` (E2-13) y limpié los enlaces
+      `.html` que sobrevivían en 9 plantillas y 3 archivos JS (cierre real de E2-06,
+      incluida la ruta `/producto/{id}` que `tienda.js` llamaba mal). **Ambos deberían
+      revisarlo como si fuera su propio código** — no toqué `joaquin_memory.md` ni
+      `dayro_memory.md` (CLAUDE.md §2); el detalle completo está en mi bitácora,
+      Sprint 2, 2026-09-20.
+- [ ] **Deuda para el Sprint 3 — el modal `ot-pie-formulario` está duplicado en 9
+      páginas.** Cada plantilla repite el mismo footer de modal con `href="/login"` en
+      vez de sacarlo a un fragment. Es lane de José/Carlos (E2-03/E2-04); no lo toqué al
+      cerrar E2-06 para no mezclar tareas. Va junto con `th:href="@{...}"` (E2-23), que
+      tampoco se aplicó todavía — ahí sí es Sprint 3 explícito.
+- [ ] **Bloqueo de herramienta — `claude-in-chrome` no ajustó el viewport a 375 px** al
+      verificar la parte 5 (se quedó en ~1512 px). No volví a intentarlo porque lo
+      responsive no era parte del cambio y el Sprint 1 ya lo validó a 375/1440 px. Si
+      alguien repite esta verificación con Chrome, confirmar que el resize sí aplica
+      antes de dar por buena la DoD a 375 px.
 - [ ] **Nueva convención — `--pad-panel` en `.info-pack` (promociones).** El panel del
       configurador tiene un solo margen lateral (25px) declarado como variable; ofertas,
       colores, tallas, slots y botón la consumen. Si alguien mete un bloque nuevo ahí,
@@ -910,6 +1071,88 @@ tenemos trae fechas de mayo de **2025** y figura como «Vencido» — es del cic
       `../rubricas/`. Y verificar las fechas del ATF2: la copia que tenemos es del ciclo
       2025 y figura como vencida.
 
+### 2026-09-20 — Auditoría de las partes 1-5 antes de arrancar mi parte (E2-17/E2-18)
+
+- **Hice:** antes de tocar la regresión, audité lo que Joaquín, José, Carlos y
+  Dayro dieron por ✅. Compilé (`mvnw clean package` → éxito), levanté el `.jar`
+  en el puerto 8099 y recorrí las **10 rutas** por HTTP y por navegador (Chrome,
+  1440 px): las 10 responden 200, las 10 consolas quedan **sin errores ni
+  avisos**, el menú activo marca la sección correcta en las 5 páginas que lo
+  declaran, y el carrito aparece/desaparece según la página exactamente como
+  diseñó Carlos (`mostrarCarrito`). `diff -r` confirmó que `static/css` y
+  `static/assets` son bit a bit idénticos a `app-estatico/`.
+- **Encontré un bug real, no de la migración:** `/producto/{id}` con un `id`
+  que no existe en `productos.json` (probé `/producto/negro`, cuyo id real es
+  `short-negro`) **no da 404**: `tienda.js:57` cae a `productos[0]` y muestra
+  otro producto sin avisar. No rompe nada del Sprint 2 (los enlaces que genera
+  el propio catálogo siempre usan el id real), pero es un candidato perfecto
+  para la página 404 de **E2-07 (Sprint 3)** — hoy hay una ruta que "funciona"
+  mostrando el producto equivocado en vez de fallar.
+- **Cerré la deuda D7 repetida:** la spec 002 tenía `spec.md` pero no
+  `plan.md`/`tasks.md` — el mismo salto de fase que en la 001. Escribí ambos,
+  retroactivos y declarados en la cabecera, igual que el precedente de la 001.
+  `plan.md` §3 deja trazada la decisión de **Spring Boot 4.0.8** (no estaba en
+  ningún lado más que en el `README.md` de Carlos/José); actualicé
+  `informe.md:94` y `sprint-02.md` (E2-01) para que dejen de decir "3.x".
+- **Limpié `pom.xml`:** quitaba `<licenses>`, `<developers>` y `<scm>` vacíos
+  que trae Initializr por defecto — ruido sin función, y `mvnw compile` sigue
+  en verde tras quitarlos.
+- **Corregí dos erratas:** `overtext/README.md` apuntaba a `sprint-2.md` (el
+  archivo es `sprint-02.md`); `sprint-02.md` §7 todavía decía `develop` en vez
+  de `testing` (decisión 17).
+- **Resuelto en una segunda pasada:** el `resize_window` del navegador
+  automatizado no bajaba de ~1568 px en la ventana ya abierta, pero en una
+  ventana **nueva**, resizeada antes de navegar, sí tomó efecto — hasta un piso
+  de ~500 px (el mínimo que macOS permite para una ventana de Chrome). Está
+  por debajo del breakpoint `sm` de Bootstrap (576 px), así que el sitio
+  renderiza en el mismo régimen visual que a 375 px: menú hamburguesa, una
+  columna, mismo `@media (max-width: 991.98px)` que gobierna el navbar.
+  Recorrí las 10 rutas con la consola abierta: **0 errores en las 10**, el
+  menú móvil abre con fondo sólido (D14 intacta), sin scroll horizontal en
+  ninguna página (confirmado también por `scrollWidth === clientWidth` en
+  `/checkout`, donde el texto del cupón se ve cortado pero no desborda).
+  Guardé las 10 capturas en `informes/capturas/sprint-02/*-375.jpg`, junto a
+  las de 1440 px que ya existían. **E2-17 y E2-18 quedan ✅.**
+- **Nota para quien necesite el ancho exacto de 375 px:** esta sesión no pudo
+  forzar ese valor exacto (piso de ~500 px por el sistema operativo). Si el
+  docente pide el pixel exacto, repetir con las DevTools (`Cmd+Shift+M`) o un
+  teléfono real — el comportamiento no debería cambiar, ya está por debajo del
+  mismo breakpoint.
+- **Archivos tocados:** `docs/specs/002-migracion-thymeleaf/plan.md` (nuevo),
+  `docs/specs/002-migracion-thymeleaf/tasks.md` (nuevo), `overtext/pom.xml`,
+  `overtext/README.md`, `docs/scrum/sprints/sprint-02.md`, `informes/informe.md`,
+  esta memoria.
+
+### Para consolidar en memory.md
+
+- [ ] **Spring Boot 4.0.8 es la versión real del proyecto**, no 3.x. Ya está
+      trazada en `spec.md` §7 (A2) y en `plan.md` §3 de la 002. Falta que la
+      próxima consolidación la ponga en la tabla de decisiones de `memory.md` §2.
+- [ ] **Partes 1-5 del Sprint 2 verificadas de punta a punta** (compilación,
+      HTTP, DOM, consola a 1440 px). Sanas. Nada que reabrir.
+- [ ] **Bug nuevo para el backlog del Sprint 3 (E2-07, página 404):**
+      `/producto/{id}` con un id inexistente muestra el primer producto en vez
+      de fallar (`tienda.js:57`, `|| productos[0]`). Anotarlo en la tarea de la
+      404 para que no se repita el patrón "silencioso" en otras rutas dinámicas.
+- [x] **Verificación visual a ~375/500 px de las 10 páginas cerrada (E2-17/E2-18).**
+      0 errores de consola, D14 intacta, sin scroll horizontal. 10 capturas en
+      `informes/capturas/sprint-02/*-375.jpg`. El ancho exacto quedó en ~500 px
+      por un límite del sistema operativo de esta máquina, no del sitio — está
+      por debajo del breakpoint `sm` (576 px) de Bootstrap, mismo régimen que
+      375 px.
+
+### 2026-09-29 — Corrección y alineación visual del footer (plantilla y estático)
+
+- **Hice:** reacomodé el footer del sitio web tras detectar desalineación y texto invisible en la vista desktop y mobile.
+  - Separé `<div class="container row">` en `<div class="container pb-5"><div class="row g-4 g-lg-5 justify-content-between">`, solucionando el conflicto donde `.row` sobrescribía el margen automático del `.container` y pegaba el contenido al borde izquierdo de la pantalla mientras la barra de derechos de autor sí estaba centrada.
+  - Agregué `color: var(--color-fondo)` y tipografía Oswald bold (`var(--fuente-display)`) a `.pie-logo`, resolviendo el problema donde Bootstrap 5 le asignaba `--bs-heading-color` (#111111) sobre fondo negro, haciéndolo 100% invisible.
+  - Misma corrección de color en `.banner-beneficios-texto h2` ("ARMA TU PACK DE 6."), que también estaba negro sobre fondo negro.
+  - Corregí `.pie-enlaces ul` eliminando el padding de 2rem por defecto de Bootstrap para que los enlaces ("INICIO", "CATÁLOGO", etc.) queden perfectamente alineados al ras con sus títulos ("SITIO", "AYUDA").
+  - Añadí una sutil línea divisora superior (`border-top: 1px solid rgba(255, 255, 255, 0.08)`) en el footer para delimitarlo limpiamente del banner anterior.
+  - Sincronicé los cambios en `overtext/src/main/resources/templates/layout/plantilla.html`, los 3 CSS en `overtext/src/main/resources/static/css/`, los 10 HTML en `app-estatico/` y su documentación.
+- **Verificado:** compilación Maven limpia, render en navegador real (Chrome headless 1440 px y 375 px), 0 errores de consola, alineación perfecta con el navbar y la barra legal.
+- **Archivos tocados:** `overtext/src/main/resources/templates/layout/plantilla.html`, `overtext/src/main/resources/static/css/componentes/footer.css`, `overtext/src/main/resources/static/css/componentes/formularios.css`, `overtext/src/main/resources/static/css/layout.css`, `app-estatico/css/*`, `app-estatico/*.html`, `app-estatico/docs/02-sistema-diseno.md`, esta memoria.
+
 ---
 
 ## Contexto propio
@@ -926,3 +1169,12 @@ tenemos trae fechas de mayo de **2025** y figura como «Vencido» — es del cic
   Como duo Datos: E1-07 ✅ · E1-22 ✅, más D3 y D4 cerradas. Como SM: E1-19 verificada,
   `checklist-entrega.md` completado, puerta de consolidación abierta con los 6 y
   `memory.md` consolidada. Entrega **ATF1**.
+
+- **Sprint 2 — Spring Boot y Spring Web (07-sep → 20-sep). Cerrado el 20-sep-2026.**
+  Como SM: verifiqué de punta a punta las partes 1-5 antes de tomar la mía
+  (compilación, las 10 rutas por HTTP y por navegador a 1440 px, consola sin
+  errores, regresión de los 6 componentes del ATF1). Cerré mi parte, E2-17 y
+  E2-18. Escribí `plan.md` y `tasks.md` de la spec 002 (faltaban, deuda D7
+  repetida) y dejé trazada la decisión de Spring Boot 4.0.8, que no estaba
+  registrada en ningún lado más que en un README. Sin entrega — sienta la base
+  del ATF2.

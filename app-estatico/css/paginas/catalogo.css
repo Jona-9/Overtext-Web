@@ -1,9 +1,5 @@
-/* ============================================================
-   OVERTEXT — Página Catálogo
-   Grid de productos y swatches de color.
-   ============================================================ */
 
-/* --- Hero del catálogo --- */
+
 .catalogo-titulo {
     font-size: clamp(2rem, 5vw, 3.5rem);
     letter-spacing: -2px;
@@ -13,15 +9,10 @@
     max-width: 480px;
 }
 
-/* --- Sección catálogo --- */
 .catalogo-productos {
     padding: var(--espacio-xl) 0;
 }
 
-/* El layout del grid lo da el sistema de columnas de Bootstrap (row/col-*).
-   .productos-grid queda solo como gancho para js/tienda.js. */
-
-/* --- Swatches de color (catálogo) --- */
 .producto-colores {
     display: flex;
     gap: 6px;
@@ -41,7 +32,3 @@
     transform: scale(1.2);
 }
 
-/* Sin paleta de clases: js/tienda.js pinta cada .color con el hex de
-   productos.json (art. 7, un dato no se duplica). */
-
-/* La responsividad del grid la maneja Bootstrap (col-12/col-sm-6/col-lg-4/col-xl-3). */

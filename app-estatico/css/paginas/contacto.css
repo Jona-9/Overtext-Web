@@ -1,9 +1,5 @@
-/* ============================================================
-   OVERTEXT — Página Contacto
-   Hero, barra social y estilos específicos de contacto.
-   ============================================================ */
 
-/* --- Hero de contacto --- */
+
 .hero-contacto {
     padding: var(--espacio-xl) 0 var(--espacio-lg);
     border-bottom: 0.5px solid var(--color-borde);
@@ -26,7 +22,6 @@
     max-width: 480px;
 }
 
-/* --- Sección contacto: formulario + panel de info --- */
 .contacto-seccion {
     padding: var(--espacio-xl) 0;
 }
@@ -64,20 +59,6 @@
     margin-bottom: var(--espacio-lg);
 }
 
-.contacto-form {
-    display: flex;
-    flex-direction: column;
-    gap: var(--espacio-sm);
-}
-
-.contacto-enviar {
-    width: auto;
-    align-self: flex-start;
-    padding: 14px 40px;
-    margin-top: var(--espacio-sm);
-}
-
-/* --- Panel de información de contacto --- */
 .info-panel {
     background: var(--color-fondo-alt);
     padding: var(--espacio-lg);
@@ -114,7 +95,6 @@
     opacity: 1;
 }
 
-/* E1-11: iconos de Bootstrap en lugar de los PNG de 4-5 MB */
 .info-item .bi {
     font-size: 26px;
     line-height: 1;
@@ -170,7 +150,6 @@
     color: rgba(255, 255, 255, 0.7);
 }
 
-/* --- Responsive --- */
 @media (max-width: 860px) {
     .contacto-grid {
         grid-template-columns: 1fr;

@@ -1,19 +1,13 @@
-/* ============================================================
-   OVERTEXT — Formulario de contacto
-   Valida con Bootstrap (was-validated) y, si los datos son válidos,
-   muestra lo ingresado en un `modal` de Bootstrap.
-   ============================================================ */
+
 (function () {
     'use strict';
 
-    var formulario = document.getElementById('form-contacto');
+    var formularios = document.querySelectorAll('.form-contacto');
     var modal = document.getElementById('modal-contacto');
-    if (!formulario || !modal) return;
+    if (!formularios.length || !modal) return;
 
     var cuerpo = document.getElementById('modal-datos');
 
-    // E1-08 · El modal es de Bootstrap: la apertura, el cierre con Esc, el
-    // clic fuera y el bloqueo del scroll los gestiona el framework.
     var ventana = bootstrap.Modal.getOrCreateInstance(modal);
 
     function escapar(txt) {
@@ -27,31 +21,45 @@
             (escapar(valor) || '—') + '</p></div>';
     }
 
-    formulario.addEventListener('submit', function (e) {
-        e.preventDefault();
-        e.stopPropagation();
+    function valor(formulario, nombre) {
+        var campo = formulario.querySelector('[name="' + nombre + '"]');
+        return campo ? campo.value.trim() : '';
+    }
 
-        // E1-07 · Validación de Bootstrap: si algún campo no cumple, se marca
-        // el formulario y no se envía. El modal solo se abre con datos válidos.
-        formulario.classList.add('was-validated');
-        if (!formulario.checkValidity()) return;
+    Array.prototype.forEach.call(formularios, function (formulario) {
+        formulario.addEventListener('submit', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
 
-        var datos = {
-            nombre:  document.getElementById('contacto-nombre').value.trim(),
-            correo:  document.getElementById('contacto-correo').value.trim(),
-            asunto:  document.getElementById('contacto-asunto').value.trim(),
-            mensaje: document.getElementById('contacto-mensaje').value.trim()
-        };
+            formulario.classList.add('was-validated');
+            if (!formulario.checkValidity()) return;
 
-        cuerpo.innerHTML =
-            fila('Nombre', datos.nombre) +
-            fila('Correo', datos.correo) +
-            fila('Asunto', datos.asunto) +
-            fila('Mensaje', datos.mensaje);
+            var datos = {
+                nombre:  valor(formulario, 'contacto-nombre'),
+                correo:  valor(formulario, 'contacto-correo'),
+                asunto:  valor(formulario, 'contacto-asunto'),
+                mensaje: valor(formulario, 'contacto-mensaje')
+            };
 
-        ventana.show();
-        formulario.reset();
-        formulario.classList.remove('was-validated');
+            cuerpo.innerHTML =
+                fila('Nombre', datos.nombre) +
+                fila('Correo', datos.correo) +
+                fila('Asunto', datos.asunto) +
+                fila('Mensaje', datos.mensaje);
+
+            formulario.reset();
+            formulario.classList.remove('was-validated');
+
+            var contenedor = formulario.closest('.modal');
+            if (contenedor) {
+                contenedor.addEventListener('hidden.bs.modal', function abrir() {
+                    contenedor.removeEventListener('hidden.bs.modal', abrir);
+                    ventana.show();
+                });
+                bootstrap.Modal.getOrCreateInstance(contenedor).hide();
+            } else {
+                ventana.show();
+            }
+        });
     });
-
 }());

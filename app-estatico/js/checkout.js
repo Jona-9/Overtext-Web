@@ -1,10 +1,4 @@
-/* ============================================================
-   OVERTEXT — Checkout (Finalizar compra)
-   Página única con pasos que se desbloquean progresivamente:
-   1) Datos del cliente → 2) Envío → 3) Pago.
-   El tipo de envío revela sus campos inline (sin recargar) y
-   recalcula el resumen. Al finalizar arma ot_pedido.
-   ============================================================ */
+
 (function () {
     'use strict';
 
@@ -17,9 +11,8 @@
         delivery: 'DELIVERY A LIMA — S/ 15.00',
         provincia:'ENVÍO A PROVINCIA — S/ 25.00'
     };
-    var TIPO = ''; // se define al elegir opción de envío
+    var TIPO = '';
 
-    // Acceso al carrito (fuente única de verdad)
     var Carrito = window.Carrito || {
         obtener: function () { return []; },
         vaciar: function () { localStorage.removeItem('ot_carrito'); },
@@ -45,16 +38,12 @@
         });
     }
 
-    // Un campo dentro de un sub-bloque de envío no activo cuenta como oculto.
-    // (No se puede confiar en offsetWidth: los sub-bloques usan max-height:0,
-    //  que mantiene el ancho > 0.)
     function esVisible(el) {
         var caja = el.closest('.envio-campos');
         if (caja && !caja.classList.contains('visible')) return false;
         return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length);
     }
 
-    /* --- Render dinámico del resumen del pedido --- */
     function renderResumen() {
         var items = Carrito.obtener();
         var cont = document.getElementById('resumen-productos');
@@ -102,7 +91,6 @@
         return { items: items, subtotal: subtotal, costoEnvio: costoEnvio, total: total };
     }
 
-    /* --- Validación por campo (input o select) --- */
     function validarInput(input) {
         var val = input.value.trim();
         var ok = val !== '';
@@ -113,17 +101,14 @@
             var tipo = (document.getElementById('co-doc') || {}).value;
             if (tipo === 'DNI') ok = /^\d{8}$/.test(val);
             else if (tipo === 'RUC') ok = /^\d{11}$/.test(val);
-            else ok = /^[A-Za-z0-9]{6,12}$/.test(val); // Carné de extranjería / Pasaporte
+            else ok = /^[A-Za-z0-9]{6,12}$/.test(val);
         }
-        // E1-07 · Estado de validación con las clases de Bootstrap. El mensaje
-        // .invalid-feedback lo muestra el propio framework, sin tocar estilos
-        // desde JS (constitución art. 4).
+
         input.classList.toggle('is-invalid', !ok);
         input.classList.toggle('is-valid', ok);
         return ok;
     }
 
-    // Valida los campos requeridos VISIBLES de un paso
     function validarPaso(paso) {
         var ok = true;
         var sel = '.paso[data-paso="' + paso + '"] input[required], ' +
@@ -144,7 +129,6 @@
         sel.addEventListener('change', function () { if (esVisible(this)) validarInput(this); });
     });
 
-    // El número de documento se revalida al cambiar el tipo
     var selDoc = document.getElementById('co-doc');
     var inpNum = document.getElementById('co-numdoc');
     if (selDoc && inpNum) {
@@ -154,7 +138,6 @@
         });
     }
 
-    /* --- Poblar ubigeo (distritos de Lima, departamentos → provincias) --- */
     var ubigeo = null;
     function opt(v) { var o = document.createElement('option'); o.value = v; o.textContent = v; return o; }
     fetch('/js/peru-ubigeo.json')
@@ -179,7 +162,6 @@
         });
     }
 
-    /* --- Cambio de opción de envío: revela su sub-bloque y recalcula --- */
     var subbloques = form.querySelectorAll('.envio-campos');
     var errorEnvio = document.getElementById('envio-error');
     form.querySelectorAll('input[name="envio"]').forEach(function (radio) {
@@ -193,7 +175,6 @@
         });
     });
 
-    /* --- Gating: "CONTINUAR" desbloquea el siguiente paso --- */
     function desbloquearSiguiente(paso) {
         var actual = form.querySelector('.paso[data-paso="' + paso + '"]');
         actual.classList.add('paso-completado');
@@ -222,7 +203,6 @@
         });
     });
 
-    // Reabrir un paso ya completado tocando su cabecera
     form.querySelectorAll('.paso-cabecera').forEach(function (cab) {
         cab.addEventListener('click', function () {
             var paso = cab.closest('.paso');
@@ -233,7 +213,6 @@
         });
     });
 
-    /* --- Envío del formulario --- */
     form.addEventListener('submit', function (e) {
         e.preventDefault();
 
@@ -301,7 +280,6 @@
         window.location.href = '/confirmacion.html';
     });
 
-    // Render inicial del resumen al cargar la página
     renderResumen();
 
 }());

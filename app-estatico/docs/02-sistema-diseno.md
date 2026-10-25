@@ -104,10 +104,12 @@ Ambas familias se importan con un único `@import` de Google Fonts al inicio de 
 ### Footer (grilla Bootstrap `row`/`col-*`):
 ```html
 <footer class="pie-pagina">
-  <div class="container row g-4 pb-5">
-    <div class="col-12 col-md-6 col-lg-4 pie-info"> … </div>
-    <div class="col-6 col-md-3 col-lg-2 pie-enlaces"><h3>SITIO</h3><ul>…</ul></div>
-    <!-- … -->
+  <div class="container pb-5">
+    <div class="row g-4 g-lg-5 justify-content-between">
+      <div class="col-12 col-md-6 col-lg-4 pie-info"> … </div>
+      <div class="col-6 col-md-3 col-lg-2 pie-enlaces"><h3>SITIO</h3><ul>…</ul></div>
+      <!-- … -->
+    </div>
   </div>
 </footer>
 ```

@@ -1,0 +1,26 @@
+Una carpeta por color. Para saber que falta: abre la carpeta y cuenta.
+
+  <color>/principal.webp   la foto del producto (catalogo + carrito). OBLIGATORIA.
+  <color>/1.webp .. N.webp fotos de galeria del detalle, en orden. Opcionales.
+
+Si un color no tiene fotos de galeria, el detalle muestra principal.webp
+y no se rompe (js/tienda.js hace el fallback).
+
+Formato: 3:4 vertical, 1200x1600, menos de 300 KB.
+Todo se recorta a 3:4 (card y foto grande) y las de galeria ademas a 1:1
+en la miniatura, asi que centra el sujeto.
+
+Estado hoy:
+  beige   principal + 1,2,3,4   (3 y 4 son horizontales, se recortan)
+  negro   principal + 1,2,3,4   (3 y 4 son horizontales, se recortan)
+  guinda  principal             <- faltan galeria
+  gris    principal             <- faltan galeria
+  oliva   principal             <- faltan galeria
+  azul    principal             <- faltan galeria
+  marron  principal             <- faltan galeria
+
+Para anadir fotos: mete 1.webp, 2.webp, 3.webp en la carpeta del color y
+anade esas rutas al array "galeria" de ese producto en js/productos.json.
+
+Las imagenes que no son de producto (hero, tela, nosotros, packs) van en
+assets/img/sitio/.

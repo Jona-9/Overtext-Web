@@ -87,6 +87,13 @@ El `spec.md` tiene tres `[NECESITA ACLARACIÓN]` que bloquean el modelo de datos
 
 **El 404 vale un cuarto del criterio 1 (6 pts) y es invisible en el uso normal**, así que se olvida con facilidad. Lo hago en la sesión 15 y lo pruebo entrando a `/pagina-que-no-existe`.
 
+### Como PO — checkpoint de spec
+
+- [x] Aprobar `docs/specs/003-thymeleaf-interacciones/spec.md` *(2026-09-22)* — cubre
+      E2-21, E2-22 y E2-24 de José. Ver bitácora.
+- [x] Aprobar `docs/specs/004-errores-y-contacto/spec.md` *(2026-09-27)* — cubre
+      mis E2-07, E2-19 y E2-20. Ver bitácora.
+
 ### Como PO — antes de entregar
 
 - [ ] Verificar los 4 criterios del ATF2 contra la rúbrica, uno por uno
@@ -260,6 +267,111 @@ Luego los objetivos general y específicos, y paso a Jonathan con la arquitectur
 - **Sprint 1 aceptado como PO (28-ago).** Los seis componentes de Bootstrap del criterio 1 (1a-1f) están en producción y verificados en el sitio servido; ver la tabla de evidencia en mi bitácora.
 - **Lección de proceso para el Planning del Sprint 2:** una decisión de PO que toca código **sale del Planning con dueño y número de tarea**. I1 e I2 se decidieron el 25-ago y tardaron tres días en llegar al archivo, porque quedaron como nota en tres memorias y nadie era su dueño (todos respetaban bien el art. 9). El art. 9 protege el código, pero no asigna trabajo: eso es del backlog.
 - **Nota para Doc/QA:** `nosotros.html` tenía un `<link>` relativo `href="css/componentes/formularios.css"` (sin `/`); no lo toqué (lane de limpieza E1-12/E1-14).
+
+---
+
+## Bitácora — Sprint 3
+
+### 2026-09-22 — aprobación de `docs/specs/003-thymeleaf-interacciones/spec.md`
+
+- **Hice (como PO):** revisé el spec que José escribió para sus tres tareas del Sprint 3
+  (E2-21 `th:each` del catálogo, E2-22 `th:each` del configurador, E2-24 verificación de
+  fragments). No existía spec para este trabajo — `002-migracion-thymeleaf` lo excluía a
+  propósito para el Sprint 3 — y esta vez José se detuvo a pedir el checkpoint **antes**
+  de tocar código, en vez de implementar primero y escribir el spec después (como pasó con
+  D7 en el Sprint 1 y D16 en el Sprint 2). Lo valoro: es la primera vez que el equipo
+  respeta CLAUDE.md §4 en el orden correcto.
+- **Reviso las cuatro decisiones de diseño de la §5 del spec:**
+  - **Retirar el render del catálogo de `tienda.js`** (queda como código muerto si no se
+    hace, y `renderDetalle` sigue intacto para la ficha de producto): de acuerdo, es
+    limpieza directa del criterio 2b.
+  - **Pintar el color del configurador con `th:style` del hex del modelo**, en vez de una
+    clase `color-muestra--<slug>` nueva: de acuerdo. Cierra además una duplicación de hex
+    entre `productos.json` y `promociones.css` que no tenía dueño (mismo patrón que D3/D4
+    del Sprint 1, pero detectada antes de que nadie se equivoque con un hex "parecido" —
+    ver trampa T11).
+  - **Reutilizar `ProductoService.listarTodos()` para los colores**, sin crear una
+    colección derivada nueva: de acuerdo, respeta el art. 8 (no añadir una abstracción que
+    nadie pidió).
+  - **Los enlaces nuevos del catálogo ya nacen con `th:href="@{...}"`**, adelantando una
+    porción de E2-23 (que es de Carlos): de acuerdo, no es invasión de tarea — es
+    simplemente que el `th:each` no puede escribirse de otra forma. Anotado en el spec
+    para que Carlos no repita ese bloque.
+- **Aprobado.** Marqué el checkpoint del spec (§8) y su cabecera como aprobado, con fecha
+  de hoy. **Esto habilita a José a implementar E2-21, E2-22 y E2-24** sin volver a pedir
+  permiso — el spec ya documenta el "qué" y el "por qué"; el "cómo" exacto lo decide quien
+  lo implemente, siempre que no se aparte de las cuatro decisiones aprobadas.
+- **Decidí / aprendí:** un checkpoint de PO no tiene que ser una reunión — basta con leer
+  el spec, confirmar que las decisiones no violan la constitución (art. 7 y 8, en este
+  caso) y marcarlo. El costo de aprobar **antes** de que se escriba código es mucho menor
+  que reconstruir un spec retroactivo, que es lo que pasó dos veces ya.
+- **Bloqueo:** ninguno. Spec 003 aprobado; desbloquea a José.
+- **Archivos tocados:** `docs/specs/003-thymeleaf-interacciones/spec.md` (cabecera y
+  checklist §8, marcado aprobado); esta memoria.
+
+### Para consolidar en memory.md
+
+- [ ] **Spec 003 aprobado (2026-09-22)** — `docs/specs/003-thymeleaf-interacciones/spec.md`.
+      Habilita E2-21, E2-22 y E2-24 de José en el Sprint 3.
+- [ ] **Primera vez que el equipo pide el checkpoint del PO antes de escribir código**, no
+      después. Vale la pena repetirlo en la Retrospectiva del Sprint 3 como lo que
+      corrigió a D7/D16, no solo como una excepción de José.
+
+### 2026-09-27 — E2-07, E2-19 y E2-20 (duo Datos/Backend, con Dayro)
+
+- **Hice (como PO):** escribí y aprobé en el mismo checkpoint
+  `docs/specs/004-errores-y-contacto/spec.md` — ni E2-07, ni E2-19, ni E2-20 tenían
+  spec (el 002 los excluía a propósito para el Sprint 3, y el 003 solo cubre las
+  tareas de José). Mismo patrón que el spec 003: aprobación antes de tocar código,
+  no retroactiva.
+- **Hice (Duo Datos):**
+  - **E2-07 y E2-19** — Página 404 y 500 personalizadas. **Decisión de diseño:** sin
+    `ManejadorErroresGlobal`/`@ControllerAdvice` — Spring Boot ya resuelve
+    `templates/error/404.html` y `error/500.html` automáticamente por código de
+    estado (`BasicErrorController`), así que el `@ControllerAdvice` que pedía el
+    ticket habría sido una capa redundante (art. 8). Las dos plantillas reusan
+    `layout/plantilla :: cabecera` (con `mostrarCarrito=false`, sin el fragment
+    `carrito` — ver trampa T9) y `:: pie`.
+  - **E2-20** — `ContactoController` gana un `@PostMapping("/contacto")`. No toqué
+    el flujo de confirmación por modal que ya existe (E1-07/E1-08): `contacto.js`
+    ahora dispara un `fetch` asíncrono al mismo endpoint, sin bloquear el modal. El
+    controller valida que los 4 campos no lleguen vacíos (400 si alguno sí, caso
+    que en la práctica solo pasa sin JS) y por ahora solo registra el mensaje por
+    log — la tabla `mensaje_contacto` es Sprint 7 (E4-11), no se adelantó.
+- **Verifiqué en vivo** (servidor levantado en `:8099`, no el 8080 real, para no
+  chocar con nadie): `/pagina-que-no-existe` → 404 con navbar y pie del sitio;
+  `/producto/no-existe` → mismo 404 (antes cerraba en 404 "pelado" desde el
+  `ResponseStatusException` de `ProductoController`, ahora con diseño); un endpoint
+  temporal que lanzaba una excepción sin capturar → 500 con el mismo tratamiento
+  (lo creé, lo probé y lo borré, no queda en el repo); `POST /contacto` con los 4
+  campos → 200; con un campo vacío → 400. `mvnw compile` limpio, sin el archivo de
+  prueba.
+- **Decidí / aprendí:** un `curl` sin `-H "Accept: text/html"` recibe el error como
+  JSON (`BasicErrorController` negocia el formato); un navegador real manda
+  `Accept: text/html` y sí ve la plantilla. No es un bug, es cómo negocia
+  contenido Spring — quien vuelva a probar por `curl` que no se asuste si ve JSON.
+- **Bloqueo:** ninguno. E2-07, E2-19 y E2-20 cerradas con Definición de Hecho
+  completa (falta solo la captura en `informes/capturas/sprint-03/`, que es tarea
+  del duo Documento/QA — E2-25).
+- **Archivos tocados:**
+  `docs/specs/004-errores-y-contacto/spec.md` (nuevo),
+  `overtext/src/main/resources/templates/error/404.html` (nuevo),
+  `overtext/src/main/resources/templates/error/500.html` (nuevo),
+  `overtext/src/main/java/pe/edu/utp/overtext/controller/ContactoController.java`,
+  `overtext/src/main/resources/static/js/contacto.js`,
+  esta memoria.
+
+### Para consolidar en memory.md
+
+- [ ] **Spec 004 aprobado (2026-09-27)** — `docs/specs/004-errores-y-contacto/spec.md`.
+      Cierra ATF2-1c (404) por completo.
+- [ ] **E2-07, E2-19 y E2-20 cerradas.** 404/500 personalizados sin
+      `@ControllerAdvice` (Spring Boot los resuelve solo por convención de nombre de
+      plantilla); `POST /contacto` real, sin romper el modal de confirmación que
+      ya existía.
+- [ ] **Falta la captura del 404** en `informes/capturas/sprint-03/` (E2-25, duo
+      Documento/QA) y la verificación final de los 4 criterios del ATF2 antes de
+      empaquetar (mi checklist de "antes de entregar", sigue pendiente).
 
 ---
 

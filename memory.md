@@ -4,30 +4,50 @@
 > Se consolida **solo cuando los 6 integrantes cerraron el sprint**. Si falta alguien, este archivo no se toca.
 > Es la última foto **estable**: puede estar desactualizada respecto al sprint en curso. Si contradice el código, gana el código.
 
-**Última consolidación:** **Sprint 1 — 28-ago-2026.** Sprint cerrado, entrega **ATF1** hecha.
-**Enmienda del 28-ago (SM):** cierre de deuda previo al Sprint 2 — **D6, D8, D9, D10, D11, D13 y D14 cerradas**; D7 reformulada (falta el visto del PO); **D15 abierta**. D13 y D14 se detectaron y se arreglaron en el mismo barrido. Se corrigió además la evidencia de E1-25 en la §5. Solo se tocaron la §5, la §6 y la tabla de trampas.
+**Última consolidación:** **Sprint 2 — 20-sep-2026.** Sprint cerrado. **Sin entrega** (sienta las bases del ATF2, que se entrega en el Sprint 3).
 **Estado de la puerta:** ✅ Joaquín · ✅ José · ✅ Jonathan · ✅ Dayro · ✅ Carlos · ✅ Jhade
-**Sprint en curso:** ninguno. El **Sprint 2** (Spring Boot y Spring Web) arranca el 07-sep.
+**Sprint en curso:** ninguno. El **Sprint 3** (Thymeleaf, rutas y 404 — entrega ATF2) arranca el 21-sep.
 
 ---
 
 ## 1. Estado actual
 
-**Sprint 1 cerrado. ATF1 entregado.** El sitio estático está migrado a Bootstrap 5.3 con
-una capa de tema propia, el código quedó limpio y el modelo de datos está diseñado.
+**Sprint 2 cerrado. Sin entrega — sienta las bases del ATF2.** El sitio del ATF1 quedó
+migrado a un proyecto Spring Boot con Thymeleaf: mismas 10 páginas, mismo contenido y
+mismo CSS/JS/assets, ahora servidos por controladores y armados con una plantilla base
+y fragments en vez de HTML duplicado.
 
-- **Línea base:** `app-estatico/` — 10 páginas HTML, **Bootstrap 5.3 por CDN** +
-  `css/tema-overtext.css`, CSS propio modular (`main.css` / `layout.css` +
-  `componentes/` + `paginas/`), JS vanilla, carrito en `localStorage`.
-- **Los 6 componentes de Bootstrap están en producción:** contenedores, navbar
-  responsivo, formularios validados, modales, carrusel y sistema de grillas.
-- **Modelo de datos diseñado, no implementado.**
+- **Línea base congelada:** `app-estatico/` — se conserva intacta como referencia del
+  ATF1, no se edita ni se borra.
+- **Proyecto activo:** `overtext/` — Spring Boot **4.0.8** (no 3.x, ver decisión 20) +
+  Thymeleaf, Java 17, Maven Wrapper. `./mvnw spring-boot:run` levanta todo en
+  `http://localhost:8080` (o el puerto de `OVERTEXT_PORT`); no hay proceso de frontend
+  aparte, Spring sirve HTML renderizado y los estáticos en el mismo proceso.
+- **10 rutas limpias, un controller por sección**, en `pe.edu.utp.overtext.controller`:
+  `/`, `/catalogo`, `/producto/{id}`, `/promociones`, `/nosotros`, `/contacto`,
+  `/login`, `/checkout`, `/confirmacion`, `/admin`.
+- **`layout/plantilla.html`** con 4 `th:fragment` (`cabecera`, `carrito`, `pie`,
+  `scripts`) elimina la duplicación de encabezado/pie/carrito de las 10 páginas:
+  **3.820 → 2.924 líneas de HTML en total**.
+- **Regresión del ATF1 verificada de punta a punta** (E2-17/E2-18, 20-sep): las 10
+  rutas responden 200, **0 errores de consola** en las 10 a 1440 px y a ~500 px (mismo
+  régimen de breakpoint que 375 px — Bootstrap cambia de layout en 576 y 992 px, no en
+  el pixel exacto), los 6 componentes de Bootstrap del ATF1 siguen intactos, incluidas
+  las regresiones D13 y D14 del Sprint 1. Capturas en `informes/capturas/sprint-02/`,
+  10 páginas × 2 anchos.
+- **Modelo de datos sigue diseñado, no implementado.**
   `docs/specs/001-sitio-bootstrap/esquema-fisico.sql` define las **10 tablas** y es la
   **fuente autoritativa**; `data-model.md` es la vista lógica y el diccionario. Si
   discrepan, gana el `.sql`. El diagrama del informe se **genera** desde ahí.
-- **Stack objetivo:** Bootstrap 5.3 → Spring Boot 3.x + Thymeleaf → Spring Data JPA + MySQL → Spring Security.
-- **Stack actual:** HTML + Bootstrap 5.3 + CSS propio + JS vanilla. Sin backend ni base de datos todavía.
-- **`assets/` pesa 3,8 MB** (venía de 39 MB) y ninguna imagen supera 300 KB.
+- **Stack objetivo:** Bootstrap 5.3 → Spring Boot + Thymeleaf → Spring Data JPA + MySQL → Spring Security.
+- **Stack actual:** Spring Boot 4.0.8 + Thymeleaf + Bootstrap 5.3 + CSS propio + JS
+  vanilla (cliente). Sin base de datos ni seguridad todavía — llegan en Sprints 4 y 6.
+- **`assets/` pesa 3,8 MB** (venía de 39 MB) y ninguna imagen supera 300 KB; se
+  trasladó bit a bit igual a `overtext/src/main/resources/static/assets/`.
+- **Fuera de alcance de este sprint, tal como lo trazó el spec 002:** página 404, menú
+  activo con `th:classappend` (el parámetro `paginaActiva` de `cabecera` ya lo resuelve
+  técnicamente — confirmar en el Sprint 3 antes de rehacerlo), `th:if`/`th:unless`,
+  `th:each`, `th:href="@{...}"` en todos los enlaces. Todo eso es **Sprint 3 (ATF2)**.
 
 ## 2. Decisiones vigentes
 
@@ -52,6 +72,7 @@ una capa de tema propia, el código quedó limpio y el modelo de datos está dis
 | 17 | **La rama de integración es `testing`.** `develop` no existe ni se va a crear | La DoD la nombraba por inercia de la plantilla; los PR ya entran a `testing` | 1 |
 | 18 | Jhade lleva la redacción del informe en un documento propio, fuera del repo | Es la editora y custodia la voz única (art. 10). `informes/informe.md` es el esqueleto limpio: **sus `⬜` no son trabajo pendiente** | 1 |
 | 19 | Toda deuda o decisión de PO que toque código sale del Planning con **dueño y número de tarea** | D3 y D4 las detectaron 3 personas y esperaron 3 días a un "duo dueño" que no existía. El art. 9 protege el código, no reparte el trabajo | 1 |
+| 20 | **Spring Boot 4.0.8, no 3.x** | `start.spring.io` retiró la línea 3.x el 14-sep, el día que se generó el proyecto. Ningún requisito del sprint cambia (Spring Web y Thymeleaf funcionan igual); trazada en `docs/specs/002-migracion-thymeleaf/spec.md` §7 (A2) y `plan.md` §3 | 2 |
 
 ## 3. Convenciones activas
 
@@ -61,8 +82,8 @@ Ver `docs/constitution.md`. No se duplican aquí.
 
 | Ruta | Qué contiene |
 |---|---|
-| `app-estatico/` | Sitio del ATF1. Se congela tras la entrega. |
-| `overtext/` | Proyecto Spring Boot. **Aún no existe** — se crea en el Sprint 2. |
+| `app-estatico/` | Sitio del ATF1. Congelado, no se edita. |
+| `overtext/` | Proyecto Spring Boot activo (Sprint 2 en adelante). CSS/JS se editan aquí, en `src/main/resources/static/`, no en `app-estatico/`. Rutas y controllers en `src/main/java/pe/edu/utp/overtext/controller/`; plantillas en `src/main/resources/templates/`. |
 | `docs/specs/` | Specs SDD por feature. |
 | `docs/scrum/roadmap.md` | **Planificación de las 18 semanas**: sílabo → sprint → rúbrica. |
 | `docs/scrum/sprints/` | Los 7 sprints, uno por archivo, + la estabilización. |
@@ -93,7 +114,19 @@ Leyenda: ⬜ pendiente · 🟨 en curso · ✅ cubierto y con evidencia
 
 **ATF1: los 12 criterios cubiertos y con evidencia.**
 
-*(Las tablas de ATF2, ATF3 y TF se añaden al llegar a cada avance.)*
+### ATF2 — 20 pts (en curso, entrega en el Sprint 3)
+
+| Criterio | Pts | Estado | Evidencia | Quién |
+|---|:-:|---|---|---|
+| 1a Rutas de 5+ páginas | 6 | ✅ | 9 controllers, 10 rutas limpias en `pe.edu.utp.overtext.controller` | Dayro (E2-06) |
+| 1b Página de inicio por defecto | — | ✅ | `HomeController` → `GET /` → `paginas/index` | Joaquín/Jonathan (E2-05) |
+| 1c Página 404 | — | ⬜ | Sprint 3 (E2-07) | — |
+| 1d Menú activo con `th:classappend` | — | 🟨 | El parámetro `paginaActiva` de `cabecera` ya lo resuelve técnicamente (Carlos, E2-03); falta que el Sprint 3 confirme que cubre el criterio antes de retocar el fragment | Carlos |
+| 2a Fragments | 6 | ✅ (parte estructural) | `layout/plantilla.html` con 4 `th:fragment`; las 10 páginas los usan | Carlos (E2-03/E2-04) |
+| 2b `th:if`/`th:unless` | — | ⬜ | Sprint 3 | — |
+| 2c `th:each` | — | ⬜ | Sprint 3 (catálogo, colores del configurador) | — |
+
+**ATF2 a mitad de camino: 1a y 1b cerrados, 2a estructural cerrado. Faltan 1c, 1d (confirmar) y 2b/2c — todo trazado para el Sprint 3.**
 
 ### Extras del sílabo sin rúbrica (decisión 9)
 
@@ -110,9 +143,12 @@ Leyenda: ⬜ pendiente · 🟨 en curso · ✅ cubierto y con evidencia
 
 | # | Pendiente | Origen | Dueño |
 |---|---|---|---|
-| **D7** | **`plan.md` y `tasks.md` ya existen** en `docs/specs/001-sitio-bootstrap/` (28-ago), pero la fase Plan **no se cierra con el archivo escrito sino con el checkpoint del PO**. Ambos son retroactivos y lo declaran en su cabecera. `plan.md` §10 traza qué sección del informe sale de dónde | Sprint 1 | **Joaquín — aprobar. Lo primero del Sprint 2** |
+| **D7** | **`plan.md` y `tasks.md` ya existen** en `docs/specs/001-sitio-bootstrap/` (28-ago), pero la fase Plan **no se cierra con el archivo escrito sino con el checkpoint del PO**. Ambos son retroactivos y lo declaran en su cabecera. `plan.md` §10 traza qué sección del informe sale de dónde | Sprint 1 | **Joaquín — aprobar. Sigue sin marcarse** |
 | D12 | `js/login.js` tiene las credenciales en el cliente (`admin@mail.com` / `123456`) | Sprint 1 | Se borra con Spring Security (Sprint 6, E4-08) |
-| D15 | **Quedan ~18 clases CSS que ninguna página usa** (`tarjetas-grid`, `grid-pie`, `miniaturas-grid`, `banner-titulo`, `tag-disponible`, `select-campo`…), ~180 líneas. Misma familia que D8 y D10: restos de la migración. Ninguna rompe nada ni cuesta rúbrica. Va con la decisión de **en qué capa vive la tipografía de párrafo**, que es lo que dejó a E1-25 sin sitio | Sprint 1 (detectada 28-ago) | **Sin dueño — Planning del Sprint 2 (regla 19)** |
+| D15 | **Quedan ~18 clases CSS que ninguna página usa** (`tarjetas-grid`, `grid-pie`, `miniaturas-grid`, `banner-titulo`, `tag-disponible`, `select-campo`…), ~180 líneas. Misma familia que D8 y D10: restos de la migración, se trasladaron tal cual a `overtext/`. Ninguna rompe nada ni cuesta rúbrica. Va con la decisión de **en qué capa vive la tipografía de párrafo**, que es lo que dejó a E1-25 sin sitio | Sprint 1 (detectada 28-ago) | **Sin dueño — sigue sin tomarse en dos plannings. Planning del Sprint 3, esta vez con nombre** |
+| D16 | **El mismo patrón de D7 se repitió en el Sprint 2:** `docs/specs/002-migracion-thymeleaf/` tenía `spec.md` pero no `plan.md`/`tasks.md`; se implementó saltando esas dos fases de CLAUDE.md §4. Ambos documentos se escribieron retroactivos el 20-sep, declarados en su cabecera, mismo precedente que D7 | Sprint 2 (detectada 20-sep) | **Joaquín — aprobar, igual que D7. Es la segunda vez que pasa: la Retrospectiva del Sprint 2 debería preguntarse por qué** |
+| D17 | **`/producto/{id}` con un id inexistente no da 404**: `tienda.js:57` (`\|\| productos[0]`) muestra el primer producto del catálogo en vez de fallar. No es un bug de la migración — ya existía en el ATF1 — pero ahora hay una ruta de servidor que lo hace más visible | Detectada el 20-sep, verificando E2-17/E2-18 | **Sprint 3, junto con la página 404 (E2-07)** |
+| D18 | **El modal `ot-pie-formulario` (enlace a `/login` en el pie de cada modal) está duplicado en 9 páginas**, en vez de vivir en un fragment. No se tocó al cerrar E2-06 para no mezclar tareas de duos distintos | Sprint 2 (detectada 20-sep, ver `jonathan_memory.md`) | **José/Carlos, junto con E2-23 (`th:href="@{...}"`) en el Sprint 3** |
 
 ### Cerradas en el Sprint 1
 
@@ -160,3 +196,6 @@ Leyenda: ⬜ pendiente · 🟨 en curso · ✅ cubierto y con evidencia
 | T11 | **Un color "parecido" no es el mismo color.** Los hex del configurador estaban aproximados (negro `#1A1A1A` vs `#111111`) y pasaron tres revisiones visuales sin que nadie lo notara. Los hex se copian del catálogo, no se estiman a ojo. |
 | T12 | **Un `grep` de la clase pelada no basta para borrar CSS.** Da falsos positivos por substring: `.enlace` aparece en `.enlace-boletin` y `.pie-enlaces`, `.boton-carrito` en `.boton-carrito-pack`, `.activo` en `.color-opcion.activo`. Hay que mirar cada coincidencia. Y ojo con `#menu-principal`: la **regla** `.menu-principal` era CSS muerto, pero el **id** lo necesita el `collapse` de Bootstrap en las 10 páginas. |
 | T13 | **Consola limpia no es sitio correcto.** D13 (un texto de negocio quemado que contradecía al JS) y D14 (el menú móvil ilegible sobre el carrusel) convivían con **0 errores y 0 avisos** en las 10 páginas. E1-19 verifica el log; el criterio 1b se juzga mirando la pantalla a 375 px. Las dos verificaciones son distintas y hacen falta las dos. |
+| T14 | **El automatizador de Chrome no baja de ~500 px de ancho de ventana** en esta máquina (mínimo del sistema operativo), y solo si la ventana se redimensiona **antes** de navegar — redimensionar una ventana ya abierta con contenido cargado no tiene efecto. Para verificar responsive con esta herramienta: abrir una ventana nueva, fijar el tamaño, y recién ahí navegar. 500 px sigue por debajo del breakpoint `sm` de Bootstrap (576 px), así que el comportamiento es el mismo que a 375 px. |
+| T15 | **Spring Initializr ya no ofrece Spring Boot 3.x** (retirado el 14-sep-2026); el mínimo disponible es la línea 4.x. Si algún documento o rúbrica pide explícitamente 3.x, sigue existiendo en Maven Central y se puede fijar a mano en el `pom.xml`, pero el proyecto real usa **4.0.8** (decisión 20). |
+| T16 | **Este proyecto no tiene frontend separado.** Todo — HTML renderizado, CSS, JS, imágenes — lo sirve el mismo proceso de Spring Boot (`./mvnw spring-boot:run`) en un solo puerto. No hay que levantar nada más ni buscar un `npm run dev`. |

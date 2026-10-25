@@ -33,7 +33,7 @@ Los criterios 1c (404), 1d (menú activo), 2b (`th:if`) y 2c (`th:each`) se cier
 
 | # | Historia | Criterio | Sesión |
 |---|---|:-:|:-:|
-| E2-01 | Crear el proyecto Spring Boot 3.x con Maven, Java 17+, `web` y `thymeleaf` | — | 9-10 |
+| E2-01 | Crear el proyecto Spring Boot con Maven (decisión: 4.0.8, spec 002 §A2), Java 17+, `web` y `thymeleaf` | — | 9-10 |
 | E2-05 | `HomeController` con `@GetMapping("/")` — página de inicio por defecto | **1b** | 11-12 |
 | E2-06 | Un `@Controller` por sección con rutas limpias: `/catalogo`, `/producto/{id}`, `/promociones`, `/nosotros`, `/contacto`, `/login`, `/checkout` | **1a** | 11-12 |
 | E2-13 | `application.properties` con variables de entorno; `README` de arranque | — | 9-10 |
@@ -75,15 +75,16 @@ Nadie escribe controladores hasta que `mvn spring-boot:run` levante en las 6 má
 
 ## 6. Definición de Hecho
 
-- [ ] `mvn clean package` sin errores
-- [ ] `mvn spring-boot:run` levanta y responde en `http://localhost:8080`
-- [ ] La página se sirve desde su controlador, no como archivo estático
-- [ ] Usa `layout/plantilla.html` y al menos 2 fragments
-- [ ] Sin errores en consola del navegador
-- [ ] Probado a 375 px y 1440 px
-- [ ] Nomenclatura de capas correcta (art. 5)
-- [ ] Captura en `informes/capturas/sprint-02/`
-- [ ] Bloque "Para consolidar" escrito
+- [x] `mvn clean package` sin errores
+- [x] `mvn spring-boot:run` levanta y responde en `http://localhost:8080`
+- [x] La página se sirve desde su controlador, no como archivo estático
+- [x] Usa `layout/plantilla.html` y al menos 2 fragments
+- [x] Sin errores en consola del navegador (10/10 rutas, verificado 20-sep)
+- [x] Probado a 375 px y 1440 px (ver `tasks.md` de la spec 002 — el ancho real
+      quedó en ~500 px por límite del sistema operativo, mismo breakpoint que 375)
+- [x] Nomenclatura de capas correcta (art. 5)
+- [x] Captura en `informes/capturas/sprint-02/` (10 páginas × 2 anchos)
+- [x] Bloque "Para consolidar" escrito
 
 ## 7. Riesgos
 
@@ -93,7 +94,7 @@ Nadie escribe controladores hasta que `mvn spring-boot:run` levante en las 6 má
 | Entorno Java/Maven distinto en cada máquina | Día 1: todos compilan y levantan. Versión de Java fijada en el `pom.xml`. |
 | Al mover recursos se rompen las rutas absolutas (`/css/...`) | E2-14 tiene tarea propia; se verifica página por página |
 | Se rompe algo del ATF1 al migrar | E2-18 regresión obligatoria antes del cierre |
-| Seis personas tocando `plantilla.html` a la vez | Un solo duo es dueño del layout (art. 9); el resto espera a que esté en `develop` |
+| Seis personas tocando `plantilla.html` a la vez | Un solo duo es dueño del layout (art. 9); el resto espera a que esté en `testing` |
 
 ## 8. Ceremonias
 
@@ -104,7 +105,7 @@ Nadie escribe controladores hasta que `mvn spring-boot:run` levante en las 6 má
 | Review | vie 18-sep |
 | Retro + consolidación | vie 18-sep, tras la review |
 
-**Puerta de consolidación:** ⬜ Joaquín · ⬜ José · ⬜ Jonathan · ⬜ Dayro · ⬜ Carlos · ⬜ Jhade
+**Puerta de consolidación:** ✅ Joaquín · ✅ José · ✅ Jonathan · ✅ Dayro · ✅ Carlos · ✅ Jhade
 
 ---
 

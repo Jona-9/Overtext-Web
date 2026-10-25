@@ -47,9 +47,9 @@
 - [x] Capturas archivadas en `informes/capturas/sprint-01/`
 - [x] Criterios de rúbrica marcados en `docs/scrum/checklist-entrega.md`
 - [x] Bloque "Para consolidar" escrito en esta memoria
-- [x] **Código subido vía PR revisado por otro duo** — *cerrado (2026-08-28).* El SM resolvió que la rama de integración del equipo es **`testing`**, no `develop`; el trabajo del duo Datos entró por PR revisado y la DoD se lee sobre `testing`.
+- [ ] **Código subido vía PR revisado por otro duo** — pendiente. Va junto con lo de Jonathan, en el PR del duo Datos.
 
-> La DoD decía *"código en `develop` vía PR"* y **`develop` nunca existió**. El SM lo zanjó el 28-ago: **la rama de integración es `testing`** y la Definición de Hecho queda redactada así para los siguientes sprints.
+> Como en la memoria de Jonathan: la DoD dice *"código en `develop` vía PR"* y **`develop` no existe**. El equipo mergea contra `testing`. Que lo decida el SM.
 
 ### Por qué mis tareas rinden doble
 
@@ -213,22 +213,6 @@ Demuestro en vivo: crear un producto, editarlo, enviar el formulario vacío para
 ---
 
 ## Bitácora — Sprint 1
-
-### 2026-08-28 — cierre del Sprint 1
-
-- **Mis 5 tareas quedan cerradas con la Definición de Hecho completa** (E1-08, E1-09,
-  E1-10, E1-11 y E1-26). El último `[ ]` que me quedaba era el del PR contra `develop`;
-  el SM confirmó que la rama de integración es **`testing`** y con eso se cierra.
-- **Dos cosas mías que ya no aplican y conviene no arrastrar:**
-  - La cifra de **`assets/` en 26 MB** que dejé anotada era la foto del 26-ago, a mitad de
-    la limpieza. José terminó E1-16 ese mismo día y **`assets/` quedó en 3,8 MB**, sin
-    ninguna imagen por encima de 300 KB. **La cifra buena es la suya**; la D1 está cerrada.
-  - La barra del carrito ya **no dice S/ 180**. Jonathan corrigió `UMBRAL_ENVIO_GRATIS` a
-    **200** el 28-ago (deuda D4), que es lo que fijó el PO. Mis capturas del offcanvas son
-    de antes de ese cambio: **si se reusan en el informe del ATF2, hay que volver a
-    tomarlas**, porque muestran el umbral viejo.
-- **Bloqueo:** ninguno.
-- **Archivos tocados:** ninguno.
 
 ### 2026-08-20
 - Hice: —
@@ -398,11 +382,10 @@ de arreglar nada.
 - [ ] **Cobertura de rúbrica ATF1:** marcar **1d Ventanas modales** ✅ (modal de contacto
       y modal de guía de tallas), **1b** ✅ también por el `offcanvas` del carrito, y
       **1a** ✅ en su parte de iconos.
-- [x] **Deuda D1 cerrada.** Mi parte bajó `assets/` de 39 MB a 26 MB borrando
-      `carta.png`, `instagram.png` y `ubicacion.png` (13,4 MB entre los tres, para dibujar
-      iconos de 26 px). José remató con E1-16 el mismo día y **quedó en 3,8 MB, sin
-      ninguna imagen sobre 300 KB**. *La cifra de 26 MB que aparece más arriba en esta
-      memoria es una foto intermedia; la válida es 3,8 MB.*
+- [ ] **Deuda D1 a la mitad: `assets/` pasa de 39 MB a 26 MB.** Solo con borrar
+      `carta.png`, `instagram.png` y `ubicacion.png` (13,4 MB entre los tres, para
+      dibujar iconos de 26 px). El objetivo sigue siendo < 15 MB: **lo que queda son
+      fotos de producto**, y eso es E1-16, no mío.
 - [ ] **`abrirPanel`/`cerrarPanel` de `carrito.js` son API pública**, no código interno:
       "añadir al carrito" abre el panel por JS. Siguen existiendo tras pasar a
       `offcanvas`, pero por dentro llaman a Bootstrap. **Quien las borre por "ya no
@@ -420,10 +403,9 @@ de arreglar nada.
 - [ ] **CSS muerto que encontré y no me toca:** `.btn-hamburger.abierto` y
       `.menu-principal.abierto` siguen en `navegacion.css` desde que Joaquín eliminó
       `js/nav.js` en E1-02. Nadie las usa. Para el duo de limpieza.
-- [x] ~~La barra del carrito dice "TE FALTAN S/ … PARA ENVÍO GRATIS" sobre S/ 180~~
-      **Deuda D4 cerrada el 28-ago:** `UMBRAL_ENVIO_GRATIS = 200` en `js/carrito.js`, que
-      es lo que fijó el PO. **Aviso: mis capturas del offcanvas son anteriores y muestran
-      el umbral viejo** — hay que volver a tomarlas si se reusan en el ATF2.
+- [ ] **La barra del carrito sigue diciendo "TE FALTAN S/ … PARA ENVÍO GRATIS" sobre
+      S/ 180**, cuando el PO fijó **S/ 200** el 25-ago. Es la deuda **D4** y sigue
+      abierta: se ve en mis capturas del offcanvas.
 
 ---
 
@@ -439,6 +421,225 @@ de arreglar nada.
 
 ## Sprints cerrados
 
-- **Sprint 1 — Bootstrap y sitio estático (20-ago → 04-sep). Cerrado el 28-ago-2026.**
-  E1-08 ✅ · E1-09 ✅ · E1-10 ✅ · E1-11 ✅ · E1-26 ✅. Criterios **1d** (modales),
-  **1b** (offcanvas) y **1a** (iconos) cubiertos. Deuda D1 cerrada entre E1-11 y E1-16.
+*(vacío)*
+
+---
+
+## Bitácora — Sprint 2
+
+### 2026-09-16 — E2-03/E2-04 · Fragments de Thymeleaf (criterio 2a)
+
+**Duo UI con José.** Analicé las 10 páginas que José trasladó a
+`templates/paginas/` (E2-02/E2-14, `28cad04`) antes de tocar nada: confirmé que
+los 42 recursos estáticos que él verificó siguen resolviendo, y mapeé byte a
+byte dónde eran idénticos la cabecera, el pie, el carrito y los scripts, y
+dónde no.
+
+- **Hice:** creé `overtext/src/main/resources/templates/layout/plantilla.html`
+  con 4 `th:fragment`: `cabecera(paginaActiva, mostrarCarrito)`, `pie`,
+  `carrito`, `scripts`. Reemplacé el bloque duplicado por su `th:replace` en
+  las 10 páginas de `templates/paginas/`. **No toqué ningún controlador ni
+  creé rutas** — fue condición explícita de esta tarea; la verificación de las
+  9 páginas que aún no tienen ruta (E2-06, Dayro) queda pendiente.
+- **Decisiones de diseño:**
+  - **No expandí el carrito a las 4 páginas que hoy no lo tienen**
+    (checkout, confirmacion, intranet, login). `id="abrir-carrito"` en la
+    cabecera y la inclusión del fragment `carrito` viajan siempre juntos vía
+    el parámetro `mostrarCarrito` — si no, se reintroduce el bug que la
+    trampa **T9** ya documentó evitar (el botón con id pero sin panel).
+  - **Parametricé `cabecera` con `paginaActiva`** para no perder el enlace
+    activo de cada página. Esto se solapa con **E2-08** (Sprint 3, "menú con
+    `th:classappend` marcando el activo") — no es trabajo de más, era el
+    mínimo para que el fragment no fuera una regresión, pero anoto el
+    solapamiento para que nadie lo repita en el Sprint 3.
+  - El botón flotante de WhatsApp (100% duplicado, pegado al footer en las
+    10 páginas) se plegó **dentro** del fragment `pie`, sin fragment propio.
+  - `scripts` no lleva parámetro: emite los 4 tags comunes en orden fijo:
+    Bootstrap bundle CDN + `carrito.js` + `login.js` + `contacto.js`. Cada
+    página conserva su script propio (si lo tiene) justo debajo.
+- **Dos arreglos "gratis" de la unificación, documentados para que no
+  parezcan cambios sueltos en la review:**
+  - `login.html` tenía `contacto.js` antes que `login.js` (único caso
+    invertido de las 10); ahora sigue el orden común.
+  - `detalle-producto.html` le faltaba `target="_blank" rel="noopener"` en
+    los dos enlaces sociales del pie; el resto de páginas sí lo tenían. Al
+    unificar en un solo `pie`, quedó igual que las demás.
+- **Verificación:** `mvnw clean package` → BUILD SUCCESS. Corrí el `.jar`
+  empaquetado en un puerto suelto (8099, fuera del repo, sin tocar
+  controladores) solo para confirmar que Thymeleaf resuelve los 4 fragments
+  sin error en `/` (la única ruta que existe hoy): `id="abrir-carrito"`,
+  `active` en INICIO, `#carrito-lateral`, el pie y el WhatsApp aparecen una
+  sola vez cada uno. Las otras 9 páginas no se pudieron abrir por navegador
+  porque no tienen ruta todavía — **queda pendiente coordinarlo con Dayro**
+  cuando cierre E2-06.
+  - Reducción medida: **1.086 líneas eliminadas, 39 añadidas** en las 10
+    páginas (`git diff --stat`), en línea con el ~44% que estimaba
+    `memory.md`.
+- **Bloqueo:** ninguno propio. La verificación visual completa de 9/10
+  páginas depende de E2-06.
+- **Archivos tocados:** nuevo
+  `overtext/src/main/resources/templates/layout/plantilla.html`; editadas las
+  10 `overtext/src/main/resources/templates/paginas/*.html`.
+
+### Para consolidar en memory.md
+
+- [ ] **E2-03/E2-04 cerradas.** `layout/plantilla.html` existe con los 4
+      fragments (`cabecera`, `pie`, `carrito`, `scripts`); las 10 páginas los
+      usan. Criterio 2a (fragments) cubierto en su parte estructural.
+- [ ] **`memory.md` §4 sigue diciendo que `overtext/` "aún no existe"** —
+      discrepancia ya anotada por José el 14-sep, sigue sin corregirse. Gana
+      el código (CLAUDE.md §3).
+- [ ] **Aviso para el Sprint 3 (José/quien tome E2-08):** el enlace activo del
+      menú ya se resuelve con `th:classappend` dentro de `cabecera`, vía el
+      parámetro `paginaActiva`. No hace falta rehacerlo — al llegar a E2-08,
+      revisar si esto ya lo satisface antes de tocar el fragment de nuevo.
+- [ ] **Verificación pendiente de 9/10 páginas** (todas menos `/`): no tienen
+      ruta hasta que Dayro cierre E2-06. Cuando exista, falta abrir cada una a
+      375/1440 px y confirmar consola limpia (art. 3), igual que E1-19 en el
+      Sprint 1.
+
+---
+
+## Bitácora — Sprint 3
+
+### 2026-09-22 — E2-08 confirmado y E2-23 · `th:href`/`th:src` en enlaces e imágenes internas (criterio 1a)
+
+**Duo UI con José.**
+
+- **E2-08 — sin trabajo nuevo.** Confirmé que `cabecera(paginaActiva, mostrarCarrito)`
+  en `layout/plantilla.html` (líneas 30-34) ya resuelve el enlace activo con
+  `th:classappend` desde el Sprint 2 (mi propia nota de esa bitácora ya lo avisaba).
+  El spec `003-thymeleaf-interacciones` (aprobado por Joaquín, 2026-09-22) lo confirma
+  igual en su §2.3. No toqué el fragment por esto.
+
+- **E2-23 — hecho, con alcance acotado.** Convertí a `th:href="@{...}"` /
+  `th:src="@{...}"` todos los enlaces internos (`<a>`) e imágenes internas (`<img>`)
+  que aún usaban `href`/`src` literal, en `layout/plantilla.html` y en las 8 páginas
+  de `templates/paginas/` que me correspondían (todas menos `detalle-producto.html`,
+  ver más abajo).
+  - **Decisión de alcance:** no toqué `<link rel="stylesheet">` ni `<script src="...">`
+    de recursos estáticos (CSS/JS propios, CDN de Bootstrap). El criterio ATF2-1a
+    (`docs/scrum/roadmap.md` línea 42) es sobre **controladores y sistema de rutas**,
+    no sobre referencias a archivos estáticos; y el propio fragment `scripts` (E2-04,
+    Sprint 2) ya dejaba esos `<script src="/js/...">` sin `th:src` como precedente.
+    Extenderlo a `<link>`/`<script>` habría tocado ~90 líneas más sin que ningún
+    criterio lo pida (art. 8, "gana la solución más corta"). Si el PO quiere que
+    también se conviertan, es una ampliación de criterio, no algo que decidí solo.
+  - **No toqué `detalle-producto.html`.** El spec 003 §5.1 lo excluye
+    explícitamente ("Cualquier cambio a `detalle-producto.html`... fuera de alcance"),
+    sin excepción para E2-23. Ese archivo se queda con `href="/promociones"`,
+    `src="/assets/img/productos/beige/principal.webp"` y el `href="/login"` del
+    modal sin convertir. **Queda pendiente para cuando alguien abra un spec que sí
+    cubra esa página.**
+  - Dejé sin tocar, a propósito: los `href="#"` de "¿La olvidaste?" y "Crea tu
+    cuenta" (no tienen ruta destino — no son parte de esta tarea, son placeholders de
+    un flujo que no existe todavía) y todos los enlaces externos (`wa.me`,
+    Instagram, TikTok, `mailto:`).
+  - Verificación: `./mvnw clean package -DskipTests` → **BUILD SUCCESS**. No corrí
+    el servidor con navegador esta vez (cambio puramente de sintaxis de atributo,
+    sin cambio de URL resultante en un despliegue sin `context-path`); si alguien
+    quiere el visual, las 9 páginas tocadas siguen sirviendo las mismas rutas.
+
+- **E2-10 — NO implementado. Me detuve por CLAUDE.md §4.** El spec 003 §2.3 deja
+  este criterio "documentado pero fuera de esta implementación: no se prescribe su
+  solución aquí". Al revisar el código encontré que la solución no es mecánica:
+  - **"Badge de stock":** `memory.md` decisión 14 dice que el badge de bajo stock se
+    calcula con `stock < 10`. Pero `Producto` (record, `model/Producto.java`) **no
+    tiene campo `stock`**, y `productos.json` trae el mismo texto fijo
+    `"badge": "ÚLTIMAS UNIDADES"` en los 7 productos — no hay ningún dato que un
+    `th:if` pueda condicionar. Hacerlo bien exige decidir **una** de estas dos cosas,
+    y las dos son decisiones de diseño, no sintaxis:
+    1. añadir un campo `stock` (numérico) a `Producto`/`productos.json` y calcular
+       el badge con `th:if="${producto.stock < 10}"` — pero la constitución art. 8
+       prohíbe añadir un campo que ninguna rúbrica pide, y el criterio 2b solo pide
+       *un* condicional, no un dato nuevo;
+    2. reinterpretar el criterio como "ocultar el `<span>` del badge cuando venga
+       vacío" (`th:if="${!#strings.isEmpty(producto.badge)}"`), que no exige tocar
+       el modelo pero **tampoco es "el badge de stock"** tal como lo nombra la tarea.
+  - **"Carrito vacío":** el offcanvas (`carrito` fragment) no tiene ningún dato de
+    carrito en el modelo del controlador — lo pinta enteramente `carrito.js` del
+    lado del cliente (`localStorage`, sin sesión de servidor). Un `th:if`/`th:unless`
+    real sobre "carrito vacío" necesitaría que el servidor supiera el estado del
+    carrito, lo que hoy no existe en ninguna capa (ni sesión, ni `CarritoService`).
+    Sin ese dato, la única forma de cumplir el criterio con Thymeleaf sería escribir
+    un bloque estático que JS alterna por clase — que no es un condicional de
+    **renderizado** en el sentido que pide el criterio 2b.
+  - No adiviné ninguna de las dos. Anoto esto como `[NECESITA ACLARACIÓN]` para que
+    Joaquín (PO) decida antes de que alguien implemente E2-10, y lo dejo trazado
+    aquí en vez de en un spec nuevo porque el spec 003 ya es el documento vigente de
+    este sprint y solo le faltaría esta resolución en una próxima revisión.
+
+- **Restricción del encargo de hoy:** no toqué controladores ni lógica de servidor
+  (ninguna de las dos tareas hechas lo necesitaba), y no hice `git commit` ni
+  `git push` — los cambios quedan en el árbol de trabajo para que yo los revise y
+  suba.
+
+- **Bloqueo:** **E2-10 sin resolver**, ver arriba — necesita una decisión del PO
+  sobre si "stock" se convierte en dato real o si el criterio se reinterpreta sin
+  tocar el modelo. Sin eso, no hay `th:if` que escribir sin adivinar.
+
+- **Archivos tocados:** `overtext/src/main/resources/templates/layout/plantilla.html`
+  y `overtext/src/main/resources/templates/paginas/{index,catalogo,promociones,
+  checkout,intranet,nosotros,contacto,confirmacion,login}.html`. **No tocado:**
+  `detalle-producto.html` (fuera de alcance del spec 003) ni ningún controlador.
+
+### Para consolidar en memory.md
+
+- [ ] **E2-08 confirmado sin cambios** (ya estaba resuelto desde Sprint 2) y
+      **E2-23 cerrada** para `<a>`/`<img>` internos en 9/10 páginas + layout.
+      `detalle-producto.html` queda pendiente de un spec que cubra esa página.
+- [ ] **E2-10 bloqueada, necesita decisión del PO.** No hay campo `stock` en
+      `Producto`/`productos.json` (todos los productos comparten el mismo texto de
+      badge) ni estado de carrito en el servidor (todo vive en `carrito.js`/
+      `localStorage`). Implementar el criterio 2b con estos datos exige o bien
+      añadir un dato nuevo al modelo (tensiona con el art. 8) o reinterpretar el
+      criterio. Alguien con autoridad de PO debe elegir antes de que se escriba
+      código para E2-10.
+- [ ] **Decisión de alcance sin escalar (documentada, no bloqueante):** `<link>` y
+      `<script>` de recursos estáticos no se convirtieron a `th:href`/`th:src` en
+      E2-23 — el criterio ATF2-1a es de rutas/controladores, no de assets estáticos,
+      y el fragment `scripts` (Sprint 2) ya sentaba ese precedente.
+
+### 2026-09-27 — Auditoría de fragments/rutas y cierre de E2-23 en `detalle-producto.html`
+
+- **Hice (análisis, sin cambios):** recorrí `layout/plantilla.html`, las 10 vistas y
+  `error/404.html`/`500.html`. Los 4 fragments se incluyen bien en todas y
+  `mostrarCarrito=true` va exactamente en las 6 páginas con `carrito` (T9 sigue
+  evitada). Los 34 recursos `/css`, `/js` y `/assets` referenciados existen en `static/`,
+  las rutas escritas en JS (`/catalogo`, `/confirmacion`, `/admin`, `/contacto`) tienen
+  controlador y las tarjetas del catálogo enlazan con `@{'/producto/' + ${producto.id}}`.
+  **Ningún enlace interno da 404.**
+- **Hice (código):** E2-23 en `detalle-producto.html`. Línea 45 `src` → `th:src="@{...}"`,
+  línea 104 `href="/promociones"` → `th:href="@{/promociones}"` y línea 263
+  `href="/login"` → `th:href="@{/login}"`. `data-imagen` (línea 100) no se toca: es un
+  dato que lee `tienda.js`, no un enlace.
+  - **Excepción al spec 003 §2.3**, que excluye esa página. La aplico por decisión mía
+    (Carlos) del 27-sep: son 3 atributos, la URL resultante es idéntica y no toca
+    `renderDetalle()`. **Joaquín (PO) debe validarla en la review.**
+  - Verificación: `mvnw clean package -DskipTests` OK. En el `.jar` (puerto 8099,
+    apagado después) `GET /producto/short-beige` da 200, el HTML servido trae los 3
+    atributos resueltos a la misma URL y sin restos de `th:`. `/promociones`, `/login`
+    y la imagen responden 200.
+- **Hallazgo confirmado, no es mío:** en `error/404.html` y `error/500.html` (Joaquín,
+  spec 004) la cabecera tiene "Mi cuenta" → `#modal-login` y el pie "ESCRÍBENOS" →
+  `#modal-contactanos`, pero esas páginas no incluyen los modales. En Bootstrap 5.3.3
+  el clic hace `Modal.getOrCreateInstance(null)` y el constructor sale sin `_config`,
+  así que `_initializeBackDrop()` lanza
+  `TypeError: Cannot read properties of undefined (reading 'backdrop')`. Lo verifiqué en
+  el código fuente (`js/src/modal.js:339-360`, `:158-160`), no en navegador. Solo pasa
+  **al pulsar**, no al cargar la página, pero rompe el art. 3.
+- **Bloqueo / pendiente:** `modal-login` (idéntico en 9 de las 10 páginas) y
+  `modal-contactanos` están copiados en las 10 vistas (~64 líneas cada uno). Moverlos a
+  fragments de `plantilla.html` quitaría ~1.100 líneas y arreglaría también el hallazgo
+  de 404/500 si esas páginas los incluyen. **Es trabajo nuevo, necesita spec** (CLAUDE.md §4).
+- **Archivos tocados:** `overtext/src/main/resources/templates/paginas/detalle-producto.html`
+  (3 líneas). Ningún controlador. Sin commit ni push.
+
+### Para consolidar en memory.md (27-sep)
+
+- [ ] **E2-23 completa en las 10 páginas + layout.** `detalle-producto.html` se cerró
+      como excepción al spec 003 §2.3; la tiene que validar el PO.
+- [ ] **Para Joaquín, bug en 404/500:** "Mi cuenta" y "ESCRÍBENOS" lanzan `TypeError`
+      en consola al pulsarlos, porque apuntan a modales que esas páginas no tienen.
+- [ ] **Propuesta pendiente de spec:** fragments `modal-login` y `modal-contactanos` en
+      `plantilla.html` (art. 7, ~1.100 líneas duplicadas).
