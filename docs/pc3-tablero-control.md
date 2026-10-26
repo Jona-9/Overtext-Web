@@ -91,13 +91,13 @@ Fase 3A: Carlos               Fase 3B: José
   - [x] Crear paquete `pe.edu.utp.overtext.entity`.
   - [x] Crear entidad `Categoria.java` (`@Entity`, `@Table(name = "categoria")`, `@Id`, `@GeneratedValue`, relación `@OneToMany`).
   - [x] Crear entidad `Producto.java` (`@Entity`, `@Table(name = "producto")`, relación `@ManyToOne` hacia Categoria, getters, setters y constructores).
-  - [ ] Crear entidad `Rol.java` (`@Entity`, `@Table(name = "rol")`, `@Id`, relación `@OneToMany(mappedBy = "rol")`).
-  - [ ] Crear entidad `Usuario.java` (`@Entity`, `@Table(name = "usuario")`, `@Id`, relación `@ManyToOne` hacia `Rol`).
+  - [x] Crear entidad `Rol.java` (`@Entity`, `@Table(name = "rol")`, `@Id`, relación `@OneToMany(mappedBy = "rol")`).
+  - [x] Crear entidad `Usuario.java` (`@Entity`, `@Table(name = "usuario")`, `@Id`, relación `@ManyToOne` hacia `Rol`).
   - [ ] Verificar que no existan errores de compilación (`./mvnw compile`).
-- [ ] **Capturas Obligatorias:**
-  - [ ] `informes/capturas/pc3/04-entidades-jpa.png` (Código en IDE mostrando anotaciones `@Entity`, `@Id`, `@ManyToOne` y `@OneToMany`).
+- [x] **Capturas Obligatorias:**
+  - [x] `informes/capturas/pc3/04-1-entidades-jpa.png` a `04-4-entidades-jpa.png` (Código en IDE mostrando anotaciones `@Entity`, `@Id`, `@ManyToOne` y `@OneToMany` para Categoria, Producto, Rol y Usuario).
 - [ ] **Documentación:**
-  - [ ] Redactar sección *3.2 Modelo de Dominio y Mapeo Objeto-Relacional (JPA)* con diccionario de campos de Categoria, Producto, Rol y Usuario.
+  - [x] Redactar sección *3.2 Modelo de Dominio y Mapeo Objeto-Relacional (JPA)* con diccionario de campos de Categoria, Producto, Rol y Usuario (en `informes/secciones-p3/3.2-modelo-de-dominio-jpa.md`).
 - [ ] **Git:** Merge de `feature/p3-dayro-entity` a `testing`.
 
 ---
