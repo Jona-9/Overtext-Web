@@ -82,7 +82,7 @@ Fase 3A: Carlos               Fase 3B: José
   - [ ] `informes/capturas/pc3/03-cmd-arranque-hikari.png` (Consola mostrando conexión exitosa en puerto 8080).
 - [ ] **Documentación:**
   - [ ] Redactar sección *3.1 Conexión a Base de Datos en la Nube con Supabase y Pool HikariCP*.
-- [ ] **Git:** Merge de `feature/p3-jonathan-supabase` a `testing`.
+- [ ] **Git:** Merge de `jonathan_avance3` a `testing` (solo al finalizar toda la Fase 1 y verificar con Supabase).
 
 ---
 
