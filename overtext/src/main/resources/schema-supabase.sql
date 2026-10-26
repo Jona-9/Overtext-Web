@@ -85,10 +85,15 @@ VALUES
 ('CLIENTE', 'Cliente registrado de la tienda OverText')
 ON CONFLICT (nombre) DO NOTHING;
 
--- Inserción de usuarios iniciales (Contraseñas legibles para verificación: Admin123! y Cliente123!)
+-- Inserción / Actualización de usuarios iniciales (Contraseñas legibles para verificación: Admin123! y Cliente123!)
 INSERT INTO usuario (email, password, nombre, activo, rol_id)
 VALUES
 ('admin@overtext.pe', 'Admin123!', 'Administrador OverText', true, 1),
 ('cliente@overtext.pe', 'Cliente123!', 'Jonathan Lopez', true, 2)
-ON CONFLICT (email) DO NOTHING;
+ON CONFLICT (email) DO UPDATE 
+SET password = EXCLUDED.password;
+
+-- Actualización directa para sincronizar instancias de BD ya existentes
+UPDATE usuario SET password = 'Admin123!' WHERE email = 'admin@overtext.pe';
+UPDATE usuario SET password = 'Cliente123!' WHERE email = 'cliente@overtext.pe';
 
