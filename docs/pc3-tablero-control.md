@@ -20,8 +20,8 @@
 | Integrante | Rol en la PC3 | Capa / Especialidad | Tiempo Est. | Ventana Límite | Estado | Aprobación |
 |---|---|---|:---:|:---:|:---:|:---:|
 | **Jonathan** | Scrum Master & DevOps | Infraestructura & Supabase | 3 - 4 h | Lun 26 — 12:00 | 🟨 En curso | [ ] Aprobado |
-| **Dayro** | Backend Developer | Capa Entity (JPA) | 2 - 3 h | Lun 26 — 18:00 | ⬜ Pendiente | [ ] Aprobado |
-| **Carlos** | Backend Developer | Capa Repository (JPA / Nativo) | 3 h | Mar 27 — 13:00 | ⬜ Pendiente | [ ] Aprobado |
+| **Dayro** | Backend Developer | Capa Entity (JPA) | 2 - 3 h | Lun 26 — 18:00 | 🟨 En curso | [ ] Aprobado |
+| **Carlos** | Backend Developer | Capa Repository (JPA / Nativo) | 3 h | Mar 27 — 13:00 | 🟨 En curso | [ ] Aprobado |
 | **José** | Backend Developer | Capa DTO & Bean Validation | 3 h | Mar 27 — 13:00 | ⬜ Pendiente | [ ] Aprobado |
 | **Joaquín** | Backend Developer | Capa Service & Controller REST | 5 - 6 h | Mié 28 — 13:00 | ⬜ Pendiente | [ ] Aprobado |
 | **Jhade** | QA & Editora del Informe | Pruebas Postman / cURL & Doc | 6 - 8 h | Jue 29 — 14:00 | ⬜ Pendiente | [ ] Aprobado |
@@ -87,11 +87,11 @@ Fase 3A: Carlos               Fase 3B: José
 ---
 
 ### 2. Dayro — Capa Entity (Mapeo Objeto-Relacional JPA) *(Est.: 2-3h | Límite: Lun 26 18:00)*
-- [ ] **Código de Entidades:**
-  - [ ] Crear paquete `pe.edu.utp.overtext.entity`.
-  - [ ] Crear entidad `Categoria.java` (`@Entity`, `@Table(name = "categoria")`, `@Id`, `@GeneratedValue`, relación `@OneToMany`).
-  - [ ] Crear entidad `Producto.java` (`@Entity`, `@Table(name = "producto")`, relación `@ManyToOne` hacia Categoria, getters, setters y constructores).
-  - [ ] Verificar que no existan errores de compilación (`./mvnw compile`).
+- [x] **Código de Entidades:**
+  - [x] Crear paquete `pe.edu.utp.overtext.entity`.
+  - [x] Crear entidad `Categoria.java` (`@Entity`, `@Table(name = "categoria")`, `@Id`, `@GeneratedValue`, relación `@OneToMany`).
+  - [x] Crear entidad `Producto.java` (`@Entity`, `@Table(name = "producto")`, relación `@ManyToOne` hacia Categoria, getters, setters y constructores).
+  - [x] Verificar que no existan errores de compilación (`./mvnw compile`).
 - [ ] **Capturas Obligatorias:**
   - [ ] `informes/capturas/pc3/04-entidades-jpa.png` (Código en IDE mostrando anotaciones `@Entity`, `@Id` y `@ManyToOne`).
 - [ ] **Documentación:**
@@ -101,12 +101,12 @@ Fase 3A: Carlos               Fase 3B: José
 ---
 
 ### 3. Carlos — Capa Repository (Consultas JPA y Consulta Nativa) *(Est.: 3h | Límite: Mar 27 13:00)*
-- [ ] **Código de Repositorios:**
-  - [ ] Crear paquete `pe.edu.utp.overtext.repository`.
-  - [ ] Crear interfaz `CategoriaRepository.java` extendiendo `JpaRepository<Categoria, Long>`.
-  - [ ] Crear interfaz `ProductoRepository.java` extendiendo `JpaRepository<Producto, Long>`.
-  - [ ] Implementar **Select JPA:** `List<Producto> findByActivoTrue();`.
-  - [ ] Implementar **Select Nativo (Requisito P3):**
+- [x] **Código de Repositorios:**
+  - [x] Crear paquete `pe.edu.utp.overtext.repository`.
+  - [x] Crear interfaz `CategoriaRepository.java` extendiendo `JpaRepository<Categoria, Long>`.
+  - [x] Crear interfaz `ProductoRepository.java` extendiendo `JpaRepository<Producto, Long>`.
+  - [x] Implementar **Select JPA:** `List<Producto> findByActivoTrue();`.
+  - [x] Implementar **Select Nativo (Requisito P3):**
     `@Query(value = "SELECT * FROM producto WHERE stock > 0 AND activo = true ORDER BY precio ASC", nativeQuery = true)`
     `List<Producto> listarProductosDisponiblesNativo();`
 - [ ] **Capturas Obligatorias:**
