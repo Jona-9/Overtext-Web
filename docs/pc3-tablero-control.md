@@ -68,10 +68,10 @@ Fase 3A: Carlos               Fase 3B: José
   - [x] Retirar dependencia `spring-boot-starter-thymeleaf` de `overtext/pom.xml`.
   - [x] Retirar controladores de vistas HTML de P2 (`CatalogoController`, `HomeController`, etc.), preparando el proyecto exclusivamente para los `@RestController`.
   - [x] Desacoplar plantillas `templates/` y estáticos para que el proyecto sea 100% Backend REST JSON.
-- [ ] **Configuración en Supabase:**
-  - [ ] Crear proyecto en [Supabase](https://supabase.com).
-  - [ ] Ejecutar script DDL `schema-supabase.sql` en el SQL Editor de Supabase.
-  - [ ] Verificar creación de tablas `categoria` y `producto` con los 7 registros iniciales.
+- [x] **Configuración en Supabase:**
+  - [x] Crear proyecto en [Supabase](https://supabase.com).
+  - [x] Ejecutar script DDL `schema-supabase.sql` en el SQL Editor de Supabase.
+  - [x] Verificar creación de tablas `categoria` y `producto` con los 7 registros iniciales.
 - [x] **Configuración de Spring Boot:**
   - [x] Añadir dependencias en `overtext/pom.xml` (`postgresql`, `spring-boot-starter-data-jpa`, `spring-boot-starter-validation`).
   - [x] Configurar credenciales y URL JDBC en `overtext/src/main/resources/application.properties`.
