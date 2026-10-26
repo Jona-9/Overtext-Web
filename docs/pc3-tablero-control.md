@@ -87,15 +87,17 @@ Fase 3A: Carlos               Fase 3B: José
 ---
 
 ### 2. Dayro — Capa Entity (Mapeo Objeto-Relacional JPA) *(Est.: 2-3h | Límite: Lun 26 18:00)*
-- [x] **Código de Entidades:**
+- [ ] **Código de Entidades:**
   - [x] Crear paquete `pe.edu.utp.overtext.entity`.
   - [x] Crear entidad `Categoria.java` (`@Entity`, `@Table(name = "categoria")`, `@Id`, `@GeneratedValue`, relación `@OneToMany`).
   - [x] Crear entidad `Producto.java` (`@Entity`, `@Table(name = "producto")`, relación `@ManyToOne` hacia Categoria, getters, setters y constructores).
-  - [x] Verificar que no existan errores de compilación (`./mvnw compile`).
+  - [ ] Crear entidad `Rol.java` (`@Entity`, `@Table(name = "rol")`, `@Id`, relación `@OneToMany(mappedBy = "rol")`).
+  - [ ] Crear entidad `Usuario.java` (`@Entity`, `@Table(name = "usuario")`, `@Id`, relación `@ManyToOne` hacia `Rol`).
+  - [ ] Verificar que no existan errores de compilación (`./mvnw compile`).
 - [ ] **Capturas Obligatorias:**
-  - [ ] `informes/capturas/pc3/04-entidades-jpa.png` (Código en IDE mostrando anotaciones `@Entity`, `@Id` y `@ManyToOne`).
+  - [ ] `informes/capturas/pc3/04-entidades-jpa.png` (Código en IDE mostrando anotaciones `@Entity`, `@Id`, `@ManyToOne` y `@OneToMany`).
 - [ ] **Documentación:**
-  - [ ] Redactar sección *3.2 Modelo de Dominio y Mapeo Objeto-Relacional (JPA)* con diccionario de campos.
+  - [ ] Redactar sección *3.2 Modelo de Dominio y Mapeo Objeto-Relacional (JPA)* con diccionario de campos de Categoria, Producto, Rol y Usuario.
 - [ ] **Git:** Merge de `feature/p3-dayro-entity` a `testing`.
 
 ---
