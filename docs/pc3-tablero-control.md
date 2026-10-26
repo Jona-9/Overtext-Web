@@ -19,7 +19,7 @@
 
 | Integrante | Rol en la PC3 | Capa / Especialidad | Tiempo Est. | Ventana Límite | Estado | Aprobación |
 |---|---|---|:---:|:---:|:---:|:---:|
-| **Jonathan** | Scrum Master & DevOps | Infraestructura & Supabase | 3 - 4 h | Lun 26 — 12:00 | 🟨 En curso | [ ] Aprobado |
+| **Jonathan** | Scrum Master & DevOps | Infraestructura & Supabase | 3 - 4 h | Lun 26 — 12:00 | 🟩 Listo para Merge | [x] Aprobado |
 | **Dayro** | Backend Developer | Capa Entity (JPA) | 2 - 3 h | Lun 26 — 18:00 | 🟨 En curso | [ ] Aprobado |
 | **Carlos** | Backend Developer | Capa Repository (JPA / Nativo) | 3 h | Mar 27 — 13:00 | 🟨 En curso | [ ] Aprobado |
 | **José** | Backend Developer | Capa DTO & Bean Validation | 3 h | Mar 27 — 13:00 | ⬜ Pendiente | [ ] Aprobado |
@@ -76,12 +76,12 @@ Fase 3A: Carlos               Fase 3B: José
   - [x] Añadir dependencias en `overtext/pom.xml` (`postgresql`, `spring-boot-starter-data-jpa`, `spring-boot-starter-validation`).
   - [x] Configurar credenciales y URL JDBC en `overtext/src/main/resources/application.properties`.
   - [x] Probar arranque limpio de Spring Boot y conexión HikariCP a Supabase como API REST pura.
-- [ ] **Capturas Obligatorias:**
-  - [ ] `informes/capturas/pc3/01-supabase-dashboard.png` (Dashboard web del proyecto activo).
-  - [ ] `informes/capturas/pc3/02-supabase-tablas.png` (Table Editor con registros).
-  - [ ] `informes/capturas/pc3/03-cmd-arranque-hikari.png` (Consola mostrando conexión exitosa en puerto 8080).
-- [ ] **Documentación:**
-  - [ ] Redactar sección *3.1 Conexión a Base de Datos en la Nube con Supabase y Pool HikariCP*.
+- [x] **Capturas Obligatorias:**
+  - [x] `informes/capturas/pc3/01-supabase-dashboard-activo.png` (Dashboard web del proyecto activo).
+  - [x] `informes/capturas/pc3/02-1-supabase-tabla-categoria.png` a `02-4-supabase-tabla-usuario.png` (Table Editor con tablas y registros).
+  - [x] `informes/capturas/pc3/03-spring-arranque-hikaricp.png` (Consola mostrando conexión exitosa HikariCP en puerto 8080).
+- [x] **Documentación:**
+  - [x] Redactar sección *3.1 Conexión a Base de Datos en la Nube con Supabase y Pool HikariCP* (en `informes/secciones-p3/3.1-conexion-bd-supabase-hikaricp.md`).
 - [ ] **Git:** Merge de `jonathan_avance3` a `testing` (solo al finalizar toda la Fase 1 y verificar con Supabase).
 
 ---
