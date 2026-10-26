@@ -11,4 +11,10 @@
 # no se versionan.
 informes/*.docx
 marcosWeb.md
-CLAUDE.md 
+CLAUDE.md
+
+# Variables de entorno y secretos locales (NUNCA subir a Git)
+.env
+.env.*
+*.env
+**/.env
