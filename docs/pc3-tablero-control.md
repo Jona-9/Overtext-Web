@@ -143,8 +143,8 @@ Fase 3A: Carlos               Fase 3B: José
     - [x] `@NotNull`, `@Positive` en `rolId`.
   - [x] Crear `UsuarioResponseDTO.java` (id, email, nombre, activo, rolNombre sin hash de password).
   - [x] Verificar las validaciones con la prueba unitaria `ProductoRequestDTOValidationTest.java` (suite completa: 8/8 en verde contra Supabase).
-- [ ] **Capturas Obligatorias:**
-  - [ ] `informes/capturas/pc3/06-dto-validaciones-codigo.png` (Código en IDE destacando las 5 anotaciones Bean Validation).
+- [x] **Capturas Obligatorias:**
+  - [x] `informes/capturas/pc3/06-dto-validaciones-codigo.png` (Código en IDE destacando las 5 anotaciones Bean Validation).
 - [x] **Documentación:**
   - [x] Redactar sección *3.4 Capa DTO y Validación de Datos con Bean Validation* con tablas de restricciones de Producto y Usuario.
 - [ ] **Git:** Merge de `feature/p3-jose-dto` a `testing`.
