@@ -16,7 +16,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import pe.edu.utp.overtext.controller.api.ProductoRestController;
+import pe.edu.utp.overtext.controller.ProductoRestController;
 import pe.edu.utp.overtext.entity.Producto;
 import pe.edu.utp.overtext.repository.ProductoRepository;
 import pe.edu.utp.overtext.service.ProductoService;

@@ -1,4 +1,4 @@
-package pe.edu.utp.overtext.controller.api;
+package pe.edu.utp.overtext.controller;
 
 import java.util.List;
 
