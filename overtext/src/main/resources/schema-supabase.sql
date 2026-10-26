@@ -88,7 +88,7 @@ ON CONFLICT (nombre) DO NOTHING;
 -- Inserción de usuarios iniciales
 INSERT INTO usuario (email, password, nombre, activo, rol_id)
 VALUES
-('admin@overtext.pe', '$2a$10$e8wV4T3J9oN1m0L...hash', 'Administrador OverText', true, 1),
-('cliente@overtext.pe', '$2a$10$e8wV4T3J9oN1m0L...hash', 'Jonathan Lopez', true, 2)
+('admin@overtext.pe', 'Admin123!', 'Administrador OverText', true, 1),
+('cliente@overtext.pe', 'Cliente123!', 'Joaquin chaparro', true, 2)
 ON CONFLICT (email) DO NOTHING;
 
