@@ -88,7 +88,7 @@ Cualquier agente de IA o desarrollador que genere código en `entity/`, `dto/`, 
 ```mermaid
 flowchart TD
     FASE1["FASE 1: INFRAESTRUCTURA & BD<br><b>Jonathan</b> (DevOps & Supabase)<br>pom.xml + application.properties + schema SQL"]
-    --> FASE2["FASE 2: CAPA ENTITY<br><b>Dayro</b> (Modelo JPA)<br>Categoria.java + Producto.java"]
+    --> FASE2["FASE 2: CAPA ENTITY<br><b>Dayro</b> (Modelo JPA)<br>Categoria, Producto, Rol, Usuario"]
     
     FASE2 --> FASE3A["FASE 3A: CAPA REPOSITORY<br><b>Carlos</b> (Consultas SQL)<br>Select JPA + Select Nativo"]
     FASE2 --> FASE3B["FASE 3B: CAPA DTO & VALIDATION<br><b>José</b> (Bean Validation)<br>ProductoRequestDTO + ResponseDTO"]
@@ -144,13 +144,17 @@ flowchart TD
 * **Archivos exclusivos a su cargo:**
   - `overtext/src/main/java/pe/edu/utp/overtext/entity/Categoria.java`
   - `overtext/src/main/java/pe/edu/utp/overtext/entity/Producto.java`
+  - `overtext/src/main/java/pe/edu/utp/overtext/entity/Rol.java`
+  - `overtext/src/main/java/pe/edu/utp/overtext/entity/Usuario.java`
 * **Entregables de Código:**
-  1. Clase `Categoria` con anotaciones `@Entity`, `@Table`, `@Id`, `@GeneratedValue(strategy = GenerationType.IDENTITY)` y relación `@OneToMany`.
-  2. Clase `Producto` con `@Entity`, `@Table`, relación `@ManyToOne` hacia `Categoria`, campos de precio, stock, código, imágenes y `correoProveedor`.
+  1. Clase `Categoria` con anotaciones `@Entity`, `@Table(name = "categoria")`, `@Id`, `@GeneratedValue(strategy = GenerationType.IDENTITY)` y relación `@OneToMany(mappedBy = "categoria")`.
+  2. Clase `Producto` con `@Entity`, `@Table(name = "producto")`, relación `@ManyToOne` hacia `Categoria`, campos de precio, stock, código, imágenes y `correoProveedor`.
+  3. Clase `Rol` con `@Entity`, `@Table(name = "rol")`, `@Id`, `@GeneratedValue(strategy = GenerationType.IDENTITY)`, campos `nombre`, `descripcion` y relación `@OneToMany(mappedBy = "rol")`.
+  4. Clase `Usuario` con `@Entity`, `@Table(name = "usuario")`, `@Id`, campos `email`, `password`, `nombre`, `activo` y relación `@ManyToOne` hacia `Rol` con `@JoinColumn(name = "rol_id")`.
 * **Entregable de Documentación:**
-  - Redactar: *Capítulo 3.2: Modelo de Dominio y Mapeo Objeto-Relacional (JPA)* con el diccionario de campos de ambas entidades.
+  - Redactar: *Capítulo 3.2: Modelo de Dominio y Mapeo Objeto-Relacional (JPA)* con el diccionario de campos de las 4 entidades (`Categoria`, `Producto`, `Rol`, `Usuario`).
 * **Capturas Obligatorias a su cargo:**
-  - 📸 **Captura 4:** `informes/capturas/pc3/04-entidades-jpa.png` (Código en IDE mostrando las anotaciones `@Entity`, `@Id` y `@ManyToOne`).
+  - 📸 **Captura 4:** `informes/capturas/pc3/04-entidades-jpa.png` (Código en IDE mostrando las anotaciones `@Entity`, `@Id`, `@ManyToOne` y `@OneToMany`).
 * **Hito de Cierre Fase 2:** PR a `testing` aprobado. Todo el equipo hace `git pull origin testing`. Desbloquea a Carlos y José.
 
 ---

@@ -34,7 +34,7 @@
 | Integrante | Rol en la PC3 | Archivos que PUEDE tocar | Archivos que NO DEBE tocar |
 |---|---|---|---|
 | **Jonathan** | DevOps & Supabase | `overtext/pom.xml`<br>`application.properties`<br>`schema-supabase.sql` | Clases de negocio en `entity/`, `dto/`, `repository/`, `service/` |
-| **Dayro** | Modelo & Persistencia | `entity/Categoria.java`<br>`entity/Producto.java` | Repositorios, DTOs, Servicios y Controladores |
+| **Dayro** | Modelo & Persistencia | `entity/Categoria.java`<br>`entity/Producto.java`<br>`entity/Rol.java`<br>`entity/Usuario.java` | Repositorios, DTOs, Servicios y Controladores |
 | **Carlos** | Repositorios SQL | `repository/CategoriaRepository.java`<br>`repository/ProductoRepository.java` | Entidades, DTOs y Controladores |
 | **José** | DTOs & Validaciones | `dto/ProductoRequestDTO.java`<br>`dto/ProductoResponseDTO.java`<br>`dto/CategoriaDTO.java` | Entidades y Servicios |
 | **Joaquín** | Servicios y APIs | `service/ProductoService.java`<br>`service/impl/ProductoServiceImpl.java`<br>`controller/api/ProductoRestController.java`<br>`advice/GlobalExceptionHandler.java` | Entidades, DTOs y Repositorios |
@@ -70,6 +70,20 @@ Cualquier agente que genere código en `entity/`, `dto/`, `service/` o `controll
 | `correoProveedor` | `String` | `VARCHAR(100)` | `@NotBlank` y `@Email(message = "Debe ser un email válido")` |
 | `activo` | `Boolean` | `BOOLEAN` | *(Por defecto true)* |
 | `categoriaId` | `Long` | `BIGINT REFERENCES categoria(id)` | `@NotNull` y `@Positive` (en RequestDTO) |
+
+### C. Entidad `Rol`
+- `Long id` (PK, generado automáticamente con `@GeneratedValue(strategy = GenerationType.IDENTITY)`)
+- `String nombre` (Ej: "ADMIN", "CLIENTE", único, `VARCHAR(40) NOT NULL`)
+- `String descripcion` (`VARCHAR(150)`, opcional)
+- Relación: `@OneToMany(mappedBy = "rol")` hacia `Usuario`.
+
+### D. Entidad `Usuario`
+- `Long id` (PK, generado automáticamente con `@GeneratedValue(strategy = GenerationType.IDENTITY)`)
+- `String email` (Único, `VARCHAR(100) NOT NULL`)
+- `String password` (`VARCHAR(255) NOT NULL`)
+- `String nombre` (`VARCHAR(100) NOT NULL`)
+- `Boolean activo` (Por defecto `true`, `BOOLEAN NOT NULL`)
+- Relación: `@ManyToOne` hacia `Rol` con `@JoinColumn(name = "rol_id", nullable = false)`.
 
 ---
 

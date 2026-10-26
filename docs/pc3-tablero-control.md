@@ -20,8 +20,8 @@
 | Integrante | Rol en la PC3 | Capa / Especialidad | Tiempo Est. | Ventana Límite | Estado | Aprobación |
 |---|---|---|:---:|:---:|:---:|:---:|
 | **Jonathan** | Scrum Master & DevOps | Infraestructura & Supabase | 3 - 4 h | Lun 26 — 12:00 | 🟨 En curso | [ ] Aprobado |
-| **Dayro** | Backend Developer | Capa Entity (JPA) | 2 - 3 h | Lun 26 — 18:00 | ⬜ Pendiente | [ ] Aprobado |
-| **Carlos** | Backend Developer | Capa Repository (JPA / Nativo) | 3 h | Mar 27 — 13:00 | ⬜ Pendiente | [ ] Aprobado |
+| **Dayro** | Backend Developer | Capa Entity (JPA) | 2 - 3 h | Lun 26 — 18:00 | 🟨 En curso | [ ] Aprobado |
+| **Carlos** | Backend Developer | Capa Repository (JPA / Nativo) | 3 h | Mar 27 — 13:00 | 🟨 En curso | [ ] Aprobado |
 | **José** | Backend Developer | Capa DTO & Bean Validation | 3 h | Mar 27 — 13:00 | ⬜ Pendiente | [ ] Aprobado |
 | **Joaquín** | Backend Developer | Capa Service & Controller REST | 5 - 6 h | Mié 28 — 13:00 | ⬜ Pendiente | [ ] Aprobado |
 | **Jhade** | QA & Editora del Informe | Pruebas Postman / cURL & Doc | 6 - 8 h | Jue 29 — 14:00 | ⬜ Pendiente | [ ] Aprobado |
@@ -64,49 +64,51 @@ Fase 3A: Carlos               Fase 3B: José
 ## 3. Checklist de Responsabilidades por Integrante
 
 ### 1. Jonathan — DevOps, Limpieza de Frontend y Supabase *(Est.: 3-4h | Límite: Lun 26 12:00)*
-- [ ] **Limpieza de Frontend y Conversión a Backend REST Puro:**
-  - [ ] Retirar dependencia `spring-boot-starter-thymeleaf` de `overtext/pom.xml`.
-  - [ ] Retirar controladores de vistas HTML de P2 (`CatalogoController`, `HomeController`, etc.), preparando el proyecto exclusivamente para los `@RestController`.
-  - [ ] Desacoplar plantillas `templates/` y estáticos para que el proyecto sea 100% Backend REST JSON.
-- [ ] **Configuración en Supabase:**
-  - [ ] Crear proyecto en [Supabase](https://supabase.com).
-  - [ ] Ejecutar script DDL `schema-supabase.sql` en el SQL Editor de Supabase.
-  - [ ] Verificar creación de tablas `categoria` y `producto` con los 7 registros iniciales.
-- [ ] **Configuración de Spring Boot:**
-  - [ ] Añadir dependencias en `overtext/pom.xml` (`postgresql`, `spring-boot-starter-data-jpa`, `spring-boot-starter-validation`).
-  - [ ] Configurar credenciales y URL JDBC en `overtext/src/main/resources/application.properties`.
-  - [ ] Probar arranque limpio de Spring Boot y conexión HikariCP a Supabase como API REST pura.
+- [x] **Limpieza de Frontend y Conversión a Backend REST Puro:**
+  - [x] Retirar dependencia `spring-boot-starter-thymeleaf` de `overtext/pom.xml`.
+  - [x] Retirar controladores de vistas HTML de P2 (`CatalogoController`, `HomeController`, etc.), preparando el proyecto exclusivamente para los `@RestController`.
+  - [x] Desacoplar plantillas `templates/` y estáticos para que el proyecto sea 100% Backend REST JSON.
+- [x] **Configuración en Supabase:**
+  - [x] Crear proyecto en [Supabase](https://supabase.com).
+  - [x] Ejecutar script DDL `schema-supabase.sql` en el SQL Editor de Supabase.
+  - [x] Verificar creación de tablas `categoria` y `producto` con los 7 registros iniciales.
+- [x] **Configuración de Spring Boot:**
+  - [x] Añadir dependencias en `overtext/pom.xml` (`postgresql`, `spring-boot-starter-data-jpa`, `spring-boot-starter-validation`).
+  - [x] Configurar credenciales y URL JDBC en `overtext/src/main/resources/application.properties`.
+  - [x] Probar arranque limpio de Spring Boot y conexión HikariCP a Supabase como API REST pura.
 - [ ] **Capturas Obligatorias:**
   - [ ] `informes/capturas/pc3/01-supabase-dashboard.png` (Dashboard web del proyecto activo).
   - [ ] `informes/capturas/pc3/02-supabase-tablas.png` (Table Editor con registros).
   - [ ] `informes/capturas/pc3/03-cmd-arranque-hikari.png` (Consola mostrando conexión exitosa en puerto 8080).
 - [ ] **Documentación:**
   - [ ] Redactar sección *3.1 Conexión a Base de Datos en la Nube con Supabase y Pool HikariCP*.
-- [ ] **Git:** Merge de `feature/p3-jonathan-supabase` a `testing`.
+- [ ] **Git:** Merge de `jonathan_avance3` a `testing` (solo al finalizar toda la Fase 1 y verificar con Supabase).
 
 ---
 
 ### 2. Dayro — Capa Entity (Mapeo Objeto-Relacional JPA) *(Est.: 2-3h | Límite: Lun 26 18:00)*
 - [ ] **Código de Entidades:**
-  - [ ] Crear paquete `pe.edu.utp.overtext.entity`.
-  - [ ] Crear entidad `Categoria.java` (`@Entity`, `@Table(name = "categoria")`, `@Id`, `@GeneratedValue`, relación `@OneToMany`).
-  - [ ] Crear entidad `Producto.java` (`@Entity`, `@Table(name = "producto")`, relación `@ManyToOne` hacia Categoria, getters, setters y constructores).
+  - [x] Crear paquete `pe.edu.utp.overtext.entity`.
+  - [x] Crear entidad `Categoria.java` (`@Entity`, `@Table(name = "categoria")`, `@Id`, `@GeneratedValue`, relación `@OneToMany`).
+  - [x] Crear entidad `Producto.java` (`@Entity`, `@Table(name = "producto")`, relación `@ManyToOne` hacia Categoria, getters, setters y constructores).
+  - [ ] Crear entidad `Rol.java` (`@Entity`, `@Table(name = "rol")`, `@Id`, relación `@OneToMany(mappedBy = "rol")`).
+  - [ ] Crear entidad `Usuario.java` (`@Entity`, `@Table(name = "usuario")`, `@Id`, relación `@ManyToOne` hacia `Rol`).
   - [ ] Verificar que no existan errores de compilación (`./mvnw compile`).
 - [ ] **Capturas Obligatorias:**
-  - [ ] `informes/capturas/pc3/04-entidades-jpa.png` (Código en IDE mostrando anotaciones `@Entity`, `@Id` y `@ManyToOne`).
+  - [ ] `informes/capturas/pc3/04-entidades-jpa.png` (Código en IDE mostrando anotaciones `@Entity`, `@Id`, `@ManyToOne` y `@OneToMany`).
 - [ ] **Documentación:**
-  - [ ] Redactar sección *3.2 Modelo de Dominio y Mapeo Objeto-Relacional (JPA)* con diccionario de campos.
+  - [ ] Redactar sección *3.2 Modelo de Dominio y Mapeo Objeto-Relacional (JPA)* con diccionario de campos de Categoria, Producto, Rol y Usuario.
 - [ ] **Git:** Merge de `feature/p3-dayro-entity` a `testing`.
 
 ---
 
 ### 3. Carlos — Capa Repository (Consultas JPA y Consulta Nativa) *(Est.: 3h | Límite: Mar 27 13:00)*
-- [ ] **Código de Repositorios:**
-  - [ ] Crear paquete `pe.edu.utp.overtext.repository`.
-  - [ ] Crear interfaz `CategoriaRepository.java` extendiendo `JpaRepository<Categoria, Long>`.
-  - [ ] Crear interfaz `ProductoRepository.java` extendiendo `JpaRepository<Producto, Long>`.
-  - [ ] Implementar **Select JPA:** `List<Producto> findByActivoTrue();`.
-  - [ ] Implementar **Select Nativo (Requisito P3):**
+- [x] **Código de Repositorios:**
+  - [x] Crear paquete `pe.edu.utp.overtext.repository`.
+  - [x] Crear interfaz `CategoriaRepository.java` extendiendo `JpaRepository<Categoria, Long>`.
+  - [x] Crear interfaz `ProductoRepository.java` extendiendo `JpaRepository<Producto, Long>`.
+  - [x] Implementar **Select JPA:** `List<Producto> findByActivoTrue();`.
+  - [x] Implementar **Select Nativo (Requisito P3):**
     `@Query(value = "SELECT * FROM producto WHERE stock > 0 AND activo = true ORDER BY precio ASC", nativeQuery = true)`
     `List<Producto> listarProductosDisponiblesNativo();`
 - [ ] **Capturas Obligatorias:**

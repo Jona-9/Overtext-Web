@@ -31,9 +31,28 @@ CREATE TABLE IF NOT EXISTS producto (
     categoria_id     BIGINT NOT NULL REFERENCES categoria(id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
+-- 3. Tabla: rol
+CREATE TABLE IF NOT EXISTS rol (
+    id          BIGSERIAL PRIMARY KEY,
+    nombre      VARCHAR(40) NOT NULL UNIQUE,
+    descripcion VARCHAR(150)
+);
+
+-- 4. Tabla: usuario
+CREATE TABLE IF NOT EXISTS usuario (
+    id          BIGSERIAL PRIMARY KEY,
+    email       VARCHAR(100) NOT NULL UNIQUE,
+    password    VARCHAR(255) NOT NULL,
+    nombre      VARCHAR(100) NOT NULL,
+    activo      BOOLEAN NOT NULL DEFAULT TRUE,
+    rol_id      BIGINT NOT NULL REFERENCES rol(id) ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
 -- Índices recomendados
 CREATE INDEX IF NOT EXISTS ix_producto_categoria ON producto(categoria_id);
 CREATE INDEX IF NOT EXISTS ix_producto_activo ON producto(activo);
+CREATE INDEX IF NOT EXISTS ix_usuario_rol ON usuario(rol_id);
+CREATE INDEX IF NOT EXISTS ix_usuario_email ON usuario(email);
 
 -- ============================================================
 -- Datos iniciales (Semillero OverText)
@@ -46,7 +65,7 @@ ON CONFLICT (slug) DO NOTHING;
 
 -- Inserción de los 7 productos representativos con sus colores oficiales
 INSERT INTO producto (
-    codigo, nombre, slogan, descripcion, precio, precioPack, stock,
+    codigo, nombre, slogan, descripcion, precio, precio_pack, stock,
     imagen_principal, color_nombre, color_hex, correo_proveedor, activo, categoria_id
 )
 VALUES
@@ -58,3 +77,18 @@ VALUES
 ('PROD-AZU-06', 'Short Azul Marino', 'Sobriedad y versatilidad total.', 'Azul marino clásico con bolsillos laterales profundos.', 45.00, 35.00, 20, '/assets/img/catalogo/short-azul-marino-1.webp', 'Azul Marino', '#1B263B', 'proveedor.norte@overtext.pe', true, 1),
 ('PROD-MAR-07', 'Short Marrón', 'Tonos tierra de tendencia.', 'Marrón cálido fabricado en tela french terry premium.', 45.00, 35.00, 15, '/assets/img/catalogo/short-marron-1.webp', 'Marrón', '#4A3728', 'proveedor.sur@overtext.pe', true, 1)
 ON CONFLICT (codigo) DO NOTHING;
+
+-- Inserción de roles del sistema
+INSERT INTO rol (nombre, descripcion)
+VALUES
+('ADMIN', 'Administrador con acceso total al sistema'),
+('CLIENTE', 'Cliente registrado de la tienda OverText')
+ON CONFLICT (nombre) DO NOTHING;
+
+-- Inserción de usuarios iniciales
+INSERT INTO usuario (email, password, nombre, activo, rol_id)
+VALUES
+('admin@overtext.pe', '$2a$10$e8wV4T3J9oN1m0L...hash', 'Administrador OverText', true, 1),
+('cliente@overtext.pe', '$2a$10$e8wV4T3J9oN1m0L...hash', 'Jonathan Lopez', true, 2)
+ON CONFLICT (email) DO NOTHING;
+

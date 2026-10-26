@@ -1,48 +1,41 @@
 package pe.edu.utp.overtext.service;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import tools.jackson.databind.ObjectMapper;
-
-import pe.edu.utp.overtext.model.Producto;
+import pe.edu.utp.overtext.entity.Producto;
+import pe.edu.utp.overtext.repository.ProductoRepository;
 
 @Service
+@Transactional(readOnly = true)
 public class ProductoServiceImpl implements ProductoService {
 
-    private static final String RUTA_CATALOGO = "static/js/productos.json";
+    private final ProductoRepository productoRepository;
 
-    private final List<Producto> productos;
-
-    public ProductoServiceImpl(ObjectMapper objectMapper) {
-        this.productos = cargarCatalogo(objectMapper);
+    public ProductoServiceImpl(ProductoRepository productoRepository) {
+        this.productoRepository = productoRepository;
     }
 
     @Override
     public List<Producto> listarTodos() {
-        return productos;
+        return productoRepository.findAll();
     }
 
     @Override
-    public Optional<Producto> buscarPorId(String id) {
-        return productos.stream()
-                .filter(p -> p.id().equals(id))
-                .findFirst();
+    public List<Producto> listarActivos() {
+        return productoRepository.findByActivoTrue();
     }
 
-    private static List<Producto> cargarCatalogo(ObjectMapper objectMapper) {
-        try (InputStream flujo = new ClassPathResource(RUTA_CATALOGO).getInputStream()) {
-            Producto[] arreglo = objectMapper.readValue(flujo, Producto[].class);
-            return List.copyOf(Arrays.asList(arreglo));
-        } catch (IOException excepcion) {
-            throw new IllegalStateException(
-                    "No se pudo cargar el catálogo desde " + RUTA_CATALOGO, excepcion);
-        }
+    @Override
+    public List<Producto> listarDisponiblesNativo() {
+        return productoRepository.listarProductosDisponiblesNativo();
+    }
+
+    @Override
+    public Optional<Producto> buscarPorId(Long id) {
+        return productoRepository.findById(id);
     }
 }

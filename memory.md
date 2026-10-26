@@ -17,7 +17,7 @@
 
 **ATF2 cerrado y verificado al 100%. En ejecución activa de la PC3 (ATF3).**
 
-- **Línea base congelada:** `app-estatico/` — se conserva intacta como referencia del ATF1, no se edita ni se borra.
+- **Línea base histórica:** `app-estatico/` (P1) fue retirada del árbol de trabajo para mantener el repositorio 100% enfocado en el Backend REST de la PC3, permaneciendo preservada en el historial de Git.
 - **Proyecto activo:** `overtext/` — Spring Boot **4.0.8** + Thymeleaf, Java 17/21, Maven Wrapper. `./mvnw spring-boot:run` levanta en `http://localhost:8080`. Compilación limpia y 0 errores de consola.
 - **10 rutas limpias por controlador y páginas de error integradas:**
   `/`, `/catalogo`, `/producto/{id}`, `/promociones`, `/nosotros`, `/contacto`, `/login`, `/checkout`, `/confirmacion`, `/admin`.
