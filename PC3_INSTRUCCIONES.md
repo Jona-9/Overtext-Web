@@ -78,6 +78,31 @@ Cualquier agente de IA o desarrollador que genere código en `entity/`, `dto/`, 
 | `activo` | `Boolean` | `activo` (BOOLEAN) | *(Por defecto true)* |
 | `categoriaId` | `Long` | `categoria_id` (BIGINT) | `@NotNull(message = "La categoría es obligatoria")`<br>`@Positive(message = "El ID de categoría debe ser válido")` |
 
+### C. Modelo de `Rol` y DTO
+- **Entidad `Rol`:**
+  - `Long id` (PK, `@Id`, `@GeneratedValue(strategy = GenerationType.IDENTITY)`)
+  - `String nombre` (VARCHAR 40, UNIQUE, NOT NULL, ej: "ADMIN", "CLIENTE")
+  - `String descripcion` (VARCHAR 150)
+  - `List<Usuario> usuarios` (`@OneToMany(mappedBy = "rol")`)
+- **DTO `RolDTO`:**
+  - `Long id`, `String nombre`, `String descripcion`
+
+### D. Modelo de `Usuario` y DTOs
+- **Entidad `Usuario`:**
+  - `Long id` (PK, `@Id`, `@GeneratedValue(strategy = GenerationType.IDENTITY)`)
+  - `String email` (VARCHAR 100, UNIQUE, NOT NULL)
+  - `String password` (VARCHAR 255, NOT NULL)
+  - `String nombre` (VARCHAR 100, NOT NULL)
+  - `Boolean activo` (BOOLEAN, NOT NULL, default `true`)
+  - `Rol rol` (`@ManyToOne`, `@JoinColumn(name = "rol_id")`)
+- **DTO `UsuarioRequestDTO` (Bean Validation):**
+  - `String email` (`@NotBlank`, `@Email`)
+  - `String password` (`@NotBlank`, `@Size(min = 6)`)
+  - `String nombre` (`@NotBlank`, `@Size(min = 3, max = 100)`)
+  - `Long rolId` (`@NotNull`, `@Positive`)
+- **DTO `UsuarioResponseDTO`:**
+  - `Long id`, `String email`, `String nombre`, `Boolean activo`, `String rolNombre` (omite hash de password)
+
 > [!CAUTION]
 > **Prohibido modificar los tipos canónicos:** No uses `BigDecimal` ni `float` para precios; usa unificado `Double`. No uses `int` primitivo; usa `Integer`. No uses `long` primitivo; usa `Long`. Esto garantiza que los agentes de Dayro, Carlos, José y Joaquín interoperen sin inconsistencias de tipos.
 
@@ -90,10 +115,10 @@ flowchart TD
     FASE1["FASE 1: INFRAESTRUCTURA & BD<br><b>Jonathan</b> (DevOps & Supabase)<br>pom.xml + application.properties + schema SQL"]
     --> FASE2["FASE 2: CAPA ENTITY<br><b>Dayro</b> (Modelo JPA)<br>Categoria, Producto, Rol, Usuario"]
     
-    FASE2 --> FASE3A["FASE 3A: CAPA REPOSITORY<br><b>Carlos</b> (Consultas SQL)<br>Select JPA + Select Nativo"]
-    FASE2 --> FASE3B["FASE 3B: CAPA DTO & VALIDATION<br><b>José</b> (Bean Validation)<br>ProductoRequestDTO + ResponseDTO"]
+    FASE2 --> FASE3A["FASE 3A: CAPA REPOSITORY<br><b>Carlos</b> (Consultas SQL)<br>Select JPA + Select Nativo + Rol & Usuario Repos"]
+    FASE2 --> FASE3B["FASE 3B: CAPA DTO & VALIDATION<br><b>José</b> (Bean Validation)<br>Producto, Rol & Usuario DTOs"]
     
-    FASE3A --> FASE4["FASE 4: CAPA SERVICE & CONTROLLER<br><b>Joaquín</b> (Negocio & REST)<br>ProductoServiceImpl + ProductoRestController"]
+    FASE3A --> FASE4["FASE 4: CAPA SERVICE & CONTROLLER<br><b>Joaquín</b> (Negocio & REST)<br>Producto, Rol & Usuario Services & Controllers"]
     FASE3B --> FASE4
     
     FASE4 --> FASE5["FASE 5: PRUEBAS POSTMAN & CMD<br><b>Jhade</b> (QA & Pruebas en Vivo)<br>Colección Postman + Script cURL"]
@@ -117,16 +142,17 @@ flowchart TD
 * **Rama Git:** `feature/p3-jonathan-supabase-backend`  
 * **Prerrequisito:** Ninguno (Punto de partida).  
 * **Archivos a su cargo:**
-  - `overtext/pom.xml` (Retirar dependencia `spring-boot-starter-thymeleaf`, añadir `postgresql`, `spring-boot-starter-data-jpa`, `spring-boot-starter-validation`).
+  - `overtext/pom.xml` (Retirar dependencia `spring-boot-starter-thymeleaf`, añadir `postgresql`, `spring-boot-starter-data-jpa`, `spring-boot-starter-validation`, `lombok` y `annotationProcessorPaths`).
   - Desacoplar los controladores HTML de la P2 (`CatalogoController`, `HomeController`, `CheckoutController`, `ContactoController`, `IntranetController`, `LoginController`, `NosotrosController`, `ProductoController`, `PromocionesController`), dejando la arquitectura lista para los `@RestController` de la P3.
   - Limpieza de `src/main/resources/templates/` y recursos estáticos no requeridos en la API para garantizar un entregable 100% Backend limpio.
   - `overtext/src/main/resources/application.properties` (Datasource Supabase PostgreSQL y variables de entorno).
-  - `overtext/src/main/resources/schema-supabase.sql` (Script DDL y datos iniciales para Supabase).
+  - `overtext/src/main/resources/schema-supabase.sql` (Script DDL y datos iniciales para Supabase: tablas `categoria`, `producto`, `rol` y `usuario`).
 * **Entregables de Código:**
   1. Conversión completa a **Backend REST Puro**: La aplicación Spring Boot arranca sin dependencias ni controladores frontend, sirviendo exclusivamente respuestas JSON.
   2. Conexión establecida y verificada contra Supabase mediante JDBC PostgreSQL.
-  3. Tablas `categoria` y `producto` creadas en Supabase con sus 7 registros sembrados.
-  4. Compilación y test limpios con `./mvnw clean compile` y `./mvnw test`.
+  3. Tablas `categoria`, `producto`, `rol` y `usuario` creadas en Supabase con sus registros sembrados.
+  4. Configuración de Lombok para eliminar boilerplate en entidades.
+  5. Compilación y test limpios con `mvn clean test` (4/4 pruebas pasadas).
 * **Entregable de Documentación:**
   - Redactar: *Capítulo 3.1: Conexión a Base de Datos en la Nube con Supabase y Conversión a Backend REST*.
 * **Capturas Obligatorias a su cargo:**
@@ -147,14 +173,15 @@ flowchart TD
   - `overtext/src/main/java/pe/edu/utp/overtext/entity/Rol.java`
   - `overtext/src/main/java/pe/edu/utp/overtext/entity/Usuario.java`
 * **Entregables de Código:**
-  1. Clase `Categoria` con anotaciones `@Entity`, `@Table(name = "categoria")`, `@Id`, `@GeneratedValue(strategy = GenerationType.IDENTITY)` y relación `@OneToMany(mappedBy = "categoria")`.
-  2. Clase `Producto` con `@Entity`, `@Table(name = "producto")`, relación `@ManyToOne` hacia `Categoria`, campos de precio, stock, código, imágenes y `correoProveedor`.
-  3. Clase `Rol` con `@Entity`, `@Table(name = "rol")`, `@Id`, `@GeneratedValue(strategy = GenerationType.IDENTITY)`, campos `nombre`, `descripcion` y relación `@OneToMany(mappedBy = "rol")`.
-  4. Clase `Usuario` con `@Entity`, `@Table(name = "usuario")`, `@Id`, campos `email`, `password`, `nombre`, `activo` y relación `@ManyToOne` hacia `Rol` con `@JoinColumn(name = "rol_id")`.
+  1. Clase `Categoria` con anotaciones `@Entity`, `@Table(name = "categoria")`, `@Id`, `@GeneratedValue(strategy = GenerationType.IDENTITY)`, relación `@OneToMany(mappedBy = "categoria")` y Lombok `@Data`, `@NoArgsConstructor`, `@AllArgsConstructor`.
+  2. Clase `Producto` con `@Entity`, `@Table(name = "producto")`, relación `@ManyToOne` hacia `Categoria`, campos de precio, stock, código, imágenes, `correoProveedor` y Lombok `@Data`, `@NoArgsConstructor`, `@AllArgsConstructor`.
+  3. Clase `Rol` con `@Entity`, `@Table(name = "rol")`, `@Id`, `@GeneratedValue(strategy = GenerationType.IDENTITY)`, campos `nombre`, `descripcion`, relación `@OneToMany(mappedBy = "rol")` y Lombok `@Data`, `@NoArgsConstructor`, `@AllArgsConstructor`.
+  4. Clase `Usuario` con `@Entity`, `@Table(name = "usuario")`, `@Id`, campos `email`, `password`, `nombre`, `activo`, relación `@ManyToOne` hacia `Rol` con `@JoinColumn(name = "rol_id")` y Lombok `@Data`, `@NoArgsConstructor`, `@AllArgsConstructor`.
+  5. Cero código repetitivo manual (getters, setters y constructores generados limpiamente por Lombok).
 * **Entregable de Documentación:**
   - Redactar: *Capítulo 3.2: Modelo de Dominio y Mapeo Objeto-Relacional (JPA)* con el diccionario de campos de las 4 entidades (`Categoria`, `Producto`, `Rol`, `Usuario`).
 * **Capturas Obligatorias a su cargo:**
-  - 📸 **Captura 4:** `informes/capturas/pc3/04-entidades-jpa.png` (Código en IDE mostrando las anotaciones `@Entity`, `@Id`, `@ManyToOne` y `@OneToMany`).
+  - 📸 **Captura 4:** `informes/capturas/pc3/04-entidades-jpa.png` (Código en IDE mostrando las 4 entidades JPA con sus anotaciones).
 * **Hito de Cierre Fase 2:** PR a `testing` aprobado. Todo el equipo hace `git pull origin testing`. Desbloquea a Carlos y José.
 
 ---
@@ -168,6 +195,8 @@ flowchart TD
 * **Archivos exclusivos a su cargo:**
   - `overtext/src/main/java/pe/edu/utp/overtext/repository/CategoriaRepository.java`
   - `overtext/src/main/java/pe/edu/utp/overtext/repository/ProductoRepository.java`
+  - `overtext/src/main/java/pe/edu/utp/overtext/repository/RolRepository.java`
+  - `overtext/src/main/java/pe/edu/utp/overtext/repository/UsuarioRepository.java`
 * **Entregables de Código:**
   1. `CategoriaRepository` extendiendo `JpaRepository<Categoria, Long>`.
   2. `ProductoRepository` extendiendo `JpaRepository<Producto, Long>`.
@@ -177,8 +206,13 @@ flowchart TD
      @Query(value = "SELECT * FROM producto WHERE stock > 0 AND activo = true ORDER BY precio ASC", nativeQuery = true)
      List<Producto> listarProductosDisponiblesNativo();
      ```
+  5. `RolRepository` extendiendo `JpaRepository<Rol, Long>`:
+     - `Optional<Rol> findByNombre(String nombre);`
+  6. `UsuarioRepository` extendiendo `JpaRepository<Usuario, Long>`:
+     - `Optional<Usuario> findByEmail(String email);`
+     - `List<Usuario> findByActivoTrue();`
 * **Entregable de Documentación:**
-  - Redactar: *Capítulo 3.3: Capa de Persistencia y Consultas: JPA vs SQL Nativo*.
+  - Redactar: *Capítulo 3.3: Capa de Persistencia y Consultas: JPA vs SQL Nativo* (incluyendo el catálogo de repositorios: `CategoriaRepository`, `ProductoRepository`, `RolRepository` y `UsuarioRepository`).
 * **Capturas Obligatorias a su cargo:**
   - 📸 **Captura 5:** `informes/capturas/pc3/05-cmd-query-nativa-logs.png` (Terminal/CMD con Hibernate mostrando la ejecución del SQL nativo en consola).
 
@@ -192,6 +226,9 @@ flowchart TD
   - `overtext/src/main/java/pe/edu/utp/overtext/dto/ProductoRequestDTO.java`
   - `overtext/src/main/java/pe/edu/utp/overtext/dto/ProductoResponseDTO.java`
   - `overtext/src/main/java/pe/edu/utp/overtext/dto/CategoriaDTO.java`
+  - `overtext/src/main/java/pe/edu/utp/overtext/dto/RolDTO.java`
+  - `overtext/src/main/java/pe/edu/utp/overtext/dto/UsuarioRequestDTO.java`
+  - `overtext/src/main/java/pe/edu/utp/overtext/dto/UsuarioResponseDTO.java`
 * **Entregables de Código:**
   1. `ProductoRequestDTO` con las 5 anotaciones estrictas de `P3.md`:
      - `@NotBlank` (código y nombre)
@@ -200,8 +237,16 @@ flowchart TD
      - `@Positive` (precio mayor a 0)
      - `@Email` (correo del proveedor)
   2. `ProductoResponseDTO` para transferir respuestas limpias a Postman/Frontend.
+  3. `CategoriaDTO` para información de categorías.
+  4. `RolDTO` (id, nombre, descripcion) para serialización de roles.
+  5. `UsuarioRequestDTO` con Bean Validation:
+     - `@NotBlank`, `@Email` en `email`.
+     - `@NotBlank`, `@Size(min = 6)` en `password`.
+     - `@NotBlank`, `@Size(min = 3, max = 100)` en `nombre`.
+     - `@NotNull`, `@Positive` en `rolId`.
+  6. `UsuarioResponseDTO` (id, email, nombre, activo, rolNombre) para serialización segura sin exponer el hash de contraseña.
 * **Entregable de Documentación:**
-  - Redactar: *Capítulo 3.4: Capa DTO y Validación con Bean Validation* con tabla de validaciones campo por campo.
+  - Redactar: *Capítulo 3.4: Capa DTO y Validación con Bean Validation* con tabla de validaciones de `ProductoRequestDTO` y `UsuarioRequestDTO`.
 * **Capturas Obligatorias a su cargo:**
   - 📸 **Captura 6:** `informes/capturas/pc3/06-dto-validaciones-codigo.png` (Código en IDE del DTO con las 5 anotaciones visibles).
 
@@ -216,7 +261,13 @@ flowchart TD
 * **Archivos exclusivos a su cargo:**
   - `overtext/src/main/java/pe/edu/utp/overtext/service/ProductoService.java`
   - `overtext/src/main/java/pe/edu/utp/overtext/service/impl/ProductoServiceImpl.java`
+  - `overtext/src/main/java/pe/edu/utp/overtext/service/RolService.java`
+  - `overtext/src/main/java/pe/edu/utp/overtext/service/impl/RolServiceImpl.java`
+  - `overtext/src/main/java/pe/edu/utp/overtext/service/UsuarioService.java`
+  - `overtext/src/main/java/pe/edu/utp/overtext/service/impl/UsuarioServiceImpl.java`
   - `overtext/src/main/java/pe/edu/utp/overtext/controller/api/ProductoRestController.java`
+  - `overtext/src/main/java/pe/edu/utp/overtext/controller/api/RolRestController.java`
+  - `overtext/src/main/java/pe/edu/utp/overtext/controller/api/UsuarioRestController.java`
   - `overtext/src/main/java/pe/edu/utp/overtext/controller/advice/GlobalExceptionHandler.java`
 * **Entregables de Código:**
   1. `ProductoServiceImpl` anotado con `@Service` y `@Transactional`, conectando con los repositorios de Supabase y convirtiendo Entity/DTO.
@@ -227,9 +278,16 @@ flowchart TD
      - `POST /api/productos` con validación `@Valid @RequestBody ProductoRequestDTO dto`.
      - `PUT /api/productos/{id}` con validación `@PathVariable @Positive` y `@Valid`.
      - `DELETE /api/productos/{id}` con validación `@PathVariable @Positive`.
-  3. `GlobalExceptionHandler` con `@RestControllerAdvice` para capturar errores de validación y devolverlos en HTTP 400 Bad Request formateados en JSON.
+  3. `RolServiceImpl` y `RolRestController` (`@RestController`, `@RequestMapping("/api/roles")`):
+     - `GET /api/roles`: Listar catálogo de roles para asignación (`List<RolDTO>`).
+  4. `UsuarioServiceImpl` y `UsuarioRestController` (`@RestController`, `@RequestMapping("/api/usuarios")`, `@Validated`):
+     - `GET /api/usuarios`: Listar usuarios activos (`List<UsuarioResponseDTO>`).
+     - `GET /api/usuarios/{id}`: Detalle por ID con `@PathVariable @Positive Long id`.
+     - `POST /api/usuarios`: Registro con `@Valid @RequestBody UsuarioRequestDTO dto` (valida email no duplicado, retorna `201 Created`).
+     - `DELETE /api/usuarios/{id}`: Baja lógica (`activo = false`) con `@PathVariable @Positive Long id` (retorna `204 No Content`).
+  5. `GlobalExceptionHandler` con `@RestControllerAdvice` para capturar errores de validación (`MethodArgumentNotValidException`, `ConstraintViolationException`), duplicados y `ResourceNotFoundException`, devolviéndolos en JSON formateado.
 * **Entregable de Documentación:**
-  - Redactar: *Capítulo 3.5: Lógica de Servicios y Endpoints de la API REST*.
+  - Redactar: *Capítulo 3.5: Lógica de Servicios y Endpoints de la API REST* (documentando catálogo de endpoints de productos, roles y usuarios).
 * **Capturas Obligatorias a su cargo:**
   - 📸 **Captura 7:** `informes/capturas/pc3/07-postman-endpoints-list.png` (Estructura de la colección en Postman con las peticiones configuradas).
 * **Hito de Cierre Fase 4:** PR a `testing` aprobado. Todo el equipo hace `git pull origin testing`. Desbloquea a Jhade.
@@ -241,10 +299,10 @@ flowchart TD
 * **Rama Git:** `feature/p3-jhade-qa-documentacion`  
 * **Prerrequisito:** Backend levantado y corriendo en `http://localhost:8080`.  
 * **Archivos exclusivos a su cargo:**
-  - `docs/pruebas/OverText_PC3_Postman_Collection.json` (Colección exportada de Postman).
-  - `docs/pruebas/pruebas_curl_pc3.sh` (Script ejecutable de cURL).
+  - `docs/pruebas/OverText_PC3_Postman_Collection.json` (Colección exportada de Postman con productos, roles y usuarios).
+  - `docs/pruebas/pruebas_curl_pc3.sh` (Script ejecutable de cURL para todas las APIs).
 * **Entregables Técnicos & QA:**
-  1. Ejecución de las 7 peticiones en Postman verificando respuestas y códigos de estado.
+  1. Ejecución de las peticiones en Postman verificando respuestas y códigos de estado (CRUD productos, roles y usuarios).
   2. Ejecución del script `bash docs/pruebas/pruebas_curl_pc3.sh` en Terminal / CMD.
 * **Capturas Obligatorias a su cargo:**
   - 📸 **Captura 8:** `informes/capturas/pc3/08-postman-get-jpa.png` (`GET /api/productos` retornando 200 OK y JSON de productos).

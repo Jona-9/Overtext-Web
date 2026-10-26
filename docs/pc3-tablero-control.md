@@ -19,12 +19,12 @@
 
 | Integrante | Rol en la PC3 | Capa / Especialidad | Tiempo Est. | Ventana Límite | Estado | Aprobación |
 |---|---|---|:---:|:---:|:---:|:---:|
-| **Jonathan** | Scrum Master & DevOps | Infraestructura & Supabase | 3 - 4 h | Lun 26 — 12:00 | 🟩 Listo para Merge | [x] Aprobado |
-| **Dayro** | Backend Developer | Capa Entity (JPA) | 2 - 3 h | Lun 26 — 18:00 | 🟨 En curso | [ ] Aprobado |
-| **Carlos** | Backend Developer | Capa Repository (JPA / Nativo) | 3 h | Mar 27 — 13:00 | 🟨 En curso | [ ] Aprobado |
-| **José** | Backend Developer | Capa DTO & Bean Validation | 3 h | Mar 27 — 13:00 | ⬜ Pendiente | [ ] Aprobado |
-| **Joaquín** | Backend Developer | Capa Service & Controller REST | 5 - 6 h | Mié 28 — 13:00 | ⬜ Pendiente | [ ] Aprobado |
-| **Jhade** | QA & Editora del Informe | Pruebas Postman / cURL & Doc | 6 - 8 h | Jue 29 — 14:00 | ⬜ Pendiente | [ ] Aprobado |
+| **Jonathan** | Scrum Master & DevOps | Infraestructura & Supabase | 3 - 4 h | Lun 26 — 12:00 | 🟩 Finalizado | [x] Aprobado |
+| **Dayro** | Backend Developer | Capa Entity (JPA) | 2 - 3 h | Lun 26 — 18:00 | 🟩 Finalizado | [x] Aprobado |
+| **Carlos** | Backend Developer | Capa Repository (JPA / Nativo) | 3 h | Mar 27 — 13:00 | 🟨 Desbloqueado / En curso | [ ] Aprobado |
+| **José** | Backend Developer | Capa DTO & Bean Validation | 3 h | Mar 27 — 13:00 | 🟨 Desbloqueado / En curso | [ ] Aprobado |
+| **Joaquín** | Backend Developer | Capa Service & Controller REST | 5 - 6 h | Mié 28 — 13:00 | ⬜ En espera de Fase 3 | [ ] Aprobado |
+| **Jhade** | QA & Editora del Informe | Pruebas Postman / cURL & Doc | 6 - 8 h | Jue 29 — 14:00 | ⬜ En espera de Fase 4 | [ ] Aprobado |
 
 > ⏳ **DEADLINE FINAL DE ENTREGA:** **Jueves hasta las 18:00 hrs.**  
 > 🛡️ **Colchón de Contingencia y Ensayo de Sustentación:** Jueves de 14:00 a 18:00 hrs (4 horas libres de buffer).
@@ -34,10 +34,10 @@
 ## 2. Cronograma Maestro y Distribución Temporal
 
 ```
-[Dom 25 - Lun 26 12:00] Fase 1: Jonathan (DevOps & Supabase, 4h)
+[Dom 25 - Lun 26 12:00] Fase 1: Jonathan (DevOps & Supabase, 4h) — [FINALIZADO]
           │
           ▼
-[Lun 26 14:00 - 18:00]  Fase 2: Dayro (Entidades JPA, 3h)
+[Lun 26 14:00 - 18:00]  Fase 2: Dayro (Entidades JPA + Lombok, 3h) — [FINALIZADO]
           │
      ┌────┴────────────────────────┐
      ▼                             ▼
@@ -63,7 +63,7 @@ Fase 3A: Carlos               Fase 3B: José
 
 ## 3. Checklist de Responsabilidades por Integrante
 
-### 1. Jonathan — DevOps, Limpieza de Frontend y Supabase *(Est.: 3-4h | Límite: Lun 26 12:00)*
+### 1. Jonathan — DevOps, Limpieza de Frontend, Supabase y Lombok *(Est.: 3-4h | Límite: Lun 26 12:00)*
 - [x] **Limpieza de Frontend y Conversión a Backend REST Puro:**
   - [x] Retirar dependencia `spring-boot-starter-thymeleaf` de `overtext/pom.xml`.
   - [x] Retirar controladores de vistas HTML de P2 (`CatalogoController`, `HomeController`, etc.), preparando el proyecto exclusivamente para los `@RestController`.
@@ -71,9 +71,10 @@ Fase 3A: Carlos               Fase 3B: José
 - [x] **Configuración en Supabase:**
   - [x] Crear proyecto en [Supabase](https://supabase.com).
   - [x] Ejecutar script DDL `schema-supabase.sql` en el SQL Editor de Supabase.
-  - [x] Verificar creación de tablas `categoria` y `producto` con los 7 registros iniciales.
-- [x] **Configuración de Spring Boot:**
-  - [x] Añadir dependencias en `overtext/pom.xml` (`postgresql`, `spring-boot-starter-data-jpa`, `spring-boot-starter-validation`).
+  - [x] Verificar creación de tablas `categoria`, `producto`, `rol` y `usuario` con datos iniciales sembrados.
+- [x] **Configuración de Spring Boot y Lombok:**
+  - [x] Añadir dependencias en `overtext/pom.xml` (`postgresql`, `spring-boot-starter-data-jpa`, `spring-boot-starter-validation`, `lombok`).
+  - [x] Configurar `annotationProcessorPaths` de Lombok en `maven-compiler-plugin`.
   - [x] Configurar credenciales y URL JDBC en `overtext/src/main/resources/application.properties`.
   - [x] Probar arranque limpio de Spring Boot y conexión HikariCP a Supabase como API REST pura.
 - [x] **Capturas Obligatorias:**
@@ -82,23 +83,24 @@ Fase 3A: Carlos               Fase 3B: José
   - [x] `informes/capturas/pc3/03-spring-arranque-hikaricp.png` (Consola mostrando conexión exitosa HikariCP en puerto 8080).
 - [x] **Documentación:**
   - [x] Redactar sección *3.1 Conexión a Base de Datos en la Nube con Supabase y Pool HikariCP* (en `informes/secciones-p3/3.1-conexion-bd-supabase-hikaricp.md`).
-- [ ] **Git:** Merge de `jonathan_avance3` a `testing` (solo al finalizar toda la Fase 1 y verificar con Supabase).
+- [x] **Git:** Fase 1 finalizada, verificada contra Supabase y lista para merge.
 
 ---
 
 ### 2. Dayro — Capa Entity (Mapeo Objeto-Relacional JPA) *(Est.: 2-3h | Límite: Lun 26 18:00)*
-- [ ] **Código de Entidades:**
+- [x] **Código de Entidades (Estándar Lombok sin código repetitivo):**
   - [x] Crear paquete `pe.edu.utp.overtext.entity`.
   - [x] Crear entidad `Categoria.java` (`@Entity`, `@Table(name = "categoria")`, `@Id`, `@GeneratedValue`, relación `@OneToMany`).
-  - [x] Crear entidad `Producto.java` (`@Entity`, `@Table(name = "producto")`, relación `@ManyToOne` hacia Categoria, getters, setters y constructores).
+  - [x] Crear entidad `Producto.java` (`@Entity`, `@Table(name = "producto")`, relación `@ManyToOne` hacia Categoria).
   - [x] Crear entidad `Rol.java` (`@Entity`, `@Table(name = "rol")`, `@Id`, relación `@OneToMany(mappedBy = "rol")`).
   - [x] Crear entidad `Usuario.java` (`@Entity`, `@Table(name = "usuario")`, `@Id`, relación `@ManyToOne` hacia `Rol`).
-  - [ ] Verificar que no existan errores de compilación (`./mvnw compile`).
+  - [x] Implementación limpia con `@Data`, `@NoArgsConstructor` y `@AllArgsConstructor` de Lombok (cero constructores manuales ni getters/setters repetitivos).
+  - [x] Verificar que no existan errores de compilación (`mvn clean test` exitoso: 4/4 pruebas pasadas contra Supabase).
 - [x] **Capturas Obligatorias:**
   - [x] `informes/capturas/pc3/04-1-entidades-jpa.png` a `04-4-entidades-jpa.png` (Código en IDE mostrando anotaciones `@Entity`, `@Id`, `@ManyToOne` y `@OneToMany` para Categoria, Producto, Rol y Usuario).
-- [ ] **Documentación:**
+- [x] **Documentación:**
   - [x] Redactar sección *3.2 Modelo de Dominio y Mapeo Objeto-Relacional (JPA)* con diccionario de campos de Categoria, Producto, Rol y Usuario (en `informes/secciones-p3/3.2-modelo-de-dominio-jpa.md`).
-- [ ] **Git:** Merge de `feature/p3-dayro-entity` a `testing`.
+- [x] **Git:** Fase 2 completada e integrada. Desbloquea a Carlos y José.
 
 ---
 
@@ -111,10 +113,13 @@ Fase 3A: Carlos               Fase 3B: José
   - [x] Implementar **Select Nativo (Requisito P3):**
     `@Query(value = "SELECT * FROM producto WHERE stock > 0 AND activo = true ORDER BY precio ASC", nativeQuery = true)`
     `List<Producto> listarProductosDisponiblesNativo();`
+- [ ] **Repositorios de Seguridad / Dominio (Rol y Usuario):**
+  - [ ] Crear interfaz `RolRepository.java` extendiendo `JpaRepository<Rol, Long>` con `Optional<Rol> findByNombre(String nombre)`.
+  - [ ] Crear interfaz `UsuarioRepository.java` extendiendo `JpaRepository<Usuario, Long>` con `Optional<Usuario> findByEmail(String email)` y `List<Usuario> findByActivoTrue()`.
 - [ ] **Capturas Obligatorias:**
   - [ ] `informes/capturas/pc3/05-cmd-query-nativa-logs.png` (Terminal/CMD con logs de Hibernate mostrando la consulta nativa SQL).
 - [ ] **Documentación:**
-  - [ ] Redactar sección *3.3 Capa de Persistencia y Consultas: JPA vs SQL Nativo*.
+  - [ ] Redactar sección *3.3 Capa de Persistencia y Consultas: JPA vs SQL Nativo* (incluyendo `CategoriaRepository`, `ProductoRepository`, `RolRepository` y `UsuarioRepository`).
 - [ ] **Git:** Merge de `feature/p3-carlos-repository` a `testing`.
 
 ---
@@ -130,10 +135,17 @@ Fase 3A: Carlos               Fase 3B: José
     - [ ] `@Email` en `correoProveedor`.
   - [ ] Crear `ProductoResponseDTO.java` para serializar respuestas limpias a Postman/Frontend.
   - [ ] Crear `CategoriaDTO.java`.
+  - [ ] Crear `RolDTO.java` (id, nombre, descripcion) para catálogo de roles.
+  - [ ] Crear `UsuarioRequestDTO.java` con validaciones Bean Validation:
+    - [ ] `@NotBlank`, `@Email` en `email`.
+    - [ ] `@NotBlank`, `@Size(min = 6)` en `password`.
+    - [ ] `@NotBlank`, `@Size(min = 3, max = 100)` en `nombre`.
+    - [ ] `@NotNull`, `@Positive` en `rolId`.
+  - [ ] Crear `UsuarioResponseDTO.java` (id, email, nombre, activo, rolNombre sin hash de password).
 - [ ] **Capturas Obligatorias:**
   - [ ] `informes/capturas/pc3/06-dto-validaciones-codigo.png` (Código en IDE destacando las 5 anotaciones Bean Validation).
 - [ ] **Documentación:**
-  - [ ] Redactar sección *3.4 Capa DTO y Validación de Datos con Bean Validation* con tabla de restricciones.
+  - [ ] Redactar sección *3.4 Capa DTO y Validación de Datos con Bean Validation* con tablas de restricciones de Producto y Usuario.
 - [ ] **Git:** Merge de `feature/p3-jose-dto` a `testing`.
 
 ---
@@ -143,28 +155,40 @@ Fase 3A: Carlos               Fase 3B: José
   - [ ] Actualizar interfaz `ProductoService.java` con métodos CRUD y consultas especializadas.
   - [ ] Implementar `ProductoServiceImpl.java` en `service/impl/` con `@Transactional` e inyección de repositorios.
   - [ ] Desacoplar la lectura estática de `productos.json` y conectar a la base de datos Supabase.
+  - [ ] Crear interfaz `RolService.java` e implementarla en `RolServiceImpl.java` (catálogo de roles disponibles).
+  - [ ] Crear interfaz `UsuarioService.java` e implementarla en `UsuarioServiceImpl.java` (listar activos, buscar por ID, registrar con validación de email duplicado, baja lógica).
 - [ ] **Código de Controladores REST:**
-  - [ ] Crear paquete `pe.edu.utp.overtext.controller.api` y la clase `ProductoRestController.java` (`@RestController`, `@RequestMapping("/api/productos")`, `@Validated`).
-  - [ ] Implementar `GET /api/productos` (Select JPA).
-  - [ ] Implementar `GET /api/productos/nativos` (Select Nativo).
-  - [ ] Implementar `GET /api/productos/{id}` con validación `@PathVariable @Positive Long id`.
-  - [ ] Implementar `POST /api/productos` con validación `@Valid @RequestBody ProductoRequestDTO dto`.
-  - [ ] Implementar `PUT /api/productos/{id}` con validación `@PathVariable @Positive` y `@Valid`.
-  - [ ] Implementar `DELETE /api/productos/{id}` con validación `@PathVariable @Positive`.
-  - [ ] Crear `GlobalExceptionHandler.java` (`@RestControllerAdvice`) para retornar HTTP 400 en errores de validación.
+  - [ ] Crear paquete `pe.edu.utp.overtext.controller.api` y la clase `ProductoRestController.java` (`@RestController`, `@RequestMapping("/api/productos")`, `@Validated`):
+    - [ ] `GET /api/productos` (Select JPA).
+    - [ ] `GET /api/productos/nativos` (Select Nativo).
+    - [ ] `GET /api/productos/{id}` con validación `@PathVariable @Positive Long id`.
+    - [ ] `POST /api/productos` con validación `@Valid @RequestBody ProductoRequestDTO dto`.
+    - [ ] `PUT /api/productos/{id}` con validación `@PathVariable @Positive` y `@Valid`.
+    - [ ] `DELETE /api/productos/{id}` con validación `@PathVariable @Positive`.
+  - [ ] Crear controlador `RolRestController.java` (`@RestController`, `@RequestMapping("/api/roles")`):
+    - [ ] `GET /api/roles` (listar catálogo de roles disponibles).
+  - [ ] Crear controlador `UsuarioRestController.java` (`@RestController`, `@RequestMapping("/api/usuarios")`, `@Validated`):
+    - [ ] `GET /api/usuarios` (listar usuarios activos con `UsuarioResponseDTO`).
+    - [ ] `GET /api/usuarios/{id}` con `@PathVariable @Positive Long id`.
+    - [ ] `POST /api/usuarios` con `@Valid @RequestBody UsuarioRequestDTO dto` (retorna 201 Created).
+    - [ ] `DELETE /api/usuarios/{id}` con `@PathVariable @Positive Long id` (baja lógica).
+  - [ ] Crear `GlobalExceptionHandler.java` (`@RestControllerAdvice`) para retornar HTTP 400 en errores de validación y duplicados.
 - [ ] **Capturas Obligatorias:**
   - [ ] `informes/capturas/pc3/07-postman-endpoints-list.png` (Colección en Postman con todos los endpoints creados).
 - [ ] **Documentación:**
-  - [ ] Redactar sección *3.5 Lógica de Servicios y Endpoints de la API REST*.
+  - [ ] Redactar sección *3.5 Lógica de Servicios y Endpoints de la API REST* (documentando endpoints de Producto, Rol y Usuario).
 - [ ] **Git:** Merge de `feature/p3-joaquin-service-api` a `testing`.
 
 ---
 
 ### 6. Jhade — Líder de Documentación, Pruebas en Postman/cURL y Empaque *(Est.: 6-8h | Límite: Jue 29 14:00)*
 - [ ] **Ejecución y Pruebas de APIs:**
-  - [ ] Crear y ejecutar la colección en Postman con las 7 peticiones (GET, POST válido, POST con errores 400, PUT, DELETE).
+  - [ ] Crear y ejecutar la colección en Postman con las peticiones completas:
+    - [ ] Endpoints de Producto (GET, POST válido, POST con errores 400, PUT, DELETE).
+    - [ ] Endpoints de Roles (`GET /api/roles`).
+    - [ ] Endpoints de Usuario (`GET /api/usuarios`, `GET /api/usuarios/{id}`, `POST /api/usuarios` válido, `POST` con error 400, `DELETE /api/usuarios/{id}`).
   - [ ] Exportar colección a `docs/pruebas/OverText_PC3_Postman_Collection.json`.
-  - [ ] Ejecutar script de terminal `bash docs/pruebas/pruebas_curl_pc3.sh`.
+  - [ ] Ejecutar script de terminal `bash docs/pruebas/pruebas_curl_pc3.sh` incluyendo pruebas de productos, roles y usuarios.
 - [ ] **Capturas Obligatorias:**
   - [ ] `informes/capturas/pc3/08-postman-get-jpa.png` (GET JPA - 200 OK).
   - [ ] `informes/capturas/pc3/09-postman-get-nativo.png` (GET Nativo - 200 OK).
