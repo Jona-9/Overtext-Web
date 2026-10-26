@@ -22,7 +22,7 @@
 | **Jonathan** | Scrum Master & DevOps | Infraestructura & Supabase | 3 - 4 h | Lun 26 — 12:00 | 🟩 Finalizado | [x] Aprobado |
 | **Dayro** | Backend Developer | Capa Entity (JPA) | 2 - 3 h | Lun 26 — 18:00 | 🟩 Finalizado | [x] Aprobado |
 | **Carlos** | Backend Developer | Capa Repository (JPA / Nativo) | 3 h | Mar 27 — 13:00 | 🟨 Desbloqueado / En curso | [ ] Aprobado |
-| **José** | Backend Developer | Capa DTO & Bean Validation | 3 h | Mar 27 — 13:00 | 🟨 Desbloqueado / En curso | [ ] Aprobado |
+| **José** | Backend Developer | Capa DTO & Bean Validation | 3 h | Mar 27 — 13:00 | 🟩 Finalizado | [ ] Aprobado |
 | **Joaquín** | Backend Developer | Capa Service & Controller REST | 5 - 6 h | Mié 28 — 13:00 | ⬜ En espera de Fase 3 | [ ] Aprobado |
 | **Jhade** | QA & Editora del Informe | Pruebas Postman / cURL & Doc | 6 - 8 h | Jue 29 — 14:00 | ⬜ En espera de Fase 4 | [ ] Aprobado |
 
@@ -125,27 +125,28 @@ Fase 3A: Carlos               Fase 3B: José
 ---
 
 ### 4. José — Capa DTO y Reglas de Bean Validation *(Est.: 3h | Límite: Mar 27 13:00)*
-- [ ] **Código de DTOs:**
-  - [ ] Crear paquete `pe.edu.utp.overtext.dto`.
-  - [ ] Crear `ProductoRequestDTO.java` con las 5 anotaciones obligatorias:
-    - [ ] `@NotBlank` en código y nombre.
-    - [ ] `@Size(min = 3, max = 100)` en nombre.
-    - [ ] `@NotNull` en precio, stock y categoría.
-    - [ ] `@Positive` en precio.
-    - [ ] `@Email` en `correoProveedor`.
-  - [ ] Crear `ProductoResponseDTO.java` para serializar respuestas limpias a Postman/Frontend.
-  - [ ] Crear `CategoriaDTO.java`.
-  - [ ] Crear `RolDTO.java` (id, nombre, descripcion) para catálogo de roles.
-  - [ ] Crear `UsuarioRequestDTO.java` con validaciones Bean Validation:
-    - [ ] `@NotBlank`, `@Email` en `email`.
-    - [ ] `@NotBlank`, `@Size(min = 6)` en `password`.
-    - [ ] `@NotBlank`, `@Size(min = 3, max = 100)` en `nombre`.
-    - [ ] `@NotNull`, `@Positive` en `rolId`.
-  - [ ] Crear `UsuarioResponseDTO.java` (id, email, nombre, activo, rolNombre sin hash de password).
+- [x] **Código de DTOs:**
+  - [x] Crear paquete `pe.edu.utp.overtext.dto`.
+  - [x] Crear `ProductoRequestDTO.java` con las 5 anotaciones obligatorias:
+    - [x] `@NotBlank` en código y nombre.
+    - [x] `@Size(min = 3, max = 100)` en nombre.
+    - [x] `@NotNull` en precio, stock y categoría.
+    - [x] `@Positive` en precio.
+    - [x] `@Email` en `correoProveedor`.
+  - [x] Crear `ProductoResponseDTO.java` para serializar respuestas limpias a Postman/Frontend.
+  - [x] Crear `CategoriaDTO.java`.
+  - [x] Crear `RolDTO.java` (id, nombre, descripcion) para catálogo de roles.
+  - [x] Crear `UsuarioRequestDTO.java` con validaciones Bean Validation:
+    - [x] `@NotBlank`, `@Email` en `email`.
+    - [x] `@NotBlank`, `@Size(min = 6)` en `password`.
+    - [x] `@NotBlank`, `@Size(min = 3, max = 100)` en `nombre`.
+    - [x] `@NotNull`, `@Positive` en `rolId`.
+  - [x] Crear `UsuarioResponseDTO.java` (id, email, nombre, activo, rolNombre sin hash de password).
+  - [x] Verificar las validaciones con la prueba unitaria `ProductoRequestDTOValidationTest.java` (suite completa: 8/8 en verde contra Supabase).
 - [ ] **Capturas Obligatorias:**
   - [ ] `informes/capturas/pc3/06-dto-validaciones-codigo.png` (Código en IDE destacando las 5 anotaciones Bean Validation).
-- [ ] **Documentación:**
-  - [ ] Redactar sección *3.4 Capa DTO y Validación de Datos con Bean Validation* con tablas de restricciones de Producto y Usuario.
+- [x] **Documentación:**
+  - [x] Redactar sección *3.4 Capa DTO y Validación de Datos con Bean Validation* con tablas de restricciones de Producto y Usuario.
 - [ ] **Git:** Merge de `feature/p3-jose-dto` a `testing`.
 
 ---
