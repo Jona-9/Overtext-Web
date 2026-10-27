@@ -10,7 +10,6 @@ import pe.edu.utp.overtext.dto.UsuarioRequestDTO;
 import pe.edu.utp.overtext.dto.UsuarioResponseDTO;
 import pe.edu.utp.overtext.entity.Rol;
 import pe.edu.utp.overtext.entity.Usuario;
-import pe.edu.utp.overtext.exception.ResourceNotFoundException;
 import pe.edu.utp.overtext.repository.RolRepository;
 import pe.edu.utp.overtext.repository.UsuarioRepository;
 import pe.edu.utp.overtext.service.UsuarioService;
@@ -57,11 +56,13 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Transactional
     public UsuarioResponseDTO registrar(UsuarioRequestDTO dto) {
         if (usuarioRepository.findByEmail(dto.getEmail()).isPresent()) {
-            throw new IllegalArgumentException("El email ya está registrado: " + dto.getEmail());
+            return null;
         }
 
-        Rol rol = rolRepository.findById(dto.getRolId())
-                .orElseThrow(() -> new ResourceNotFoundException("Rol no encontrado con ID: " + dto.getRolId()));
+        Rol rol = rolRepository.findById(dto.getRolId()).orElse(null);
+        if (rol == null) {
+            return null;
+        }
 
         Usuario usuario = new Usuario();
         usuario.setEmail(dto.getEmail());
@@ -77,9 +78,10 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     @Transactional
     public void darDeBaja(Long id) {
-        Usuario usuario = usuarioRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado con ID: " + id));
-        usuario.setActivo(false);
-        usuarioRepository.save(usuario);
+        Usuario usuario = usuarioRepository.findById(id).orElse(null);
+        if (usuario != null) {
+            usuario.setActivo(false);
+            usuarioRepository.save(usuario);
+        }
     }
 }

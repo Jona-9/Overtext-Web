@@ -10,7 +10,6 @@ import pe.edu.utp.overtext.dto.ProductoRequestDTO;
 import pe.edu.utp.overtext.dto.ProductoResponseDTO;
 import pe.edu.utp.overtext.entity.Categoria;
 import pe.edu.utp.overtext.entity.Producto;
-import pe.edu.utp.overtext.exception.ResourceNotFoundException;
 import pe.edu.utp.overtext.repository.CategoriaRepository;
 import pe.edu.utp.overtext.repository.ProductoRepository;
 import pe.edu.utp.overtext.service.ProductoService;
@@ -87,7 +86,7 @@ public class ProductoServiceImpl implements ProductoService {
         }
 
         Categoria categoria = categoriaRepository.findById(dto.getCategoriaId())
-                .orElseThrow(() -> new ResourceNotFoundException("Categoría no encontrada con ID: " + dto.getCategoriaId()));
+                .orElseThrow(() -> new IllegalArgumentException("Categoría no encontrada con ID: " + dto.getCategoriaId()));
 
         Producto producto = new Producto();
         producto.setCodigo(dto.getCodigo());
@@ -112,7 +111,7 @@ public class ProductoServiceImpl implements ProductoService {
     @Transactional
     public ProductoResponseDTO actualizar(Long id, ProductoRequestDTO dto) {
         Producto existente = productoRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Producto no encontrado con ID: " + id));
+                .orElseThrow(() -> new IllegalArgumentException("Producto no encontrado con ID: " + id));
 
         if (!existente.getCodigo().equalsIgnoreCase(dto.getCodigo())) {
             productoRepository.findByCodigo(dto.getCodigo()).ifPresent(otro -> {
@@ -123,7 +122,7 @@ public class ProductoServiceImpl implements ProductoService {
         }
 
         Categoria categoria = categoriaRepository.findById(dto.getCategoriaId())
-                .orElseThrow(() -> new ResourceNotFoundException("Categoría no encontrada con ID: " + dto.getCategoriaId()));
+                .orElseThrow(() -> new IllegalArgumentException("Categoría no encontrada con ID: " + dto.getCategoriaId()));
 
         existente.setCodigo(dto.getCodigo());
         existente.setNombre(dto.getNombre());
@@ -146,7 +145,7 @@ public class ProductoServiceImpl implements ProductoService {
     @Transactional
     public void eliminar(Long id) {
         Producto existente = productoRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Producto no encontrado con ID: " + id));
+                .orElseThrow(() -> new IllegalArgumentException("Producto no encontrado con ID: " + id));
         productoRepository.delete(existente);
     }
 }

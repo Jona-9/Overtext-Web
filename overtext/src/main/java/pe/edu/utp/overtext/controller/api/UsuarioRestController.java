@@ -46,12 +46,18 @@ public class UsuarioRestController {
     @PostMapping
     public ResponseEntity<UsuarioResponseDTO> registrar(@Valid @RequestBody UsuarioRequestDTO dto) {
         UsuarioResponseDTO creado = usuarioService.registrar(dto);
+        if (creado == null) {
+            return ResponseEntity.badRequest().build();
+        }
         return ResponseEntity.status(HttpStatus.CREATED).body(creado);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> darDeBaja(
             @PathVariable @Positive(message = "El ID debe ser positivo") Long id) {
+        if (usuarioService.buscarPorId(id).isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
         usuarioService.darDeBaja(id);
         return ResponseEntity.noContent().build();
     }

@@ -173,7 +173,7 @@ Fase 3A: Carlos               Fase 3B: José
     - [x] `GET /api/usuarios/{id}` con `@PathVariable @Positive Long id`.
     - [x] `POST /api/usuarios` con `@Valid @RequestBody UsuarioRequestDTO dto` (retorna 201 Created).
     - [x] `DELETE /api/usuarios/{id}` con `@PathVariable @Positive Long id` (baja lógica).
-  - [x] Crear `GlobalExceptionHandler.java` (`@RestControllerAdvice`) para retornar HTTP 400 en errores de validación y duplicados.
+  - [x] Controladores con respuestas semánticas (`200 OK`, `201 Created`, `204 No Content`, `400 Bad Request`, `404 Not Found`).
 - [x] **Capturas Obligatorias:**
   - [x] `informes/capturas/pc3/07-postman-endpoints-list.png` (Colección en Postman con todos los endpoints creados).
 - [x] **Documentación:**

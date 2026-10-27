@@ -58,12 +58,18 @@ public class ProductoRestController {
     public ResponseEntity<ProductoResponseDTO> actualizar(
             @PathVariable @Positive(message = "El ID debe ser positivo") Long id,
             @Valid @RequestBody ProductoRequestDTO dto) {
+        if (productoService.buscarPorId(id).isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
         ProductoResponseDTO actualizado = productoService.actualizar(id, dto);
         return ResponseEntity.ok(actualizado);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable @Positive(message = "El ID debe ser positivo") Long id) {
+        if (productoService.buscarPorId(id).isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
         productoService.eliminar(id);
         return ResponseEntity.noContent().build();
     }

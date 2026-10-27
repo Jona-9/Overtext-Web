@@ -13,11 +13,7 @@
   - `ProductoRestController` (`/api/productos`): endpoints para Select JPA, Select Nativo, GET con `@Positive`, POST con `@Valid`, PUT y DELETE.
   - `RolRestController` (`/api/roles`): catálogo de roles.
   - `UsuarioRestController` (`/api/usuarios`): listado, búsqueda con `@Positive`, registro con `@Valid` y baja lógica con `@Positive`.
-- **Cumplimiento de Directiva de Usuario:** Se eliminaron todos los comentarios de las clases de controladores, garantizando código 100% puro y limpio.
-- Creé la infraestructura de excepciones:
-  - `ResourceNotFoundException` para recursos inexistentes.
-  - `ErrorResponse` record para serializar respuestas de error uniformes en JSON.
-  - `GlobalExceptionHandler` (`@RestControllerAdvice`) para interceptar `MethodArgumentNotValidException` (400), `ConstraintViolationException` (400), `ResourceNotFoundException` (404), `IllegalArgumentException` (400) y excepciones no controladas (500).
+- **Cumplimiento de Directiva de Usuario:** Se eliminaron todos los comentarios de las clases de controladores, garantizando código 100% puro y limpio. Se retiró cualquier componente de `@ControllerAdvice` / `GlobalExceptionHandler` manteniendo exclusivamente la arquitectura estándar enseñada en clase con respuestas semánticas en `ResponseEntity`.
 - Creé y exporté la colección oficial de Postman: `docs/pruebas/OverText_PC3_Postman_Collection.json` con todos los endpoints de Productos, Roles y Usuarios.
 - Archivé la evidencia visual obligatoria: `informes/capturas/pc3/07-postman-endpoints-list.png` mostrando la estructura de peticiones configuradas en Postman.
 - Actualicé y amplié la suite de pruebas en `OvertextApplicationTests.java`, cubriendo la totalidad de endpoints y validaciones.
@@ -35,9 +31,6 @@
 - `overtext/src/main/java/pe/edu/utp/overtext/controller/api/ProductoRestController.java` (nuevo / reubicado)
 - `overtext/src/main/java/pe/edu/utp/overtext/controller/api/RolRestController.java` (nuevo)
 - `overtext/src/main/java/pe/edu/utp/overtext/controller/api/UsuarioRestController.java` (nuevo)
-- `overtext/src/main/java/pe/edu/utp/overtext/controller/advice/GlobalExceptionHandler.java` (nuevo)
-- `overtext/src/main/java/pe/edu/utp/overtext/controller/advice/ErrorResponse.java` (nuevo)
-- `overtext/src/main/java/pe/edu/utp/overtext/exception/ResourceNotFoundException.java` (nuevo)
 - `overtext/src/test/java/pe/edu/utp/overtext/OvertextApplicationTests.java` (modificado)
 - `informes/secciones-p3/3.5-logica-servicios-endpoints-api-rest.md` (nuevo)
 - `informes/capturas/pc3/07-postman-endpoints-list.png` (nuevo)
@@ -48,7 +41,7 @@
 ### Decisiones / aprendido
 - Se eliminaron las versiones preliminares en `controller/` y `service/` para situarlas en sus paquetes canónicos `controller/api/` y `service/impl/`, evitando colisiones de beans en el contenedor de Spring.
 - Los controladores están libres de comentarios por directiva explícita del usuario.
-- El manejo global de excepciones retorna un formato JSON estándar que facilita la verificación en Postman y scripts cURL.
+- Se eliminó el paquete `advice/` para apegarse 100% al temario enseñado por el docente, resolviendo respuestas HTTP semánticas (`200 OK`, `201 Created`, `204 No Content`, `400 Bad Request`, `404 Not Found`) con `ResponseEntity` nativo.
 - La suite completa de 15 pruebas unitarias e integración se ejecuta limpiamente contra la base de datos Supabase en la nube.
 
 ### Estado / PR
