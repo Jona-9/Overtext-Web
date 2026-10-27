@@ -18,6 +18,8 @@
   - `ResourceNotFoundException` para recursos inexistentes.
   - `ErrorResponse` record para serializar respuestas de error uniformes en JSON.
   - `GlobalExceptionHandler` (`@RestControllerAdvice`) para interceptar `MethodArgumentNotValidException` (400), `ConstraintViolationException` (400), `ResourceNotFoundException` (404), `IllegalArgumentException` (400) y excepciones no controladas (500).
+- Creé y exporté la colección oficial de Postman: `docs/pruebas/OverText_PC3_Postman_Collection.json` con todos los endpoints de Productos, Roles y Usuarios.
+- Archivé la evidencia visual obligatoria: `informes/capturas/pc3/07-postman-endpoints-list.png` mostrando la estructura de peticiones configuradas en Postman.
 - Actualicé y amplié la suite de pruebas en `OvertextApplicationTests.java`, cubriendo la totalidad de endpoints y validaciones.
 - Ejecuté `mvn clean test` contra Supabase PostgreSQL: **15 de 15 pruebas exitosas en verde** (0 fallas, 0 errores, `BUILD SUCCESS`).
 - Redacté la sección técnica oficial del informe: `informes/secciones-p3/3.5-logica-servicios-endpoints-api-rest.md`.
@@ -38,6 +40,8 @@
 - `overtext/src/main/java/pe/edu/utp/overtext/exception/ResourceNotFoundException.java` (nuevo)
 - `overtext/src/test/java/pe/edu/utp/overtext/OvertextApplicationTests.java` (modificado)
 - `informes/secciones-p3/3.5-logica-servicios-endpoints-api-rest.md` (nuevo)
+- `informes/capturas/pc3/07-postman-endpoints-list.png` (nuevo)
+- `docs/pruebas/OverText_PC3_Postman_Collection.json` (nuevo)
 - `docs/memoria/joaquin_memory.md` (nuevo)
 - `docs/pc3-tablero-control.md` (actualizado)
 

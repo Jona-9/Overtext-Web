@@ -1,0 +1,404 @@
+{
+	"info": {
+		"_postman_id": "overtext-pc3-backend-rest",
+		"name": "OverText - PC3 (Spring Boot + Supabase PostgreSQL)",
+		"description": "Colección oficial de pruebas de APIs REST para la Práctica Calificada 3 (PC3) - UTP 2026-2 - Grupo 01",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. Productos",
+			"item": [
+				{
+					"name": "GET 01 - Listar Productos Activos (Select JPA)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/productos",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"productos"
+							]
+						},
+						"description": "Retorna lista de productos activos (Select JPA findByActivoTrue)"
+					},
+					"response": []
+				},
+				{
+					"name": "GET 02 - Listar Disponibles (Select Nativo stock > 0)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/productos/nativos",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"productos",
+								"nativos"
+							]
+						},
+						"description": "Retorna productos con stock > 0 usando consulta SQL nativa en PostgreSQL"
+					},
+					"response": []
+				},
+				{
+					"name": "GET 03 - Buscar por ID Válido (ID: 1)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/productos/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"productos",
+								"1"
+							]
+						},
+						"description": "Búsqueda por ID con validación @Positive superada"
+					},
+					"response": []
+				},
+				{
+					"name": "GET 04 - Buscar por ID Inválido (ID: -5) [Falla 400]",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/productos/-5",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"productos",
+								"-5"
+							]
+						},
+						"description": "Demuestra la validación en GET con @PathVariable @Positive retornando 400"
+					},
+					"response": []
+				},
+				{
+					"name": "POST 05 - Crear Producto Válido (201 Created)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"codigo\": \"PROD-POSTMAN-01\",\n    \"nombre\": \"Short Streetwear Edición Especial\",\n    \"slogan\": \"Estilo y confort urbano\",\n    \"descripcion\": \"Fabricado en algodón reactivo premium de 350g\",\n    \"precio\": 59.90,\n    \"precioPack\": 45.00,\n    \"stock\": 20,\n    \"imagenPrincipal\": \"/assets/img/catalogo/short-postman.webp\",\n    \"colorNombre\": \"Gris Asfalto\",\n    \"colorHex\": \"#3A3D40\",\n    \"correoProveedor\": \"contacto@overtext.pe\",\n    \"categoriaId\": 1\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/productos",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"productos"
+							]
+						},
+						"description": "Creación exitosa de producto cumpliendo todas las anotaciones Bean Validation"
+					},
+					"response": []
+				},
+				{
+					"name": "POST 06 - Crear Producto Inválido [Falla Bean Validation 400]",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"codigo\": \"\",\n    \"nombre\": \"AB\",\n    \"precio\": -15.00,\n    \"stock\": -5,\n    \"colorNombre\": \"\",\n    \"colorHex\": \"\",\n    \"correoProveedor\": \"correo-sin-formato-valido\",\n    \"categoriaId\": -1\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/productos",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"productos"
+							]
+						},
+						"description": "Demuestra la intercepción de Bean Validation (@NotBlank, @Size, @NotNull, @Positive, @Email) retornando HTTP 400"
+					},
+					"response": []
+				},
+				{
+					"name": "PUT 07 - Actualizar Producto (200 OK)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"codigo\": \"PROD-NEG-01\",\n    \"nombre\": \"Short Negro Clásico Actualizado\",\n    \"slogan\": \"El clásico infaltable renovado\",\n    \"descripcion\": \"Short urbano en algodón pesado con corte relajado\",\n    \"precio\": 49.90,\n    \"precioPack\": 39.90,\n    \"stock\": 35,\n    \"imagenPrincipal\": \"/assets/img/catalogo/short-negro-1.webp\",\n    \"colorNombre\": \"Negro Mate\",\n    \"colorHex\": \"#111111\",\n    \"correoProveedor\": \"proveedor.lima@overtext.pe\",\n    \"categoriaId\": 1\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/productos/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"productos",
+								"1"
+							]
+						},
+						"description": "Actualización completa del producto ID 1"
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE 08 - Eliminar Producto (204 No Content)",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/productos/7",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"productos",
+								"7"
+							]
+						},
+						"description": "Eliminación física o lógica con retorno 204 No Content"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "2. Roles",
+			"item": [
+				{
+					"name": "GET 01 - Listar Catálogo de Roles",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/roles",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"roles"
+							]
+						},
+						"description": "Retorna catálogo de roles (ADMIN, CLIENTE) para asignación"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "3. Usuarios",
+			"item": [
+				{
+					"name": "GET 01 - Listar Usuarios Activos",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/usuarios",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"usuarios"
+							]
+						},
+						"description": "Retorna lista de usuarios activos omitiendo password"
+					},
+					"response": []
+				},
+				{
+					"name": "GET 02 - Buscar Usuario por ID Válido",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/usuarios/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"usuarios",
+								"1"
+							]
+						},
+						"description": "Retorna detalle del usuario administrador"
+					},
+					"response": []
+				},
+				{
+					"name": "POST 03 - Registrar Nuevo Usuario (201 Created)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"joaquin.dev@overtext.pe\",\n    \"password\": \"SeguraPassword2026!\",\n    \"nombre\": \"Joaquin Chaparro\",\n    \"rolId\": 2\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/usuarios",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"usuarios"
+							]
+						},
+						"description": "Crea nuevo usuario cliente retornando 201 Created sin exponer hash"
+					},
+					"response": []
+				},
+				{
+					"name": "POST 04 - Registrar Usuario Duplicado [Falla 400]",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"admin@overtext.pe\",\n    \"password\": \"ClaveRepetida123!\",\n    \"nombre\": \"Admin Duplicado\",\n    \"rolId\": 1\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/usuarios",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"usuarios"
+							]
+						},
+						"description": "Valida email duplicado arrojando 400 Bad Request"
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE 05 - Baja Lógica Usuario (204 No Content)",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/usuarios/2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"usuarios",
+								"2"
+							]
+						},
+						"description": "Baja lógica de usuario (activo = false) retornando 204 No Content"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080"
+		}
+	]
+}

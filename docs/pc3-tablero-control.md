@@ -174,8 +174,8 @@ Fase 3A: Carlos               Fase 3B: José
     - [x] `POST /api/usuarios` con `@Valid @RequestBody UsuarioRequestDTO dto` (retorna 201 Created).
     - [x] `DELETE /api/usuarios/{id}` con `@PathVariable @Positive Long id` (baja lógica).
   - [x] Crear `GlobalExceptionHandler.java` (`@RestControllerAdvice`) para retornar HTTP 400 en errores de validación y duplicados.
-- [ ] **Capturas Obligatorias:**
-  - [ ] `informes/capturas/pc3/07-postman-endpoints-list.png` (Colección en Postman con todos los endpoints creados).
+- [x] **Capturas Obligatorias:**
+  - [x] `informes/capturas/pc3/07-postman-endpoints-list.png` (Colección en Postman con todos los endpoints creados).
 - [x] **Documentación:**
   - [x] Redactar sección *3.5 Lógica de Servicios y Endpoints de la API REST* (documentando endpoints de Producto, Rol y Usuario).
 - [ ] **Git:** Merge de `feature/p3-joaquin-service-api` a `testing`.
