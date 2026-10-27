@@ -21,7 +21,7 @@
 |---|---|---|:---:|:---:|:---:|:---:|
 | **Jonathan** | Scrum Master & DevOps | Infraestructura & Supabase | 3 - 4 h | Lun 26 — 12:00 | 🟩 Finalizado | [x] Aprobado |
 | **Dayro** | Backend Developer | Capa Entity (JPA) | 2 - 3 h | Lun 26 — 18:00 | 🟩 Finalizado | [x] Aprobado |
-| **Carlos** | Backend Developer | Capa Repository (JPA / Nativo) | 3 h | Mar 27 — 13:00 | 🟨 Desbloqueado / En curso | [ ] Aprobado |
+| **Carlos** | Backend Developer | Capa Repository (JPA / Nativo) | 3 h | Mar 27 — 13:00 | 🟩 Finalizado | [x] Aprobado |
 | **José** | Backend Developer | Capa DTO & Bean Validation | 3 h | Mar 27 — 13:00 | 🟩 Finalizado | [ ] Aprobado |
 | **Joaquín** | Backend Developer | Capa Service & Controller REST | 5 - 6 h | Mié 28 — 13:00 | ⬜ En espera de Fase 3 | [ ] Aprobado |
 | **Jhade** | QA & Editora del Informe | Pruebas Postman / cURL & Doc | 6 - 8 h | Jue 29 — 14:00 | ⬜ En espera de Fase 4 | [ ] Aprobado |
@@ -116,11 +116,11 @@ Fase 3A: Carlos               Fase 3B: José
 - [x] **Repositorios de Seguridad / Dominio (Rol y Usuario):**
   - [x] Crear interfaz `RolRepository.java` extendiendo `JpaRepository<Rol, Long>` con `Optional<Rol> findByNombre(String nombre)`.
   - [x] Crear interfaz `UsuarioRepository.java` extendiendo `JpaRepository<Usuario, Long>` con `Optional<Usuario> findByEmail(String email)` y `List<Usuario> findByActivoTrue()`.
-- [ ] **Capturas Obligatorias:**
-  - [ ] `informes/capturas/pc3/05-cmd-query-nativa-logs.png` (Terminal/CMD con logs de Hibernate mostrando la consulta nativa SQL).
+- [x] **Capturas Obligatorias:**
+  - [x] `informes/capturas/pc3/05-cmd-query-nativa-logs.png` (Terminal/CMD con logs de Hibernate mostrando la consulta nativa SQL).
 - [x] **Documentación:**
   - [x] Redactar sección *3.3 Capa de Persistencia y Consultas: JPA vs SQL Nativo* (incluyendo `CategoriaRepository`, `ProductoRepository`, `RolRepository` y `UsuarioRepository`).
-- [ ] **Git:** Merge de `feature/p3-carlos-repository` a `testing`.
+- [x] **Git:** Fase 3A finalizada y verificada contra Supabase. Rama `feature/p3-carlos-repository` lista para merge a `testing`.
 
 ---
 
@@ -212,7 +212,7 @@ Fase 3A: Carlos               Fase 3B: José
 - [ ] Conexión a Base de Datos en la Nube (PostgreSQL en Supabase).
 - [ ] CRUD Completo implementado y verificado (GET, POST, PUT, DELETE).
 - [ ] APIs ejecutadas y documentadas en Postman y cURL.
-- [ ] Al menos un Select JPA y al menos un Select Nativo.
+- [x] Al menos un Select JPA y al menos un Select Nativo (`ProductoRepository`: `findByActivoTrue` y `listarProductosDisponiblesNativo`).
 - [ ] DTO con validaciones `@Size`, `@Email`, `@NotNull`, `@Positive`, `@NotBlank`.
 - [ ] Controlador con validaciones en POST (`@Valid`) y GET (`@Positive`).
 - [ ] Las 14 capturas archivadas en `informes/capturas/pc3/`.
