@@ -23,7 +23,7 @@
 | **Dayro** | Backend Developer | Capa Entity (JPA) | 2 - 3 h | Lun 26 — 18:00 | 🟩 Finalizado | [x] Aprobado |
 | **Carlos** | Backend Developer | Capa Repository (JPA / Nativo) | 3 h | Mar 27 — 13:00 | 🟩 Finalizado | [x] Aprobado |
 | **José** | Backend Developer | Capa DTO & Bean Validation | 3 h | Mar 27 — 13:00 | 🟩 Finalizado | [ ] Aprobado |
-| **Joaquín** | Backend Developer | Capa Service & Controller REST | 5 - 6 h | Mié 28 — 13:00 | ⬜ En espera de Fase 3 | [ ] Aprobado |
+| **Joaquín** | Backend Developer | Capa Service & Controller REST | 5 - 6 h | Mié 28 — 13:00 | 🟩 Finalizado | [ ] Aprobado |
 | **Jhade** | QA & Editora del Informe | Pruebas Postman / cURL & Doc | 6 - 8 h | Jue 29 — 14:00 | ⬜ En espera de Fase 4 | [ ] Aprobado |
 
 > ⏳ **DEADLINE FINAL DE ENTREGA:** **Jueves hasta las 18:00 hrs.**  
@@ -152,32 +152,32 @@ Fase 3A: Carlos               Fase 3B: José
 ---
 
 ### 5. Joaquín — Capa Service y Controladores REST con CRUD Completo *(Est.: 5-6h | Límite: Mié 28 13:00)*
-- [ ] **Código de Servicios y Transaccionalidad:**
-  - [ ] Actualizar interfaz `ProductoService.java` con métodos CRUD y consultas especializadas.
-  - [ ] Implementar `ProductoServiceImpl.java` en `service/impl/` con `@Transactional` e inyección de repositorios.
-  - [ ] Desacoplar la lectura estática de `productos.json` y conectar a la base de datos Supabase.
-  - [ ] Crear interfaz `RolService.java` e implementarla en `RolServiceImpl.java` (catálogo de roles disponibles).
-  - [ ] Crear interfaz `UsuarioService.java` e implementarla en `UsuarioServiceImpl.java` (listar activos, buscar por ID, registrar con validación de email duplicado, baja lógica).
-- [ ] **Código de Controladores REST:**
-  - [ ] Crear paquete `pe.edu.utp.overtext.controller.api` y la clase `ProductoRestController.java` (`@RestController`, `@RequestMapping("/api/productos")`, `@Validated`):
-    - [ ] `GET /api/productos` (Select JPA).
-    - [ ] `GET /api/productos/nativos` (Select Nativo).
-    - [ ] `GET /api/productos/{id}` con validación `@PathVariable @Positive Long id`.
-    - [ ] `POST /api/productos` con validación `@Valid @RequestBody ProductoRequestDTO dto`.
-    - [ ] `PUT /api/productos/{id}` con validación `@PathVariable @Positive` y `@Valid`.
-    - [ ] `DELETE /api/productos/{id}` con validación `@PathVariable @Positive`.
-  - [ ] Crear controlador `RolRestController.java` (`@RestController`, `@RequestMapping("/api/roles")`):
-    - [ ] `GET /api/roles` (listar catálogo de roles disponibles).
-  - [ ] Crear controlador `UsuarioRestController.java` (`@RestController`, `@RequestMapping("/api/usuarios")`, `@Validated`):
-    - [ ] `GET /api/usuarios` (listar usuarios activos con `UsuarioResponseDTO`).
-    - [ ] `GET /api/usuarios/{id}` con `@PathVariable @Positive Long id`.
-    - [ ] `POST /api/usuarios` con `@Valid @RequestBody UsuarioRequestDTO dto` (retorna 201 Created).
-    - [ ] `DELETE /api/usuarios/{id}` con `@PathVariable @Positive Long id` (baja lógica).
-  - [ ] Crear `GlobalExceptionHandler.java` (`@RestControllerAdvice`) para retornar HTTP 400 en errores de validación y duplicados.
+- [x] **Código de Servicios y Transaccionalidad:**
+  - [x] Actualizar interfaz `ProductoService.java` con métodos CRUD y consultas especializadas.
+  - [x] Implementar `ProductoServiceImpl.java` en `service/impl/` con `@Transactional` e inyección de repositorios.
+  - [x] Desacoplar la lectura estática de `productos.json` y conectar a la base de datos Supabase.
+  - [x] Crear interfaz `RolService.java` e implementarla en `RolServiceImpl.java` (catálogo de roles disponibles).
+  - [x] Crear interfaz `UsuarioService.java` e implementarla en `UsuarioServiceImpl.java` (listar activos, buscar por ID, registrar con validación de email duplicado, baja lógica).
+- [x] **Código de Controladores REST:**
+  - [x] Crear paquete `pe.edu.utp.overtext.controller.api` y la clase `ProductoRestController.java` (`@RestController`, `@RequestMapping("/api/productos")`, `@Validated`):
+    - [x] `GET /api/productos` (Select JPA).
+    - [x] `GET /api/productos/nativos` (Select Nativo).
+    - [x] `GET /api/productos/{id}` con validación `@PathVariable @Positive Long id`.
+    - [x] `POST /api/productos` con validación `@Valid @RequestBody ProductoRequestDTO dto`.
+    - [x] `PUT /api/productos/{id}` con validación `@PathVariable @Positive` y `@Valid`.
+    - [x] `DELETE /api/productos/{id}` con validación `@PathVariable @Positive`.
+  - [x] Crear controlador `RolRestController.java` (`@RestController`, `@RequestMapping("/api/roles")`):
+    - [x] `GET /api/roles` (listar catálogo de roles disponibles).
+  - [x] Crear controlador `UsuarioRestController.java` (`@RestController`, `@RequestMapping("/api/usuarios")`, `@Validated`):
+    - [x] `GET /api/usuarios` (listar usuarios activos con `UsuarioResponseDTO`).
+    - [x] `GET /api/usuarios/{id}` con `@PathVariable @Positive Long id`.
+    - [x] `POST /api/usuarios` con `@Valid @RequestBody UsuarioRequestDTO dto` (retorna 201 Created).
+    - [x] `DELETE /api/usuarios/{id}` con `@PathVariable @Positive Long id` (baja lógica).
+  - [x] Crear `GlobalExceptionHandler.java` (`@RestControllerAdvice`) para retornar HTTP 400 en errores de validación y duplicados.
 - [ ] **Capturas Obligatorias:**
   - [ ] `informes/capturas/pc3/07-postman-endpoints-list.png` (Colección en Postman con todos los endpoints creados).
-- [ ] **Documentación:**
-  - [ ] Redactar sección *3.5 Lógica de Servicios y Endpoints de la API REST* (documentando endpoints de Producto, Rol y Usuario).
+- [x] **Documentación:**
+  - [x] Redactar sección *3.5 Lógica de Servicios y Endpoints de la API REST* (documentando endpoints de Producto, Rol y Usuario).
 - [ ] **Git:** Merge de `feature/p3-joaquin-service-api` a `testing`.
 
 ---
