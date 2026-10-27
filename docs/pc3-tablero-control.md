@@ -113,13 +113,13 @@ Fase 3A: Carlos               Fase 3B: José
   - [x] Implementar **Select Nativo (Requisito P3):**
     `@Query(value = "SELECT * FROM producto WHERE stock > 0 AND activo = true ORDER BY precio ASC", nativeQuery = true)`
     `List<Producto> listarProductosDisponiblesNativo();`
-- [ ] **Repositorios de Seguridad / Dominio (Rol y Usuario):**
-  - [ ] Crear interfaz `RolRepository.java` extendiendo `JpaRepository<Rol, Long>` con `Optional<Rol> findByNombre(String nombre)`.
-  - [ ] Crear interfaz `UsuarioRepository.java` extendiendo `JpaRepository<Usuario, Long>` con `Optional<Usuario> findByEmail(String email)` y `List<Usuario> findByActivoTrue()`.
+- [x] **Repositorios de Seguridad / Dominio (Rol y Usuario):**
+  - [x] Crear interfaz `RolRepository.java` extendiendo `JpaRepository<Rol, Long>` con `Optional<Rol> findByNombre(String nombre)`.
+  - [x] Crear interfaz `UsuarioRepository.java` extendiendo `JpaRepository<Usuario, Long>` con `Optional<Usuario> findByEmail(String email)` y `List<Usuario> findByActivoTrue()`.
 - [ ] **Capturas Obligatorias:**
   - [ ] `informes/capturas/pc3/05-cmd-query-nativa-logs.png` (Terminal/CMD con logs de Hibernate mostrando la consulta nativa SQL).
-- [ ] **Documentación:**
-  - [ ] Redactar sección *3.3 Capa de Persistencia y Consultas: JPA vs SQL Nativo* (incluyendo `CategoriaRepository`, `ProductoRepository`, `RolRepository` y `UsuarioRepository`).
+- [x] **Documentación:**
+  - [x] Redactar sección *3.3 Capa de Persistencia y Consultas: JPA vs SQL Nativo* (incluyendo `CategoriaRepository`, `ProductoRepository`, `RolRepository` y `UsuarioRepository`).
 - [ ] **Git:** Merge de `feature/p3-carlos-repository` a `testing`.
 
 ---
